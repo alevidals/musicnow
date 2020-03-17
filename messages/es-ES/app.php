@@ -59,4 +59,7 @@ return [
     'Usuario ID' => '',
     'Usuarios' => '',
     'Remember me' => 'Recuérdame',
+    'Password Repeat' => 'Repetir contraseña',
+    'Introduzca los siguientes datos para registrarse:' => '',
+    'Registrar un usuario' => '',
 ];

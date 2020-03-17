@@ -58,4 +58,7 @@ return [
     'Update' => '',
     'Update Usuarios: {name}' => 'Update user: {name}',
     'Usuarios' => 'Users',
+    'Password Repeat' => 'Repeat password',
+    'Introduzca los siguientes datos para registrarse:' => 'Enter the following information to register:',
+    'Registrar un usuario' => 'Register an user',
 ];
