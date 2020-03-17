@@ -58,4 +58,5 @@ return [
     'Update Usuarios: {name}' => 'Actualizar el usuario: {name}',
     'Usuario ID' => '',
     'Usuarios' => '',
+    'Remember me' => 'Recuérdame',
 ];
