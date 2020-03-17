@@ -2,12 +2,13 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
+use Yii;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -46,7 +47,7 @@ class UsuariosController extends Controller
 
     /**
      * Displays a single Usuarios model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -78,7 +79,7 @@ class UsuariosController extends Controller
     /**
      * Updates an existing Usuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +99,7 @@ class UsuariosController extends Controller
     /**
      * Deletes an existing Usuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +113,7 @@ class UsuariosController extends Controller
     /**
      * Finds the Usuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Usuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -123,5 +124,58 @@ class UsuariosController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    public function actionRegistrar()
+    {
+        $model = new Usuarios(['scenario' => Usuarios::SCENARIO_CREAR]);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $url = Url::to([
+                'usuarios/activar',
+                'id' => $model->id,
+                'confirm_token' => $model->confirm_token,
+            ], true);
+
+            $body = <<<EOT
+                <h2>Pulsa el siguiente enlace para confirmar la cuenta de correo.<h2>
+                <a href="$url">Confirmar cuenta</a>
+            EOT;
+
+            if ($this->actionMail($model->email, $body)) {
+                Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
+            } else {
+                Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
+            }
+
+            return $this->redirect(['site/login']);
+        }
+
+        return $this->render('registrar', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionMail($email, $body)
+    {
+        return Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['smtpUsername'])
+                ->setTo($email)
+                ->setSubject('Mensaje de confirmación para Mus!c Now')
+                ->setHtmlBody($body)
+                ->send();
+    }
+
+    public function actionActivar($id, $confirm_token)
+    {
+        $model = $this->findModel($id);
+        if ($model->confirm_token === $confirm_token) {
+            $model->confirm_token = null;
+            $model->save();
+            Yii::$app->session->setFlash('success', 'Correo confirmado. Inicie sesión');
+            return $this->redirect(['site/login']);
+        }
+        Yii::$app->session->setFlash('error', 'El correo no se ha podido confirmar.');
+        return $this->redirect(['site/index']);
     }
 }
