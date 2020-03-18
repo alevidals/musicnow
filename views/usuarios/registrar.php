@@ -23,14 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-        <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
         <?= $form->field($model, 'nombre')->textInput() ?>
         <?= $form->field($model, 'apellidos')->textInput() ?>
+        <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password Repeat')) ?>
         <?= $form->field($model, 'email')->textInput() ?>
         <?= $form->field($model, 'fnac')->textInput() ?>
         <?= $form->field($model, 'rol')->textInput() ?>
-        <?= $form->field($model, 'password')->passwordInput() ?>
-        <?= $form->field($model, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password Repeat')) ?>
 
         <div class="form-group">
             <div class="offset-sm-2">

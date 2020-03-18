@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Albumes'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Albumes'), ['create'], ['class' => 'btn main-yellow']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -33,6 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'tableOptions' => [
+            'class' => 'table admin-table '
+        ]
     ]); ?>
 
 

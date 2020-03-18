@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Canciones'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Canciones'), ['create'], ['class' => 'btn main-yellow']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,6 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'label' => '',
+                'attribute' => 'imagen',
+                'value' => function ($model, $key, $index, $column) {
+                        return Html::img($model->url_portada, ['class' => 'img-fluid', 'width' => 100]);
+                },
+                'format' => 'raw',
+            ],
             'titulo',
             [
                 'attribute' => 'album.titulo',
@@ -34,12 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('app', 'Género')
             ],
             'url_cancion:url',
-            'url_portada:url',
             'anyo',
             'duracion',
-            'created_at:datetime',
+            // 'created_at:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'tableOptions' => [
+            'class' => 'table admin-table '
         ],
     ]); ?>
 

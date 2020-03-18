@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap');
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.navbar,
+.footer {
+    background-color: #202020 !important;
+}
+
+body {
+    background-color: #181818;
+}
+
+.footer {
+    border-top: none;
+    color: white !important;
+}
+
+.breadcrumb {
+    background-color: #383838;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    z-index: 1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #181818;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4b4b4b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+.main-yellow {
+    background-color: #ffba00
+}
+
+h1 {
+    color: white;
+}
+
+.summary {
+    color: white;
+}
+
+.admin-table thead {
+    background-color: #181818;
+}
+
+.admin-table a, .action-column, .breadcrumb a {
+    color: #ffbb00;
+}
+
+.admin-table td {
+    color: white;
+}
+
+.admin-table tbody {
+    background-color: #383838;
+}
+
+p {
+    color: white;
+}
+
+.nav-tabs  {
+    background-color: transparent;
+}
+
+
+.nav-tabs .nav-item .nav-link {
+    color: white;
+}
+
+.nav-tabs .nav-item .active {
+    border: 1px solid #ffba00;
+    background-color: #ffba00;
+    color: #000;
+}
+.nav-tabs {
+    border: none;
+}
+
+label {
+    color: white;
+}
+/*
+.custom-control-label::after {
+    background-color: #ffba00;
+} */
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #ffbb00;
+    border: none;
+}
+
+.custom-control-input.is-valid:checked~.custom-control-label::before {
+    background-color: #ffbb00 !important;
+    color: red !important;
+}
+
+.custom-control-input.is-valid~.custom-control-label {
+    border: none;
+    color: white;
+}

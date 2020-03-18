@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+#note1, #note2, #note3, #note4 {
+    animation: note 4s infinite linear;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+#girl {
+    animation: girl 5s infinite linear;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes note {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotateZ(30deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes girl {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotateZ(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
