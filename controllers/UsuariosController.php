@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\LoginForm;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use Yii;
@@ -148,10 +149,10 @@ class UsuariosController extends Controller
                 Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
             }
 
-            return $this->redirect(['site/login']);
+            return $this->redirect(['usuarios/login']);
         }
 
-        return $this->render('registrar', [
+        return $this->render('login', [
             'model' => $model,
         ]);
     }
@@ -173,9 +174,55 @@ class UsuariosController extends Controller
             $model->confirm_token = null;
             $model->save();
             Yii::$app->session->setFlash('success', 'Correo confirmado. Inicie sesión');
-            return $this->redirect(['site/login']);
+            return $this->redirect(['usuarios/login']);
         }
         Yii::$app->session->setFlash('error', 'El correo no se ha podido confirmar.');
         return $this->redirect(['site/index']);
+    }
+
+    /**
+     * Login action.
+     *
+     * @return Response|string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->getUser() !== null) {
+                if ($model->getUser()->confirm_token !== null) {
+                    Yii::$app->session->setFlash('warning', 'Debes confirmar el correo.');
+                } else {
+                    if ($model->login()) {
+                        return $this->goBack();
+                    }
+                }
+            }
+        }
+
+        // if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        //     return $this->goBack();
+        // }
+
+        $model->password = '';
+        return $this->render('login', [
+            'loginFormModel' => $model,
+        ]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }

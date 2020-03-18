@@ -51,10 +51,10 @@ AppAsset::register($this);
             ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
             ['label' => 'Registrarse', 'url' => ['/usuarios/registrar']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/usuarios/login']]
             ) : (
                 '<li class="nav-item">'
-                . Html::beginForm(['/site/logout'], 'post')
+                . Html::beginForm(['/usuarios/logout'], 'post')
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->login . ')',
                     ['class' => 'btn btn-dark nav-link logout']

@@ -115,3 +115,8 @@ label {
     border: none;
     color: white;
 }
+
+.login-img {
+    width: 540px;
+    height: 346px;
+}

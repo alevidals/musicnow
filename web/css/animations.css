@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
     text-align: center;
-}
+} */
 
 #note1, #note2, #note3, #note4 {
     animation: note 4s infinite linear;

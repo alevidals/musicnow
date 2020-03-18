@@ -18,14 +18,6 @@ $this->title = 'Login';
 
     <!-- <p>Rellena los siguientes campos:</p> -->
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'horizontalCssClasses' => ['wrapper' => 'col-sm-5'],
-        ],
-    ]); ?>
-
 <ul class="nav nav-tabs justify-content-center nav-fill mb-5" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">LOGIN</a>
@@ -38,7 +30,7 @@ $this->title = 'Login';
         <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="mx-auto mb-5">
+                    <div class="mx-auto mb-5 text-center">
                         <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto', 'width' => '300px']) ?>
                     </div>
 
@@ -52,11 +44,9 @@ $this->title = 'Login';
                                 ],
                             ]); ?>
 
-                                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => 'Username'])->label(false) ?>
-
-                                <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label(false) ?>
-
-                                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                                <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true, 'placeholder' => 'Username'])->label(false) ?>
+                                <?= $form->field($loginFormModel, 'password')->passwordInput(['placeholder' => 'Password'])->label(false) ?>
+                                <?= $form->field($loginFormModel, 'rememberMe')->checkbox() ?>
 
                                 <div class="form-group">
                                     <?= Html::submitButton('Login', ['class' => 'mx-auto btn btn-warning btn-block rounded', 'name' => 'login-button']) ?>
@@ -67,7 +57,7 @@ $this->title = 'Login';
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <?= Html::img('@web/img/undraw_listening_1u79.svg', ['alt' => 'girl-music', 'class' => 'img-fluid']) ?>
+                    <?= Html::img('@web/img/undraw_listening_1u79.svg', ['alt' => 'girl-music', 'class' => 'login-img']) ?>
                 </div>
             </div>
         </div>
@@ -75,18 +65,19 @@ $this->title = 'Login';
         <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
             <div class="row">
                 <div class="col-lg-6 order-2 order-lg-1 align-self-center">
-                    <?= Html::img('@web/img/undraw_compose_music_ovo2.svg', ['alt' => 'girl-music', 'class' => 'img-fluid']) ?>
+                    <?= Html::img('@web/img/undraw_compose_music_ovo2.svg', ['alt' => 'girl-music', 'class' => 'login-img']) ?>
                 </div>
-                <div class="col-lg-6 order-1 order-lg-2">
-                    <div class="mx-auto mb-5">
-                        <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto ', 'width' => '300px']) ?>
+                <div class="col-lg-6 order-1 order-lg-2 align-self-center">
+                    <div class="mx-auto mb-5 text-center">
+                        <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo', 'width' => '300px']) ?>
                     </div>
 
                     <div class="row">
                         <div class="mx-auto col-lg-12">
                             <?php $form = ActiveForm::begin([
-                                'id' => 'login-form',
+                                'id' => 'register-form',
                                 'layout' => 'horizontal',
+                                'action' => ['usuarios/registrar'],
                                 'fieldConfig' => [
                                     'horizontalCssClasses' => ['wrapper' => 'col-lg-12 mx-auto'],
                                 ],
@@ -113,5 +104,4 @@ $this->title = 'Login';
         </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
 </div>
