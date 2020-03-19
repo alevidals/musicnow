@@ -43,12 +43,9 @@ EOT;
 $this->registerJS($js);
 
 $this->title = 'Login';
-// $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="site-login container">
-    <!-- <h1><?= Html::encode($this->title) ?></h1> -->
-
-    <!-- <p>Rellena los siguientes campos:</p> -->
 
     <div class="text-center mb-5">
         <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto', 'width' => '300px']) ?>
@@ -56,10 +53,10 @@ $this->title = 'Login';
 
     <ul class="nav nav-tabs justify-content-center nav-fill mb-5 w-100" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">LOGIN</a>
+            <a class="nav-link active text-uppercase" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true"><?= Yii::t('app', 'Entrar') ?></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">REGISTER</a>
+            <a class="nav-link text-uppercase" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false"><?= Yii::t('app', 'Registrarse') ?></a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -77,13 +74,13 @@ $this->title = 'Login';
                                     'horizontalCssClasses' => ['wrapper' => 'col-lg-12 mx-auto'],
                                 ],
                             ]); ?>
-                                <h2 class="fs-title">Inicia sesión con tu nombre de usuario</h2>
-                                <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label('Username') ?>
-                                <?= $form->field($loginFormModel, 'password')->passwordInput()->label('Contraseña') ?>
-                                <?= $form->field($loginFormModel, 'rememberMe')->checkbox() ?>
+                                <h2 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h2>
+                                <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
+                                <?= $form->field($loginFormModel, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
+                                <?= $form->field($loginFormModel, 'rememberMe')->checkbox()->label(Yii::t('app', 'Remember me')) ?>
 
                                 <div class="form-group row px-15">
-                                    <?= Html::submitButton('Login', ['class' => 'col-lg-12 mx-auto col-sm-10 offset-sm-2 btn btn-warning btn-block rounded', 'name' => 'login-button']) ?>
+                                    <?= Html::submitButton('Login', ['class' => 'btn btn-warning btn-block rounded', 'name' => 'login-button']) ?>
                                 </div>
 
                             <?php ActiveForm::end(); ?>
@@ -114,27 +111,27 @@ $this->title = 'Login';
                                 ],
                             ]); ?>
                                 <fieldset>
-                                    <h2 class="fs-title">Regístrate con tu dirección de correo electrónico</h2>
-                                    <?= $form->field($usuario, 'nombre')->textInput()->label('Nombre*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($usuario, 'apellidos')->textInput()->label('Apellidos*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($usuario, 'login')->textInput(['autofocus' => true])->label('Login*', ['class' => 'col-12']) ?>
-                                    <?= Html::button('Siguiente', ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
+                                    <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
+                                    <?= $form->field($usuario, 'nombre')->textInput()->label(Yii::t('app', 'Nombre') . '*', ['class' => 'col-12']) ?>
+                                    <?= $form->field($usuario, 'apellidos')->textInput()->label(Yii::t('app', 'Apellidos') . '*', ['class' => 'col-12']) ?>
+                                    <?= $form->field($usuario, 'login')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12']) ?>
+                                    <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
                                 </fieldset>
                                 <fieldset>
-                                    <h2 class="fs-title">Regístrate con tu dirección de correo electrónico</h2>
+                                    <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
                                     <div class="row">
-                                        <div class="col-6 pr-1">
-                                            <?= $form->field($usuario, 'password')->passwordInput()->label('Contraseña*', ['class' => 'col-12']) ?>
+                                        <div class="col-md-6 col-12">
+                                            <?= $form->field($usuario, 'password')->passwordInput()->label(Yii::t('app', 'Password') . '*', ['class' => 'col-12']) ?>
                                         </div>
-                                        <div class="col-6 pl-1">
-                                            <?= $form->field($usuario, 'password_repeat')->passwordInput()->label('Repetir contraseña*', ['class' => 'col-12']) ?>
+                                        <div class="col-md-6 col-12">
+                                            <?= $form->field($usuario, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password Repeat') . '*', ['class' => 'col-12']) ?>
                                         </div>
                                     </div>
                                     <?= $form->field($usuario, 'email')->textInput()->label('Email*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($usuario, 'fnac')->textInput()->label('Fecha nacimiento', ['class' => 'col-12']) ?>
+                                    <?= $form->field($usuario, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12']) ?>
                                     <?= $form->field($usuario, 'rol')->textInput()->label('Rol', ['class' => 'col-12']) ?>
-                                    <?= Html::button('Anterior', ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
-                                    <?= Html::submitButton('Registrarse', ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
+                                    <?= Html::button(Yii::t('app', 'Anterior'), ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
+                                    <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
                                 </fieldset>
                             <?php ActiveForm::end(); ?>
                         </div>
