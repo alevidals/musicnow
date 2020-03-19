@@ -167,3 +167,8 @@ label {
     letter-spacing: 2px;
     font-weight: bold;
 }
+
+.custom-file-label::after {
+    color: black;
+    background-color: #ffba00;
+}
