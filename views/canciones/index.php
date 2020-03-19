@@ -26,13 +26,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'label' => '',
-                'attribute' => 'imagen',
                 'value' => function ($model, $key, $index, $column) {
-                        return Html::img($model->url_portada, ['class' => 'img-fluid', 'width' => 100]);
+                        return Html::img($model->url_portada, ['width' => '47px']);
                 },
                 'format' => 'raw',
             ],
-            'titulo',
+            [
+                'label' => '',
+                'value' => function ($model, $key, $index, $column) {
+                        return <<<EOT
+                                <audio controls>
+                                    <source src="$model->url_cancion">
+                                </audio>
+                        EOT;
+                },
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'titulo',
+                'value' => function ($model, $key, $index, $column) {
+                    return substr($model->titulo, 0, 23) . '...';
+                }
+            ],
             [
                 'attribute' => 'album.titulo',
                 'label' => Yii::t('app', 'Título del álbum')
@@ -41,12 +56,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'genero.denominacion',
                 'label' => Yii::t('app', 'Género')
             ],
-            'url_cancion:url',
             'anyo',
-            'duracion',
+            // 'duracion',
             // 'created_at:datetime',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {portada}',
+                'buttons' => [
+                    'portada' => function ($url, $model, $key) {
+                        return Html::a('Portada', ['canciones/imagen', 'id' => $model->id]);
+                    }
+                ],
+            ],
         ],
         'tableOptions' => [
             'class' => 'table admin-table '
