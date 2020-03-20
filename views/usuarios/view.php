@@ -40,6 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'confirm_token',
             'created_at:datetime',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>

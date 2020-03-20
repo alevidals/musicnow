@@ -185,3 +185,7 @@ label {
     background-color: #181818;
     color: white;
 }
+
+.admin-table th {
+    color: #ffba00;
+}

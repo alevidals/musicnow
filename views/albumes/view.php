@@ -34,6 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'anyo',
             'created_at:datetime',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>

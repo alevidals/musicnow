@@ -40,6 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'usuario_id',
             'created_at:datetime',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>
