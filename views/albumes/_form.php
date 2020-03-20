@@ -16,8 +16,6 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'anyo')->textInput() ?>
 
-    <?= $form->field($model, 'usuario_id')->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

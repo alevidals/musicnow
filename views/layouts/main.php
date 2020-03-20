@@ -43,24 +43,35 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Géneros', 'url' => ['/generos/index']],
             ['label' => 'Álbumes', 'url' => ['/albumes/index']],
             ['label' => 'Canciones', 'url' => ['/canciones/index']],
             ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/usuarios/login']]
+                [
+                    'label' => 'Entra',
+                    'items' => [
+                        ['label' => 'Login', 'url' => ['/usuarios/login']],
+                    ]
+                ]
             ) : (
-                '<li class="nav-item">'
-                . Html::beginForm(['/usuarios/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->login . ')',
-                    ['class' => 'btn btn-dark nav-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+                [
+                    'label' => Yii::$app->user->identity->nombre,
+                    'items' => [
+                        ['label' => 'Mi cuenta', 'url' => ['usuarios/update']],
+                        [
+                            'label' => 'Logout',
+                            'url' => [
+                                '/usuarios/logout',
+                                'method' => 'post',
+                            ],
+                            'linkOptions' => [
+                                'data-method' => 'post',
+                            ]
+                        ],
+                    ]
+                ]
+            ),
         ],
     ]);
     NavBar::end();

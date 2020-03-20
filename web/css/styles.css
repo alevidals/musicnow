@@ -172,3 +172,16 @@ label {
     color: black;
     background-color: #ffba00;
 }
+
+.dropdown-menu, .dropdown-item.active {
+    background-color: #4A4A4A;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #181818;
+    color: white;
+}
