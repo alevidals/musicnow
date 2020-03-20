@@ -42,12 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw',
             ],
-            [
-                'attribute' => 'titulo',
-                'value' => function ($model, $key, $index, $column) {
-                    return substr($model->titulo, 0, 23) . '...';
-                }
-            ],
+            'titulo',
             [
                 'attribute' => 'album.titulo',
                 'label' => Yii::t('app', 'Título del álbum')
@@ -57,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('app', 'Género')
             ],
             'anyo',
+            'usuario.login',
             // 'duracion',
             // 'created_at:datetime',
             [

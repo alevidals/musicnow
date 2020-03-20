@@ -25,6 +25,8 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'url_cancion') ?>
 
+    <?php // echo $form->field($model, 'usuario_id')?>
+
     <?php // echo $form->field($model, 'url_portada') ?>
 
     <?php // echo $form->field($model, 'anyo') ?>

@@ -64,7 +64,7 @@ class CancionesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Canciones();
+        $model = new Canciones(['usuario_id' => Yii::$app->user->id]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

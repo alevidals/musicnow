@@ -17,8 +17,8 @@ class CancionesSearch extends Canciones
     public function rules()
     {
         return [
-            [['id', 'album_id', 'genero_id'], 'integer'],
-            [['titulo', 'url_cancion', 'url_portada', 'duracion', 'created_at', 'album.titulo', 'genero.denominacion'], 'safe'],
+            [['id', 'album_id', 'genero_id', 'usuario_id'], 'integer'],
+            [['titulo', 'url_cancion', 'url_portada', 'duracion', 'created_at', 'album.titulo', 'genero.denominacion', 'usuario.login'], 'safe'],
             [['anyo'], 'number'],
         ];
     }
@@ -34,7 +34,7 @@ class CancionesSearch extends Canciones
 
     public function attributes()
     {
-        return array_merge(parent::attributes(), ['album.titulo'], ['genero.denominacion']);
+        return array_merge(parent::attributes(), ['album.titulo'], ['genero.denominacion'], ['usuario.login']);
     }
 
     /**
@@ -48,7 +48,8 @@ class CancionesSearch extends Canciones
     {
         $query = Canciones::find()
             ->joinWith('album a')
-            ->joinWith('genero g');
+            ->joinWith('genero g')
+            ->joinWith('usuario u');
 
         // add conditions that should always apply here
 
@@ -66,6 +67,11 @@ class CancionesSearch extends Canciones
             'desc' => ['g.denominacion' => SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['usuario.login'] = [
+            'asc' => ['u.login' => SORT_ASC],
+            'desc' => ['u.login' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -80,6 +86,7 @@ class CancionesSearch extends Canciones
             'album_id' => $this->album_id,
             'genero_id' => $this->genero_id,
             'anyo' => $this->anyo,
+            'usuario_id' => $this->usuario_id,
             'created_at' => $this->created_at,
         ]);
 
@@ -94,6 +101,10 @@ class CancionesSearch extends Canciones
 
         $query->andFilterWhere([
             'ilike', 'g.denominacion', $this->getAttribute('genero.denominacion')
+        ]);
+
+        $query->andFilterWhere([
+            'ilike', 'u.login', $this->getAttribute('usuario.login')
         ]);
 
         return $dataProvider;

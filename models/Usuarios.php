@@ -21,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property string $created_at
  *
  * @property Albumes[] $albumes
+ * @property Canciones[] $canciones
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -135,5 +136,15 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         }
 
         return true;
+    }
+
+    /**
+     * Gets query for [[Canciones]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCanciones()
+    {
+        return $this->hasMany(self::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
     }
 }

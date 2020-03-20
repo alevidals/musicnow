@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'url_portada:url',
             'anyo',
             'duracion',
+            'usuario_id',
             'created_at:datetime',
         ],
     ]) ?>

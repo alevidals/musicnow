@@ -64,7 +64,7 @@ class AlbumesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Albumes();
+        $model = new Albumes(['usuario_id' => Yii::$app->user->id]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
