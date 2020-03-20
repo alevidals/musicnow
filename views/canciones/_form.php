@@ -64,12 +64,13 @@ $js = <<<EOT
             var urlCancion = songPrefix + cancion.name.replace(/\s/g, '') + suffix;
             $('#canciones-url_portada').val(urlPortada);
             $('#canciones-url_cancion').val(urlCancion);
+            $('#canciones-file_name').val(cancion.name.replace(/\s/g, ''));
 
             var storageImageRef = firebase.storage().ref('portadas/' + portada.name.replace(/\s/g, ''));
             storageImageRef.put(portada);
             var storageSongRef = firebase.storage().ref('temas/' + cancion.name.replace(/\s/g, ''));
 
-            var task = storageSongRef . put(cancion);
+            var task = storageSongRef.put(cancion);
 
             task.on('state_changed',
 
@@ -128,6 +129,7 @@ $this->registerJs($js);
         </div>
     </div>
 
+    <?= Html::activeHiddenInput($model, 'file_name', ['maxlength' => true]) ?>
 
     <?= $form->field($model, 'anyo')->textInput() ?>
 

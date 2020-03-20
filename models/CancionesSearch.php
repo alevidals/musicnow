@@ -18,7 +18,7 @@ class CancionesSearch extends Canciones
     {
         return [
             [['id', 'album_id', 'genero_id', 'usuario_id'], 'integer'],
-            [['titulo', 'url_cancion', 'url_portada', 'duracion', 'created_at', 'album.titulo', 'genero.denominacion', 'usuario.login'], 'safe'],
+            [['titulo', 'url_cancion', 'url_portada', 'duracion', 'created_at', 'file_name', 'album.titulo', 'genero.denominacion', 'usuario.login'], 'safe'],
             [['anyo'], 'number'],
         ];
     }
@@ -93,6 +93,7 @@ class CancionesSearch extends Canciones
         $query->andFilterWhere(['ilike', 'titulo', $this->titulo])
             ->andFilterWhere(['ilike', 'url_cancion', $this->url_cancion])
             ->andFilterWhere(['ilike', 'url_portada', $this->url_portada])
+            ->andFilterWhere(['ilike', 'file_name', $this->file_name])
             ->andFilterWhere(['ilike', 'duracion', $this->duracion]);
 
         $query->andFilterWhere([

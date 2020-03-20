@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'genero.denominacion',
             'url_cancion:url',
             'url_portada:url',
+            'file_name',
             'anyo',
             'duracion',
             'usuario_id',

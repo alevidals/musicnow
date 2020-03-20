@@ -48,6 +48,7 @@ CREATE TABLE canciones
   , album_id    BIGINT        NOT NULL REFERENCES albumes (id)
   , genero_id   BIGINT        NOT NULL REFERENCES generos (id)
   , url_cancion VARCHAR(2048) NOT NULL
+  , file_name   VARCHAR(255)  NOT NULL
   , url_portada VARCHAR(2048) NOT NULL
   , anyo        NUMERIC(4)    NOT NULL
   , duracion    INTERVAL      NOT NULL
