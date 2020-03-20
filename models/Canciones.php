@@ -15,11 +15,13 @@ use Yii;
  * @property string $url_portada
  * @property float $anyo
  * @property string $duracion
+ * @property int $usuario_id
  * @property string $created_at
  *
  * @property AlbumesCanciones[] $albumesCanciones
  * @property Albumes $album
  * @property Generos $genero
+ * @property Usuarios $usuario
  */
 class Canciones extends \yii\db\ActiveRecord
 {
@@ -37,9 +39,9 @@ class Canciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titulo', 'album_id', 'genero_id', 'url_cancion', 'url_portada', 'anyo', 'duracion'], 'required'],
-            [['album_id', 'genero_id'], 'default', 'value' => null],
-            [['album_id', 'genero_id'], 'integer'],
+            [['titulo', 'album_id', 'genero_id', 'url_cancion', 'url_portada', 'anyo', 'duracion', 'usuario_id'], 'required'],
+            [['album_id', 'genero_id', 'usuario_id'], 'default', 'value' => null],
+            [['album_id', 'genero_id', 'usuario_id'], 'integer'],
             [['anyo'], 'number'],
             [['duracion'], 'string'],
             [['created_at'], 'safe'],
@@ -47,6 +49,7 @@ class Canciones extends \yii\db\ActiveRecord
             [['url_cancion', 'url_portada'], 'string', 'max' => 2048],
             [['album_id'], 'exist', 'skipOnError' => true, 'targetClass' => Albumes::className(), 'targetAttribute' => ['album_id' => 'id']],
             [['genero_id'], 'exist', 'skipOnError' => true, 'targetClass' => Generos::className(), 'targetAttribute' => ['genero_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
     }
 
@@ -64,6 +67,7 @@ class Canciones extends \yii\db\ActiveRecord
             'url_portada' => Yii::t('app', 'Url Portada'),
             'anyo' => Yii::t('app', 'Anyo'),
             'duracion' => Yii::t('app', 'Duracion'),
+            'usuario_id' => Yii::t('app', 'Usuario ID'),
             'created_at' => Yii::t('app', 'Created At'),
         ];
     }
@@ -96,5 +100,15 @@ class Canciones extends \yii\db\ActiveRecord
     public function getGenero()
     {
         return $this->hasOne(Generos::className(), ['id' => 'genero_id'])->inverseOf('canciones');
+    }
+
+    /**
+     * Gets query for [[Usuario]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('canciones');
     }
 }

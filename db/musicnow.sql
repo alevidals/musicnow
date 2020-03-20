@@ -51,6 +51,7 @@ CREATE TABLE canciones
   , url_portada VARCHAR(2048) NOT NULL
   , anyo        NUMERIC(4)    NOT NULL
   , duracion    INTERVAL      NOT NULL
+  , usuario_id  BIGINT        NOT NULL REFERENCES usuarios (id)
   , created_at  TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
