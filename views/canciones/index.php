@@ -49,7 +49,7 @@ $js = <<<EOT
                 success: function (data, code, jqXHR) {
                     var storage = firebase.storage();
                     var storageRef = storage.ref();
-                    var songRef = storageRef.child('temas/' + data);
+                    var songRef = storageRef.child('temas/' + data.usuario_id + '/' + data.file_name);
                     songRef.delete().then(function() {
                         $.ajax({
                             method: 'POST',

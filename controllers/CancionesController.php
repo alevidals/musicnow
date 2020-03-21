@@ -142,6 +142,9 @@ class CancionesController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = $this->findModel($id);
         Yii::debug($model->url_cancion);
-        return $model->file_name;
+        return [
+            'file_name' => $model->file_name,
+            'usuario_id' => $model->usuario_id
+        ];
     }
 }
