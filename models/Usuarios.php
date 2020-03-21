@@ -107,7 +107,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function validateAuthKey($authKey)
     {
-        // return $this->auth_key === $authKey;
+        return $this->auth_key === $authKey;
     }
 
     public static function findByUsername($nombre)
