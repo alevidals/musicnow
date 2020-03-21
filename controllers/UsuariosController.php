@@ -138,35 +138,35 @@ class UsuariosController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    public function actionRegistrar()
-    {
-        $model = new Usuarios(['scenario' => Usuarios::SCENARIO_CREAR]);
+    // public function actionRegistrar()
+    // {
+    //     $model = new Usuarios(['scenario' => Usuarios::SCENARIO_CREAR]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $url = Url::to([
-                'usuarios/activar',
-                'id' => $model->id,
-                'confirm_token' => $model->confirm_token,
-            ], true);
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         $url = Url::to([
+    //             'usuarios/activar',
+    //             'id' => $model->id,
+    //             'confirm_token' => $model->confirm_token,
+    //         ], true);
 
-            $body = <<<EOT
-                <h2>Pulsa el siguiente enlace para confirmar la cuenta de correo.<h2>
-                <a href="$url">Confirmar cuenta</a>
-            EOT;
+    //         $body = <<<EOT
+    //             <h2>Pulsa el siguiente enlace para confirmar la cuenta de correo.<h2>
+    //             <a href="$url">Confirmar cuenta</a>
+    //         EOT;
 
-            if ($this->actionMail($model->email, $body)) {
-                Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
-            } else {
-                Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
-            }
+    //         if ($this->actionMail($model->email, $body)) {
+    //             Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
+    //         } else {
+    //             Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
+    //         }
 
-            return $this->redirect(['usuarios/login']);
-        }
+    //         return $this->redirect(['usuarios/login']);
+    //     }
 
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
+    //     return $this->render('login', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     public function actionMail($email, $body)
     {
@@ -202,26 +202,57 @@ class UsuariosController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->getUser() !== null) {
-                if ($model->getUser()->confirm_token !== null) {
-                    Yii::$app->session->setFlash('warning', 'Debes confirmar el correo.');
-                } else {
-                    if ($model->login()) {
-                        return $this->goBack();
+        $loginModel = new LoginForm();
+        $userModel = new Usuarios(['scenario' => Usuarios::SCENARIO_CREAR]);
+        $action = 'login';
+
+        if (isset($_POST['LoginForm'])) {
+            $action = 'login';
+            if ($loginModel->load(Yii::$app->request->post())) {
+                if ($loginModel->getUser() !== null) {
+                    if ($loginModel->getUser()->confirm_token !== null) {
+                        Yii::$app->session->setFlash('warning', 'Debes confirmar el correo.');
+                    } else {
+                        if ($loginModel->login()) {
+                            return $this->goBack();
+                        }
                     }
                 }
             }
         }
 
-        // if ($model->load(Yii::$app->request->post()) && $model->login()) {
-        //     return $this->goBack();
-        // }
+        if (isset($_POST['Usuarios'])) {
+            $action = 'register';
+            if ($userModel->load(Yii::$app->request->post()) && $userModel->save()) {
+                $url = Url::to([
+                    'usuarios/activar',
+                    'id' => $userModel->id,
+                    'confirm_token' => $userModel->confirm_token,
+                ], true);
 
-        $model->password = '';
+                $body = <<<EOT
+                    <h2>Pulsa el siguiente enlace para confirmar la cuenta de correo.<h2>
+                    <a href="$url">Confirmar cuenta</a>
+                EOT;
+
+                if ($this->actionMail($userModel->email, $body)) {
+                    Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
+                }
+
+                return $this->redirect(['usuarios/login']);
+            }
+        }
+
+
+
+        $userModel->password = '';
+        $userModel->password_repeat = '';
         return $this->render('login', [
-            'loginFormModel' => $model,
+            'loginFormModel' => $loginModel,
+            'userModel' => $userModel,
+            'action' => $action
         ]);
     }
 
