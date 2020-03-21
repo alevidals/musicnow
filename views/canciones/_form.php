@@ -8,13 +8,15 @@ use yii\bootstrap4\Html;
 /* @var $form yii\bootstrap4\ActiveForm */
 
 
-$apiKey = getenv('apiKey');
-$authDomain = getenv('authDomain');
-$databaseURL = getenv('databaseURL');
-$projectId = getenv('projectId');
-$storageBucket = getenv('storageBucket');
-$messagingSenderId = getenv('messagingSenderId');
-$appId = getenv('appId');
+$apiKey = Yii::$app->params['apiKey'];
+$authDomain = Yii::$app->params['authDomain'];
+$databaseURL = Yii::$app->params['databaseURL'];
+$projectId = Yii::$app->params['projectId'];
+$storageBucket = Yii::$app->params['storageBucket'];
+$messagingSenderId = Yii::$app->params['messagingSenderId'];
+$appId = Yii::$app->params['appId'];
+
+$usuario_id = $model->usuario_id;
 
 $js = <<<EOT
 
@@ -30,8 +32,8 @@ $js = <<<EOT
 
     firebase . initializeApp(firebaseConfig);
 
-    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/temas%2F$model->usuario_id%2F';
-    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/portadas%2F$model->usuario_id%2F';
+    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/temas%2F$usuario_id%2F';
+    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/portadas%2F$usuario_id%2F';
     const suffix = '?alt=media';
 
     var portada = '';
@@ -67,9 +69,9 @@ $js = <<<EOT
             $('#canciones-song_name').val(cancion.name.replace(/\s/g, ''));
             $('#canciones-image_name').val(portada.name.replace(/\s/g, ''));
 
-            var storageImageRef = firebase.storage().ref('portadas/$model->usuario_id/' + portada.name.replace(/\s/g, ''));
+            var storageImageRef = firebase.storage().ref('portadas/$usuario_id/' + portada.name.replace(/\s/g, ''));
             storageImageRef.put(portada);
-            var storageSongRef = firebase.storage().ref('temas/$model->usuario_id/' + cancion.name.replace(/\s/g, ''));
+            var storageSongRef = firebase.storage().ref('temas/$usuario_id/' + cancion.name.replace(/\s/g, ''));
 
             var task = storageSongRef.put(cancion);
 

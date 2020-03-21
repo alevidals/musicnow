@@ -11,13 +11,13 @@ use yii\helpers\Url;
 $this->title = Yii::t('app', 'Canciones');
 $this->params['breadcrumbs'][] = $this->title;
 
-$apiKey = getenv('apiKey');
-$authDomain = getenv('authDomain');
-$databaseURL = getenv('databaseURL');
-$projectId = getenv('projectId');
-$storageBucket = getenv('storageBucket');
-$messagingSenderId = getenv('messagingSenderId');
-$appId = getenv('appId');
+$apiKey = Yii::$app->params['apiKey'];
+$authDomain = Yii::$app->params['authDomain'];
+$databaseURL = Yii::$app->params['databaseURL'];
+$projectId = Yii::$app->params['projectId'];
+$storageBucket = Yii::$app->params['storageBucket'];
+$messagingSenderId = Yii::$app->params['messagingSenderId'];
+$appId = Yii::$app->params['appId'];
 
 $url = Url::to(['canciones/url']);
 $urlBorrar = Url::to(['canciones/delete']);
