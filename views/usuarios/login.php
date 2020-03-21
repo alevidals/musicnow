@@ -11,20 +11,20 @@ use yii\helpers\Html;
 $usuario = new Usuarios(['scenario' => Usuarios::SCENARIO_CREAR]);
 
 $js = <<<'EOT'
-var current_fs, next_fs, previous_fs; //fieldsets
-var left, opacity, scale; //fieldset properties which we will animate
-var animating; //flag to prevent quick multi-click glitches
+var current_fs, next_fs, previous_fs;
+
+$('#register-tab, #login-tab').on('click', function ev() {
+    $('form').trigger('reset');
+});
 
 $(".next").click(function(){
 
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
 
-    //show the next fieldset
     current_fs.fadeOut(500, function () {
         next_fs.fadeIn(500);
     });
-	//hide the current fieldset with style
 });
 
 $(".previous").click(function(){
@@ -32,11 +32,9 @@ $(".previous").click(function(){
 	current_fs = $(this).parent();
 	previous_fs = $(this).parent().prev();
 
-	//show the previous fieldset
     current_fs.fadeOut(500, function () {
         previous_fs.fadeIn();
     });
-	//hide the current fieldset with style
 });
 EOT;
 
