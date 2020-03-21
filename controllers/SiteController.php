@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Canciones;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $canciones = Canciones::find('album a')->all();
+
+        return $this->render('index', [
+            'canciones' => $canciones,
+        ]);
     }
 
     /**
