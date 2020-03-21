@@ -34,14 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'genero.denominacion',
             'url_cancion:url',
             'url_portada:url',
-            'file_name',
+            'song_name',
+            'image_name',
             'anyo',
             'duracion',
             'usuario_id',
             'created_at:datetime',
         ],
         'options' => [
-            'class' => 'table admin-table'
+            'class' => 'table admin-table',
         ],
     ]) ?>
 

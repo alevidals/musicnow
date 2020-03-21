@@ -12,8 +12,9 @@ use Yii;
  * @property int $album_id
  * @property int $genero_id
  * @property string $url_cancion
- * @property string $file_name
+ * @property string $song_name
  * @property string $url_portada
+ * @property string $image_name
  * @property float $anyo
  * @property string $duracion
  * @property int $usuario_id
@@ -40,13 +41,13 @@ class Canciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titulo', 'album_id', 'genero_id', 'url_cancion', 'file_name', 'url_portada', 'anyo', 'duracion', 'usuario_id'], 'required'],
+            [['titulo', 'album_id', 'genero_id', 'url_cancion', 'song_name', 'url_portada', 'image_name', 'anyo', 'duracion', 'usuario_id'], 'required'],
             [['album_id', 'genero_id', 'usuario_id'], 'default', 'value' => null],
             [['album_id', 'genero_id', 'usuario_id'], 'integer'],
             [['anyo'], 'number'],
             [['duracion'], 'string'],
             [['created_at'], 'safe'],
-            [['titulo', 'file_name'], 'string', 'max' => 255],
+            [['titulo', 'song_name', 'image_name'], 'string', 'max' => 255],
             [['url_cancion', 'url_portada'], 'string', 'max' => 2048],
             [['album_id'], 'exist', 'skipOnError' => true, 'targetClass' => Albumes::className(), 'targetAttribute' => ['album_id' => 'id']],
             [['genero_id'], 'exist', 'skipOnError' => true, 'targetClass' => Generos::className(), 'targetAttribute' => ['genero_id' => 'id']],
@@ -65,7 +66,8 @@ class Canciones extends \yii\db\ActiveRecord
             'album_id' => Yii::t('app', 'Album ID'),
             'genero_id' => Yii::t('app', 'Genero ID'),
             'url_cancion' => Yii::t('app', 'Url Cancion'),
-            'file_name' => Yii::t('app', 'File Name'),
+            'song_name' => Yii::t('app', 'Song Name'),
+            'image_name' => Yii::t('app', 'Image Name'),
             'url_portada' => Yii::t('app', 'Url Portada'),
             'anyo' => Yii::t('app', 'Anyo'),
             'duracion' => Yii::t('app', 'Duracion'),
