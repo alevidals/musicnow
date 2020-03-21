@@ -2,13 +2,13 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Canciones;
 use app\models\CancionesSearch;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**
@@ -58,7 +58,7 @@ class CancionesController extends Controller
 
     /**
      * Displays a single Canciones model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -90,7 +90,7 @@ class CancionesController extends Controller
     /**
      * Updates an existing Canciones model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -110,7 +110,7 @@ class CancionesController extends Controller
     /**
      * Deletes an existing Canciones model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -124,7 +124,7 @@ class CancionesController extends Controller
     /**
      * Finds the Canciones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Canciones the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -143,8 +143,9 @@ class CancionesController extends Controller
         $model = $this->findModel($id);
         Yii::debug($model->url_cancion);
         return [
-            'file_name' => $model->file_name,
-            'usuario_id' => $model->usuario_id
+            'song_name' => $model->song_name,
+            'image_name' => $model->image_name,
+            'usuario_id' => $model->usuario_id,
         ];
     }
 }

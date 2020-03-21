@@ -49,14 +49,17 @@ $js = <<<EOT
                 success: function (data, code, jqXHR) {
                     var storage = firebase.storage();
                     var storageRef = storage.ref();
-                    var songRef = storageRef.child('temas/' + data.usuario_id + '/' + data.file_name);
+                    var songRef = storageRef.child('temas/' + data.usuario_id + '/' + data.song_name);
+                    var imageRef = storageRef.child('portadas/' + data.usuario_id + '/' + data.image_name);
                     songRef.delete().then(function() {
-                        $.ajax({
-                            method: 'POST',
-                            url: '$urlBorrar&id=' + id,
-                            success: function (data, code, jqXHR) {
-                                console.log(data);
-                            }
+                        imageRef.delete().then(function() {
+                            $.ajax({
+                                method: 'POST',
+                                url: '$urlBorrar&id=' + id,
+                                success: function (data, code, jqXHR) {
+                                    console.log(data);
+                                }
+                            });
                         });
                     });
                 }
@@ -80,7 +83,7 @@ $this->registerJS($js);
         <?= Html::a(Yii::t('app', 'Create Canciones'), ['create'], ['class' => 'btn main-yellow']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -89,14 +92,14 @@ $this->registerJS($js);
             [
                 'label' => '',
                 'value' => function ($model, $key, $index, $column) {
-                        return Html::img($model->url_portada, ['width' => '47px']);
+                    return Html::img($model->url_portada, ['width' => '47px']);
                 },
                 'format' => 'raw',
             ],
             [
                 'label' => '',
                 'value' => function ($model, $key, $index, $column) {
-                        return <<<EOT
+                    return <<<EOT
                                 <audio controls>
                                     <source src="$model->url_cancion">
                                 </audio>
@@ -107,16 +110,17 @@ $this->registerJS($js);
             'titulo',
             [
                 'attribute' => 'album.titulo',
-                'label' => Yii::t('app', 'Título del álbum')
+                'label' => Yii::t('app', 'Título del álbum'),
             ],
             [
                 'attribute' => 'genero.denominacion',
-                'label' => Yii::t('app', 'Género')
+                'label' => Yii::t('app', 'Género'),
             ],
             'anyo',
             'usuario.login',
             // 'duracion',
-            //'file_name',
+            //'song_name',
+            //'image_name',
             // 'created_at:datetime',
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -124,16 +128,16 @@ $this->registerJS($js);
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-eye"></i>', [
-                            'canciones/view', 'id' => $model->id
+                            'canciones/view', 'id' => $model->id,
                         ], [
-                            'class' => 'btn btn-sm p-0 pr-1 shadow-none'
+                            'class' => 'btn btn-sm p-0 pr-1 shadow-none',
                         ]);
                     },
                     'update' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-pen"></i>', [
-                            'canciones/view', 'id' => $model->id
+                            'canciones/view', 'id' => $model->id,
                         ], [
-                            'class' => 'btn btn-sm p-0 shadow-none'
+                            'class' => 'btn btn-sm p-0 shadow-none',
                         ]);
                     },
                     'delete' => function ($url, $model, $key) {
@@ -146,7 +150,7 @@ $this->registerJS($js);
             ],
         ],
         'tableOptions' => [
-            'class' => 'table admin-table '
+            'class' => 'table admin-table ',
         ],
     ]); ?>
 

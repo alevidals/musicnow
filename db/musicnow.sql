@@ -43,17 +43,18 @@ DROP TABLE IF EXISTS canciones CASCADE;
 
 CREATE TABLE canciones
 (
-    id          BIGSERIAL     PRIMARY KEY
-  , titulo      VARCHAR(255)  NOT NULL
-  , album_id    BIGINT        NOT NULL REFERENCES albumes (id)
-  , genero_id   BIGINT        NOT NULL REFERENCES generos (id)
-  , url_cancion VARCHAR(2048) NOT NULL
-  , file_name   VARCHAR(255)  NOT NULL
-  , url_portada VARCHAR(2048) NOT NULL
-  , anyo        NUMERIC(4)    NOT NULL
-  , duracion    INTERVAL      NOT NULL
-  , usuario_id  BIGINT        NOT NULL REFERENCES usuarios (id)
-  , created_at  TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id           BIGSERIAL     PRIMARY KEY
+  , titulo       VARCHAR(255)  NOT NULL
+  , album_id     BIGINT        NOT NULL REFERENCES albumes (id)
+  , genero_id    BIGINT        NOT NULL REFERENCES generos (id)
+  , url_cancion  VARCHAR(2048) NOT NULL
+  , song_name    VARCHAR(255)  NOT NULL
+  , image_name   VARCHAR(255)  NOT NULL
+  , url_portada  VARCHAR(2048) NOT NULL
+  , anyo         NUMERIC(4)    NOT NULL
+  , duracion     INTERVAL      NOT NULL
+  , usuario_id   BIGINT        NOT NULL REFERENCES usuarios (id)
+  , created_at   TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS albumes_canciones CASCADE;

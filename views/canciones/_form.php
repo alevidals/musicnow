@@ -1,7 +1,7 @@
 <?php
 
-use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Canciones */
@@ -64,7 +64,8 @@ $js = <<<EOT
             var urlCancion = songPrefix + cancion.name.replace(/\s/g, '') + suffix;
             $('#canciones-url_portada').val(urlPortada);
             $('#canciones-url_cancion').val(urlCancion);
-            $('#canciones-file_name').val(cancion.name.replace(/\s/g, ''));
+            $('#canciones-song_name').val(cancion.name.replace(/\s/g, ''));
+            $('#canciones-image_name').val(portada.name.replace(/\s/g, ''));
 
             var storageImageRef = firebase.storage().ref('portadas/$model->usuario_id/' + portada.name.replace(/\s/g, ''));
             storageImageRef.put(portada);
@@ -129,7 +130,8 @@ $this->registerJs($js);
         </div>
     </div>
 
-    <?= Html::activeHiddenInput($model, 'file_name', ['maxlength' => true]) ?>
+    <?= Html::activeHiddenInput($model, 'song_name', ['maxlength' => true]) ?>
+    <?= Html::activeHiddenInput($model, 'image_name', ['maxlength' => true]) ?>
 
     <?= $form->field($model, 'anyo')->textInput() ?>
 

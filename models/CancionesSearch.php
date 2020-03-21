@@ -4,7 +4,6 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Canciones;
 
 /**
  * CancionesSearch represents the model behind the search form of `app\models\Canciones`.
@@ -18,7 +17,7 @@ class CancionesSearch extends Canciones
     {
         return [
             [['id', 'album_id', 'genero_id', 'usuario_id'], 'integer'],
-            [['titulo', 'url_cancion', 'url_portada', 'duracion', 'created_at', 'file_name', 'album.titulo', 'genero.denominacion', 'usuario.login'], 'safe'],
+            [['titulo', 'url_cancion', 'url_portada', 'duracion', 'created_at', 'song_name', 'image_name', 'album.titulo', 'genero.denominacion', 'usuario.login'], 'safe'],
             [['anyo'], 'number'],
         ];
     }
@@ -38,7 +37,7 @@ class CancionesSearch extends Canciones
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -93,19 +92,20 @@ class CancionesSearch extends Canciones
         $query->andFilterWhere(['ilike', 'titulo', $this->titulo])
             ->andFilterWhere(['ilike', 'url_cancion', $this->url_cancion])
             ->andFilterWhere(['ilike', 'url_portada', $this->url_portada])
-            ->andFilterWhere(['ilike', 'file_name', $this->file_name])
+            ->andFilterWhere(['ilike', 'song_name', $this->song_name])
+            ->andFilterWhere(['ilike', 'image_name', $this->image_name])
             ->andFilterWhere(['ilike', 'duracion', $this->duracion]);
 
         $query->andFilterWhere([
-            'ilike', 'a.titulo', $this->getAttribute('album.titulo')
+            'ilike', 'a.titulo', $this->getAttribute('album.titulo'),
         ]);
 
         $query->andFilterWhere([
-            'ilike', 'g.denominacion', $this->getAttribute('genero.denominacion')
+            'ilike', 'g.denominacion', $this->getAttribute('genero.denominacion'),
         ]);
 
         $query->andFilterWhere([
-            'ilike', 'u.login', $this->getAttribute('usuario.login')
+            'ilike', 'u.login', $this->getAttribute('usuario.login'),
         ]);
 
         return $dataProvider;
