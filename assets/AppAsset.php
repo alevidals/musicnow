@@ -22,9 +22,12 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/styles.css',
-        // 'css/animations.css',
+        'css/owl.theme.default.min.css',
+        'css/owl.carousel.min.css',
     ];
     public $js = [
+        'js/owl.carousel.js',
+        'js/owl.autoplay.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
