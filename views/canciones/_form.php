@@ -30,8 +30,8 @@ $js = <<<EOT
 
     firebase . initializeApp(firebaseConfig);
 
-    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/temas%2F';
-    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/portadas%2F';
+    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/temas%2F$model->usuario_id%2F';
+    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/portadas%2F$model->usuario_id%2F';
     const suffix = '?alt=media';
 
     var portada = '';
@@ -66,9 +66,9 @@ $js = <<<EOT
             $('#canciones-url_cancion').val(urlCancion);
             $('#canciones-file_name').val(cancion.name.replace(/\s/g, ''));
 
-            var storageImageRef = firebase.storage().ref('portadas/' + portada.name.replace(/\s/g, ''));
+            var storageImageRef = firebase.storage().ref('portadas/$model->usuario_id/' + portada.name.replace(/\s/g, ''));
             storageImageRef.put(portada);
-            var storageSongRef = firebase.storage().ref('temas/' + cancion.name.replace(/\s/g, ''));
+            var storageSongRef = firebase.storage().ref('temas/$model->usuario_id/' + cancion.name.replace(/\s/g, ''));
 
             var task = storageSongRef.put(cancion);
 
