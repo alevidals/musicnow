@@ -38,17 +38,22 @@ $js = <<<EOT
 
     var portada = '';
     var cancion = '';
+    var valid = false;
 
     $('#bar').hide();
 
     $('#canciones-portada').on('change', function ev(e) {
         portada = e.target.files[0];
         $('#cover-label').text(portada.name);
+        $('.image-feedback').text('');
+        $('.image-feedback').css('display', 'none');
     });
 
     $('#canciones-cancion').on('change', function ev(e) {
         cancion = e.target.files[0];
         $('#song-label').text(cancion.name);
+        $('.song-feedback').text('');
+        $('.song-feedback').css('display', 'none');
     });
 
     $('.send-btn').on('click', function ev(e) {
@@ -62,38 +67,62 @@ $js = <<<EOT
         $('#w0').yiiActiveForm("validate");
 
         if (cancion && portada) {
-            var urlPortada = imagePrefix + portada.name.replace(/\s/g, '') + suffix;
-            var urlCancion = songPrefix + cancion.name.replace(/\s/g, '') + suffix;
-            $('#canciones-url_portada').val(urlPortada);
-            $('#canciones-url_cancion').val(urlCancion);
-            $('#canciones-song_name').val(cancion.name.replace(/\s/g, ''));
-            $('#canciones-image_name').val(portada.name.replace(/\s/g, ''));
 
-            var storageImageRef = firebase.storage().ref('portadas/$usuario_id/' + portada.name.replace(/\s/g, ''));
-            storageImageRef.put(portada);
-            var storageSongRef = firebase.storage().ref('temas/$usuario_id/' + cancion.name.replace(/\s/g, ''));
-
-            var task = storageSongRef.put(cancion);
-
-            task.on('state_changed',
-
-                function progress(snapshot) {
-                    $('#bar').show();
-                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    $('#uploaderBar').text(Math.round(percentage) + '%');
-                    $('#uploaderBar').css('width', Math.round(percentage) + '%');
-                },
-
-                function error(err) {
-                },
-
-                function complete() {
-                    $('#w0').trigger('submit');
+            $('.invalid-feedback').each(function() {
+                if ($(this).is(':not(:empty)')) {
+                    valid = false;
+                    return false;
+                } else {
+                    valid = true;
                 }
+            });
 
-            );
+            if (valid) {
+                var urlPortada = imagePrefix + portada.name.replace(/\s/g, '') + suffix;
+                var urlCancion = songPrefix + cancion.name.replace(/\s/g, '') + suffix;
+                $('#canciones-url_portada').val(urlPortada);
+                $('#canciones-url_cancion').val(urlCancion);
+                $('#canciones-song_name').val(cancion.name.replace(/\s/g, ''));
+                $('#canciones-image_name').val(portada.name.replace(/\s/g, ''));
+
+                var storageImageRef = firebase.storage().ref('portadas/$usuario_id/' + portada.name.replace(/\s/g, ''));
+                storageImageRef.put(portada);
+                var storageSongRef = firebase.storage().ref('temas/$usuario_id/' + cancion.name.replace(/\s/g, ''));
+
+                var task = storageSongRef.put(cancion);
+
+                task.on('state_changed',
+
+                    function progress(snapshot) {
+                        $('#bar').show();
+                        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        $('#uploaderBar').text(Math.round(percentage) + '%');
+                        $('#uploaderBar').css('width', Math.round(percentage) + '%');
+                    },
+
+                    function error(err) {
+                    },
+
+                    function complete() {
+                        $('#w0').trigger('submit');
+                    }
+
+                );
+            }
+        } else {
+            if ($('#canciones-portada').val() == '') {
+                $('.image-feedback').text('Debes introducir una imágen');
+                $('.image-feedback').css('display', 'block');
+            }
+            if ($('#canciones-cancion').val() == '') {
+                $('.song-feedback').text('Debes introducir una canción');
+                $('.song-feedback').css('display', 'block');
+            }
         }
 
+    function isEmpty( el ){
+        return !$.trim(el.html())
+    }
 
     });
 EOT;
@@ -114,22 +143,28 @@ $this->registerJs($js);
 
     <?= $form->field($model, 'genero_id')->textInput() ?>
 
-    <label class="col-12 px-0" for="canciones-portada">Portada</label>
-    <div class="input-group mb-3">
-        <div class="custom-file">
-            <?= Html::fileInput('Portada', '', ['class' => 'custom-file-input', 'id' => 'canciones-portada', 'accept' => 'image/png']) ?>
-            <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
-            <label class="custom-file-label" id="cover-label" for="canciones-url_portada">Portada...</label>
+    <div class="form-group required">
+        <label class="col-12 px-0" for="canciones-portada">Portada</label>
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <?= Html::fileInput('Portada', '', ['class' => 'custom-file-input', 'id' => 'canciones-portada', 'accept' => 'image/png']) ?>
+                <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
+                <label class="custom-file-label" id="cover-label" for="canciones-url_portada">Portada...</label>
+            </div>
         </div>
+        <div class="invalid-feedback image-feedback"></div>
     </div>
 
-    <label class="col-12 px-0" for="canciones-cancion">Canción</label>
-    <div class="input-group mb-3">
-        <div class="custom-file">
-            <?= Html::fileInput('Canción', '', ['class' => 'custom-file-input', 'id' => 'canciones-cancion', 'accept' => 'audio/mp3']) ?>
-            <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
-            <label class="custom-file-label" id="song-label" for="canciones-url_cancion">Canción...</label>
+    <div class="form-group">
+        <label class="col-12 px-0" for="canciones-cancion">Canción</label>
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <?= Html::fileInput('Canción', '', ['class' => 'custom-file-input', 'id' => 'canciones-cancion', 'accept' => 'audio/mp3']) ?>
+                <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
+                <label class="custom-file-label" id="song-label" for="canciones-url_cancion">Canción...</label>
+            </div>
         </div>
+        <div class="invalid-feedback song-feedback"></div>
     </div>
 
     <?= Html::activeHiddenInput($model, 'song_name', ['maxlength' => true]) ?>
