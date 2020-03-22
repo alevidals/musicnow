@@ -133,6 +133,10 @@ label {
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
     }
+
+    .user-info {
+        position: fixed;
+    }
 }
 
 .px-15 {

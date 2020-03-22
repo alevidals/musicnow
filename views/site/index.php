@@ -31,7 +31,7 @@ $this->registerJS($js);
     </div>
 
     <div class="row">
-        <div class="col-6 mt-5">
+        <div class="col-12 col-lg-6 mt-5 order-1 order-lg-0">
             <?php foreach ($canciones as $cancion) : ?>
                 <div class="row">
                     <div class="col">
@@ -42,14 +42,14 @@ $this->registerJS($js);
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="col-4 mt-5 ml-auto">
-            <div class="row">
-                <div class="col-3">
-                    <?= Html::img('https://pixabay.com/get/57e7d7444e5aaa14f1dc8460825668204022dfe05b55794a712c79d1/delete-1727486_640.png', ['class' => 'img-fluid']) ?>
+        <div class="d-none d-md-block col-lg-6 mt-5 order-0 order-lg-1">
+            <div class="row ml-lg-5 user-info">
+                <div class="col-md-2 col-lg-3 col-xl-2">
+                    <?= Html::img('https://pixabay.com/get/57e7d7444e5aaa14f1dc8460825668204022dfe05b55794a712c79d1/delete-1727486_640.png', ['class' => 'img-fluid', ['max-width' => '100px']]) ?>
                 </div>
-                <div class="col">
-                    <p class="mt-0 p-0"><?= Yii::$app->user->identity->login ?></p>
-                    <p class="p-0 m-0"><?= Yii::$app->user->identity->nombre . ' ' .  Yii::$app->user->identity->apellidos ?></p>
+                <div class="col-md-10 col-lg-9 col-xl-10 my-auto">
+                    <p><?= Yii::$app->user->identity->login ?></p>
+                    <p><?= Yii::$app->user->identity->nombre . ' ' .  Yii::$app->user->identity->apellidos ?></p>
                 </div>
             </div>
         </div>
