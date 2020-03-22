@@ -135,7 +135,7 @@ $this->registerJS($js);
                     },
                     'update' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-pen"></i>', [
-                            'canciones/view', 'id' => $model->id,
+                            'canciones/update', 'id' => $model->id,
                         ], [
                             'class' => 'btn btn-sm p-0 shadow-none',
                         ]);
