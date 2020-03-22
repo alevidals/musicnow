@@ -137,6 +137,13 @@ class CancionesController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Retorna un array con el nombre de la canción, el nombre de la imagen
+     * y el id del usuario que ejecuta esa acción.
+     *
+     * @param int $id
+     * @return array
+     */
     public function actionUrl($id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;

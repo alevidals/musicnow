@@ -142,36 +142,14 @@ class UsuariosController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    // public function actionRegistrar()
-    // {
-    //     $model = new Usuarios(['scenario' => Usuarios::SCENARIO_CREAR]);
-
-    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
-    //         $url = Url::to([
-    //             'usuarios/activar',
-    //             'id' => $model->id,
-    //             'confirm_token' => $model->confirm_token,
-    //         ], true);
-
-    //         $body = <<<EOT
-    //             <h2>Pulsa el siguiente enlace para confirmar la cuenta de correo.<h2>
-    //             <a href="$url">Confirmar cuenta</a>
-    //         EOT;
-
-    //         if ($this->actionMail($model->email, $body)) {
-    //             Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
-    //         } else {
-    //             Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
-    //         }
-
-    //         return $this->redirect(['usuarios/login']);
-    //     }
-
-    //     return $this->render('login', [
-    //         'model' => $model,
-    //     ]);
-    // }
-
+    /**
+     * Envía un correo a a una dirección específica con el cuerpo
+     * del mensaje pasado por parámetros.
+     *
+     * @param string $email dirección a la que queremos mandar el correo
+     * @param string $body cuerpo que se enviará al correo
+     * @return bool  true si se envía o false si hay error
+     */
     public function actionMail($email, $body)
     {
         return Yii::$app->mailer->compose()
@@ -182,6 +160,12 @@ class UsuariosController extends Controller
                 ->send();
     }
 
+    /**
+     * Confirma la cuenta un usuario.
+     *
+     * @param int $id el id del usuario al que se le confirmará la cuenta
+     * @param string $confirm_token token de confirmación que se eliminará
+     */
     public function actionActivar($id, $confirm_token)
     {
         $model = $this->findModel($id);
@@ -196,7 +180,8 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Login action.
+     * Autentifica al usuario si envía el formulario de login o lo
+     * registra si envía el formulario de registro.
      *
      * @return Response|string
      */
@@ -248,8 +233,6 @@ class UsuariosController extends Controller
                 return $this->redirect(['usuarios/login']);
             }
         }
-
-
 
         $userModel->password = '';
         $userModel->password_repeat = '';
