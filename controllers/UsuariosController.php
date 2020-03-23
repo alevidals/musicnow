@@ -38,7 +38,7 @@ class UsuariosController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
                             return Yii::$app->user->identity->login === 'admin'
-                                && Yii::$app->user->identity->rol === 'admin';
+                                && Yii::$app->user->identity->rol === 1;
                         }
                     ],
                 ],

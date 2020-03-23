@@ -129,7 +129,6 @@ $this->title = 'Login';
                                     </div>
                                     <?= $form->field($userModel, 'email')->textInput()->label('Email*', ['class' => 'col-12']) ?>
                                     <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12']) ?>
-                                    <?= $form->field($userModel, 'rol')->textInput()->label('Rol', ['class' => 'col-12']) ?>
                                     <?= Html::button(Yii::t('app', 'Anterior'), ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
                                     <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
                                 </fieldset>

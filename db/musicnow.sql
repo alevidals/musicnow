@@ -2,6 +2,13 @@
 -- Archivo de base de datos --
 ------------------------------
 
+DROP TABLE IF EXISTS roles CASCADE;
+
+CREATE TABLE roles (
+  id BIGSERIAL PRIMARY KEY,
+  rol VARCHAR(255) NOT NULL
+);
+
 DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios
@@ -13,7 +20,7 @@ CREATE TABLE usuarios
   , email         VARCHAR(255) NOT NULL UNIQUE
   , password      VARCHAR(255) NOT NULL
   , fnac          DATE
-  , rol           VARCHAR(255) NOT NULL
+  , rol           BIGINT       NOT NULL REFERENCES roles (id) DEFAULT 2
   , auth_key      VARCHAR(255)
   , confirm_token VARCHAR(255)
   , created_at    TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -65,3 +72,7 @@ CREATE TABLE albumes_canciones
   , album_id     BIGINT    NOT NULL REFERENCES albumes (id)
   , canciones_id BIGINT    NOT NULL REFERENCES canciones (id)
 );
+
+INSERT INTO roles (rol)
+VALUES ('admin')
+     , ('usuario');

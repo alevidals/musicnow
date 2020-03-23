@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Usuarios;
+use app\models\Roles;
 
 /**
- * UsuariosSearch represents the model behind the search form of `app\models\Usuarios`.
+ * RolesSearch represents the model behind the search form of `app\models\Roles`.
  */
-class UsuariosSearch extends Usuarios
+class RolesSearch extends Roles
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class UsuariosSearch extends Usuarios
     public function rules()
     {
         return [
-            [['id', 'rol'], 'integer'],
-            [['login', 'nombre', 'apellidos', 'email', 'password', 'fnac', 'auth_key', 'confirm_token', 'created_at'], 'safe'],
+            [['id'], 'integer'],
+            [['rol'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class UsuariosSearch extends Usuarios
      */
     public function search($params)
     {
-        $query = Usuarios::find();
+        $query = Roles::find();
 
         // add conditions that should always apply here
 
@@ -59,18 +59,9 @@ class UsuariosSearch extends Usuarios
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'fnac' => $this->fnac,
-            'rol' => $this->rol,
-            'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['ilike', 'login', $this->login])
-            ->andFilterWhere(['ilike', 'nombre', $this->nombre])
-            ->andFilterWhere(['ilike', 'apellidos', $this->apellidos])
-            ->andFilterWhere(['ilike', 'email', $this->email])
-            ->andFilterWhere(['ilike', 'password', $this->password])
-            ->andFilterWhere(['ilike', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['ilike', 'confirm_token', $this->confirm_token]);
+        $query->andFilterWhere(['ilike', 'rol', $this->rol]);
 
         return $dataProvider;
     }

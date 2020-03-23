@@ -15,13 +15,14 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $password
  * @property string|null $fnac
- * @property string $rol
+ * @property int $rol
  * @property string|null $auth_key
  * @property string|null $confirm_token
  * @property string $created_at
  *
  * @property Albumes[] $albumes
  * @property Canciones[] $canciones
+ * @property Roles $rol
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -43,17 +44,20 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['login', 'nombre', 'apellidos', 'email', 'rol'], 'required'],
+            [['login', 'nombre', 'apellidos', 'email'], 'required'],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREAR]],
             [['fnac', 'created_at'], 'safe'],
+            [['rol'], 'default', 'value' => 2],
+            [['rol'], 'integer'],
             [['login'], 'string', 'max' => 50],
-            [['nombre', 'apellidos', 'email', 'password', 'rol', 'auth_key', 'confirm_token'], 'string', 'max' => 255],
+            [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token'], 'string', 'max' => 255],
             [['email'], 'unique'],
             [['email'], 'email'],
             [['login'], 'unique'],
             [['password'], 'trim', 'on' => [self::SCENARIO_CREAR]],
             [['password_repeat'], 'trim', 'on' => [self::SCENARIO_CREAR]],
             [['password_repeat'], 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => [self::SCENARIO_CREAR]],
+            [['rol'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol' => 'id']],
         ];
     }
 
@@ -84,7 +88,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAlbumes()
     {
-        return $this->hasMany(Albumes::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+        return $this->hasMany(Albumes::className(), ['usuario_id' => 'id']);
     }
 
     public static function findIdentity($id)
@@ -146,6 +150,17 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getCanciones()
     {
-        return $this->hasMany(self::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+        return $this->hasMany(Canciones::className(), ['usuario_id' => 'id']);
     }
+
+    /**
+     * Gets query for [[Rol]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRol()
+    {
+        return $this->hasOne(Roles::className(), ['id' => 'rol']);
+    }
+
 }
