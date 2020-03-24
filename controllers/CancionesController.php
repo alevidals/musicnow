@@ -6,6 +6,7 @@ use app\models\Albumes;
 use app\models\Canciones;
 use app\models\CancionesSearch;
 use app\models\Generos;
+use app\models\Usuarios;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -84,10 +85,14 @@ class CancionesController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $usuario = Usuarios::findOne(Yii::$app->user->id);
+
+        $albumes = $usuario->getAlbumes()->select('titulo')->indexBy('id')->column();
+
         return $this->render('create', [
             'model' => $model,
             'generos' => ['' => ''] + Generos::lista(),
-            'albumes' => ['' => ''] + Albumes::lista(),
+            'albumes' => ['' => ''] + $albumes,
         ]);
     }
 
