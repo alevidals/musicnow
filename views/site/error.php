@@ -11,17 +11,21 @@ $this->title = $name;
 ?>
 <div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row">
+        <div class="col-12 col-lg-6 align-self-center">
+            <h3>Oops! <?= Html::encode($message) ?></h3>
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+            <h1 class="h1-error"><?= Html::encode($exception->statusCode) ?></h1>
+
+            <p class="font-weight-bold">
+                Please contact us if you think this is a server error. Thank you.
+            </p>
+        </div>
+        <div class="col-12 col-lg-6 align-self-center">
+            <?= Html::img('@web/img/undraw_mello_otq1.png', ['class' => 'img-fluid']) ?>
+        </div>
     </div>
 
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+    <?= Html::a('Volver al inicio', ['site/index'], ['class' => 'btn main-yellow font-weight-bolder mt-5']) ?>
 
 </div>

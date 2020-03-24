@@ -100,11 +100,6 @@ label {
     color: white;
 }
 
-/*
-.custom-control-label::after {
-    background-color: #ffba00;
-} */
-
 .custom-control-input:checked~.custom-control-label::before {
     background-color: #ffbb00;
     border: none;
@@ -119,11 +114,6 @@ label {
     border: none;
     color: white;
 }
-
-/* .login-img {
-    max-width: 540px;
-    max-height: 346px;
-} */
 
 @media (min-width: 992px) {
     .site-login {
@@ -192,4 +182,21 @@ label {
 
 .admin-table th {
     color: #ffba00;
+}
+
+h2,h3 {
+    color: white;
+}
+
+.h1-error {
+    font-size: 150px;
+    font-weight: 900;
+}
+
+.site-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
