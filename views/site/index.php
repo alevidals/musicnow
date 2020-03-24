@@ -9,7 +9,7 @@ $this->title = 'My Yii Application';
 $js = <<<EOT
     $(document).ready(function(){
         $(".owl-carousel").owlCarousel({
-            'loop': true,
+            loop: true,
             autoplay:true,
             autoplayTimeout:4000,
             items : 1

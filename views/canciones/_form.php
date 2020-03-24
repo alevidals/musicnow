@@ -32,8 +32,8 @@ $js = <<<EOT
 
     firebase . initializeApp(firebaseConfig);
 
-    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/temas%2F$usuario_id%2F';
-    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/fir-test-64d53.appspot.com/o/portadas%2F$usuario_id%2F';
+    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/music-test-77a40.appspot.com/o/temas%2F$usuario_id%2F';
+    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/music-test-77a40.appspot.com/o/portadas%2F$usuario_id%2F';
     const suffix = '?alt=media';
 
     var portada = '';

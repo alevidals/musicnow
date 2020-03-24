@@ -254,4 +254,23 @@ class UsuariosController extends Controller
 
         return $this->goHome();
     }
+
+    public function actionPerfil($id)
+    {
+        $model = Usuarios::findOne($id);
+
+        if ($model === null) {
+            Yii::$app->session->setFlash('error', 'El usuario no existe');
+            return $this->redirect(['site/index']);
+        }
+
+        $canciones = $model->getCanciones()->all();
+        $albumes = $model->getAlbumes()->all();
+
+        return $this->render('perfil', [
+            'model' => $model,
+            'canciones' => $canciones,
+            'albumes' => $albumes,
+        ]);
+    }
 }
