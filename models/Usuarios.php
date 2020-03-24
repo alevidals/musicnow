@@ -27,6 +27,7 @@ use yii\web\IdentityInterface;
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const SCENARIO_CREAR = 'crear';
+    const SCENARIO_UPDATE = 'update';
 
     public $password_repeat;
 
@@ -54,9 +55,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['email'], 'unique'],
             [['email'], 'email'],
             [['login'], 'unique'],
-            [['password'], 'trim', 'on' => [self::SCENARIO_CREAR]],
+            [['password'], 'trim', 'on' => [self::SCENARIO_CREAR, self::SCENARIO_UPDATE]],
             [['password_repeat'], 'trim', 'on' => [self::SCENARIO_CREAR]],
-            [['password_repeat'], 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => [self::SCENARIO_CREAR]],
+            [['password_repeat'], 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => [self::SCENARIO_CREAR, self::SCENARIO_UPDATE]],
             [['rol'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol' => 'id']],
         ];
     }
@@ -138,6 +139,14 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 $this->confirm_token = $security->generateRandomString(255);
                 $this->password = $security->generatePasswordHash($this->password);
             }
+        } else {
+            if ($this->scenario === self::SCENARIO_UPDATE) {
+                if ($this->password === '') {
+                    $this->password = $this->getOldAttribute('password');
+                } else {
+                    $this->password = $security->generatePasswordHash($this->password);
+                }
+            }
         }
 
         return true;
@@ -162,5 +171,4 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Roles::className(), ['id' => 'rol']);
     }
-
 }

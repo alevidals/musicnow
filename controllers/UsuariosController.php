@@ -37,9 +37,11 @@ class UsuariosController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
-                            return Yii::$app->user->identity->login === 'admin'
-                                && Yii::$app->user->identity->rol === 1;
-                        }
+                            $id = Yii::$app->request->get('id');
+                            return (Yii::$app->user->identity->login === 'admin'
+                                && Yii::$app->user->identity->rol === 1)
+                                || ($id == Yii::$app->user->id);
+                        },
                     ],
                 ],
             ],
@@ -101,11 +103,18 @@ class UsuariosController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
+
+        $model->scenario = Usuarios::SCENARIO_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        $model->password = '';
+        $model->password_repeat = '';
+
 
         return $this->render('update', [
             'model' => $model,
@@ -239,7 +248,7 @@ class UsuariosController extends Controller
         return $this->render('login', [
             'loginFormModel' => $loginModel,
             'userModel' => $userModel,
-            'action' => $action
+            'action' => $action,
         ]);
     }
 
