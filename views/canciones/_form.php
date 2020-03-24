@@ -139,9 +139,9 @@ $this->registerJs($js);
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'album_id')->textInput() ?>
+    <?= $form->field($model, 'album_id')->dropDownList($albumes) ?>
 
-    <?= $form->field($model, 'genero_id')->textInput() ?>
+    <?= $form->field($model, 'genero_id')->dropDownList($generos) ?>
 
     <div class="form-group required">
         <label class="col-12 px-0" for="canciones-portada">Portada</label>

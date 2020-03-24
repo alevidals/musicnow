@@ -57,4 +57,17 @@ class Generos extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Canciones::className(), ['genero_id' => 'id'])->inverseOf('genero');
     }
+
+    /**
+     * Devuelve la denominación de todos los géneros indexados por el id.
+     *
+     * @return array
+     */
+    public static function lista()
+    {
+        return static::find()
+            ->select('denominacion')
+            ->indexBy('id')
+            ->column();
+    }
 }

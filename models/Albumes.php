@@ -86,4 +86,17 @@ class Albumes extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Canciones::className(), ['album_id' => 'id'])->inverseOf('album');
     }
+
+    /**
+     * Devuelve el título de todos los álbumes indexados por el id.
+     *
+     * @return array
+     */
+    public static function lista()
+    {
+        return static::find()
+            ->select('titulo')
+            ->indexBy('id')
+            ->column();
+    }
 }
