@@ -32,8 +32,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'titulo',
             'album.titulo',
             'genero.denominacion',
-            'url_cancion:url',
-            'url_portada:url',
+            [
+                'label' => 'Canción',
+                'value' => function ($model) {
+                    return <<<EOT
+                                <audio controls>
+                                    <source src="$model->url_cancion">
+                                </audio>
+                        EOT;
+                },
+                'format' => 'raw',
+            ],
+            [
+                'label' => 'Portada',
+                'value' => function ($model) {
+                    return Html::img($model->url_portada, ['class' => 'img-fluid', 'style' => 'max-width: 250px;']);
+                },
+                'format' => 'raw',
+            ],
             'song_name',
             'image_name',
             'anyo',
