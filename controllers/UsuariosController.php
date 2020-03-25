@@ -31,7 +31,7 @@ class UsuariosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete'],
+                'only' => ['index', 'update', 'create', 'delete', 'imagen'],
                 'rules' => [
                     [
                         'allow' => true,

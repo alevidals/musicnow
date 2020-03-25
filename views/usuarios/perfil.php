@@ -18,13 +18,15 @@ use yii\bootstrap4\Html;
     <div class="mt-3 d-flex">
         <h1 class="d-inline-block"><?= $model->login?></h1>
         <div class="dropdown d-inline-block ml-auto my-auto">
-            <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <?= Html::a('Editar perfil', ['usuarios/update', 'id' => Yii::$app->user->id], ['class' => 'dropdown-item']) ?>
-                <?= Html::a('Editar imágen de perfil', ['usuarios/imagen', 'id' => Yii::$app->user->id], ['class' => 'dropdown-item']) ?>
-            </div>
+            <?php if ($model->id == Yii::$app->user->id) : ?>
+                <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <?= Html::a('Editar perfil', ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
+                    <?= Html::a('Editar imágen de perfil', ['usuarios/imagen', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
