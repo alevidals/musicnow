@@ -61,7 +61,7 @@ AppAsset::register($this);
                 [
                     'label' => Yii::$app->user->identity->nombre,
                     'items' => [
-                        ['label' => 'Mi cuenta', 'url' => ['usuarios/update', 'id' => Yii::$app->user->id]],
+                        ['label' => 'Mi cuenta', 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
                         [
                             'label' => 'Logout',
                             'url' => [

@@ -167,7 +167,8 @@ label {
     background-color: #ffba00;
 }
 
-.dropdown-menu, .dropdown-item.active {
+.dropdown-menu,
+.dropdown-item.active {
     background-color: #4A4A4A;
 }
 
@@ -184,7 +185,8 @@ label {
     color: #ffba00;
 }
 
-h2,h3 {
+h2,
+h3 {
     color: white;
 }
 
@@ -202,5 +204,12 @@ h2,h3 {
 }
 
 .modal-body {
-    background-color:#181818;
+    background-color: #181818;
+}
+
+.dots-menu {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none !important;
 }

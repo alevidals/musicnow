@@ -14,7 +14,17 @@ Yii::debug(count($canciones));
 
     <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid']) ?>
 
-    <h1 class="mt-3"><?= $model->login?></h1>
+    <div class="mt-3 d-flex">
+        <h1 class="d-inline-block"><?= $model->login?></h1>
+        <div class="dropdown d-inline-block ml-auto my-auto">
+            <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-h"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <?= Html::a('Editar perfil', ['usuarios/update', 'id' => Yii::$app->user->id], ['class' => 'dropdown-item']) ?>
+            </div>
+        </div>
+    </div>
 
     <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
         <li class="nav-item ml-auto">
