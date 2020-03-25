@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Usuarios;
+use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
 {
@@ -67,10 +68,36 @@ class SiteController extends Controller
         $canciones = Canciones::find('album a')->all();
         $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
 
+        $usuariosSearch = new ActiveDataProvider([
+            'query' => Usuarios::find()->where('1=0'),
+        ]);
+
+        if (($cadena = Yii::$app->request->get('cadena', ''))) {
+            // $usuariosSearch->query->where(['ilike', 'titulo', $cadena]);
+            return $this->redirect(['site/search', 'cadena' => $cadena]);
+        }
+
         return $this->render('index', [
             'canciones' => $canciones,
             'usuario' => $usuario,
+            'cadena' => $cadena,
         ]);
+    }
+
+    public function actionSearch($cadena)
+    {
+
+        $usuariosSearch = new ActiveDataProvider([
+            'query' => Usuarios::find()
+                ->where(['ilike', 'login', $cadena])
+                ->orWhere(['ilike', 'email', $cadena]),
+        ]);
+
+        return $this->render('search', [
+            'cadena' => $cadena,
+            'usuariosSearch' => $usuariosSearch,
+        ]);
+
     }
 
     /**
