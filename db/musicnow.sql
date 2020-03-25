@@ -13,17 +13,19 @@ DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios
 (
-    id            BIGSERIAL    PRIMARY KEY
-  , login         VARCHAR(50)  NOT NULL UNIQUE
-  , nombre        VARCHAR(255) NOT NULL
-  , apellidos     VARCHAR(255) NOT NULL
-  , email         VARCHAR(255) NOT NULL UNIQUE
-  , password      VARCHAR(255) NOT NULL
+    id            BIGSERIAL     PRIMARY KEY
+  , login         VARCHAR(50)   NOT NULL UNIQUE
+  , nombre        VARCHAR(255)  NOT NULL
+  , apellidos     VARCHAR(255)  NOT NULL
+  , email         VARCHAR(255)  NOT NULL UNIQUE
+  , password      VARCHAR(255)  NOT NULL
   , fnac          DATE
-  , rol           BIGINT       NOT NULL REFERENCES roles (id) DEFAULT 2
+  , rol           BIGINT        NOT NULL REFERENCES roles (id) DEFAULT 2
   , auth_key      VARCHAR(255)
   , confirm_token VARCHAR(255)
-  , created_at    TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
+  , url_image   VARCHAR(2048)
+  , image_name     VARCHAR(255)
+  , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS generos CASCADE;

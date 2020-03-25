@@ -25,6 +25,10 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'email') ?>
 
+    <?php // echo $form->field($model, 'url_image')?>
+
+    <?php // echo $form->field($model, 'image_name')?>
+
     <?php // echo $form->field($model, 'password') ?>
 
     <?php // echo $form->field($model, 'fnac') ?>

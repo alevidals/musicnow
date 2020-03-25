@@ -30,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'rol',
             //'password',
+            //'url_image:url',
+            //'image_name',
             //'fnac',
             //'auth_key',
             //'confirm_token',

@@ -282,4 +282,17 @@ class UsuariosController extends Controller
             'albumes' => $albumes,
         ]);
     }
+
+    public function actionImagen($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['perfil', 'id' => $model->id]);
+        }
+
+        return $this->render('imagen', [
+            'model' => $model,
+        ]);
+    }
 }

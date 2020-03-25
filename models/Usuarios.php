@@ -16,8 +16,8 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property string|null $fnac
  * @property int $rol
- * @property string|null $auth_key
- * @property string|null $confirm_token
+ * @property string|null $url_image
+ * @property string|null $image_name
  * @property string $created_at
  *
  * @property Albumes[] $albumes
@@ -51,7 +51,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['rol'], 'default', 'value' => 2],
             [['rol'], 'integer'],
             [['login'], 'string', 'max' => 50],
-            [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token'], 'string', 'max' => 255],
+            [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name'], 'string', 'max' => 255],
+            [['url_image'], 'string', 'max' => 2048],
             [['email'], 'unique'],
             [['email'], 'email'],
             [['login'], 'unique'],
@@ -79,6 +80,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'auth_key' => Yii::t('app', 'Auth Key'),
             'confirm_token' => Yii::t('app', 'Confirm Token'),
             'created_at' => Yii::t('app', 'Created At'),
+            'url_image' => Yii::t('app', 'Url Image'),
+            'image_name' => Yii::t('app', 'Image Name'),
         ];
     }
 

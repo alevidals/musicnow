@@ -37,6 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'fnac:date',
             'rol',
             'auth_key',
+            'url_image:url',
+            'image_name',
             // 'confirm_token',
             'created_at:datetime',
         ],
