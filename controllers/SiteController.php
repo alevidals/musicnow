@@ -10,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Usuarios;
 
 class SiteController extends Controller
 {
@@ -64,9 +65,11 @@ class SiteController extends Controller
     {
 
         $canciones = Canciones::find('album a')->all();
+        $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
 
         return $this->render('index', [
             'canciones' => $canciones,
+            'usuario' => $usuario,
         ]);
     }
 

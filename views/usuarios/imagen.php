@@ -18,7 +18,6 @@ $appId = Yii::$app->params['appId'];
 $firebaseUrl = Yii::$app->params['firebaseUrl'];
 
 $usuario_id = Yii::$app->user->id;
-$image = $model->url_image;
 
 $js = <<<EOT
 
@@ -40,18 +39,6 @@ $js = <<<EOT
     var image = '';
 
     $('#bar').hide();
-
-    var storageRef = firebase.storage().ref();
-
-    var listRef = storageRef.child('image/perfil/$usuario_id');
-
-    listRef.listAll().then(function(res) {
-        if (res.items.length == 0) {
-            $('#image-perfil').attr('src', 'https://firebasestorage.googleapis.com/v0/b/music-test-77a40.appspot.com/o/image%2Fperfil%2Fall%2Fblank-profile.png?alt=media&token=687f6533-77f8-4ab0-b87d-65c855488ce0');
-        } else {
-            $('#image-perfil').attr('src', '$image');
-        }
-    });
 
     $('#usuarios-image').on('change', function ev(e) {
         image = e.target.files[0];
@@ -114,7 +101,7 @@ $this->registerJs($js);
 
 <div class="usuarios-image">
 
-    <?= Html::img('', ['width' => '200px', 'id' => 'image-perfil', 'class' => 'my-3 mx-auto']) ?>
+    <?= Html::img($model->url_image, ['width' => '200px', 'id' => 'image-perfil', 'class' => 'my-3 mx-auto']) ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -122,7 +109,7 @@ $this->registerJs($js);
         <label class="col-12 px-0" for="usuarios-image">Imágen de perfil</label>
         <div class="input-group mb-3">
             <div class="custom-file">
-                <?= Html::fileInput('Imágen', '', ['class' => 'custom-file-input', 'id' => 'usuarios-image', 'accept' => 'image/png']) ?>
+                <?= Html::fileInput('imagen', '', ['class' => 'custom-file-input', 'id' => 'usuarios-image', 'accept' => 'image/png']) ?>
                 <?= Html::activeHiddenInput($model, 'url_image', ['maxlength' => true]) ?>
                 <label class="custom-file-label" id="image-label" for="usuarios-url_image">Imágen...</label>
             </div>
@@ -133,13 +120,16 @@ $this->registerJs($js);
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success send-btn']) ?>
-        <?= Html::button(Yii::t('app', 'Delete'), ['class' => 'btn btn-danger delete-btn']) ?>
     </div>
+
+    <?php ActiveForm::end(); ?>
+
+    <?php $form = ActiveForm::begin(); ?>
+    <?= Html::button(Yii::t('app', 'Delete'), ['class' => 'btn btn-danger delete-btn']) ?>
+    <?php ActiveForm::end(); ?>
 
     <div class="progress mt-5" id="bar">
         <div class="progress-bar text-dark main-yellow font-weight-bold" id="uploaderBar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-
-    <?php ActiveForm::end(); ?>
 
 </div>

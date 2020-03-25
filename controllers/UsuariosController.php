@@ -287,8 +287,14 @@ class UsuariosController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['perfil', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($_POST['imagen'] == '') {
+                $baseUrl = Yii::$app->params['firebaseUrl'];
+                $model->url_image = $baseUrl . '/image%2Fperfil%2Fall%2Fblank-profile.png?alt=media';
+            }
+            if ($model->save()) {
+                return $this->redirect(['perfil', 'id' => $model->id]);
+            }
         }
 
         return $this->render('imagen', [
