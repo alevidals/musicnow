@@ -12,5 +12,6 @@ return [
     'storageBucket' => getenv('storageBucket'),
     'messagingSenderId' => getenv('messagingSenderId'),
     'appId' => getenv('appId'),
+    'firebaseUrl' => getenv('firebaseUrl'),
 
 ];

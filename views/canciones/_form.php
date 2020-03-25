@@ -15,6 +15,7 @@ $projectId = Yii::$app->params['projectId'];
 $storageBucket = Yii::$app->params['storageBucket'];
 $messagingSenderId = Yii::$app->params['messagingSenderId'];
 $appId = Yii::$app->params['appId'];
+$firebaseUrl = Yii::$app->params['firebaseUrl'];
 
 $usuario_id = $model->usuario_id;
 
@@ -32,8 +33,8 @@ $js = <<<EOT
 
     firebase . initializeApp(firebaseConfig);
 
-    const songPrefix = 'https://firebasestorage.googleapis.com/v0/b/music-test-77a40.appspot.com/o/temas%2F$usuario_id%2F';
-    const imagePrefix = 'https://firebasestorage.googleapis.com/v0/b/music-test-77a40.appspot.com/o/portadas%2F$usuario_id%2F';
+    const songPrefix = '$firebaseUrl/temas%2F$usuario_id%2F';
+    const imagePrefix = '$firebaseUrl/portadas%2F$usuario_id%2F';
     const suffix = '?alt=media';
 
     var portada = '';
