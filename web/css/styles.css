@@ -213,3 +213,18 @@ h3 {
     color: white;
     outline: none !important;
 }
+
+.user-search-img {
+    border-radius: 100%;
+}
+
+.small-artist {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.perfil-link:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
