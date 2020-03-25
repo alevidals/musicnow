@@ -5,14 +5,60 @@ use yii\bootstrap4\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-Yii::debug(count($canciones));
-
 \yii\web\YiiAsset::register($this);
+
+
+$apiKey = Yii::$app->params['apiKey'];
+$authDomain = Yii::$app->params['authDomain'];
+$databaseURL = Yii::$app->params['databaseURL'];
+$projectId = Yii::$app->params['projectId'];
+$storageBucket = Yii::$app->params['storageBucket'];
+$messagingSenderId = Yii::$app->params['messagingSenderId'];
+$appId = Yii::$app->params['appId'];
+$firebaseUrl = Yii::$app->params['firebaseUrl'];
+
+$usuario_id = Yii::$app->user->id;
+$image = $model->url_image;
+
+$js = <<<EOT
+
+    var firebaseConfig = {
+        apiKey: "$apiKey",
+        authDomain: "$authDomain",
+        databaseURL: "$databaseURL",
+        projectId: "$projectId",
+        storageBucket: "$storageBucket",
+        messagingSenderId: "$messagingSenderId",
+        appId: "$appId",
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    var storageRef = firebase.storage().ref();
+
+    var listRef = storageRef.child('image/perfil/$usuario_id');
+
+    listRef.listAll().then(function(res) {
+        if (res.items.length == 0) {
+            $('#image-perfil').attr('src', 'https://firebasestorage.googleapis.com/v0/b/music-test-77a40.appspot.com/o/image%2Fperfil%2Fall%2Fblank-profile.png?alt=media&token=687f6533-77f8-4ab0-b87d-65c855488ce0');
+        } else {
+            $('#image-perfil').attr('src', '$image');
+        }
+    });
+
+EOT;
+
+$this->registerJsFile('@web/js/firebase-app.js');
+$this->registerJsFile('@web/js/firebase-storage.js');
+$this->registerJs($js);
+
 ?>
 
 <div class="usuarios-view">
 
     <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid']) ?>
+
+    <?= Html::img('', ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3']) ?>
 
     <div class="mt-3 d-flex">
         <h1 class="d-inline-block"><?= $model->login?></h1>
@@ -22,6 +68,7 @@ Yii::debug(count($canciones));
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <?= Html::a('Editar perfil', ['usuarios/update', 'id' => Yii::$app->user->id], ['class' => 'dropdown-item']) ?>
+                <?= Html::a('Editar imágen de perfil', ['usuarios/imagen', 'id' => Yii::$app->user->id], ['class' => 'dropdown-item']) ?>
             </div>
         </div>
     </div>
