@@ -12,6 +12,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Usuarios;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 
 class SiteController extends Controller
 {
@@ -68,12 +69,7 @@ class SiteController extends Controller
         $canciones = Canciones::find('album a')->all();
         $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
 
-        $usuariosSearch = new ActiveDataProvider([
-            'query' => Usuarios::find()->where('1=0'),
-        ]);
-
         if (($cadena = Yii::$app->request->get('cadena', ''))) {
-            // $usuariosSearch->query->where(['ilike', 'titulo', $cadena]);
             return $this->redirect(['site/search', 'cadena' => $cadena]);
         }
 
@@ -93,9 +89,23 @@ class SiteController extends Controller
                 ->orWhere(['ilike', 'email', $cadena]),
         ]);
 
+        $ids = [];
+        $usuarios = Usuarios::find()->select('id')->where(['ilike', 'login', $cadena])->all();
+
+        foreach ($usuarios as $usuario) {
+            $ids[] = $usuario->id;
+        }
+
+        $cancionesSearch = new ActiveDataProvider([
+            'query' => Canciones::find()
+                ->where(['ilike', 'titulo', $cadena])
+                ->orWhere(['IN', 'usuario_id', $ids]),
+        ]);
+
         return $this->render('search', [
             'cadena' => $cadena,
             'usuariosSearch' => $usuariosSearch,
+            'cancionesSearch' => $cancionesSearch,
         ]);
 
     }
