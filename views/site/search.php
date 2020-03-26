@@ -34,13 +34,13 @@ $this->registerJS($js);
                 <div class="form-group">
                     <?= Html::textInput('cadena', $cadena, ['class' => 'form-control']) ?>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <?= Html::submitButton('Buscar', ['class' => 'btn main-yellow']) ?>
                 </div>
     <?= Html::endForm() ?>
 
     <?php if ($usuariosSearch->totalCount > 0) : ?>
-            <h3>Artistas</h3>
+            <h3 class="mt-3">Artistas</h3>
             <div class="row">
                 <?php foreach ($usuariosSearch->getModels() as $usuario) : ?>
                     <?= Html::a(
@@ -52,6 +52,25 @@ $this->registerJS($js);
                         ['usuarios/perfil', 'id' => $usuario->id],
                         ['class' => 'perfil-link mt-3']
                     ) ?>
+                <?php endforeach; ?>
+            </div>
+    <?php endif ?>
+
+    <?php if ($cancionesSearch->totalCount > 0) : ?>
+            <h3 class="mt-3">Canciones</h3>
+            <div class="row">
+                <?php foreach ($cancionesSearch->getModels() as $cancion) : ?>
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-1">
+                            <?= Html::img($cancion->url_portada, ['width' => '80px', 'class' => 'd-inline-block']) ?>
+                        </div>
+                        <div class="col my-auto">
+                            <p class="m-0 font-weight-bold"><?= $cancion->titulo ?></p>
+                            <p class="m-0"><?= $cancion->getUsuario()->one()->login ?></p>
+                        </div>
+                    </div>
+                </div>
                 <?php endforeach; ?>
             </div>
     <?php endif ?>
