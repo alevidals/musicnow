@@ -26,7 +26,8 @@ $js = <<<EOT
     $.fn.filepond.registerPlugin(
         FilePondPluginImagePreview,
         FilePondPluginImageValidateSize,
-        FilePondPluginFileValidateSize
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType,
     );
 
     $('.filepond').filepond({
@@ -34,6 +35,7 @@ $js = <<<EOT
         imageValidateSizeMaxWidth: 200,
         imageValidateSizeMaxHeight: 200,
         maxFileSize: '5MB',
+        acceptedFileTypes: ['image/png'],
     });
 
     $('.filepond').on('FilePond:addfile', function(e) {

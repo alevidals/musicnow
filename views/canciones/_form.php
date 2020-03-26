@@ -36,7 +36,8 @@ $js = <<<EOT
     $.fn.filepond.registerPlugin(
         FilePondPluginImagePreview,
         FilePondPluginImageValidateSize,
-        FilePondPluginFileValidateSize
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType,
     );
 
     $('.filepond-image').filepond({
@@ -44,11 +45,12 @@ $js = <<<EOT
         imageValidateSizeMaxWidth: 540,
         imageValidateSizeMaxHeight: 540,
         maxFileSize: '5MB',
-        class: 'peeeeee',
+        acceptedFileTypes: ['image/png'],
     });
 
     $('.filepond-song').filepond({
         labelIdle: 'Introduza su canción',
+        acceptedFileTypes: ['audio/mp3'],
         maxFileSize: '20MB',
     });
 
