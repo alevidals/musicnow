@@ -30,6 +30,69 @@ $url = Url::to(['canciones/url']);
 
 $js = <<<EOT
 
+    const songPrefix = '$firebaseUrl/temas%2F$usuario_id%2F';
+    const imagePrefix = '$firebaseUrl/portadas%2F$usuario_id%2F';
+
+    const suffix = '?alt=media';
+    var portadaFlag = true;
+    var cancionFlag = true;
+
+    var portada = '';
+    var cancion = '';
+    var array = [];
+
+    $('#bar').hide();
+
+    $.fn.filepond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageValidateSize,
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType,
+    );
+
+    $('.filepond-image').filepond({
+        labelIdle: 'Introduza su portada',
+        imageValidateSizeMaxWidth: 540,
+        imageValidateSizeMaxHeight: 540,
+        maxFileSize: '5MB',
+        acceptedFileTypes: ['image/png'],
+    });
+
+    $('.filepond-song').filepond({
+        labelIdle: 'Introduza su canción',
+        acceptedFileTypes: ['audio/mp3'],
+        maxFileSize: '20MB',
+    });
+
+    $('.filepond-image').on('FilePond:removefile', function(e) {
+        portadaFlag = true;
+        portada = '';
+        $('.image-feedback').text('');
+        $('.image-feedback').css('display', 'none');
+    });
+
+    $('.filepond-song').on('FilePond:removefile', function(e) {
+        cancionFlag = true;
+        cancion = '';
+        $('.song-feedback').text('');
+        $('.song-feedback').css('display', 'none');
+    });
+
+    $('.filepond-image').on('FilePond:error', function(e) {
+        $('.image-feedback').text('Debes introducir una imágen que cumpla los requisitos');
+        $('.image-feedback').css('display', 'block');
+        portadaFlag = false;
+        portada = '';
+    });
+
+    $('.filepond-song').on('FilePond:error', function(e) {
+        $('.song-feedback').text('Debes introducir una canción que cumpla los requisitos');
+        $('.song-feedback').css('display', 'block');
+        console.log('error-song');
+        cancionFlag = false;
+        cancion = '';
+    });
+
     var firebaseConfig = {
         apiKey: "$apiKey",
         authDomain: "$authDomain",
@@ -41,16 +104,6 @@ $js = <<<EOT
     };
 
     firebase.initializeApp(firebaseConfig);
-
-    const songPrefix = '$firebaseUrl/temas%2F$usuario_id%2F';
-    const imagePrefix = '$firebaseUrl/portadas%2F$usuario_id%2F';
-    const suffix = '?alt=media';
-
-    var portada = '';
-    var cancion = '';
-    var array = [];
-
-    $('#bar').hide();
 
     $('#canciones-portada').on('change', function (e){
         portada = e.target.files[0];
@@ -76,113 +129,128 @@ $js = <<<EOT
         var storage = firebase.storage();
         var storageRef = storage.ref();
 
-        var portadaRequest = function () {
-            return new Promise(function(resolve, reject) {
-                $.ajax({
-                    method: 'GET',
-                    url: '$url',
-                    data: {
-                        id: id
-                    },
-                    success: function (data, code, jqXHR) {
-                        var imageRef = storageRef.child('portadas/' + data.usuario_id + '/' + data.image_name);
-                        imageRef.delete().then(function() {
-                            var urlPortada = imagePrefix + portada.name.replace(/\s/g, '') + suffix;
-                            $('#canciones-url_portada').val(urlPortada);
-                            $('#canciones-image_name').val(portada.name.replace(/\s/g, ''));
-                            var storageImageRef = firebase.storage().ref('portadas/$usuario_id/' + portada.name.replace(/\s/g, ''));
-                            var task = storageImageRef.put(portada);
+        console.log('llego');
 
-                            task.on('state_changed',
+        if (portadaFlag && cancionFlag) {
+            console.log('y aqui');
+            var portadaRequest = function () {
+                return new Promise(function(resolve, reject) {
+                    $.ajax({
+                        method: 'GET',
+                        url: '$url',
+                        data: {
+                            id: id
+                        },
+                        success: function (data, code, jqXHR) {
+                            var imageRef = storageRef.child('portadas/' + data.usuario_id + '/' + data.image_name);
+                            imageRef.delete().then(function() {
+                                var urlPortada = imagePrefix + portada.name.replace(/\s/g, '') + suffix;
+                                $('#canciones-url_portada').val(urlPortada);
+                                $('#canciones-image_name').val(portada.name.replace(/\s/g, ''));
+                                var storageImageRef = firebase.storage().ref('portadas/$usuario_id/' + portada.name.replace(/\s/g, ''));
+                                var task = storageImageRef.put(portada);
 
-                                function progress(snapshot) {
-                                    $('#bar').show();
-                                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                                    $('#uploaderBar').text(Math.round(percentage) + '%');
-                                    $('#uploaderBar').css('width', Math.round(percentage) + '%');
-                                },
+                                task.on('state_changed',
 
-                                function error(err) {
-                                    reject();
-                                },
+                                    function progress(snapshot) {
+                                        $('#bar').show();
+                                        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                        $('#uploaderBar').text(Math.round(percentage) + '%');
+                                        $('#uploaderBar').css('width', Math.round(percentage) + '%');
+                                    },
 
-                                function complete() {
-                                    resolve();
-                                }
+                                    function error(err) {
+                                        reject();
+                                    },
 
-                            );
-                        }).catch(function() {
+                                    function complete() {
+                                        resolve();
+                                    }
+
+                                );
+                            }).catch(function() {
+                                reject();
+                            });
+                        },
+                        error: function (data, code, jqXHR) {
                             reject();
-                        });
-                    },
-                    error: function (data, code, jqXHR) {
-                        reject();
-                    }
+                        }
+                    });
                 });
-            });
-        }
+            }
 
-        var cancionRequest = function () {
-            return new Promise(function(resolve, reject) {
-                return $.ajax({
-                    method: 'GET',
-                    url: '$url',
-                    data: {
-                        id: id
-                    },
-                    success: function (data, code, jqXHR) {
-                        var songRef = storageRef.child('temas/' + data.usuario_id + '/' + data.song_name);
-                        songRef.delete()
-                        .then(function() {
-                            var urlCancion = songPrefix + cancion.name.replace(/\s/g, '') + suffix;
-                            $('#canciones-url_cancion').val(urlCancion);
-                            $('#canciones-song_name').val(cancion.name.replace(/\s/g, ''));
-                            var storageSongRef = firebase.storage().ref('temas/$usuario_id/' + cancion.name.replace(/\s/g, ''));
-                            var task = storageSongRef.put(cancion);
+            var cancionRequest = function () {
+                return new Promise(function(resolve, reject) {
+                    return $.ajax({
+                        method: 'GET',
+                        url: '$url',
+                        data: {
+                            id: id
+                        },
+                        success: function (data, code, jqXHR) {
+                            var songRef = storageRef.child('temas/' + data.usuario_id + '/' + data.song_name);
+                            songRef.delete()
+                            .then(function() {
+                                var urlCancion = songPrefix + cancion.name.replace(/\s/g, '') + suffix;
+                                $('#canciones-url_cancion').val(urlCancion);
+                                $('#canciones-song_name').val(cancion.name.replace(/\s/g, ''));
+                                var storageSongRef = firebase.storage().ref('temas/$usuario_id/' + cancion.name.replace(/\s/g, ''));
+                                var task = storageSongRef.put(cancion);
 
-                            task.on('state_changed',
+                                task.on('state_changed',
 
-                                function progress(snapshot) {
-                                    $('#bar').show();
-                                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                                    $('#uploaderBar').text(Math.round(percentage) + '%');
-                                    $('#uploaderBar').css('width', Math.round(percentage) + '%');
-                                },
+                                    function progress(snapshot) {
+                                        $('#bar').show();
+                                        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                        $('#uploaderBar').text(Math.round(percentage) + '%');
+                                        $('#uploaderBar').css('width', Math.round(percentage) + '%');
+                                    },
 
-                                function error(err) {
-                                    reject();
-                                },
+                                    function error(err) {
+                                        reject();
+                                    },
 
-                                function complete() {
-                                    resolve();
-                                }
+                                    function complete() {
+                                        resolve();
+                                    }
 
-                            );
-                        }).catch(function() {
+                                );
+                            }).catch(function() {
+                                reject();
+                            });
+                        },
+                        error: function (data, code, jqXHR) {
                             reject();
-                        });
-                    },
-                    error: function (data, code, jqXHR) {
-                        reject();
-                    }
+                        }
+                    });
                 });
+            }
+
+            if (cancion) {
+                array.push(cancionRequest);
+            }
+
+            if (portada) {
+                array.push(portadaRequest);
+            }
+
+            Promise.all(array.map(p => p()))
+            .then(() => {
+                $('#w0').trigger('submit');
+            })
+            .catch(() => {
             });
+        } else {
+            if (!portadaFlag) {
+                $('.image-feedback').text('Debes introducir una imágen');
+                $('.image-feedback').css('display', 'block');
+            }
+            if (!cancionFlag) {
+                $('.song-feedback').text('Debes introducir una canción');
+                $('.song-feedback').css('display', 'block');
+            }
         }
 
-        if (cancion) {
-            array.push(cancionRequest);
-        }
-
-        if (portada) {
-            array.push(portadaRequest);
-        }
-
-        Promise.all(array.map(p => p()))
-        .then(() => {
-            $('#w0').trigger('submit');
-        })
-        .catch(() => {
-        });
 
     });
 
@@ -207,25 +275,15 @@ $this->registerJS($js);
 
     <div class="form-group required">
         <label class="col-12 px-0" for="canciones-portada">Portada</label>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <?= Html::fileInput('Portada', '', ['class' => 'custom-file-input', 'id' => 'canciones-portada', 'accept' => 'image/png']) ?>
-                <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
-                <label class="custom-file-label" id="cover-label" for="canciones-url_portada">Portada...</label>
-            </div>
-        </div>
+        <?= Html::fileInput('Portada', '', ['class' => 'filepond-image col-md-6', 'id' => 'canciones-portada']) ?>
+        <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
         <div class="invalid-feedback image-feedback"></div>
     </div>
 
     <div class="form-group">
         <label class="col-12 px-0" for="canciones-cancion">Canción</label>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <?= Html::fileInput('Canción', '', ['class' => 'custom-file-input', 'id' => 'canciones-cancion', 'accept' => 'audio/mp3']) ?>
-                <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
-                <label class="custom-file-label" id="song-label" for="canciones-url_cancion">Canción...</label>
-            </div>
-        </div>
+        <?= Html::fileInput('Canción', '', ['class' => 'filepond-song col-md-6', 'id' => 'canciones-cancion']) ?>
+        <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
         <div class="invalid-feedback song-feedback"></div>
     </div>
 

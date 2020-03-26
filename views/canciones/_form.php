@@ -201,14 +201,14 @@ $this->registerJs($js);
 
     <div class="form-group">
         <label class="col-12 px-0" for="canciones-portada">Portada</label>
-        <?= Html::fileInput('Portada', '', ['class' => 'filepond-image col-12 col-md-6', 'id' => 'canciones-portada', 'accept' => 'image/png']) ?>
+        <?= Html::fileInput('Portada', '', ['class' => 'filepond-image col-12 col-md-6', 'id' => 'canciones-portada']) ?>
         <div class="invalid-feedback image-feedback"></div>
         <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
     </div>
 
     <div class="form-group">
         <label class="col-12 px-0" for="canciones-cancion">Canción</label>
-        <?= Html::fileInput('Canción', '', ['class' => 'filepond-song col-12 col-md-6', 'id' => 'canciones-cancion', 'accept' => 'audio/mp3']) ?>
+        <?= Html::fileInput('Canción', '', ['class' => 'filepond-song col-12 col-md-6', 'id' => 'canciones-cancion']) ?>
         <div class="invalid-feedback song-feedback"></div>
         <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
     </div>
