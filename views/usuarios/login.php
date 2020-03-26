@@ -15,9 +15,6 @@ var current_fs, next_fs, previous_fs;
 //     $('form').trigger('reset');
 // });
 
-if ("$action" === 'register') {
-    $('#register-tab').trigger('click');
-}
 
 
 $(".next").click(function(){

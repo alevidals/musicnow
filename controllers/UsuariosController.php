@@ -288,7 +288,7 @@ class UsuariosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($_POST['imagen'] == '') {
+            if ($_POST['delete'] == 'delete') {
                 $baseUrl = Yii::$app->params['firebaseUrl'];
                 $model->url_image = $baseUrl . '/image%2Fperfil%2Fall%2Fblank-profile.png?alt=media';
             }

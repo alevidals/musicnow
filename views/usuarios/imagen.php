@@ -21,6 +21,28 @@ $usuario_id = Yii::$app->user->id;
 
 $js = <<<EOT
 
+    $('.send-btn').prop('disabled', true);
+
+    $.fn.filepond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageValidateSize,
+        FilePondPluginFileValidateSize
+    );
+
+    $('.filepond').filepond({
+        labelIdle: 'Introduza su imágen',
+        imageValidateSizeMaxWidth: 200,
+        imageValidateSizeMaxHeight: 200,
+        maxFileSize: '5MB',
+    });
+
+    $('.filepond').on('FilePond:addfile', function(e) {
+        $('.send-btn').prop('disabled', false);
+        $('.send-btn').removeClass('btn-secondary');
+        $('.send-btn').addClass('main-yellow');
+
+    });
+
     var firebaseConfig = {
         apiKey: "$apiKey",
         authDomain: "$authDomain",
@@ -81,6 +103,7 @@ $js = <<<EOT
         e.preventDefault();
 
         if(confirm('¿Eliminar?')) {
+            $('.delete-hidden-input').val('delete');
             var storage = firebase.storage();
             var storageRef = storage.ref();
             var imageRef = storageRef.child('image/perfil/$usuario_id/perfil.png');
@@ -105,21 +128,16 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="form-group">
-        <label class="col-12 px-0" for="usuarios-image">Imágen de perfil</label>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <?= Html::fileInput('imagen', '', ['class' => 'custom-file-input', 'id' => 'usuarios-image', 'accept' => 'image/png']) ?>
-                <?= Html::activeHiddenInput($model, 'url_image', ['maxlength' => true]) ?>
-                <label class="custom-file-label" id="image-label" for="usuarios-url_image">Imágen...</label>
-            </div>
-        </div>
-    </div>
+    <?= Html::fileInput('imagen', '', ['class' => 'filepond col-12 col-md-6', 'id' => 'usuarios-image', 'accept' => 'image/png']) ?>
+
+    <input type="hidden" name="delete" class="delete-hidden-input">
+
+    <?= Html::activeHiddenInput($model, 'url_image', ['maxlength' => true]) ?>
 
     <?= Html::activeHiddenInput($model, 'image_name', ['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success send-btn']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-secondary send-btn']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
