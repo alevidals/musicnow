@@ -70,6 +70,21 @@ $js = <<<EOT
         cancion = '';
     });
 
+    $('.filepond-image').on('FilePond:error', function(e) {
+        $('.image-feedback').text('Debes introducir una imágen que cumpla los requisitos');
+        $('.image-feedback').css('display', 'block');
+        portadaFlag = false;
+        portada = '';
+    });
+
+    $('.filepond-song').on('FilePond:error', function(e) {
+        $('.song-feedback').text('Debes introducir una canción que cumpla los requisitos');
+        $('.song-feedback').css('display', 'block');
+        console.log('error-song');
+        cancionFlag = false;
+        cancion = '';
+    });
+
     var firebaseConfig = {
         apiKey: "$apiKey",
         authDomain: "$authDomain",
