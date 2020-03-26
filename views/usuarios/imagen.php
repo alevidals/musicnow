@@ -40,7 +40,6 @@ $js = <<<EOT
         $('.send-btn').prop('disabled', false);
         $('.send-btn').removeClass('btn-secondary');
         $('.send-btn').addClass('main-yellow');
-
     });
 
     var firebaseConfig = {

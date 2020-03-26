@@ -21,6 +21,55 @@ $usuario_id = $model->usuario_id;
 
 $js = <<<EOT
 
+
+    const songPrefix = '$firebaseUrl/temas%2F$usuario_id%2F';
+    const imagePrefix = '$firebaseUrl/portadas%2F$usuario_id%2F';
+    const suffix = '?alt=media';
+
+    var portada = '';
+    var cancion = '';
+    var portadaFlag = false;
+    var cancionFlag = false;
+    var valid = false;
+    $('#bar').hide();
+
+    $.fn.filepond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageValidateSize,
+        FilePondPluginFileValidateSize
+    );
+
+    $('.filepond-image').filepond({
+        labelIdle: 'Introduza su portada',
+        imageValidateSizeMaxWidth: 540,
+        imageValidateSizeMaxHeight: 540,
+        maxFileSize: '5MB',
+        class: 'peeeeee',
+    });
+
+    $('.filepond-song').filepond({
+        labelIdle: 'Introduza su canción',
+        maxFileSize: '20MB',
+    });
+
+    $('.filepond-image').on('FilePond:addfile', function(e) {
+        portadaFlag = true;
+    });
+
+    $('.filepond-song').on('FilePond:addfile', function(e) {
+        cancionFlag = true;
+    });
+
+    $('.filepond-image').on('FilePond:removefile', function(e) {
+        portadaFlag = false;
+        portada = '';
+    });
+
+    $('.filepond-song').on('FilePond:removefile', function(e) {
+        cancionFlag = false;
+        cancion = '';
+    });
+
     var firebaseConfig = {
         apiKey: "$apiKey",
         authDomain: "$authDomain",
@@ -31,17 +80,7 @@ $js = <<<EOT
         appId: "$appId",
     };
 
-    firebase . initializeApp(firebaseConfig);
-
-    const songPrefix = '$firebaseUrl/temas%2F$usuario_id%2F';
-    const imagePrefix = '$firebaseUrl/portadas%2F$usuario_id%2F';
-    const suffix = '?alt=media';
-
-    var portada = '';
-    var cancion = '';
-    var valid = false;
-
-    $('#bar').hide();
+    firebase.initializeApp(firebaseConfig);
 
     $('#canciones-portada').on('change', function ev(e) {
         portada = e.target.files[0];
@@ -60,7 +99,6 @@ $js = <<<EOT
     $('.send-btn').on('click', function ev(e) {
         e.preventDefault();
 
-        // TODO: ESTO ES PARA QUE VALIDE EL FORMULARIO Y LUEGO LE HAGO SUBMIT
         var data = $('#w0').data("yiiActiveForm");
         $.each(data.attributes, function() {
             this.status = 3;
@@ -111,11 +149,11 @@ $js = <<<EOT
                 );
             }
         } else {
-            if ($('#canciones-portada').val() == '') {
+            if (!portadaFlag) {
                 $('.image-feedback').text('Debes introducir una imágen');
                 $('.image-feedback').css('display', 'block');
             }
-            if ($('#canciones-cancion').val() == '') {
+            if (!cancionFlag) {
                 $('.song-feedback').text('Debes introducir una canción');
                 $('.song-feedback').css('display', 'block');
             }
@@ -144,28 +182,18 @@ $this->registerJs($js);
 
     <?= $form->field($model, 'genero_id')->dropDownList($generos) ?>
 
-    <div class="form-group required">
+    <div class="form-group">
         <label class="col-12 px-0" for="canciones-portada">Portada</label>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <?= Html::fileInput('Portada', '', ['class' => 'custom-file-input', 'id' => 'canciones-portada', 'accept' => 'image/png']) ?>
-                <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
-                <label class="custom-file-label" id="cover-label" for="canciones-url_portada">Portada...</label>
-            </div>
-        </div>
+        <?= Html::fileInput('Portada', '', ['class' => 'filepond-image col-12 col-md-6', 'id' => 'canciones-portada', 'accept' => 'image/png']) ?>
         <div class="invalid-feedback image-feedback"></div>
+        <?= Html::activeHiddenInput($model, 'url_portada', ['maxlength' => true]) ?>
     </div>
 
     <div class="form-group">
         <label class="col-12 px-0" for="canciones-cancion">Canción</label>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <?= Html::fileInput('Canción', '', ['class' => 'custom-file-input', 'id' => 'canciones-cancion', 'accept' => 'audio/mp3']) ?>
-                <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
-                <label class="custom-file-label" id="song-label" for="canciones-url_cancion">Canción...</label>
-            </div>
-        </div>
+        <?= Html::fileInput('Canción', '', ['class' => 'filepond-song col-12 col-md-6', 'id' => 'canciones-cancion', 'accept' => 'audio/mp3']) ?>
         <div class="invalid-feedback song-feedback"></div>
+        <?= Html::activeHiddenInput($model, 'url_cancion', ['maxlength' => true]) ?>
     </div>
 
     <?= Html::activeHiddenInput($model, 'song_name', ['maxlength' => true]) ?>
