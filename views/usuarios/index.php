@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'auth_key',
             //'confirm_token',
             //'created_at',
+            //'deleted_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

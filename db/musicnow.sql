@@ -23,9 +23,10 @@ CREATE TABLE usuarios
   , rol           BIGINT        NOT NULL REFERENCES roles (id) DEFAULT 2
   , auth_key      VARCHAR(255)
   , confirm_token VARCHAR(255)
-  , url_image   VARCHAR(2048)
-  , image_name     VARCHAR(255)
+  , url_image     VARCHAR(2048)
+  , image_name    VARCHAR(255)
   , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
+  , deleted_at    TIMESTAMP(0)
 );
 
 DROP TABLE IF EXISTS generos CASCADE;

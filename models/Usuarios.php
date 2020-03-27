@@ -16,9 +16,12 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property string|null $fnac
  * @property int $rol
+ * @property string|null $auth_key
+ * @property string|null $confirm_token
  * @property string|null $url_image
  * @property string|null $image_name
  * @property string $created_at
+ * @property string|null $deleted_at
  *
  * @property Albumes[] $albumes
  * @property Canciones[] $canciones
@@ -47,7 +50,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             [['login', 'nombre', 'apellidos', 'email'], 'required'],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREAR]],
-            [['fnac', 'created_at'], 'safe'],
+            [['fnac', 'created_at', 'deleted_at'], 'safe'],
             [['rol'], 'default', 'value' => 2],
             [['rol'], 'integer'],
             [['login'], 'string', 'max' => 50],
@@ -82,6 +85,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'created_at' => Yii::t('app', 'Created At'),
             'url_image' => Yii::t('app', 'Url Image'),
             'image_name' => Yii::t('app', 'Image Name'),
+            'deleted_at' => Yii::t('app', 'Deleted At'),
         ];
     }
 

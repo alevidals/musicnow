@@ -25,6 +25,14 @@ use yii\bootstrap4\Html;
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?= Html::a('Editar perfil', ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
                     <?= Html::a('Editar imágen de perfil', ['usuarios/imagen', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
+                    <?= Html::a(
+                        'Eliminar cuenta',
+                        ['usuarios/eliminar-cuenta', 'id' => $model->id],
+                        [
+                            'class' => 'dropdown-item',
+                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']
+                        ]
+                    ) ?>
                 </div>
             <?php endif; ?>
         </div>
