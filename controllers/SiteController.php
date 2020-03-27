@@ -89,13 +89,11 @@ class SiteController extends Controller
                 ->orWhere(['ilike', 'email', $cadena]),
         ]);
 
-        $ids = [];
-        $usuarios = Usuarios::find()->select('id')->where(['ilike', 'login', $cadena])->all();
-
-        foreach ($usuarios as $usuario) {
-            $ids[] = $usuario->id;
-        }
-
+        $ids = Usuarios::find()
+            ->select('id')
+            ->where(['ilike', 'login', $cadena])
+            ->column();
+            
         $cancionesSearch = new ActiveDataProvider([
             'query' => Canciones::find()
                 ->where(['ilike', 'titulo', $cadena])
