@@ -41,6 +41,8 @@ use yii\bootstrap4\ActiveForm;
 
     <?php // echo $form->field($model, 'created_at') ?>
 
+    <?php // echo $form->field($model, 'deleted_at') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>

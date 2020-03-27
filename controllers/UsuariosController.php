@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\LoginForm;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
+use DateTime;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -31,7 +32,7 @@ class UsuariosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete', 'imagen'],
+                'only' => ['index', 'update', 'create', 'delete', 'imagen', 'eliminar-cuenta'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -207,9 +208,12 @@ class UsuariosController extends Controller
         if (isset($_POST['LoginForm'])) {
             $action = 'login';
             if ($loginModel->load(Yii::$app->request->post())) {
-                if ($loginModel->getUser() !== null) {
-                    if ($loginModel->getUser()->confirm_token !== null) {
+                $user = $loginModel->getUser();
+                if ($user !== null) {
+                    if ($user->confirm_token !== null) {
                         Yii::$app->session->setFlash('warning', 'Debes confirmar el correo.');
+                    } elseif ($user->deleted_at !== null) {
+                        Yii::$app->session->setFlash('error', 'La cuenta de este usuario está eliminada.');
                     } else {
                         if ($loginModel->login()) {
                             return $this->goBack();
@@ -300,5 +304,21 @@ class UsuariosController extends Controller
         return $this->render('imagen', [
             'model' => $model,
         ]);
+    }
+
+    public function actionEliminarCuenta($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model) {
+            $model->deleted_at = (new Datetime())->format('Y-m-d H:i:s');
+            if ($model->save()) {
+                return $this->redirect(['usuarios/logout']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Se ha producido un error interno.');
+            }
+        } else {
+            return $this->redirect(['site/index']);
+        }
     }
 }

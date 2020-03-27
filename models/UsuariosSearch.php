@@ -18,7 +18,7 @@ class UsuariosSearch extends Usuarios
     {
         return [
             [['id', 'rol'], 'integer'],
-            [['login', 'nombre', 'apellidos', 'email', 'password', 'fnac', 'auth_key', 'confirm_token','url_image', 'image_name', 'created_at'], 'safe'],
+            [['login', 'nombre', 'apellidos', 'email', 'password', 'fnac', 'auth_key', 'confirm_token','url_image', 'image_name', 'created_at', 'deleted_at'], 'safe'],
         ];
     }
 
@@ -62,6 +62,7 @@ class UsuariosSearch extends Usuarios
             'fnac' => $this->fnac,
             'rol' => $this->rol,
             'created_at' => $this->created_at,
+            'deleted_at' => $this->deleted_at,
         ]);
 
         $query->andFilterWhere(['ilike', 'login', $this->login])
