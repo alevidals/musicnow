@@ -76,6 +76,19 @@ CREATE TABLE albumes_canciones
   , canciones_id BIGINT    NOT NULL REFERENCES canciones (id)
 );
 
+DROP TABLE IF EXISTS seguidores CASCADE;
+
+CREATE TABLE seguidores (
+    seguidor_id BIGINT REFERENCES usuarios (id)
+  , seguido_id BIGINT REFERENCES usuarios (id)
+  , PRIMARY KEY (seguidor_id, seguido_id)
+);
+
 INSERT INTO roles (rol)
 VALUES ('admin')
      , ('usuario');
+
+INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol)
+VALUES ('admin', 'admin', 'admin', 'admin@admin.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),
+       ('usuario1', 'usuario1', 'usuario1', 'usuario1@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),
+       ('usuario2', 'usuario2', 'usuario2', 'usuario2@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1);

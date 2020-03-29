@@ -25,6 +25,8 @@ use yii\web\IdentityInterface;
  *
  * @property Albumes[] $albumes
  * @property Canciones[] $canciones
+ * @property Seguidores[] $seguidores
+ * @property Usuarios[] $seguidos
  * @property Roles $rol
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
@@ -178,4 +180,24 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Roles::className(), ['id' => 'rol']);
     }
+
+    /**
+     * Gets query for [[Seguidores]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSeguidores()
+    {
+        return $this->hasMany(Seguidores::className(), ['seguido_id' => 'id']);
+    }
+    /**
+     * Gets query for [[Seguidos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSeguidos()
+    {
+        return $this->hasMany(self::className(), ['id' => 'seguido_id'])->viaTable('seguidores', ['seguidor_id' => 'id']);
+    }
+
 }
