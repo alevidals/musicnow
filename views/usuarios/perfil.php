@@ -1,17 +1,40 @@
 <?php
 
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
 \yii\web\YiiAsset::register($this);
 
+$urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
+
+$js = <<<EOT
+
+    $('.follow').on('click', function ev(e) {
+        $.ajax({
+            'method': 'POST',
+            'url': '$urlFollow',
+            success: function (data) {
+                $('#num-seguidores').html('Seguidores: ' + data.seguidores);
+            }
+        });
+    });
+
+EOT;
+
+$this->registerJS($js);
+
 ?>
 
 <div class="usuarios-view">
 
     <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid']) ?>
+
+    <button class="btn main-yellow mt-4 follow">Seguir</button>
+
+    <p id="num-seguidores">Seguidores: <?= $model->getSeguidores()->count() ?></p>
 
     <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3']) ?>
 
