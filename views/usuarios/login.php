@@ -45,7 +45,7 @@ $this->title = 'Login';
 ?>
 <div class="site-login container">
 
-    <div class="text-center mb-5">
+    <div class="text-center mt-5 mt-lg-0 mb-5">
         <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto', 'width' => '300px']) ?>
     </div>
 
