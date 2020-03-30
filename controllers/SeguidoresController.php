@@ -153,4 +153,24 @@ class SeguidoresController extends Controller
             'seguidores' => $usuarioSeguido->getSeguidores()->count(),
         ];
     }
+
+    public function actionUnFollow($seguido_id)
+    {
+        $seguir = Seguidores::find()
+            ->andWhere([
+                'seguidor_id' => Yii::$app->user->id,
+                'seguido_id' => $seguido_id
+            ])
+            ->one();
+
+        if ($seguir !== null) {
+            $this->findModel(Yii::$app->user->id, $seguido_id)->delete();
+        }
+
+        $usuarioSeguido = Usuarios::findOne($seguido_id);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'seguidores' => $usuarioSeguido->getSeguidores()->count(),
+        ];
+    }
 }
