@@ -24,6 +24,8 @@ use Yii;
  * @property Albumes $album
  * @property Generos $genero
  * @property Usuarios $usuario
+ * @property Likes[] $likes
+ * @property Usuarios[] $usuarios
  */
 class Canciones extends \yii\db\ActiveRecord
 {
@@ -114,5 +116,24 @@ class Canciones extends \yii\db\ActiveRecord
     public function getUsuario()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('canciones');
+    }
+
+    /**
+     * Gets query for [[Likes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLikes()
+    {
+        return $this->hasMany(Likes::className(), ['cancion_id' => 'id']);
+    }
+    /**
+     * Gets query for [[Usuarios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuarios()
+    {
+        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('likes', ['cancion_id' => 'id']);
     }
 }

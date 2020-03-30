@@ -44,6 +44,8 @@ $js = <<<EOT
         labelIdle: 'Introduza su portada',
         imageValidateSizeMaxWidth: 540,
         imageValidateSizeMaxHeight: 540,
+        imageValidateSizeMinWidth: 540,
+        imageValidateSizeMinHeight: 540,
         maxFileSize: '5MB',
         acceptedFileTypes: ['image/png'],
     });
