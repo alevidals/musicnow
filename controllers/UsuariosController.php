@@ -279,11 +279,15 @@ class UsuariosController extends Controller
 
         $canciones = $model->getCanciones()->all();
         $albumes = $model->getAlbumes()->all();
+        $seguidores = $model->getSeguidores()->all();
+        $seguidos = $model->getSeguidos()->all();
 
         return $this->render('perfil', [
             'model' => $model,
             'canciones' => $canciones,
             'albumes' => $albumes,
+            'seguidores' => $seguidores,
+            'seguidos' => $seguidos,
         ]);
     }
 

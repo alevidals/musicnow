@@ -232,3 +232,10 @@ h3 {
 .filepond--panel-root {
     background-color: #383838;
 }
+
+.outline-transparent {
+    background-color: transparent;
+    border: none;
+    outline: none !important;
+    color: white;
+}

@@ -160,10 +160,12 @@ class SeguidoresController extends Controller
         return $res;
     }
 
-    public function actionCheckFollow($seguido_id)
+    public function actionGetData($seguido_id)
     {
 
-        $textButton = 'Seguir';
+        $res = [];
+
+        $res['textButton'] = 'Seguir';
 
         $seguir = Seguidores::find()
             ->andWhere([
@@ -173,9 +175,15 @@ class SeguidoresController extends Controller
             ->one();
 
         if ($seguir !== null) {
-            $textButton = 'Dejar de seguir';
+            $res['textButton'] = 'Dejar de seguir';
         }
 
-        return $textButton;
+        $user = Usuarios::findOne($seguido_id);
+
+        $res['seguidores'] = $user->getSeguidores()->count();
+        $res['seguidos'] = $user->getSeguidos()->count();
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $res;
     }
 }
