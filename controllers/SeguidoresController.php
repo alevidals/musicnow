@@ -6,6 +6,7 @@ use app\models\Seguidores;
 use app\models\SeguidoresSearch;
 use app\models\Usuarios;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -26,6 +27,20 @@ class SeguidoresController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['follow'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            $seguido_id = Yii::$app->request->get('seguido_id');
+                            return $seguido_id != Yii::$app->user->id;
+                        },
+                    ],
                 ],
             ],
         ];

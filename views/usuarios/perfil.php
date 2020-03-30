@@ -6,9 +6,6 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-Yii::debug(count($seguidores));
-Yii::debug(count($seguidos));
-
 \yii\web\YiiAsset::register($this);
 
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
@@ -47,9 +44,11 @@ $this->registerJS($js);
 
     <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid']) ?>
 
-    <button class="btn main-yellow mt-4 follow"></button>
+    <?php if ($model->id != Yii::$app->user->id) : ?>
+        <button class="btn main-yellow mt-4 follow"></button>
+    <?php endif; ?>
 
-    <div class="row text-white text-center">
+    <div class="row text-white text-center mt-4">
         <div class="col">
             <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
                 <h4><span id="seguidores"></span> seguidores</h4>
