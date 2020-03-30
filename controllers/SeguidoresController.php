@@ -2,13 +2,13 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Seguidores;
 use app\models\SeguidoresSearch;
 use app\models\Usuarios;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**
@@ -48,8 +48,8 @@ class SeguidoresController extends Controller
 
     /**
      * Displays a single Seguidores model.
-     * @param integer $seguidor_id
-     * @param integer $seguido_id
+     * @param int $seguidor_id
+     * @param int $seguido_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -81,8 +81,8 @@ class SeguidoresController extends Controller
     /**
      * Updates an existing Seguidores model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $seguidor_id
-     * @param integer $seguido_id
+     * @param int $seguidor_id
+     * @param int $seguido_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -102,8 +102,8 @@ class SeguidoresController extends Controller
     /**
      * Deletes an existing Seguidores model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $seguidor_id
-     * @param integer $seguido_id
+     * @param int $seguidor_id
+     * @param int $seguido_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -117,8 +117,8 @@ class SeguidoresController extends Controller
     /**
      * Finds the Seguidores model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $seguidor_id
-     * @param integer $seguido_id
+     * @param int $seguidor_id
+     * @param int $seguido_id
      * @return Seguidores the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -133,10 +133,12 @@ class SeguidoresController extends Controller
 
     public function actionFollow($seguido_id)
     {
+        $res = [];
+
         $seguir = Seguidores::find()
             ->andWhere([
                 'seguidor_id' => Yii::$app->user->id,
-                'seguido_id' => $seguido_id
+                'seguido_id' => $seguido_id,
             ])
             ->one();
 
@@ -145,32 +147,35 @@ class SeguidoresController extends Controller
             $seguir->seguidor_id = Yii::$app->user->id;
             $seguir->seguido_id = $seguido_id;
             $seguir->save();
+            $res['textButton'] = 'Dejar de seguir';
+        } elseif ($seguir !== null) {
+            $this->findModel(Yii::$app->user->id, $seguido_id)->delete();
+            $res['textButton'] = 'Seguir';
         }
 
         $usuarioSeguido = Usuarios::findOne($seguido_id);
+        $res['seguidores'] = $usuarioSeguido->getSeguidores()->count();
+
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return [
-            'seguidores' => $usuarioSeguido->getSeguidores()->count(),
-        ];
+        return $res;
     }
 
-    public function actionUnFollow($seguido_id)
+    public function actionCheckFollow($seguido_id)
     {
+
+        $textButton = 'Seguir';
+
         $seguir = Seguidores::find()
             ->andWhere([
                 'seguidor_id' => Yii::$app->user->id,
-                'seguido_id' => $seguido_id
+                'seguido_id' => $seguido_id,
             ])
             ->one();
 
         if ($seguir !== null) {
-            $this->findModel(Yii::$app->user->id, $seguido_id)->delete();
+            $textButton = 'Dejar de seguir';
         }
 
-        $usuarioSeguido = Usuarios::findOne($seguido_id);
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return [
-            'seguidores' => $usuarioSeguido->getSeguidores()->count(),
-        ];
+        return $textButton;
     }
 }
