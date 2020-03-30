@@ -42,9 +42,14 @@ $js = <<<EOT
             'method': 'POST',
             url: '$urlLike&cancion_id=' + cancion_id,
             success: function (data) {
-                $('.like-btn i').removeClass('far');
-                $('.like-btn i').addClass('fas');
-                $('.like-btn ~ p span').html(data);
+                if (data.class == 'far') {
+                    $('.like-btn i').removeClass('fas');
+                    $('.like-btn i').addClass('far');
+                } else {
+                    $('.like-btn i').removeClass('far');
+                    $('.like-btn i').addClass('fas');
+                }
+                $('.like-btn ~ p span').html(data.likes);
             }
         });
     });
