@@ -9,13 +9,15 @@ use yii\helpers\Url;
 \yii\web\YiiAsset::register($this);
 
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
-$urlGetData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
+$urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
+$urlLike = Url::to(['likes/like']);
+$urlGetLikesData = Url::to(['likes/get-data']);
 
 $js = <<<EOT
 
     $.ajax({
         'method': 'POST',
-        'url': '$urlGetData',
+        'url': '$urlGetFollowData',
         success: function (data) {
             $('.follow').html(data.textButton);
             $('#seguidores').html(data.seguidores);
@@ -30,6 +32,31 @@ $js = <<<EOT
             success: function (data) {
                 $('.follow').html(data.textButton);
                 $('#seguidores').html(data.seguidores);
+            }
+        });
+    });
+
+    $('.like-btn').on('click', function ev(e) {
+        var cancion_id = $(this).attr('id').split('-')[1];
+        $.ajax({
+            'method': 'POST',
+            url: '$urlLike&cancion_id=' + cancion_id,
+            success: function (data) {
+                $('.like-btn i').removeClass('far');
+                $('.like-btn i').addClass('fas');
+                $('.like-btn ~ p span').html(data);
+            }
+        });
+    });
+
+    $('.cancion').on('click', function ev(e) {
+        var cancion_id = $(this).data('target').split('-')[1];
+        $.ajax({
+            'method': 'POST',
+            url: '$urlGetLikesData&cancion_id=' + cancion_id,
+            success: function (data) {
+                $('.like-btn i').addClass(data.class);
+                $('.like-btn ~ p span').html(data.likes);
             }
         });
     });
@@ -157,7 +184,7 @@ $this->registerJS($js);
                 <?php if (count($canciones) > 0) : ?>
                     <?php foreach ($canciones as $cancion) : ?>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <button class="outline-transparent" data-toggle="modal" data-target="#song-<?= $cancion->id ?>">
+                            <button class="outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>">
                                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
                             </button>
                             <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -169,6 +196,11 @@ $this->registerJS($js);
                                                     <?= Html::img($cancion->url_portada, ['class' => 'img-fluid']) ?>
                                                 </div>
                                                 <div class="col-lg-4">
+                                                    <div>
+                                                        <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent like-btn"><i class="fa-heart text-danger"></i></button>
+                                                        <p><span></span> likes</p>
+                                                    </div>
+
                                                     <p>Comentarios...</p>
                                                 </div>
                                             </div>

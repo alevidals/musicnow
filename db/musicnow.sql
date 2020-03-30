@@ -78,10 +78,20 @@ CREATE TABLE albumes_canciones
 
 DROP TABLE IF EXISTS seguidores CASCADE;
 
-CREATE TABLE seguidores (
+CREATE TABLE seguidores
+(
     seguidor_id BIGINT REFERENCES usuarios (id)
   , seguido_id BIGINT REFERENCES usuarios (id)
   , PRIMARY KEY (seguidor_id, seguido_id)
+);
+
+DROP TABLE IF EXISTS likes CASCADE;
+
+CREATE TABLE likes
+(
+    usuario_id BIGINT REFERENCES usuarios (id)
+  , cancion_id BIGINT REFERENCES canciones (id)
+  , PRIMARY KEY (usuario_id, cancion_id)
 );
 
 INSERT INTO roles (rol)

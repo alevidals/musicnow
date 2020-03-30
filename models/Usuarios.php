@@ -28,6 +28,8 @@ use yii\web\IdentityInterface;
  * @property Usuarios[] $seguidores
  * @property Usuarios[] $seguidos
  * @property Roles $rol
+ * @property Likes[] $likes
+ * @property Canciones[] $cancionesFavoritas
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -188,9 +190,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getSeguidores()
     {
-        return $this->hasMany(Usuarios::className(), ['id' => 'seguidor_id'])->viaTable('seguidores', ['seguido_id' => 'id']);
+        return $this->hasMany(self::className(), ['id' => 'seguidor_id'])->viaTable('seguidores', ['seguido_id' => 'id']);
     }
-    
+
     /**
      * Gets query for [[Seguidos]].
      *
@@ -201,4 +203,23 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(self::className(), ['id' => 'seguido_id'])->viaTable('seguidores', ['seguidor_id' => 'id']);
     }
 
+    /**
+     * Gets query for [[Canciones]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCancionesFavoritas()
+    {
+        return $this->hasMany(Canciones::className(), ['id' => 'cancion_id'])->viaTable('likes', ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Likes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLikes()
+    {
+        return $this->hasMany(Likes::className(), ['usuario_id' => 'id']);
+    }
 }
