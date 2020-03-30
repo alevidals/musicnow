@@ -6,6 +6,7 @@ use app\models\Canciones;
 use Yii;
 use app\models\Likes;
 use app\models\LikesSearch;
+use app\models\Seguidores;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -133,17 +134,33 @@ class LikesController extends Controller
 
     public function actionLike($cancion_id)
     {
+        $res = [];
+
         $usuario_id = Yii::$app->user->id;
 
-        $like = new Likes();
-        $like->usuario_id = $usuario_id;
-        $like->cancion_id = $cancion_id;
-        $like->save();
+        $like = Likes::find()
+            ->andWhere([
+                'usuario_id' => $usuario_id,
+                'cancion_id' => $cancion_id,
+            ])
+            ->one();
+
+        if ($like === null) {
+            $like = new Likes();
+            $like->usuario_id = $usuario_id;
+            $like->cancion_id = $cancion_id;
+            $like->save();
+            $res['class'] = 'fas';
+        } elseif ($like !== null) {
+            $this->findModel($usuario_id, $cancion_id)->delete();
+            $res['class'] = 'far';
+        }
 
         $cancion = Canciones::findOne($cancion_id);
+        $res['likes'] = $cancion->getLikes()->count();
 
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return $cancion->getLikes()->count();
+        return $res;
     }
 
     public function actionGetData($cancion_id)
