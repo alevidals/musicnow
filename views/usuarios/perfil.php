@@ -6,19 +6,23 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
+Yii::debug(count($seguidores));
+Yii::debug(count($seguidos));
+
 \yii\web\YiiAsset::register($this);
 
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
-$urlCheckFollow = Url::to(['seguidores/check-follow', 'seguido_id' => $model->id]);
+$urlGetData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 
 $js = <<<EOT
 
     $.ajax({
         'method': 'POST',
-        'url': '$urlCheckFollow',
+        'url': '$urlGetData',
         success: function (data) {
-            console.log(data);
-            $('.follow').html(data);
+            $('.follow').html(data.textButton);
+            $('#seguidores').html(data.seguidores);
+            $('#seguidos').html(data.seguidos);
         }
     });
 
@@ -27,9 +31,8 @@ $js = <<<EOT
             'method': 'POST',
             'url': '$urlFollow',
             success: function (data) {
-                console.log(data.textButton);
                 $('.follow').html(data.textButton);
-                $('#num-seguidores').html('Seguidores: ' + data.seguidores);
+                $('#seguidores').html(data.seguidores);
             }
         });
     });
@@ -44,9 +47,76 @@ $this->registerJS($js);
 
     <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid']) ?>
 
-    <button class="btn main-yellow mt-4 follow">Seguir</button>
+    <button class="btn main-yellow mt-4 follow"></button>
 
-    <p id="num-seguidores">Seguidores: <?= $model->getSeguidores()->count() ?></p>
+    <div class="row text-white text-center">
+        <div class="col">
+            <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
+                <h4><span id="seguidores"></span> seguidores</h4>
+            </button>
+            <div class="modal fade" id="seguidores-list" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <?php if (count($seguidores) > 0) : ?>
+                                    <?php foreach ($seguidores as $usuario) : ?>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px']) ?>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <div class="col-12">
+                                        <p class="my-auto">Parece que no te sigue nadie aún.</p>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidos-list">
+                <h4><span id="seguidos"></span> seguidos</h4>
+            </button>
+            <div class="modal fade" id="seguidos-list" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <?php if (count($seguidos) > 0) : ?>
+                                    <?php foreach ($seguidos as $usuario) : ?>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px']) ?>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <div class="col-12">
+                                        <p class="my-auto">Parece que no sigues a nadie aún.</p>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3']) ?>
 
@@ -88,7 +158,7 @@ $this->registerJS($js);
                 <?php if (count($canciones) > 0) : ?>
                     <?php foreach ($canciones as $cancion) : ?>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <button style="background-color: transparent; border: none; outline: none;" data-toggle="modal" data-target="#song-<?= $cancion->id ?>">
+                            <button class="outline-transparent" data-toggle="modal" data-target="#song-<?= $cancion->id ?>">
                                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
                             </button>
                             <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
