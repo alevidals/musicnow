@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
@@ -12,6 +13,8 @@ $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 $urlLike = Url::to(['likes/like']);
 $urlGetLikesData = Url::to(['likes/get-data']);
+$urlComment = Url::to(['comentarios/comentar']);
+$urlGetComments = Url::to(['canciones/comentarios']);
 
 $js = <<<EOT
 
@@ -64,6 +67,39 @@ $js = <<<EOT
                 $('.like-btn ~ p span').html(data.likes);
             }
         });
+
+        $.ajax({
+            method: 'POST',
+            url: '$urlGetComments&cancion_id=' + cancion_id,
+            success: function (data) {
+                var comentarios = Object.entries(data);
+                comentarios.forEach(element => {
+                    $('.row-comments').append("<div class='col-12'><p>" + element[1].login + ": " + element[1].comentario + "</p></div>");
+                });
+            }
+        });
+
+    });
+
+    $('.comment-btn').on('click', function ev(e) {
+        var cancion_id = $(this).attr('id').split('-')[1];
+        var comentario = $('.text-area-comment').val();
+        if (comentario.length > 255 || comentario.length == 0) {
+            $('.invalid-feedback').show();
+        } else {
+            $('.invalid-feedback').hide();
+            $.ajax({
+                'method': 'POST',
+                url: '$urlComment&cancion_id=' + cancion_id,
+                data: {
+                    comentario: comentario,
+                },
+                success: function (data) {
+                    $('.row-comments').append("<div class='col-12'><p>" + data.login + ": " + data.comentario + "</p></div>");
+                    $('.text-area-comment').val('')
+                }
+            });
+        }
     });
 
 EOT;
@@ -193,20 +229,33 @@ $this->registerJS($js);
                                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
                             </button>
                             <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-lg-8">
-                                                    <?= Html::img($cancion->url_portada, ['class' => 'img-fluid']) ?>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent like-btn"><i class="fa-heart text-danger"></i></button>
-                                                        <p><span></span> likes</p>
+                                                    <div class="row">
+                                                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid col-12']) ?>
+                                                        <div class="col-12 mt-4">
+                                                            <textarea class="form-control text-area-comment" cols="30" rows="3" placeholder="Comentario..."></textarea>
+                                                            <div class="invalid-feedback">Debe tener como máximo 255 caracteres y no estar vacío.</div>
+                                                            <button class="btn btn-sm main-yellow mt-2 comment-btn" id="comment-<?= $cancion->id ?>" type="button">Comentar</button>
+                                                        </div>
                                                     </div>
-
-                                                    <p>Comentarios...</p>
+                                                </div>
+                                                <div class="col-lg-4 custom-overflow">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div>
+                                                                <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent like-btn"><i class="fa-heart text-danger"></i></button>
+                                                                <p><span></span> likes</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="row row-comments">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

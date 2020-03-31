@@ -94,6 +94,16 @@ CREATE TABLE likes
   , PRIMARY KEY (usuario_id, cancion_id)
 );
 
+DROP TABLE IF EXISTS comentarios CASCADE;
+
+CREATE TABLE comentarios
+(
+    id         BIGSERIAL    PRIMARY KEY
+  , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id)
+  , cancion_id BIGINT       NOT NULL REFERENCES canciones (id)
+  , comentario VARCHAR(255) NOT NULL
+);
+
 INSERT INTO roles (rol)
 VALUES ('admin')
      , ('usuario');

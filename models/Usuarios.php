@@ -25,6 +25,7 @@ use yii\web\IdentityInterface;
  *
  * @property Albumes[] $albumes
  * @property Canciones[] $canciones
+ * @property Comentarios[] $comentarios
  * @property Usuarios[] $seguidores
  * @property Usuarios[] $seguidos
  * @property Roles $rol
@@ -221,5 +222,15 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getLikes()
     {
         return $this->hasMany(Likes::className(), ['usuario_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Comentarios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComentarios()
+    {
+        return $this->hasMany(Comentarios::className(), ['usuario_id' => 'id']);
     }
 }
