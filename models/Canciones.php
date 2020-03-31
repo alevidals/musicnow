@@ -22,6 +22,7 @@ use Yii;
  *
  * @property AlbumesCanciones[] $albumesCanciones
  * @property Albumes $album
+ * @property Comentarios[] $comentarios
  * @property Generos $genero
  * @property Usuarios $usuario
  * @property Likes[] $likes
@@ -135,5 +136,15 @@ class Canciones extends \yii\db\ActiveRecord
     public function getUsuarios()
     {
         return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('likes', ['cancion_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Comentarios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComentarios()
+    {
+        return $this->hasMany(Comentarios::className(), ['cancion_id' => 'id']);
     }
 }

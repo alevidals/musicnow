@@ -127,6 +127,10 @@ label {
     .user-info {
         position: fixed;
     }
+
+    .custom-overflow {
+        overflow: auto;
+    }
 }
 
 .px-15 {
@@ -246,4 +250,8 @@ h3 {
 
 .bootstrap-dialog-message {
     color: white;
+}
+
+.custom-overflow {
+    height: 607px;
 }

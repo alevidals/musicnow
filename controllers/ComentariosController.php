@@ -2,23 +2,19 @@
 
 namespace app\controllers;
 
-use app\models\Albumes;
-use app\models\Canciones;
-use app\models\CancionesSearch;
-use app\models\Comentarios;
-use app\models\Generos;
-use app\models\Usuarios;
 use Yii;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
+use app\models\Comentarios;
+use app\models\ComentariosSearch;
+use app\models\Usuarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**
- * CancionesController implements the CRUD actions for Canciones model.
+ * ComentariosController implements the CRUD actions for Comentarios model.
  */
-class CancionesController extends Controller
+class ComentariosController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,26 +28,16 @@ class CancionesController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
         ];
     }
 
     /**
-     * Lists all Canciones models.
+     * Lists all Comentarios models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CancionesSearch();
+        $searchModel = new ComentariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -61,8 +47,8 @@ class CancionesController extends Controller
     }
 
     /**
-     * Displays a single Canciones model.
-     * @param int $id
+     * Displays a single Comentarios model.
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -74,33 +60,27 @@ class CancionesController extends Controller
     }
 
     /**
-     * Creates a new Canciones model.
+     * Creates a new Comentarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Canciones(['usuario_id' => Yii::$app->user->id]);
+        $model = new Comentarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $usuario = Usuarios::findOne(Yii::$app->user->id);
-
-        $albumes = $usuario->getAlbumes()->select('titulo')->indexBy('id')->column();
-
         return $this->render('create', [
             'model' => $model,
-            'generos' => ['' => ''] + Generos::lista(),
-            'albumes' => ['' => ''] + $albumes,
         ]);
     }
 
     /**
-     * Updates an existing Canciones model.
+     * Updates an existing Comentarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -118,9 +98,9 @@ class CancionesController extends Controller
     }
 
     /**
-     * Deletes an existing Canciones model.
+     * Deletes an existing Comentarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -132,49 +112,37 @@ class CancionesController extends Controller
     }
 
     /**
-     * Finds the Canciones model based on its primary key value.
+     * Finds the Comentarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return Canciones the loaded model
+     * @param integer $id
+     * @return Comentarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Canciones::findOne($id)) !== null) {
+        if (($model = Comentarios::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    /**
-     * Retorna un array con el nombre de la canción, el nombre de la imagen
-     * y el id del usuario que ejecuta esa acción.
-     *
-     * @param int $id
-     * @return array
-     */
-    public function actionUrl($id)
+    public function actionComentar($cancion_id)
     {
+        $usuario = Usuarios::findOne(['id' =>Yii::$app->user->id ]);
+        $model = new Comentarios();
+        $comentario = Yii::$app->request->post('comentario');
+
+        $model->usuario_id = $usuario->id;
+        $model->cancion_id = $cancion_id;
+        $model->comentario = $comentario;
+
+        $model->save();
+
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $model = $this->findModel($id);
         return [
-            'song_name' => $model->song_name,
-            'image_name' => $model->image_name,
-            'usuario_id' => $model->usuario_id,
+            'login' => $usuario->login,
+            'comentario' => $comentario,
         ];
-    }
-
-    public function actionComentarios($cancion_id)
-    {
-        $comentarios = (new \yii\db\Query())
-            ->select(['usuarios.login', 'comentario'])
-            ->from('comentarios c')
-            ->leftJoin('usuarios', 'usuarios.id = c.usuario_id')
-            ->where(['cancion_id' => $cancion_id])
-            ->all();
-
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return $comentarios;
     }
 }
