@@ -3,14 +3,52 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\assets\AppAsset;
 use app\widgets\Alert;
-use yii\helpers\Html;
+use kartik\dialog\Dialog;
+use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-use yii\bootstrap4\Breadcrumbs;
-use app\assets\AppAsset;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 AppAsset::register($this);
+
+$urlCookie = Url::to(['site/cookie']);
+
+$js = <<<EOT
+    $( document ).ready(function() {
+        krajeeDialogCust2.confirm("Utilizamos cookies para asegurar que damos la mejor experiencia al usuario en nuestra web. Si sigues utilizando este sitio asumiremos que estás de acuerdo.", function (result) {
+            if (result) {
+                window.location="$urlCookie";
+            } else {
+                window.location="http://google.es";
+            }
+        });
+    });
+EOT;
+
+echo Dialog::widget([
+    'libName' => 'krajeeDialogCust2',
+    'options' => [
+        'draggable' => false,
+        'closable' => false,
+        'size' => Dialog::SIZE_MEDIUM,
+        'type' => Dialog::TYPE_WARNING,
+        'title' => 'Politica de cookies',
+        'message' => 'Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso.',
+        'btnOKClass' => 'btn-warning',
+        'btnOKLabel' => 'Aceptar',
+        'btnCancelClass' => 'btn-secondary',
+        'btnCancelLabel' => 'Rechazar',
+    ],
+]);
+
+if (!isset($_COOKIE['cookie-accept'])) {
+    $this->registerJS($js);
+}
+
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -63,7 +101,7 @@ AppAsset::register($this);
                     'label' => 'Entra',
                     'items' => [
                         ['label' => 'Login', 'url' => ['/usuarios/login']],
-                    ]
+                    ],
                 ]
             ) : (
                 [
@@ -78,9 +116,9 @@ AppAsset::register($this);
                             ],
                             'linkOptions' => [
                                 'data-method' => 'post',
-                            ]
+                            ],
                         ],
-                    ]
+                    ],
                 ]
             ),
         ],
@@ -92,8 +130,8 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             'options' => [
-                'class' => 'mt-3'
-            ]
+                'class' => 'mt-3',
+            ],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>

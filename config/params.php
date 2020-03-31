@@ -13,5 +13,5 @@ return [
     'messagingSenderId' => getenv('messagingSenderId'),
     'appId' => getenv('appId'),
     'firebaseUrl' => getenv('firebaseUrl'),
-
+    'bsVersion' => '4.x',
 ];

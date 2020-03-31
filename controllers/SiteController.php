@@ -3,16 +3,14 @@
 namespace app\controllers;
 
 use app\models\Canciones;
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Usuarios;
+use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\Query;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
+use yii\web\Response;
 
 class SiteController extends Controller
 {
@@ -65,7 +63,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         $canciones = Canciones::find('album a')->all();
         $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
 
@@ -82,7 +79,6 @@ class SiteController extends Controller
 
     public function actionSearch($cadena)
     {
-
         $usuariosSearch = new ActiveDataProvider([
             'query' => Usuarios::find()
                 ->where(['ilike', 'login', $cadena])
@@ -93,7 +89,7 @@ class SiteController extends Controller
             ->select('id')
             ->where(['ilike', 'login', $cadena])
             ->column();
-            
+
         $cancionesSearch = new ActiveDataProvider([
             'query' => Canciones::find()
                 ->where(['ilike', 'titulo', $cadena])
@@ -105,7 +101,6 @@ class SiteController extends Controller
             'usuariosSearch' => $usuariosSearch,
             'cancionesSearch' => $cancionesSearch,
         ]);
-
     }
 
     /**
@@ -134,5 +129,11 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionCookie()
+    {
+        setcookie('cookie-accept', 'true', time() + 3600 * 24 * 30);
+        $this->goBack();
     }
 }

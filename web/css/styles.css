@@ -239,3 +239,11 @@ h3 {
     outline: none !important;
     color: white;
 }
+
+.bootstrap-dialog-title {
+    color: #000 !important;
+}
+
+.bootstrap-dialog-message {
+    color: white;
+}
