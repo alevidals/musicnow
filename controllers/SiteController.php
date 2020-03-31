@@ -63,8 +63,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $canciones = Canciones::find('album a')->all();
         $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
+
+        $ids = $usuario->getSeguidos()->select('id')->column();
+
+        $canciones = Canciones::find('album a')->where(['IN', 'usuario_id', $ids])->all();
 
         if (($cadena = Yii::$app->request->get('cadena', ''))) {
             return $this->redirect(['site/search', 'cadena' => $cadena]);
