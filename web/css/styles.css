@@ -38,8 +38,8 @@ body {
     background: #4b4b4b;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover
+{
     background: #ffffff;
 }
 
@@ -47,11 +47,22 @@ body {
     background-color: #ffba00
 }
 
-h1 {
-    color: white;
-}
-
-.summary {
+h1,
+h2,
+h3,
+p,
+label,
+.summary,
+.admin-table td,
+.dropdown-item,
+.form-control-file,
+.bootstrap-dialog-message,
+.nav-tabs .nav-item .nav-link,
+.small-artist,
+.dots-menu,
+.dropdown-item:hover,
+.custom-control-input.is-valid~.custom-control-label
+{
     color: white;
 }
 
@@ -65,25 +76,12 @@ h1 {
     color: #ffbb00;
 }
 
-.admin-table td {
-    color: white;
-}
-
 .admin-table tbody {
     background-color: #383838;
 }
 
-p {
-    color: white;
-}
-
 .nav-tabs {
     background-color: transparent;
-}
-
-
-.nav-tabs .nav-item .nav-link {
-    color: white;
 }
 
 .nav-tabs .nav-item .active {
@@ -94,10 +92,6 @@ p {
 
 .nav-tabs {
     border: none;
-}
-
-label {
-    color: white;
 }
 
 .custom-control-input:checked~.custom-control-label::before {
@@ -112,7 +106,6 @@ label {
 
 .custom-control-input.is-valid~.custom-control-label {
     border: none;
-    color: white;
 }
 
 @media (min-width: 992px) {
@@ -176,22 +169,12 @@ label {
     background-color: #4A4A4A;
 }
 
-.dropdown-item {
-    color: white;
-}
-
 .dropdown-item:hover {
     background-color: #181818;
-    color: white;
 }
 
 .admin-table th {
     color: #ffba00;
-}
-
-h2,
-h3 {
-    color: white;
 }
 
 .h1-error {
@@ -214,7 +197,6 @@ h3 {
 .dots-menu {
     background-color: transparent;
     border: none;
-    color: white;
     outline: none !important;
 }
 
@@ -223,7 +205,6 @@ h3 {
 }
 
 .small-artist {
-    color: white;
     text-transform: uppercase;
     letter-spacing: 5px;
 }
@@ -248,14 +229,6 @@ h3 {
     color: #000 !important;
 }
 
-.bootstrap-dialog-message {
-    color: white;
-}
-
 .custom-overflow {
     height: 607px;
-}
-
-.form-control-file {
-    color: white;
 }
