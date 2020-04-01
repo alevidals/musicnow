@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'image')->fileInput()->label('Imágen de perfil') ?>
+
     <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>

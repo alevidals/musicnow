@@ -2,8 +2,10 @@
 
 namespace app\models;
 
+use app\services\Utility;
 use Yii;
 use yii\web\IdentityInterface;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "usuarios".
@@ -38,6 +40,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     const SCENARIO_UPDATE = 'update';
 
     public $password_repeat;
+    public $image;
 
     /**
      * {@inheritdoc}
@@ -92,6 +95,16 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'image_name' => Yii::t('app', 'Image Name'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
         ];
+    }
+
+    public function uploadImg($perfilImg)
+    {
+        $this->image = UploadedFile::getInstance($this, 'image');
+        if ($this->image !== null) {
+            $this->url_image = Utility::uploadImageFirebase($this->image, $this->id, $perfilImg);
+            $this->image_name = 'perfil.png';
+            $this->save();
+        }
     }
 
     /**

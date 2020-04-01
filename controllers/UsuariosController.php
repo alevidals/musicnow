@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -109,8 +110,12 @@ class UsuariosController extends Controller
 
         $model->scenario = Usuarios::SCENARIO_UPDATE;
 
+
+        $model->image = UploadedFile::getInstance($model, 'image');
+        $model->uploadImg(true);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['perfil', 'id' => $model->id]);
         }
 
         $model->password = '';
@@ -291,23 +296,13 @@ class UsuariosController extends Controller
         ]);
     }
 
-    public function actionImagen($id)
+    public function actionEliminarImagen($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post())) {
-            if ($_POST['delete'] == 'delete') {
-                $baseUrl = Yii::$app->params['firebaseUrl'];
-                $model->url_image = $baseUrl . '/image%2Fperfil%2Fall%2Fblank-profile.png?alt=media';
-            }
-            if ($model->save()) {
-                return $this->redirect(['perfil', 'id' => $model->id]);
-            }
+        $model->url_image = Yii::$app->params['defaultImgProfile'];
+        if ($model->save()) {
+            return $this->goBack();
         }
-
-        return $this->render('imagen', [
-            'model' => $model,
-        ]);
     }
 
     public function actionEliminarCuenta($id)
