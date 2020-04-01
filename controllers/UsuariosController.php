@@ -110,7 +110,6 @@ class UsuariosController extends Controller
 
         $model->scenario = Usuarios::SCENARIO_UPDATE;
 
-
         $model->image = UploadedFile::getInstance($model, 'image');
         $model->uploadImg(true);
 

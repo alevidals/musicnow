@@ -8,12 +8,14 @@ use app\models\CancionesSearch;
 use app\models\Comentarios;
 use app\models\Generos;
 use app\models\Usuarios;
+use app\services\Utility;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * CancionesController implements the CRUD actions for Canciones model.
@@ -82,6 +84,13 @@ class CancionesController extends Controller
     {
         $model = new Canciones(['usuario_id' => Yii::$app->user->id]);
 
+        if (Yii::$app->request->isPost) {
+            $model->portada = UploadedFile::getInstance($model, 'portada');
+            $model->uploadPortada();
+            $model->cancion = UploadedFile::getInstance($model, 'cancion');
+            $model->uploadCancion();
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -108,6 +117,20 @@ class CancionesController extends Controller
     {
         $model = $this->findModel($id);
 
+
+        if (Yii::$app->request->isPost) {
+            $model->portada = UploadedFile::getInstance($model, 'portada');
+            if ($model->portada !== null) {
+                $model->deletePortada();
+                $model->uploadPortada();
+            }
+            $model->cancion = UploadedFile::getInstance($model, 'cancion');
+            if ($model->cancion !== null) {
+                $model->deleteCancion();
+                $model->uploadCancion();
+            }
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -126,7 +149,11 @@ class CancionesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        $model->delete();
+        $model->deletePortada();
+        $model->deleteCancion();
 
         return $this->redirect(['index']);
     }

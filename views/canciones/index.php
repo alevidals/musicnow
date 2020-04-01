@@ -11,69 +11,6 @@ use yii\helpers\Url;
 $this->title = Yii::t('app', 'Canciones');
 $this->params['breadcrumbs'][] = $this->title;
 
-$apiKey = Yii::$app->params['apiKey'];
-$authDomain = Yii::$app->params['authDomain'];
-$databaseURL = Yii::$app->params['databaseURL'];
-$projectId = Yii::$app->params['projectId'];
-$storageBucket = Yii::$app->params['storageBucket'];
-$messagingSenderId = Yii::$app->params['messagingSenderId'];
-$appId = Yii::$app->params['appId'];
-
-$url = Url::to(['canciones/url']);
-$urlBorrar = Url::to(['canciones/delete']);
-$msg = Yii::t('app', 'Are you sure you want to delete this item?');
-$js = <<<EOT
-
-    var firebaseConfig = {
-        apiKey: "$apiKey",
-        authDomain: "$authDomain",
-        databaseURL: "$databaseURL",
-        projectId: "$projectId",
-        storageBucket: "$storageBucket",
-        messagingSenderId: "$messagingSenderId",
-        appId: "$appId",
-    };
-
-    firebase.initializeApp(firebaseConfig);
-
-    $('.delete').on('click', function(ev) {
-        var id = $(this).attr('id');
-        var confirmar = confirm('$msg');
-        if (confirmar) {
-            $.ajax({
-                method: 'GET',
-                url: '$url',
-                data: {
-                    id: id
-                },
-                success: function (data, code, jqXHR) {
-                    var storage = firebase.storage();
-                    var storageRef = storage.ref();
-                    var songRef = storageRef.child('temas/' + data.usuario_id + '/' + data.song_name);
-                    var imageRef = storageRef.child('portadas/' + data.usuario_id + '/' + data.image_name);
-                    songRef.delete().then(function() {
-                        imageRef.delete().then(function() {
-                            $.ajax({
-                                method: 'POST',
-                                url: '$urlBorrar&id=' + id,
-                                success: function (data, code, jqXHR) {
-                                    console.log(data);
-                                }
-                            });
-                        });
-                    });
-                }
-            });
-        }
-    });
-EOT;
-
-
-$this->registerJsFile('@web/js/firebase-app.js');
-$this->registerJsFile('@web/js/firebase-storage.js');
-$this->registerJS($js);
-
-
 ?>
 <div class="canciones-index">
 
@@ -141,9 +78,12 @@ $this->registerJS($js);
                         ]);
                     },
                     'delete' => function ($url, $model, $key) {
-                        return Html::a('<i class="fas fa-trash"></i>', null, [
+                        return Html::a('<i class="fas fa-trash"></i>', [
+                            'canciones/delete', 'id' => $model->id,
+                        ], [
                             'id' => $model->id,
-                            'class' => 'btn btn-sm p-0 pl-1 shadow-none delete',
+                            'class' => 'btn btn-sm p-0 pl-1 shadow-none',
+                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']
                         ]);
                     },
                 ],

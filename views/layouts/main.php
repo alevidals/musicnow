@@ -28,14 +28,14 @@ $js = <<<EOT
     });
 EOT;
 
-echo Dialog::widget([
+Dialog::widget([
     'libName' => 'krajeeDialogCust2',
     'options' => [
         'draggable' => false,
         'closable' => false,
         'size' => Dialog::SIZE_MEDIUM,
         'type' => Dialog::TYPE_WARNING,
-        'title' => 'Politica de cookies',
+        'title' => 'MUS!C NOW',
         'message' => 'Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso.',
         'btnOKClass' => 'btn-warning',
         'btnOKLabel' => 'Aceptar',

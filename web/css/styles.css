@@ -255,3 +255,7 @@ h3 {
 .custom-overflow {
     height: 607px;
 }
+
+.form-control-file {
+    color: white;
+}

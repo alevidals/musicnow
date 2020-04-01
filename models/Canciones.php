@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use app\services\Utility;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "canciones".
@@ -30,6 +32,10 @@ use Yii;
  */
 class Canciones extends \yii\db\ActiveRecord
 {
+
+    public $portada;
+    public $cancion;
+
     /**
      * {@inheritdoc}
      */
@@ -77,6 +83,36 @@ class Canciones extends \yii\db\ActiveRecord
             'usuario_id' => Yii::t('app', 'Usuario ID'),
             'created_at' => Yii::t('app', 'Created At'),
         ];
+    }
+
+    public function uploadPortada()
+    {
+        $this->portada = UploadedFile::getInstance($this, 'portada');
+        if ($this->portada !== null) {
+            $this->url_portada = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id);
+            $this->image_name = str_replace(' ', '', $this->portada->name);
+            $this->save();
+        }
+    }
+
+    public function uploadCancion()
+    {
+        $this->cancion = UploadedFile::getInstance($this, 'cancion');
+        if ($this->cancion !== null) {
+            $this->url_cancion = Utility::uploadFileFirebase($this->cancion, Yii::$app->user->id);
+            $this->song_name = str_replace(' ', '', $this->cancion->name);
+            $this->save();
+        }
+    }
+
+    public function deletePortada()
+    {
+        Utility::deleteFileFirebase('images/portada/' . Yii::$app->user->id . '/' . $this->image_name);
+    }
+
+    public function deleteCancion()
+    {
+        Utility::deleteFileFirebase('canciones/' . Yii::$app->user->id . '/' . $this->song_name);
     }
 
     /**
