@@ -76,7 +76,7 @@ $js = <<<EOT
                 var comentarios = Object.entries(data);
                 $('.row-comments').empty();
                 comentarios.forEach(element => {
-                    $('#row-comments-' + cancion_id).append(`
+                    $('.row-comments').append(`
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <a href="$urlPerfil&id=\${element[1].id}">
@@ -99,7 +99,6 @@ $js = <<<EOT
     $('.comment-btn').on('click', function ev(e) {
         var cancion_id = $(this).attr('id').split('-')[1];
         var comentario = $('#text-area-comment-' + cancion_id).val();
-        console.log($('#text-area-comment-' + cancion_id));
         if (comentario.length > 255 || comentario.length == 0) {
             $('.invalid-feedback').show();
         } else {
@@ -298,8 +297,8 @@ $this->registerJS($js);
                                                     <div class="row">
                                                         <div class="col-12 custom-overflow">
                                                             <!-- COMENTARIOS  -->
-                                                            <div class="row row-comments" id="row-comments-<?= $cancion->id ?>">
-                                                                </div>
+                                                            <div class="row row-comments">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

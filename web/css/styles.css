@@ -226,7 +226,7 @@ label,
 }
 
 .custom-overflow {
-    height: 600px;
+    max-height: 600px;
     word-break: break-all;
 }
 
