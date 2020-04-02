@@ -56,6 +56,8 @@ class Canciones extends \yii\db\ActiveRecord
             [['anyo'], 'number'],
             [['duracion'], 'string'],
             [['created_at'], 'safe'],
+            [['portada'], 'image', 'extensions' => ['png', 'jpg']],
+            [['cancion'], 'file', 'extensions' => ['mp3']],
             [['titulo', 'song_name', 'image_name'], 'string', 'max' => 255],
             [['url_cancion', 'url_portada'], 'string', 'max' => 2048],
             [['album_id'], 'exist', 'skipOnError' => true, 'targetClass' => Albumes::className(), 'targetAttribute' => ['album_id' => 'id']],
@@ -87,21 +89,17 @@ class Canciones extends \yii\db\ActiveRecord
 
     public function uploadPortada()
     {
-        $this->portada = UploadedFile::getInstance($this, 'portada');
         if ($this->portada !== null) {
             $this->url_portada = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id);
             $this->image_name = str_replace(' ', '', $this->portada->name);
-            $this->save();
         }
     }
 
     public function uploadCancion()
     {
-        $this->cancion = UploadedFile::getInstance($this, 'cancion');
         if ($this->cancion !== null) {
             $this->url_cancion = Utility::uploadFileFirebase($this->cancion, Yii::$app->user->id);
             $this->song_name = str_replace(' ', '', $this->cancion->name);
-            $this->save();
         }
     }
 

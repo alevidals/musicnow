@@ -61,6 +61,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['fnac', 'created_at', 'deleted_at'], 'safe'],
             [['rol'], 'default', 'value' => 2],
             [['rol'], 'integer'],
+            [['image'], 'image', 'extensions' => ['png', 'jpg']],
             [['login'], 'string', 'max' => 50],
             [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name'], 'string', 'max' => 255],
             [['url_image'], 'string', 'max' => 2048],
@@ -99,11 +100,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function uploadImg($perfilImg)
     {
-        $this->image = UploadedFile::getInstance($this, 'image');
         if ($this->image !== null) {
             $this->url_image = Utility::uploadImageFirebase($this->image, $this->id, $perfilImg);
             $this->image_name = 'perfil.png';
-            $this->save();
         }
     }
 
