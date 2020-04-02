@@ -143,6 +143,8 @@ class ComentariosController extends Controller
         return [
             'login' => $usuario->login,
             'comentario' => $comentario,
+            'usuario_id' => $usuario->id,
+            'url_image' => $usuario->url_image
         ];
     }
 }

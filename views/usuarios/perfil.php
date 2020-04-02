@@ -15,6 +15,7 @@ $urlLike = Url::to(['likes/like']);
 $urlGetLikesData = Url::to(['likes/get-data']);
 $urlComment = Url::to(['comentarios/comentar']);
 $urlGetComments = Url::to(['canciones/comentarios']);
+$urlPerfil = Url::to(['usuarios/perfil']);
 
 $js = <<<EOT
 
@@ -73,8 +74,21 @@ $js = <<<EOT
             url: '$urlGetComments&cancion_id=' + cancion_id,
             success: function (data) {
                 var comentarios = Object.entries(data);
+                $('.row-comments').empty();
                 comentarios.forEach(element => {
-                    $('.row-comments').append("<div class='col-12'><p>" + element[1].login + ": " + element[1].comentario + "</p></div>");
+                    $('.row-comments').append(`
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <a href="$urlPerfil&id=\${element[1].id}">
+                                    <img class="user-search-img" src="\${element[1].url_image}" alt="perfil" width="50px" height="50px">
+                                </a>
+                                <div class="col">
+                                    <a href="$urlPerfil&id=\${element[1].id}">\${element[1].login}</a>
+                                    <p class="m-0">\${element[1].comentario}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
                 });
             }
         });
@@ -95,8 +109,20 @@ $js = <<<EOT
                     comentario: comentario,
                 },
                 success: function (data) {
-                    $('.row-comments').append("<div class='col-12'><p>" + data.login + ": " + data.comentario + "</p></div>");
-                    $('.text-area-comment').val('')
+                    $('.row-comments').append(`
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <a href="$urlPerfil&id=\${data.usuario_id}">
+                                    <img class="user-search-img" src="\${data.url_image}" alt="perfil" width="50px" height="50px">
+                                </a>
+                                <div class="col">
+                                    <a href="$urlPerfil&id=\${data.usuario_id}">\${data.login}</a>
+                                    <p>\${data.comentario}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                    $('.text-area-comment').val('');
                 }
             });
         }
@@ -259,6 +285,7 @@ $this->registerJS($js);
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
+                                                            <!-- COMENTARIOS  -->
                                                             <div class="row row-comments">
                                                             </div>
                                                         </div>

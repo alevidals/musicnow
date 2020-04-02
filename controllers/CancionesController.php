@@ -195,7 +195,7 @@ class CancionesController extends Controller
     public function actionComentarios($cancion_id)
     {
         $comentarios = (new \yii\db\Query())
-            ->select(['usuarios.login', 'comentario'])
+            ->select(['usuarios.id', 'usuarios.login', 'comentario', 'usuarios.url_image'])
             ->from('comentarios c')
             ->leftJoin('usuarios', 'usuarios.id = c.usuario_id')
             ->where(['cancion_id' => $cancion_id])
