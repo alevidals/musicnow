@@ -57,7 +57,7 @@ label,
 .dropdown-item,
 .form-control-file,
 .bootstrap-dialog-message,
-.nav-tabs .nav-item .nav-link,
+.nav-pills .nav-item .nav-link,
 .small-artist,
 .dots-menu,
 .dropdown-item:hover,
@@ -80,18 +80,15 @@ label,
     background-color: #383838;
 }
 
-.nav-tabs {
-    background-color: transparent;
-}
-
-.nav-tabs .nav-item .active {
+.nav-pills .nav-item .active {
     border: 1px solid #ffba00;
     background-color: #ffba00;
     color: #000;
 }
 
-.nav-tabs {
-    border: none;
+.nav-pills .nav-item:hover {
+    background-color: #ffbb0091;
+    border-radius: 0.25rem;
 }
 
 .custom-control-input:checked~.custom-control-label::before {

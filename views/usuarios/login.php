@@ -49,7 +49,7 @@ $this->title = 'Login';
         <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto', 'width' => '300px']) ?>
     </div>
 
-    <ul class="nav nav-tabs justify-content-center nav-fill mb-5 w-100" id="myTab" role="tablist">
+    <ul class="nav nav-pills justify-content-center nav-fill mb-5 w-100" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active text-uppercase" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true"><?= Yii::t('app', 'Entrar') ?></a>
         </li>

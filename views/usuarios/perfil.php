@@ -247,7 +247,7 @@ $this->registerJS($js);
         </div>
     </div>
 
-    <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+    <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
         <li class="nav-item ml-auto">
             <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true">Canciones</a>
         </li>
