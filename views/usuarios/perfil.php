@@ -76,7 +76,7 @@ $js = <<<EOT
                 var comentarios = Object.entries(data);
                 $('.row-comments').empty();
                 comentarios.forEach(element => {
-                    $('.row-comments').append(`
+                    $('#row-comments-' + cancion_id).append(`
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <a href="$urlPerfil&id=\${element[1].id}">
@@ -98,7 +98,8 @@ $js = <<<EOT
 
     $('.comment-btn').on('click', function ev(e) {
         var cancion_id = $(this).attr('id').split('-')[1];
-        var comentario = $('.text-area-comment').val();
+        var comentario = $('#text-area-comment-' + cancion_id).val();
+        console.log($('#text-area-comment-' + cancion_id));
         if (comentario.length > 255 || comentario.length == 0) {
             $('.invalid-feedback').show();
         } else {
@@ -262,9 +263,18 @@ $this->registerJS($js);
                 <?php if (count($canciones) > 0) : ?>
                     <?php foreach ($canciones as $cancion) : ?>
                         <div class="col-12 col-md-4 col-lg-3">
-                            <button class="outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>">
-                                <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
-                            </button>
+                            <div class="song-container">
+                                <div class="box-3">
+                                    <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
+                                    <div class="share-buttons">
+                                        <button class="action-btn outline-transparent"><i class="fas fa-play"></i></button>
+                                        <button class="action-btn outline-transparent"><i class="far fa-heart text-danger"></i></button>
+                                        <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
+                                    </div>
+                                    <div class="layer"></div>
+                                </div>
+                            </div>
+                            <h5 class="text-center"><?= $cancion->titulo ?></h5>
                             <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
@@ -274,7 +284,7 @@ $this->registerJS($js);
                                                     <div class="row">
                                                         <?= Html::img($cancion->url_portada, ['class' => 'img-fluid col-12']) ?>
                                                         <div class="col-12 mt-4">
-                                                            <textarea class="form-control text-area-comment" cols="30" rows="3" placeholder="Comentario..."></textarea>
+                                                            <textarea id="text-area-comment-<?= $cancion->id ?>" class="form-control text-area-comment" cols="30" rows="3" placeholder="Comentario..."></textarea>
                                                             <div class="invalid-feedback">Debe tener como máximo 255 caracteres y no estar vacío.</div>
                                                             <div class="mt-3">
                                                                 <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button">Comentar</button>
@@ -288,7 +298,7 @@ $this->registerJS($js);
                                                     <div class="row">
                                                         <div class="col-12 custom-overflow">
                                                             <!-- COMENTARIOS  -->
-                                                            <div class="row row-comments">
+                                                            <div class="row row-comments" id="row-comments-<?= $cancion->id ?>">
                                                                 </div>
                                                         </div>
                                                     </div>

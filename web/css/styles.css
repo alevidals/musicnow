@@ -38,8 +38,7 @@ body {
     background: #4b4b4b;
 }
 
-::-webkit-scrollbar-thumb:hover
-{
+::-webkit-scrollbar-thumb:hover {
     background: #ffffff;
 }
 
@@ -50,6 +49,7 @@ body {
 h1,
 h2,
 h3,
+h5,
 p,
 label,
 .summary,
@@ -61,8 +61,7 @@ label,
 .small-artist,
 .dots-menu,
 .dropdown-item:hover,
-.custom-control-input.is-valid~.custom-control-label
-{
+.custom-control-input.is-valid~.custom-control-label {
     color: white;
 }
 
@@ -208,7 +207,7 @@ label,
 
 .perfil-link:hover {
     text-decoration: none;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .filepond--panel-root {
@@ -233,4 +232,71 @@ label,
 
 .like-btn {
     font-size: 23px;
+}
+
+
+/* HOVER ANIMATION */
+
+.song-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    text-align: center;
+    padding-top: 8px;
+    box-sizing: border-box;
+}
+
+.action-btn .fas,
+.action-btn .far {
+    font-size: 35px;
+    color: #fff;
+}
+
+.box-3 {
+    background-color: #2ec0f9;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 6px 5px 30px -4px rgba(0, 0, 0, 0.55);
+}
+
+.box-3:hover .share-buttons {
+    opacity: 1;
+}
+
+.action-btn.facebook {
+    margin-right: 50px;
+}
+
+.action-btn.google {
+    margin-left: 50px;
+}
+
+.box-3 .share-buttons {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    justify-content: space-around;
+    align-items: center;
+    transition: 0.4s;
+    z-index: 10;
+}
+
+.box-3 .action-btn {
+    display: inline-block;
 }
