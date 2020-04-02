@@ -23,6 +23,8 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'comentario') ?>
 
+    <?= $form->field($model, 'created_at') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>

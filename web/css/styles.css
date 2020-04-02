@@ -230,5 +230,10 @@ label,
 }
 
 .custom-overflow {
-    height: 607px;
+    height: 600px;
+    word-break: break-all;
+}
+
+.like-btn {
+    font-size: 23px;
 }

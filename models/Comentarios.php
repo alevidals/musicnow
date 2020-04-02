@@ -11,6 +11,7 @@ use Yii;
  * @property int $usuario_id
  * @property int $cancion_id
  * @property string $comentario
+ * @property string $created_at
  *
  * @property Canciones $cancion
  * @property Usuarios $usuario
@@ -35,6 +36,7 @@ class Comentarios extends \yii\db\ActiveRecord
             [['usuario_id', 'cancion_id'], 'default', 'value' => null],
             [['usuario_id', 'cancion_id'], 'integer'],
             [['comentario'], 'string', 'max' => 255],
+            [['created_at'], 'safe'],
             [['cancion_id'], 'exist', 'skipOnError' => true, 'targetClass' => Canciones::className(), 'targetAttribute' => ['cancion_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
@@ -50,6 +52,7 @@ class Comentarios extends \yii\db\ActiveRecord
             'usuario_id' => Yii::t('app', 'Usuario ID'),
             'cancion_id' => Yii::t('app', 'Cancion ID'),
             'comentario' => Yii::t('app', 'Comentario'),
+            'created_at' => Yii::t('app', 'Created At'),
         ];
     }
 

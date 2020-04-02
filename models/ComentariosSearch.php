@@ -18,7 +18,7 @@ class ComentariosSearch extends Comentarios
     {
         return [
             [['id', 'usuario_id', 'cancion_id'], 'integer'],
-            [['comentario'], 'safe'],
+            [['comentario', 'created_at'], 'safe'],
         ];
     }
 
@@ -61,6 +61,7 @@ class ComentariosSearch extends Comentarios
             'id' => $this->id,
             'usuario_id' => $this->usuario_id,
             'cancion_id' => $this->cancion_id,
+            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['ilike', 'comentario', $this->comentario]);

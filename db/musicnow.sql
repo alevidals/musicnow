@@ -102,6 +102,7 @@ CREATE TABLE comentarios
   , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id)
   , cancion_id BIGINT       NOT NULL REFERENCES canciones (id)
   , comentario VARCHAR(255) NOT NULL
+  , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO roles (rol)

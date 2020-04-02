@@ -195,10 +195,11 @@ class CancionesController extends Controller
     public function actionComentarios($cancion_id)
     {
         $comentarios = (new \yii\db\Query())
-            ->select(['usuarios.id', 'usuarios.login', 'comentario', 'usuarios.url_image'])
+            ->select(['usuarios.id', 'usuarios.login', 'comentario', 'usuarios.url_image', 'c.created_at'])
             ->from('comentarios c')
             ->leftJoin('usuarios', 'usuarios.id = c.usuario_id')
             ->where(['cancion_id' => $cancion_id])
+            ->orderBy('c.id DESC')
             ->all();
 
         Yii::$app->response->format = Response::FORMAT_JSON;

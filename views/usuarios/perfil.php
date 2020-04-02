@@ -74,6 +74,7 @@ $js = <<<EOT
             url: '$urlGetComments&cancion_id=' + cancion_id,
             success: function (data) {
                 var comentarios = Object.entries(data);
+                console.log(comentarios);
                 $('.row-comments').empty();
                 comentarios.forEach(element => {
                     $('.row-comments').append(`
@@ -83,7 +84,8 @@ $js = <<<EOT
                                     <img class="user-search-img" src="\${element[1].url_image}" alt="perfil" width="50px" height="50px">
                                 </a>
                                 <div class="col">
-                                    <a href="$urlPerfil&id=\${element[1].id}">\${element[1].login}</a>
+                                <a href="$urlPerfil&id=\${element[1].id}">\${element[1].login}</a>
+                                    <small class="text-white"><?= Utility::BUCKET ?></small>
                                     <p class="m-0">\${element[1].comentario}</p>
                                 </div>
                             </div>
@@ -109,7 +111,7 @@ $js = <<<EOT
                     comentario: comentario,
                 },
                 success: function (data) {
-                    $('.row-comments').append(`
+                    $('.row-comments').prepend(`
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <a href="$urlPerfil&id=\${data.usuario_id}">
@@ -272,22 +274,20 @@ $this->registerJS($js);
                                                         <div class="col-12 mt-4">
                                                             <textarea class="form-control text-area-comment" cols="30" rows="3" placeholder="Comentario..."></textarea>
                                                             <div class="invalid-feedback">Debe tener como máximo 255 caracteres y no estar vacío.</div>
-                                                            <button class="btn btn-sm main-yellow mt-2 comment-btn" id="comment-<?= $cancion->id ?>" type="button">Comentar</button>
+                                                            <div class="mt-3">
+                                                                <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button">Comentar</button>
+                                                                <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart text-danger"></i></button>
+                                                                <p class="d-inline-block"><span></span> like/s</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 custom-overflow">
+                                                <div class="col-lg-4 ">
                                                     <div class="row">
-                                                        <div class="col-12">
-                                                            <div>
-                                                                <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent like-btn"><i class="fa-heart text-danger"></i></button>
-                                                                <p><span></span> likes</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 custom-overflow">
                                                             <!-- COMENTARIOS  -->
                                                             <div class="row row-comments">
-                                                            </div>
+                                                                </div>
                                                         </div>
                                                     </div>
                                                 </div>
