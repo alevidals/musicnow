@@ -28,15 +28,17 @@ class Utility
         $origen = Yii::getAlias('@uploads/' . $filename);
         $img->saveAs($origen);
 
-        \yii\imagine\Image::resize($origen, 500, 500)->save($origen);
-
         if ($perfilImg) {
             $name = 'images/perfil/' . $userId . '/perfil.png';
             $url_name = self::URL_PREFIX . 'images%2Fperfil%2F' . $userId . '%2Fperfil.png' . self::URL_SUFFIX;
+            $size = 150;
         } else {
             $name = 'images/portada/' . $userId . '/' . $filename;
             $url_name = self::URL_PREFIX . 'images%2Fportada%2F' . $userId . '%2F' . $filename . self::URL_SUFFIX;
+            $size = 500;
         }
+
+        \yii\imagine\Image::resize($origen, $size, $size)->save($origen);
 
         $factory = self::getFactory();
         $storage = $factory->createStorage();

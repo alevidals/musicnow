@@ -61,7 +61,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['fnac', 'created_at', 'deleted_at'], 'safe'],
             [['rol'], 'default', 'value' => 2],
             [['rol'], 'integer'],
-            [['image'], 'image', 'extensions' => ['png', 'jpg']],
+            [['image'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 150, 'maxWidth' => 500, 'minHeight' => 150, 'maxHeight' => 500],
             [['login'], 'string', 'max' => 50],
             [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name'], 'string', 'max' => 255],
             [['url_image'], 'string', 'max' => 2048],
