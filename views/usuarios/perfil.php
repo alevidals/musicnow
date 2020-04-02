@@ -74,7 +74,6 @@ $js = <<<EOT
             url: '$urlGetComments&cancion_id=' + cancion_id,
             success: function (data) {
                 var comentarios = Object.entries(data);
-                console.log(comentarios);
                 $('.row-comments').empty();
                 comentarios.forEach(element => {
                     $('.row-comments').append(`
@@ -146,6 +145,9 @@ $this->registerJS($js);
 
     <div class="row text-white text-center mt-4">
         <div class="col">
+            <h4><span id="publicaciones"><?= $model->getCanciones()->count() ?></span> publicaciones</h4>
+        </div>
+        <div class="col">
             <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
                 <h4><span id="seguidores"></span> seguidores</h4>
             </button>
@@ -213,7 +215,7 @@ $this->registerJS($js);
         </div>
     </div>
 
-    <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3']) ?>
+    <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3 user-search-img']) ?>
 
     <div class="mt-3 d-flex">
         <h1 class="d-inline-block"><?= $model->login?></h1>
