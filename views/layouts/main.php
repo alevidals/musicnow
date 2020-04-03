@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
+use app\services\Utility;
 use app\widgets\Alert;
 use kartik\dialog\Dialog;
 use yii\bootstrap4\Breadcrumbs;
@@ -13,19 +14,22 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 AppAsset::register($this);
+$this->registerJS(Utility::GET_COOKIE);
 
 $urlCookie = Url::to(['site/cookie']);
 
 $js = <<<EOT
-    $( document ).ready(function() {
-        krajeeDialogCust2.confirm("Utilizamos cookies para asegurar que damos la mejor experiencia al usuario en nuestra web. Si sigues utilizando este sitio asumiremos que estás de acuerdo.", function (result) {
-            if (result) {
-                window.location="$urlCookie";
-            } else {
-                window.location="http://google.es";
-            }
+    if (getCookie('cookie-accept') == null) {
+        $( document ).ready(function() {
+            krajeeDialogCust2.confirm("Utilizamos cookies para asegurar que damos la mejor experiencia al usuario en nuestra web. Si sigues utilizando este sitio asumiremos que estás de acuerdo.", function (result) {
+                if (result) {
+                    window.location="$urlCookie";
+                } else {
+                    window.location="http://google.es";
+                }
+            });
         });
-    });
+    }
 EOT;
 
 Dialog::widget([
@@ -44,9 +48,7 @@ Dialog::widget([
     ],
 ]);
 
-if (!isset($_COOKIE['cookie-accept'])) {
-    $this->registerJS($js);
-}
+$this->registerJS($js);
 
 
 ?>

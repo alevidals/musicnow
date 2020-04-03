@@ -14,6 +14,27 @@ class Utility
     const DATABASE_URI = 'https://song-test-103af.firebaseio.com';
     const BUCKET = 'song-test-103af.appspot.com';
 
+    const GET_COOKIE = <<<EOT
+        function getCookie(name) {
+            var dc = document.cookie;
+            var prefix = name + "=";
+            var begin = dc.indexOf("; " + prefix);
+            if (begin == -1) {
+                begin = dc.indexOf(prefix);
+                if (begin != 0) return null;
+            }
+            else
+            {
+                begin += 2;
+                var end = document.cookie.indexOf(";", begin);
+                if (end == -1) {
+                end = dc.length;
+                }
+            }
+            return decodeURI(dc.substring(begin + prefix.length, end));
+        }
+    EOT;
+
     protected static function getFactory()
     {
         $serviceAccount = ServiceAccount::fromJsonFile('/home/ale/Escritorio/jeje.json');
