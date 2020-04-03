@@ -275,7 +275,7 @@ $this->registerJS($js);
                                     <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
                                     <div class="share-buttons">
                                         <button class="action-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                        <button class="action-btn outline-transparent"><i class="far fa-heart text-danger"></i></button>
+                                        <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
                                         <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
                                     </div>
                                     <div class="layer"></div>

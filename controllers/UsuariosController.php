@@ -281,10 +281,16 @@ class UsuariosController extends Controller
             return $this->redirect(['site/index']);
         }
 
+        $canciones_id = $model->getCanciones()->select('id')->column();
         $canciones = $model->getCanciones()->all();
         $albumes = $model->getAlbumes()->all();
         $seguidores = $model->getSeguidores()->all();
         $seguidos = $model->getSeguidos()->all();
+        $likes = Usuarios::findOne(Yii::$app->user->id)
+            ->getLikes()
+            ->select('cancion_id')
+            ->where(['IN', 'cancion_id', $canciones_id])
+            ->column();
 
         return $this->render('perfil', [
             'model' => $model,
@@ -292,6 +298,7 @@ class UsuariosController extends Controller
             'albumes' => $albumes,
             'seguidores' => $seguidores,
             'seguidos' => $seguidos,
+            'likes' => $likes,
         ]);
     }
 
