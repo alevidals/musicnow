@@ -55,7 +55,8 @@ class Utility
                     }
                     GreenAudioPlayer.init({
                         selector: '.player',
-                        stopOthersOnPlay: true
+                        stopOthersOnPlay: true,
+                        showDownloadButton: true,
                     });
                     $('.info-song img').attr('src', data.url_portada);
                     $('.player audio source').attr('src', data.url_cancion);
