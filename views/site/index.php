@@ -2,11 +2,15 @@
 
 /* @var $this yii\web\View */
 
+use app\services\Utility;
 use yii\bootstrap4\Html;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 $this->title = 'My Yii Application';
+
+$playSongCode = Utility::PLAY_SONG;
 
 $js = <<<EOT
     $(document).ready(function(){
@@ -17,6 +21,9 @@ $js = <<<EOT
             items : 1
         });
     });
+
+    // CÓDIGO PARA REPRODUCIR LA CANCIÓN
+    $playSongCode
 EOT;
 
 $this->registerJS($js);
@@ -47,6 +54,9 @@ $this->registerJS($js);
                 <div class="row">
                     <div class="col">
                         <?= Html::img($cancion->url_portada, ['class' => 'img-fluid']) ?>
+                        <div>
+                            <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
+                        </div>
                         <p class="text-white mb-0"><?= $cancion->titulo?></p>
                         <p class="text-muted mt-0"><?= $cancion->getAlbum()->one()->titulo?></p>
                     </div>
