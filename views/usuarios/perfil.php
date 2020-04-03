@@ -60,6 +60,7 @@ $js = <<<EOT
 
     $('.cancion').on('click', function ev(e) {
         var cancion_id = $(this).data('target').split('-')[1];
+        $('.like-btn i').removeClass('fas far');
         $.ajax({
             'method': 'POST',
             url: '$urlGetLikesData&cancion_id=' + cancion_id,
