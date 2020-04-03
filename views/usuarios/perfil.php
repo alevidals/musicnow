@@ -236,6 +236,13 @@ $this->registerJS($js);
                         ]
                     ) ?>
                     <?= Html::a(
+                        'Eliminar comentarios',
+                        ['comentarios/index', 'user_id' => $model->id],
+                        [
+                            'class' => 'dropdown-item',
+                        ]
+                    ) ?>
+                    <?= Html::a(
                         'Eliminar cuenta',
                         ['usuarios/eliminar-cuenta', 'id' => $model->id],
                         [
