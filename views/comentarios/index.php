@@ -14,25 +14,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Comentarios'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'usuario_id',
-            'cancion_id',
+            [
+                'attribute' => 'cancion.titulo',
+                'label' => 'Canción',
+            ],
             'comentario',
-            'created_at',
+            'created_at:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'tableOptions' => [
+            'class' => 'table admin-table ',
         ],
     ]); ?>
 
