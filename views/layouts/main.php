@@ -30,6 +30,13 @@ $js = <<<EOT
             });
         });
     }
+
+    GreenAudioPlayer.init({
+        selector: '.player',
+        stopOthersOnPlay: true
+    });
+    $('.full-player').css('display', 'none');
+    $('.player').css('display', 'none');
 EOT;
 
 Dialog::widget([
@@ -129,6 +136,21 @@ $this->registerJS($js);
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
+    </div>
+</div>
+
+<div class="full-player">
+    <div class="info-song d-flex">
+        <img src="" alt="song-cover">
+        <div class="mx-auto my-auto artist-info">
+            <p class="m-0"></p>
+            <small class="text-white"></small>
+        </div>
+    </div>
+    <div class="player">
+        <audio autoplay>
+            <source src="">
+        </audio>
     </div>
 </div>
 

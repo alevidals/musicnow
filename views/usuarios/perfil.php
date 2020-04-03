@@ -1,5 +1,6 @@
 <?php
 
+use app\services\Utility;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
@@ -16,6 +17,8 @@ $urlGetLikesData = Url::to(['likes/get-data']);
 $urlComment = Url::to(['comentarios/comentar']);
 $urlGetComments = Url::to(['canciones/comentarios']);
 $urlPerfil = Url::to(['usuarios/perfil']);
+
+$playSongCode = Utility::PLAY_SONG;
 
 $js = <<<EOT
 
@@ -129,6 +132,8 @@ $js = <<<EOT
             });
         }
     });
+
+    $playSongCode
 
 EOT;
 
@@ -274,7 +279,7 @@ $this->registerJS($js);
                                 <div class="box-3">
                                     <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
                                     <div class="share-buttons">
-                                        <button class="action-btn outline-transparent"><i class="fas fa-play"></i></button>
+                                        <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                         <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
                                         <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
                                     </div>

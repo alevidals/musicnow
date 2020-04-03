@@ -35,6 +35,43 @@ class Utility
         }
     EOT;
 
+    const PLAY_SONG = <<<EOT
+        var firstTime = true;
+        $('.play-btn').on('click', function ev(e) {
+            var cancion_id = $(this).attr('id').split('-')[1];
+            $.ajax({
+                method: 'GET',
+                url: '/index.php?r=canciones%2Fget-song-data',
+                data: {
+                    cancion_id: cancion_id
+                },
+                success: function (data) {
+                    if ($('.loading').length) {
+                        $('.loading').remove();
+                        $('.play-pause-btn').remove();
+                        $('.controls').remove();
+                        $('.volume').remove();
+                        $('.download').remove();
+                    }
+                    GreenAudioPlayer.init({
+                        selector: '.player',
+                        stopOthersOnPlay: true
+                    });
+                    $('.info-song img').attr('src', data.url_portada);
+                    $('.player audio source').attr('src', data.url_cancion);
+                    $('.artist-info p').html(data.titulo);
+                    $('.artist-info small').html(data.album);
+                    $('.full-player').css('display', 'flex');
+                    if (firstTime) {
+                        $('.full-player').effect('slide','slow');
+                        firstTime = false;
+                    }
+                    $('.player').css('display', 'flex');
+                }
+            });
+        });
+    EOT;
+
     protected static function getFactory()
     {
         $serviceAccount = ServiceAccount::fromJsonFile('/home/ale/Escritorio/jeje.json');

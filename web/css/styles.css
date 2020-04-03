@@ -300,3 +300,21 @@ label,
 .box-3 .action-btn {
     display: inline-block;
 }
+
+.full-player {
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 60px;
+}
+
+.player {
+    width: 80%;
+}
+
+.info-song {
+    width: 20%;
+}
+
+.info-song img {
+    height: 100%;
+}

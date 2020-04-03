@@ -24,10 +24,12 @@ class AppAsset extends AssetBundle
         'css/styles.css',
         'css/owl.theme.default.min.css',
         'css/owl.carousel.min.css',
+        'css/green-audio-player.min.css',
     ];
     public $js = [
         'js/owl.carousel.js',
-        'js/owl.autoplay.js'
+        'js/owl.autoplay.js',
+        'js/green-audio-player.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
