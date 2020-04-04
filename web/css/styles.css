@@ -348,3 +348,8 @@ input, select {
     border-radius: 0% !important;
     padding: 0 !important;
 }
+
+.comment-time {
+    color: lightslategray;
+    font-size: 11px;
+}

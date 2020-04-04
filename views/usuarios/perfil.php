@@ -90,8 +90,8 @@ $js = <<<EOT
                                     <img class="user-search-img" src="\${element[1].url_image}" alt="perfil" width="50px" height="50px">
                                 </a>
                                 <div class="col">
-                                <a href="$urlPerfil&id=\${element[1].id}">\${element[1].login}</a>
-                                    <small class="text-white"><?= Utility::BUCKET ?></small>
+                                    <a href="$urlPerfil&id=\${element[1].id}">\${element[1].login}</a>
+                                    <small class="ml-1 comment-time">\${element[1].created_at}</small>
                                     <p class="m-0">\${element[1].comentario}</p>
                                 </div>
                             </div>
@@ -117,6 +117,7 @@ $js = <<<EOT
                     comentario: comentario,
                 },
                 success: function (data) {
+                    console.log(data);
                     $('.row-comments').prepend(`
                         <div class="col-12 mt-3">
                             <div class="row">
@@ -125,6 +126,7 @@ $js = <<<EOT
                                 </a>
                                 <div class="col">
                                     <a href="$urlPerfil&id=\${data.usuario_id}">\${data.login}</a>
+                                    <small class="ml-1 comment-time">\${data.created_at}</small>
                                     <p>\${data.comentario}</p>
                                 </div>
                             </div>

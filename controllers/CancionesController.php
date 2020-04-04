@@ -189,6 +189,8 @@ class CancionesController extends Controller
 
     public function actionComentarios($cancion_id)
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
         $comentarios = (new \yii\db\Query())
             ->select(['usuarios.id', 'usuarios.login', 'comentario', 'usuarios.url_image', 'c.created_at'])
             ->from('comentarios c')
@@ -197,7 +199,10 @@ class CancionesController extends Controller
             ->orderBy('c.id DESC')
             ->all();
 
-        Yii::$app->response->format = Response::FORMAT_JSON;
+        foreach ($comentarios as &$comentario) {
+            $comentario['created_at'] = Yii::$app->formatter->asRelativeTime($comentario['created_at']);
+        }
+
         return $comentarios;
     }
 }

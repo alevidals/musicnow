@@ -6,6 +6,8 @@ use Yii;
 use app\models\Comentarios;
 use app\models\ComentariosSearch;
 use app\models\Usuarios;
+use DateTime;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -158,13 +160,18 @@ class ComentariosController extends Controller
         $model->comentario = $comentario;
 
         $model->save();
+        $model->refresh();
+
+        Yii::debug($model);
 
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [
             'login' => $usuario->login,
             'comentario' => $comentario,
             'usuario_id' => $usuario->id,
-            'url_image' => $usuario->url_image
+            'url_image' => $usuario->url_image,
+            'created_at' => Yii::$app->formatter->asRelativeTime($model->created_at)
+
         ];
     }
 }
