@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'seguidor_id',
             'seguido_id',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>

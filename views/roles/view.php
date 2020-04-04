@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'rol',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>

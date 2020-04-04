@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Roles;
 use app\models\RolesSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,20 @@ class RolesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'create', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            return Yii::$app->user->identity->login === 'admin'
+                                && Yii::$app->user->identity->rol === 1;
+                        }
+                    ],
                 ],
             ],
         ];
