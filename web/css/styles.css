@@ -49,9 +49,10 @@ body {
 h1,
 h2,
 h3,
+h4,
 h5,
+h6,
 p,
-label,
 .summary,
 .admin-table td,
 .dropdown-item,
@@ -61,8 +62,13 @@ label,
 .small-artist,
 .dots-menu,
 .dropdown-item:hover,
-.custom-control-input.is-valid~.custom-control-label {
-    color: white;
+.custom-control-input.is-valid~.custom-control-label,
+input {
+    color: white !important;
+}
+
+label {
+    color: #9b9b9b;
 }
 
 .admin-table thead {
@@ -317,4 +323,28 @@ label,
 
 .info-song img {
     height: 100%;
+}
+
+.img-edit {
+    cursor: pointer;
+    position: relative;
+}
+
+.edit-image-icon {
+    border-radius: 100%;
+    background-color: #ffba00;
+    padding: 5px;
+    color: #000;
+    position: absolute;
+    bottom: 3%;
+    right: 10%;
+}
+
+input, select {
+    background-color: transparent !important;
+    border: 0 !important;
+    border-bottom: 2px solid #9b9b9b !important;
+    outline: none !important;
+    border-radius: 0% !important;
+    padding: 0 !important;
 }

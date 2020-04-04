@@ -9,36 +9,71 @@ use yii\bootstrap4\Html;
 $this->title = Yii::t('app', 'Update Usuarios: {name}', [
     'name' => $model->id,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Usuarios'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+// $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Usuarios'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+// $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
 ?>
 <div class="usuarios-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'image')->fileInput()->label('Imágen de perfil') ?>
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-6 text-center">
+            <div class="form-group field-usuarios-image">
+                <label class="img-edit" for="usuarios-image">
+                    <img class="user-search-img" src="<?= $model->url_image ?>" alt="profile-img">
+                    <i class="fas fa-pen edit-image-icon"></i>
+                </label>
+                <input class="file-input form-control-file d-none" type="file" name="Usuarios[image]" id="usuarios-image">
+                <h5 class="mt-3"><?= $model->login ?></h5>
+                <h6><?= $model->nombre . ' ' . $model->apellidos ?></h6>
+            </div>
+        </div>
 
-    <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
+        <div class="w-100"></div>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+        <div class="col-lg-6">
+            <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
+        <div class="w-100"></div>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <div class="w-100"></div>
 
-    <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'fnac')->textInput() ?>
+        </div>
 
-    <?= $form->field($model, 'fnac')->textInput() ?>
+        <div class="w-100"></div>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-6 mt-3">
+            <div class="form-group text-center">
+                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn main-yellow']) ?>
+            </div>
+        </div>
     </div>
+
+
 
     <?php ActiveForm::end(); ?>
 
