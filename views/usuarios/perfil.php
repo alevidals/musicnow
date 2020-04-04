@@ -23,7 +23,7 @@ $playSongCode = Utility::PLAY_SONG;
 $js = <<<EOT
 
     $.ajax({
-        'method': 'POST',
+        'method': 'GET',
         'url': '$urlGetFollowData',
         success: function (data) {
             $('.follow').html(data.textButton);
@@ -74,8 +74,11 @@ $js = <<<EOT
         });
 
         $.ajax({
-            method: 'POST',
-            url: '$urlGetComments&cancion_id=' + cancion_id,
+            method: 'GET',
+            url: '$urlGetComments',
+            data: {
+                cancion_id: cancion_id
+            },
             success: function (data) {
                 var comentarios = Object.entries(data);
                 $('.row-comments').empty();

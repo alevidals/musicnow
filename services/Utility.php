@@ -9,10 +9,10 @@ use Yii;
 
 class Utility
 {
-    const URL_PREFIX = 'https://firebasestorage.googleapis.com/v0/b/song-test-103af.appspot.com/o/';
+    const URL_PREFIX = 'https://firebasestorage.googleapis.com/v0/b/test-song-17ae9.appspot.com/o/';
     const URL_SUFFIX = '?alt=media';
-    const DATABASE_URI = 'https://song-test-103af.firebaseio.com';
-    const BUCKET = 'song-test-103af.appspot.com';
+    const DATABASE_URI = 'https://test-song-17ae9.firebaseio.com';
+    const BUCKET = 'test-song-17ae9.appspot.com';
 
     const GET_COOKIE = <<<EOT
         function getCookie(name) {

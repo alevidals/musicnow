@@ -11,12 +11,6 @@ use yii\helpers\Html;
 $js = <<<EOT
 var current_fs, next_fs, previous_fs;
 
-// $('#register-tab, #login-tab').on('click', function ev() {
-//     $('form').trigger('reset');
-// });
-
-
-
 $(".next").click(function(){
 
     current_fs = $(this).parent();
