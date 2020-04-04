@@ -27,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'comentario',
             'created_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}',
+            ],
         ],
         'tableOptions' => [
             'class' => 'table admin-table ',

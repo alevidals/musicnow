@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'comentario',
             'created_at:datetime',
         ],
-        'tableOptions' => [
-            'class' => 'table admin-table',
+        'options' => [
+            'class' => 'table admin-table'
         ],
     ]) ?>
 

@@ -6,6 +6,7 @@ use Yii;
 use app\models\Comentarios;
 use app\models\ComentariosSearch;
 use app\models\Usuarios;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +27,25 @@ class ComentariosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'create', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            $user_id = Yii::$app->request->get('user_id');
+                            $id = Yii::$app->request->get('id');
+                            $comentarios = Usuarios::findOne(Yii::$app->user->id)->getComentarios()->select('id')->column();
+                            return (Yii::$app->user->identity->login === 'admin'
+                                && Yii::$app->user->identity->rol === 1)
+                                || ($user_id == Yii::$app->user->id)
+                                || (in_array($id, $comentarios));
+                        },
+                    ],
                 ],
             ],
         ];
@@ -108,7 +128,7 @@ class ComentariosController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['comentarios/index', 'user_id' => Yii::$app->user->id]);
     }
 
     /**
