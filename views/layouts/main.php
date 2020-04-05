@@ -89,40 +89,77 @@ $this->registerJS($js);
             'class' => 'justify-content-end',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Géneros', 'url' => ['/generos/index']],
-            ['label' => 'Álbumes', 'url' => ['/albumes/index']],
-            ['label' => 'Canciones', 'url' => ['/canciones/index']],
-            ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
-            Yii::$app->user->isGuest ? (
-                [
-                    'label' => 'Entra',
-                    'items' => [
-                        ['label' => 'Login', 'url' => ['/usuarios/login']],
-                    ],
-                ]
-            ) : (
-                [
-                    'label' => Yii::$app->user->identity->nombre,
-                    'items' => [
-                        ['label' => 'Mi cuenta', 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
-                        [
-                            'label' => 'Logout',
-                            'url' => [
-                                '/usuarios/logout',
-                                'method' => 'post',
-                            ],
-                            'linkOptions' => [
-                                'data-method' => 'post',
+    if (!Yii::$app->user->isGuest) {
+        if (Yii::$app->user->identity->rol == 1) {
+            $items = [
+                ['label' => 'Home', 'url' => ['/site/admin-index']],
+                ['label' => 'Géneros', 'url' => ['/generos/index']],
+                ['label' => 'Álbumes', 'url' => ['/albumes/index']],
+                ['label' => 'Canciones', 'url' => ['/canciones/index']],
+                ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
+                Yii::$app->user->isGuest ? (
+                    [
+                        'label' => 'Entra',
+                        'items' => [
+                            ['label' => 'Login', 'url' => ['/usuarios/login']],
+                        ],
+                    ]
+                ) : (
+                    [
+                        'label' => Yii::$app->user->identity->nombre,
+                        'items' => [
+                            [
+                                'label' => 'Logout',
+                                'url' => [
+                                    '/usuarios/logout',
+                                    'method' => 'post',
+                                ],
+                                'linkOptions' => [
+                                    'data-method' => 'post',
+                                ],
                             ],
                         ],
-                    ],
-                ]
-            ),
-        ],
+                    ]
+                ),
+            ];
+        } else {
+                $items = [
+                    ['label' => 'Home', 'url' => ['/site/index']],
+                    ['label' => 'Álbumes', 'url' => ['/albumes/index']],
+                    ['label' => 'Canciones', 'url' => ['/canciones/index']],
+                    Yii::$app->user->isGuest ? (
+                        [
+                            'label' => 'Entra',
+                            'items' => [
+                                ['label' => 'Login', 'url' => ['/usuarios/login']],
+                            ],
+                        ]
+                    ) : (
+                        [
+                            'label' => Yii::$app->user->identity->nombre,
+                            'items' => [
+                                ['label' => 'Mi cuenta', 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
+                                [
+                                    'label' => 'Logout',
+                                    'url' => [
+                                        '/usuarios/logout',
+                                        'method' => 'post',
+                                    ],
+                                    'linkOptions' => [
+                                        'data-method' => 'post',
+                                    ],
+                                ],
+                            ],
+                        ]
+                    ),
+                ];
+        }
+    } else {
+        $items = [];
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' => $items
     ]);
     NavBar::end();
     ?>
