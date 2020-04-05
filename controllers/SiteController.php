@@ -22,12 +22,8 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['index', 'logout', 'admin-index'],
                 'rules' => [
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
                     [
                         'actions' => ['admin-index'],
                         'allow' => true,
@@ -36,6 +32,11 @@ class SiteController extends Controller
                             return Yii::$app->user->identity->login === 'admin'
                                 && Yii::$app->user->identity->rol === 1;
                         }
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
