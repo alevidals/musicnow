@@ -80,7 +80,7 @@ $this->registerJS($js);
     <?php
     NavBar::begin([
         // 'brandLabel' => Yii::$app->name,
-        'brandLabel' => Html::img('@web/img/logo.png', ['width' => '40px']),
+        'brandLabel' => Html::img('@web/img/logo.png', ['class' => 'navbar-logo']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-dark bg-dark navbar-expand-md fixed-top',
@@ -178,7 +178,7 @@ $this->registerJS($js);
 
 <div class="full-player">
     <div class="info-song d-flex">
-        <img src="" alt="song-cover">
+        <img alt="song-cover">
         <div class="mx-auto my-auto artist-info">
             <p class="m-0"></p>
             <small class="text-white"></small>
@@ -186,7 +186,7 @@ $this->registerJS($js);
     </div>
     <div class="player">
         <audio autoplay>
-            <source src="">
+            <source>
         </audio>
     </div>
 </div>

@@ -40,7 +40,7 @@ $this->title = 'Login';
 <div class="site-login container">
 
     <div class="text-center mt-5 mt-lg-0 mb-5">
-        <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto', 'width' => '300px']) ?>
+        <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto']) ?>
     </div>
 
     <ul class="nav nav-pills justify-content-center nav-fill mb-5 w-100" id="myTab" role="tablist">
@@ -105,7 +105,7 @@ $this->title = 'Login';
                                     <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
                                     <?= $form->field($userModel, 'nombre')->textInput()->label(Yii::t('app', 'Nombre') . '*', ['class' => 'col-12']) ?>
                                     <?= $form->field($userModel, 'apellidos')->textInput()->label(Yii::t('app', 'Apellidos') . '*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($userModel, 'login')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12']) ?>
+                                    <?= $form->field($userModel, 'login')->textInput()->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12']) ?>
                                     <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
                                 </fieldset>
                                 <fieldset>

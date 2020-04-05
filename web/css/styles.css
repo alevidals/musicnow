@@ -358,3 +358,11 @@ input, select {
 .site-admin-index i {
     font-size: 100px;
 }
+
+.logo {
+    width: 300px;
+}
+
+.navbar-logo {
+    width: 40px;
+}
