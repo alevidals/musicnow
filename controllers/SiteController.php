@@ -109,13 +109,14 @@ class SiteController extends Controller
 
         $cancionesSearch = new ActiveDataProvider([
             'query' => Canciones::findWithTotalLikes()
+                ->joinWith('usuario u')
                 ->joinWith('genero g')
                 ->where(['ilike', 'titulo', $cadena])
                 ->orWhere(['IN', 'canciones.usuario_id', $ids])
-                ->addGroupBy('g.denominacion'),
+                ->addGroupBy(['g.denominacion', 'u.login']),
             'sort' => [
                 'attributes' => [
-                    'titulo',
+                    'u.login',
                     'g.denominacion',
                     'likes',
                 ]

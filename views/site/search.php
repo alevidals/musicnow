@@ -65,7 +65,7 @@ $this->registerJS($js);
                 Ordenar por
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <?= Html::a('Título', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'titulo' : '-titulo')], ['class' => 'dropdown-item']) ?>
+                <?= Html::a('Artista', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'u.login' : '-u.login')], ['class' => 'dropdown-item']) ?>
                 <?= Html::a('Género', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'g.denominacion' : '-g.denominacion')], ['class' => 'dropdown-item']) ?>
                 <?= Html::a('Likes', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'likes' : '-likes')], ['class' => 'dropdown-item']) ?>
             </div>
