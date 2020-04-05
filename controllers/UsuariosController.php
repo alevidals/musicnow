@@ -40,8 +40,7 @@ class UsuariosController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
                             $id = Yii::$app->request->get('id');
-                            return (Yii::$app->user->identity->login === 'admin'
-                                && Yii::$app->user->identity->rol === 1)
+                            return Yii::$app->user->identity->rol === 1
                                 || ($id == Yii::$app->user->id);
                         },
                     ],
@@ -220,7 +219,12 @@ class UsuariosController extends Controller
                         Yii::$app->session->setFlash('error', 'La cuenta de este usuario está eliminada.');
                     } else {
                         if ($loginModel->login()) {
-                            return $this->goBack();
+                            Yii::debug($user);
+                            if ($user->rol == 1) {
+                                return $this->redirect(['site/admin-index']);
+                            } else {
+                                return $this->redirect(['site/index']);
+                            }
                         }
                     }
                 }

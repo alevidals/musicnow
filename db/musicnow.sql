@@ -111,5 +111,5 @@ VALUES ('admin')
 
 INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol)
 VALUES ('admin', 'admin', 'admin', 'admin@admin.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),
-       ('usuario1', 'usuario1', 'usuario1', 'usuario1@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),
-       ('usuario2', 'usuario2', 'usuario2', 'usuario2@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1);
+       ('usuario1', 'usuario1', 'usuario1', 'usuario1@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2),
+       ('usuario2', 'usuario2', 'usuario2', 'usuario2@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2);

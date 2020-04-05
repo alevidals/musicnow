@@ -63,7 +63,8 @@ p,
 .dots-menu,
 .dropdown-item:hover,
 .custom-control-input.is-valid~.custom-control-label,
-input {
+input,
+.site-admin-index i {
     color: white !important;
 }
 
@@ -352,4 +353,8 @@ input, select {
 .comment-time {
     color: lightslategray;
     font-size: 11px;
+}
+
+.site-admin-index i {
+    font-size: 100px;
 }

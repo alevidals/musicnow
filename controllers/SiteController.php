@@ -22,12 +22,20 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index'],
                 'rules' => [
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['admin-index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            return Yii::$app->user->identity->login === 'admin'
+                                && Yii::$app->user->identity->rol === 1;
+                        }
                     ],
                 ],
             ],
@@ -78,6 +86,11 @@ class SiteController extends Controller
             'usuario' => $usuario,
             'cadena' => $cadena,
         ]);
+    }
+
+    public function actionAdminIndex()
+    {
+        return $this->render('admin-index');
     }
 
     public function actionSearch($cadena)
