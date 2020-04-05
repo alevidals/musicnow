@@ -181,4 +181,12 @@ class Canciones extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Comentarios::className(), ['cancion_id' => 'id']);
     }
+
+    public static function findWithTotalLikes()
+    {
+        return static::find()
+            ->select(['canciones.*', 'COUNT(l.cancion_id) AS likes'])
+            ->joinWith('likes l', false)
+            ->groupBy('canciones.id');
+    }
 }
