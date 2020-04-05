@@ -108,9 +108,18 @@ class SiteController extends Controller
             ->column();
 
         $cancionesSearch = new ActiveDataProvider([
-            'query' => Canciones::find()
+            'query' => Canciones::findWithTotalLikes()
+                ->joinWith('genero g')
                 ->where(['ilike', 'titulo', $cadena])
-                ->orWhere(['IN', 'usuario_id', $ids]),
+                ->orWhere(['IN', 'canciones.usuario_id', $ids])
+                ->addGroupBy('g.denominacion'),
+            'sort' => [
+                'attributes' => [
+                    'titulo',
+                    'g.denominacion',
+                    'likes',
+                ]
+            ]
         ]);
 
         return $this->render('search', [

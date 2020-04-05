@@ -17,6 +17,8 @@ $js = <<<'EOT'
     });
 EOT;
 
+$sort = Yii::$app->request->get('sort');
+
 $this->registerJS($js);
 
 ?>
@@ -57,22 +59,32 @@ $this->registerJS($js);
     <?php endif ?>
 
     <?php if ($cancionesSearch->totalCount > 0) : ?>
-            <h3 class="mt-3">Canciones</h3>
-            <div class="row">
-                <?php foreach ($cancionesSearch->getModels() as $cancion) : ?>
-                <div class="col-12 mt-3">
-                    <div class="row">
-                        <div class="col-1">
-                            <?= Html::img($cancion->url_portada, ['width' => '80px', 'class' => 'd-inline-block']) ?>
-                        </div>
-                        <div class="col my-auto">
-                            <p class="m-0 font-weight-bold"><?= $cancion->titulo ?></p>
-                            <p class="m-0"><?= $cancion->getUsuario()->one()->login ?></p>
-                        </div>
+        <h3 class="my-3">Canciones</h3>
+        <div class="dropdown">
+            <button class="btn main-yellow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ordenar por
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <?= Html::a('Título', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'titulo' : '-titulo')], ['class' => 'dropdown-item']) ?>
+                <?= Html::a('Género', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'g.denominacion' : '-g.denominacion')], ['class' => 'dropdown-item']) ?>
+                <?= Html::a('Likes', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'likes' : '-likes')], ['class' => 'dropdown-item']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <?php foreach ($cancionesSearch->getModels() as $cancion) : ?>
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <div class="col-1">
+                        <?= Html::img($cancion->url_portada, ['width' => '80px', 'class' => 'd-inline-block']) ?>
+                    </div>
+                    <div class="col my-auto">
+                        <p class="m-0 font-weight-bold"><?= $cancion->titulo ?></p>
+                        <p class="m-0"><?= $cancion->getUsuario()->one()->login ?></p>
                     </div>
                 </div>
-                <?php endforeach; ?>
             </div>
+            <?php endforeach; ?>
+        </div>
     <?php endif ?>
 
 </div>
