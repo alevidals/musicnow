@@ -5,6 +5,7 @@
 /* @var $model app\models\LoginForm */
 
 use app\models\Usuarios;
+use kartik\datecontrol\DateControl;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -39,6 +40,8 @@ EOT;
 $this->registerJS($js);
 
 $this->title = 'Login';
+
+kartik\icons\FontAwesomeAsset::register($this);
 
 ?>
 <div class="site-login container">
@@ -123,7 +126,14 @@ $this->title = 'Login';
                                         </div>
                                     </div>
                                     <?= $form->field($userModel, 'email')->textInput()->label('Email*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12']) ?>
+                                    <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12'])
+                                            ->widget(
+                                                DateControl::classname(),
+                                                [
+                                                'type' => DateControl::FORMAT_DATE,
+                                                'displayFormat' => 'php:d-m-Y',
+                                                ]
+                                            ); ?>
                                     <?= Html::button(Yii::t('app', 'Anterior'), ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
                                     <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
                                 </fieldset>

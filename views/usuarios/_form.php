@@ -1,5 +1,6 @@
 <?php
 
+use kartik\datecontrol\DateControl;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
@@ -24,7 +25,14 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fnac')->textInput() ?>
+    <?= $form->field($model, 'fnac')->textInput()
+        ->widget(
+            DateControl::classname(),
+            [
+            'type' => DateControl::FORMAT_DATE,
+            'displayFormat' => 'php:d-m-Y',
+            ]
+        ); ?>
 
     <?= $form->field($model, 'rol')->textInput() ?>
 

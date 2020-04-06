@@ -1,5 +1,6 @@
 <?php
 
+use kartik\datecontrol\DateControl;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
@@ -52,7 +53,14 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-lg-3">
-            <?= $form->field($model, 'fnac')->textInput() ?>
+            <?= $form->field($model, 'fnac')->textInput()
+            ->widget(
+                DateControl::classname(),
+                [
+                'type' => DateControl::FORMAT_DATE,
+                'displayFormat' => 'php:d-m-Y',
+                ]
+            ); ?>
         </div>
 
         <div class="w-100"></div>

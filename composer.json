@@ -28,7 +28,11 @@
         "xtetis/yii2-bootstrap4-glyphicons": "dev-master",
         "kartik-v/yii2-dialog": "dev-master",
         "kreait/firebase-php": "^4.41",
-        "yiisoft/yii2-imagine": "^2.2"
+        "yiisoft/yii2-imagine": "^2.2",
+        "kartik-v/yii2-datecontrol": "dev-master",
+        "kartik-v/yii2-widget-datetimepicker": "dev-master",
+        "kartik-v/yii2-icons": "@dev",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
