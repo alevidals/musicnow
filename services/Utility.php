@@ -2,18 +2,12 @@
 
 namespace app\services;
 
-// use Imagine\Gd\Imagine;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Yii;
 
 class Utility
 {
-    const URL_PREFIX = 'https://firebasestorage.googleapis.com/v0/b/test-song-17ae9.appspot.com/o/';
-    const URL_SUFFIX = '?alt=media';
-    const DATABASE_URI = 'https://test-song-17ae9.firebaseio.com';
-    const BUCKET = 'test-song-17ae9.appspot.com';
-
     const GET_COOKIE = <<<EOT
         function getCookie(name) {
             var dc = document.cookie;
@@ -75,10 +69,25 @@ class Utility
 
     protected static function getFactory()
     {
-        $serviceAccount = ServiceAccount::fromJsonFile('/home/ale/Escritorio/jeje.json');
+        $config = '
+        {
+            "type": "' . getenv('type') . '",
+            "project_id": "' . getenv('project_id') . '",
+            "private_key_id": "' . getenv('private_key_id') . '",
+            "private_key": "' . getenv('private_key') . '",
+            "client_email": "' . getenv('client_email') . '",
+            "client_id": "' . getenv('client_id') . '",
+            "auth_uri": "' . getenv('auth_uri') . '",
+            "token_uri": "' . getenv('token_uri') . '",
+            "auth_provider_x509_cert_url": "' . getenv('auth_provider_x509_cert_url') . '",
+            "client_x509_cert_url": "' . getenv('client_x509_cert_url') . '"
+        }
+        ';
+
+        $serviceAccount = ServiceAccount::fromJson($config);
         return (new Factory())
         ->withServiceAccount($serviceAccount)
-        ->withDatabaseUri('https://song-test-103af.firebaseio.com');
+        ->withDatabaseUri(getenv('databaseUri'));
     }
 
     public static function uploadImageFirebase($img, $userId, $perfilImg = false)
@@ -89,11 +98,11 @@ class Utility
 
         if ($perfilImg) {
             $name = 'images/perfil/' . $userId . '/perfil.png';
-            $url_name = self::URL_PREFIX . 'images%2Fperfil%2F' . $userId . '%2Fperfil.png' . self::URL_SUFFIX;
+            $url_name = getenv('url_prefix') . 'images%2Fperfil%2F' . $userId . '%2Fperfil.png' . getenv('url_suffix');
             $size = 150;
         } else {
             $name = 'images/portada/' . $userId . '/' . $filename;
-            $url_name = self::URL_PREFIX . 'images%2Fportada%2F' . $userId . '%2F' . $filename . self::URL_SUFFIX;
+            $url_name = getenv('url_prefix') . 'images%2Fportada%2F' . $userId . '%2F' . $filename . getenv('url_suffix');
             $size = 500;
         }
 
@@ -101,7 +110,7 @@ class Utility
 
         $factory = self::getFactory();
         $storage = $factory->createStorage();
-        $bucket = $storage->getBucket(self::BUCKET);
+        $bucket = $storage->getBucket(getenv('bucket'));
         $bucket->upload(file_get_contents($origen), [
             'name' => $name,
         ]);
@@ -117,19 +126,19 @@ class Utility
 
         $factory = self::getFactory();
         $storage = $factory->createStorage();
-        $bucket = $storage->getBucket(self::BUCKET);
+        $bucket = $storage->getBucket(getenv('bucket'));
         $bucket->upload(file_get_contents($origen), [
             'name' => 'canciones/' . $userId . '/' . $filename,
         ]);
         unlink($origen);
-        return self::URL_PREFIX . 'canciones%2F' . $userId . '%2F' . $filename . self::URL_SUFFIX;
+        return getenv('url_prefix') . 'canciones%2F' . $userId . '%2F' . $filename . getenv('url_suffix');
     }
 
     public static function deleteFileFirebase($name)
     {
         $factory = self::getFactory();
         $storage = $factory->createStorage();
-        $bucket = $storage->getBucket(self::BUCKET);
+        $bucket = $storage->getBucket(getenv('bucket'));
         $bucket->object($name)->delete();
     }
 }
