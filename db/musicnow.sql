@@ -46,7 +46,7 @@ CREATE TABLE albumes
   , titulo     VARCHAR(255)  NOT NULL
   , anyo       NUMERIC(4)    NOT NULL
   , created_at TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
-  , usuario_id BIGINT        NOT NULL REFERENCES usuarios (id)
+  , usuario_id BIGINT        NOT NULL REFERENCES usuarios (id)  ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS canciones CASCADE;
@@ -63,7 +63,7 @@ CREATE TABLE canciones
   , url_portada  VARCHAR(2048) NOT NULL
   , anyo         NUMERIC(4)    NOT NULL
   , duracion     INTERVAL      NOT NULL
-  , usuario_id   BIGINT        NOT NULL REFERENCES usuarios (id)
+  , usuario_id   BIGINT        NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
   , created_at   TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -89,8 +89,8 @@ DROP TABLE IF EXISTS likes CASCADE;
 
 CREATE TABLE likes
 (
-    usuario_id BIGINT REFERENCES usuarios (id)
-  , cancion_id BIGINT REFERENCES canciones (id)
+    usuario_id BIGINT REFERENCES usuarios (id)  ON DELETE CASCADE
+  , cancion_id BIGINT REFERENCES canciones (id) ON DELETE CASCADE
   , PRIMARY KEY (usuario_id, cancion_id)
 );
 
@@ -99,8 +99,8 @@ DROP TABLE IF EXISTS comentarios CASCADE;
 CREATE TABLE comentarios
 (
     id         BIGSERIAL    PRIMARY KEY
-  , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id)
-  , cancion_id BIGINT       NOT NULL REFERENCES canciones (id)
+  , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id)  ON DELETE CASCADE
+  , cancion_id BIGINT       NOT NULL REFERENCES canciones (id) ON DELETE CASCADE
   , comentario VARCHAR(255) NOT NULL
   , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
