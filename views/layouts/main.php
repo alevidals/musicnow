@@ -124,9 +124,9 @@ $this->registerJS($js);
             ];
         } else {
                 $items = [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'Álbumes', 'url' => ['/albumes/index']],
-                    ['label' => 'Canciones', 'url' => ['/canciones/index']],
+                    ['label' => 'Home', 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => 'Álbumes', 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => 'Canciones', 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
                     Yii::$app->user->isGuest ? (
                         [
                             'label' => 'Entra',
@@ -136,7 +136,7 @@ $this->registerJS($js);
                         ]
                     ) : (
                         [
-                            'label' => Yii::$app->user->identity->nombre,
+                            'label' => Html::img(Yii::$app->user->identity->url_image, ['width' => '40px', 'alt' => 'logo']),
                             'items' => [
                                 ['label' => 'Mi cuenta', 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
                                 [
@@ -159,6 +159,7 @@ $this->registerJS($js);
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
+        'encodeLabels'=> false,
         'items' => $items
     ]);
     NavBar::end();
