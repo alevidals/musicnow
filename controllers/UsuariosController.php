@@ -163,13 +163,12 @@ class UsuariosController extends Controller
      * @param string $body cuerpo que se enviará al correo
      * @return bool  true si se envía o false si hay error
      */
-    public function actionMail($email, $body)
+    public function actionMail($email, $url)
     {
-        return Yii::$app->mailer->compose()
+        return Yii::$app->mailer->compose('layouts/confirm-mail', ['content' => $url])
                 ->setFrom(Yii::$app->params['smtpUsername'])
                 ->setTo($email)
                 ->setSubject('Mensaje de confirmación para Mus!c Now')
-                ->setHtmlBody($body)
                 ->send();
     }
 
@@ -240,12 +239,7 @@ class UsuariosController extends Controller
                     'confirm_token' => $userModel->confirm_token,
                 ], true);
 
-                $body = <<<EOT
-                    <h2>Pulsa el siguiente enlace para confirmar la cuenta de correo.<h2>
-                    <a href="$url">Confirmar cuenta</a>
-                EOT;
-
-                if ($this->actionMail($userModel->email, $body)) {
+                if ($this->actionMail($userModel->email, $url)) {
                     Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
                 } else {
                     Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');

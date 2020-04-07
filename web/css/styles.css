@@ -366,3 +366,7 @@ input, select {
 .navbar-logo {
     width: 40px;
 }
+
+.form-control:focus {
+    box-shadow: none !important;
+}
