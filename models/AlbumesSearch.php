@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Albumes;
+use Yii;
 
 /**
  * AlbumesSearch represents the model behind the search form of `app\models\Albumes`.
@@ -48,6 +49,10 @@ class AlbumesSearch extends Albumes
     {
         $query = Albumes::find()
             ->joinWith('usuario u');
+
+        if (Yii::$app->user->identity->rol != 1) {
+            $query->where(['usuario_id' => Yii::$app->user->id]);
+        }
 
         // add conditions that should always apply here
 
