@@ -117,7 +117,6 @@ class CancionesController extends Controller
     {
         $model = $this->findModel($id);
 
-
         if (Yii::$app->request->isPost) {
             $model->portada = UploadedFile::getInstance($model, 'portada');
             if ($model->portada !== null) {
@@ -135,8 +134,13 @@ class CancionesController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $usuario = Usuarios::findOne(Yii::$app->user->id);
+        $albumes = $usuario->getAlbumes()->select('titulo')->indexBy('id')->column();
+
         return $this->render('update', [
             'model' => $model,
+            'generos' => ['' => ''] + Generos::lista(),
+            'albumes' => ['' => ''] + $albumes,
         ]);
     }
 

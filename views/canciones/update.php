@@ -23,9 +23,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'album_id')->textInput() ?>
+    <?= $form->field($model, 'album_id')->dropDownList($albumes) ?>
 
-    <?= $form->field($model, 'genero_id')->textInput() ?>
+    <?= $form->field($model, 'genero_id')->dropDownList($generos) ?>
 
     <?= $form->field($model, 'portada')->fileInput() ?>
 
