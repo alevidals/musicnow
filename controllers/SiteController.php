@@ -99,12 +99,20 @@ class SiteController extends Controller
         $usuariosSearch = new ActiveDataProvider([
             'query' => Usuarios::find()
                 ->where(['ilike', 'login', $cadena])
-                ->orWhere(['ilike', 'email', $cadena]),
+                ->orWhere(['ilike', 'email', $cadena])
+                ->andWhere(['!=', 'rol', 1])
         ]);
 
-        $ids = Usuarios::find()
+        $userIds = Usuarios::find()
             ->select('id')
             ->where(['ilike', 'login', $cadena])
+            ->andWhere(['!=', 'rol', 1])
+            ->column();
+
+        $adminIds = Usuarios::find()
+            ->select('id')
+            ->where(['ilike', 'login', $cadena])
+            ->andWhere(['=', 'rol', 1])
             ->column();
 
         $cancionesSearch = new ActiveDataProvider([
@@ -112,7 +120,8 @@ class SiteController extends Controller
                 ->joinWith('usuario u')
                 ->joinWith('genero g')
                 ->where(['ilike', 'titulo', $cadena])
-                ->orWhere(['IN', 'canciones.usuario_id', $ids])
+                ->orWhere(['IN', 'canciones.usuario_id', $userIds])
+                ->andWhere(['NOT IN', 'canciones.usuario_id', $adminIds])
                 ->addGroupBy(['g.denominacion', 'u.login']),
             'sort' => [
                 'attributes' => [
