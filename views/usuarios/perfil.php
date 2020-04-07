@@ -172,7 +172,7 @@ $this->registerJS($js);
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col">
-                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', , 'alt' => 'seguidor']) ?>
+                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidor']) ?>
                                                 </div>
                                                 <div class="col">
                                                     <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
@@ -205,7 +205,7 @@ $this->registerJS($js);
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col">
-                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', , 'alt' => 'seguidos']) ?>
+                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidos']) ?>
                                                 </div>
                                                 <div class="col">
                                                     <p class="d-inline-block my-auto"><?= $usuario->login ?></p>

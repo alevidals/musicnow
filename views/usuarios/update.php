@@ -20,17 +20,19 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row justify-content-center mt-5">
-        <div class="col-lg-6 text-center">
+        <div clss="col-lg-6 text-center">
             <div class="form-group field-usuarios-image">
                 <label class="img-edit" for="usuarios-image">
                     <img class="user-search-img" src="<?= $model->url_image ?>" alt="profile-img">
                     <i class="fas fa-pen edit-image-icon"></i>
                 </label>
-                <input class="file-input form-control-file d-none" type="file" name="Usuarios[image]" id="usuarios-image">
+                <?= $form->field($model, 'image')->fileInput(['class' => 'file-input form-control-file d-none'])->label(false) ?>
                 <h5 class="mt-3"><?= $model->login ?></h5>
                 <h6><?= $model->nombre . ' ' . $model->apellidos ?></h6>
             </div>
         </div>
+
+
 
         <div class="w-100"></div>
 

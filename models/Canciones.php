@@ -90,16 +90,18 @@ class Canciones extends \yii\db\ActiveRecord
     public function uploadPortada()
     {
         if ($this->portada !== null) {
-            $this->url_portada = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id);
-            $this->image_name = str_replace(' ', '', $this->portada->name);
+            $uploadedImageInfo = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id);
+            $this->url_portada = $uploadedImageInfo['url'];
+            $this->image_name = $uploadedImageInfo['image_name'];
         }
     }
 
     public function uploadCancion()
     {
         if ($this->cancion !== null) {
-            $this->url_cancion = Utility::uploadFileFirebase($this->cancion, Yii::$app->user->id);
-            $this->song_name = str_replace(' ', '', $this->cancion->name);
+            $uploadedFileInfo = Utility::uploadFileFirebase($this->cancion, Yii::$app->user->id);
+            $this->url_cancion = $uploadedFileInfo['url'];
+            $this->song_name = str_replace(' ', '', $uploadedFileInfo['song_name']);
         }
     }
 

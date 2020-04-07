@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use DateTime;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Yii;
@@ -92,7 +93,7 @@ class Utility
 
     public static function uploadImageFirebase($img, $userId, $perfilImg = false)
     {
-        $filename = str_replace(' ', '', $img->name);
+        $filename = str_replace(' ', '', $img->basename) . (new DateTime())->format('Y-m-d_H:i:s') . '.' . $img->extension;
         $origen = Yii::getAlias('@uploads/' . $filename);
         $img->saveAs($origen);
 
@@ -115,23 +116,34 @@ class Utility
             'name' => $name,
         ]);
         unlink($origen);
-        return $url_name;
+        if ($perfilImg) {
+            return $url_name;
+        } else {
+            return [
+                'url' => $url_name,
+                'image_name' => $filename
+            ];
+        }
     }
 
     public static function uploadFileFirebase($file, $userId)
     {
-        $filename = str_replace(' ', '', $file->name);
+        $filename = str_replace(' ', '', $file->basename) . (new DateTime())->format('Y-m-d_H:i:s') . '.' . $file->extension;
         $origen = Yii::getAlias('@uploads/' . $filename);
         $file->saveAs($origen);
 
         $factory = self::getFactory();
         $storage = $factory->createStorage();
         $bucket = $storage->getBucket(getenv('bucket'));
+        Yii::debug($filename);
         $bucket->upload(file_get_contents($origen), [
             'name' => 'canciones/' . $userId . '/' . $filename,
         ]);
         unlink($origen);
-        return getenv('url_prefix') . 'canciones%2F' . $userId . '%2F' . $filename . getenv('url_suffix');
+        return [
+            'url' => getenv('url_prefix') . 'canciones%2F' . $userId . '%2F' . $filename . getenv('url_suffix'),
+            'song_name' => $filename
+        ];
     }
 
     public static function deleteFileFirebase($name)
