@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -49,6 +50,10 @@ class CancionesSearch extends Canciones
             ->joinWith('album a')
             ->joinWith('genero g')
             ->joinWith('usuario u');
+
+        if (Yii::$app->user->identity->rol != 1) {
+            $query->where(['canciones.usuario_id' => Yii::$app->user->id]);
+        }
 
         // add conditions that should always apply here
 
