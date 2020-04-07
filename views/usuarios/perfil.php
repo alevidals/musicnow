@@ -50,11 +50,15 @@ $js = <<<EOT
             url: '$urlLike&cancion_id=' + cancion_id,
             success: function (data) {
                 if (data.class == 'far') {
-                    $('.like-btn i').removeClass('fas');
-                    $('.like-btn i').addClass('far');
+                    $('#outerlike-' + cancion_id + ' i').removeClass('fas');
+                    $('#outerlike-' + cancion_id + ' i').addClass('far');
+                    $('#like-' + cancion_id + ' i').removeClass('fas');
+                    $('#like-' + cancion_id + ' i').addClass('far');
                 } else {
-                    $('.like-btn i').removeClass('far');
-                    $('.like-btn i').addClass('fas');
+                    $('#outerlike-' + cancion_id + ' i').removeClass('far');
+                    $('#outerlike-' + cancion_id + ' i').addClass('fas');
+                    $('#like-' + cancion_id + ' i').removeClass('far');
+                    $('#like-' + cancion_id + ' i').addClass('fas');
                 }
                 $('.like-btn ~ p span').html(data.likes);
             }
@@ -63,12 +67,12 @@ $js = <<<EOT
 
     $('.cancion').on('click', function ev(e) {
         var cancion_id = $(this).data('target').split('-')[1];
-        $('.like-btn i').removeClass('fas far');
+        $('#like-' + cancion_id + ' i').removeClass('fas far');
         $.ajax({
             'method': 'POST',
             url: '$urlGetLikesData&cancion_id=' + cancion_id,
             success: function (data) {
-                $('.like-btn i').addClass(data.class);
+                $('#like-' + cancion_id + ' i').addClass(data.class);
                 $('.like-btn ~ p span').html(data.likes);
             }
         });
