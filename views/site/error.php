@@ -22,7 +22,7 @@ $this->title = $name;
             </p>
         </div>
         <div class="col-12 col-lg-6 align-self-center">
-            <?= Html::img('@web/img/undraw_mello_otq1.png', ['class' => 'img-fluid']) ?>
+            <?= Html::img('@web/img/undraw_mello_otq1.png', ['class' => 'img-fluid', 'alt' => 'error']) ?>
         </div>
     </div>
 

@@ -25,11 +25,11 @@ $this->registerJS($js);
 <div class="site-search">
 
     <div class="owl-carousel my-5">
-        <div> <?= Html::img('@web/img/banner.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner2.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner3.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner4.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner5.png'); ?> </div>
+        <div> <?= Html::img('@web/img/banner.png', ['alt' => 'banner']); ?> </div>
+        <div> <?= Html::img('@web/img/banner2.png', ['alt' => 'banner2']); ?> </div>
+        <div> <?= Html::img('@web/img/banner3.png', ['alt' => 'banner3']); ?> </div>
+        <div> <?= Html::img('@web/img/banner4.png', ['alt' => 'banner4']); ?> </div>
+        <div> <?= Html::img('@web/img/banner5.png', ['alt' => 'banner5']); ?> </div>
     </div>
 
     <?= Html::beginForm(['site/index'], 'get') ?>
@@ -47,7 +47,7 @@ $this->registerJS($js);
                 <?php foreach ($usuariosSearch->getModels() as $usuario) : ?>
                     <?= Html::a(
                         '<div class="col text-center">' .
-                            Html::img($usuario->url_image, ['width' => '150px', 'class' => 'd-inline-block user-search-img']) .
+                            Html::img($usuario->url_image, ['width' => '150px', 'class' => 'd-inline-block user-search-img', 'alt' => 'profile-image']) .
                             '<p class="mt-1 mb-0 font-weight-bold">' . $usuario->login . '</p>' .
                             '<small class="small-artist">artista</small>' .
                         '</div>',
@@ -75,7 +75,7 @@ $this->registerJS($js);
             <div class="col-12 mt-3">
                 <div class="row">
                     <div class="col-1">
-                        <?= Html::img($cancion->url_portada, ['width' => '80px', 'class' => 'd-inline-block']) ?>
+                        <?= Html::img($cancion->url_portada, ['width' => '80px', 'class' => 'd-inline-block', 'alt' => 'portada']) ?>
                     </div>
                     <div class="col my-auto">
                         <p class="m-0 font-weight-bold"><?= $cancion->titulo ?></p>

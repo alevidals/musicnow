@@ -80,7 +80,7 @@ $this->registerJS($js);
     <?php
     NavBar::begin([
         // 'brandLabel' => Yii::$app->name,
-        'brandLabel' => Html::img('@web/img/logo.png', ['class' => 'navbar-logo']),
+        'brandLabel' => Html::img('@web/img/logo.png', ['class' => 'navbar-logo', 'alt' => 'logo']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-dark bg-dark navbar-expand-md fixed-top',

@@ -148,7 +148,7 @@ $this->registerJS($js);
 
 <div class="usuarios-view">
 
-    <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid']) ?>
+    <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid', 'alt' => 'banner']) ?>
 
     <?php if ($model->id != Yii::$app->user->id) : ?>
         <button class="btn main-yellow mt-4 follow"></button>
@@ -172,7 +172,7 @@ $this->registerJS($js);
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col">
-                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px']) ?>
+                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', , 'alt' => 'seguidor']) ?>
                                                 </div>
                                                 <div class="col">
                                                     <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
@@ -205,7 +205,7 @@ $this->registerJS($js);
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col">
-                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px']) ?>
+                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', , 'alt' => 'seguidos']) ?>
                                                 </div>
                                                 <div class="col">
                                                     <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
@@ -226,7 +226,7 @@ $this->registerJS($js);
         </div>
     </div>
 
-    <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3 user-search-img']) ?>
+    <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3 user-search-img', 'alt' => 'profile-image']) ?>
 
     <div class="mt-3 d-flex">
         <h1 class="d-inline-block"><?= $model->login?></h1>
@@ -282,7 +282,7 @@ $this->registerJS($js);
                         <div class="col-12 col-md-4 col-lg-3">
                             <div class="song-container">
                                 <div class="box-3">
-                                    <?= Html::img($cancion->url_portada, ['class' => 'img-fluid'])?>
+                                    <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
                                     <div class="share-buttons">
                                         <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                         <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
@@ -299,7 +299,7 @@ $this->registerJS($js);
                                             <div class="row">
                                                 <div class="col-lg-8">
                                                     <div class="row">
-                                                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid col-12']) ?>
+                                                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid col-12', 'alt' => 'profile-image']) ?>
                                                         <div class="col-12 mt-4">
                                                             <textarea id="text-area-comment-<?= $cancion->id ?>" class="form-control text-area-comment" cols="30" rows="3" placeholder="Comentario..."></textarea>
                                                             <div class="invalid-feedback">Debe tener como máximo 255 caracteres y no estar vacío.</div>
@@ -333,7 +333,7 @@ $this->registerJS($js);
                             <h2>Parece que no ha subido ninguna canción aún.</h2>
                         </div>
                         <div class="col-10 col-lg-6">
-                            <?= Html::img('@web/img/undraw_recording_lywr.png', ['class' => 'img-fluid']) ?>
+                            <?= Html::img('@web/img/undraw_recording_lywr.png', ['class' => 'img-fluid', 'alt' => 'girl-music']) ?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -353,7 +353,7 @@ $this->registerJS($js);
                             <h2>Parece que no tiene ningún álbum aún.</h2>
                         </div>
                         <div class="col-10 col-lg-4">
-                            <?= Html::img('@web/img/undraw_no_data_qbuo.png', ['class' => 'img-fluid']) ?>
+                            <?= Html::img('@web/img/undraw_no_data_qbuo.png', ['class' => 'img-fluid', 'alt' => 'girl-music']) ?>
                         </div>
                     </div>
                 <?php endif; ?>

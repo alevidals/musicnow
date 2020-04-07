@@ -32,11 +32,11 @@ $this->registerJS($js);
 <div class="site-index">
 
     <div class="owl-carousel my-5">
-        <div> <?= Html::img('@web/img/banner.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner2.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner3.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner4.png'); ?> </div>
-        <div> <?= Html::img('@web/img/banner5.png'); ?> </div>
+        <div> <?= Html::img('@web/img/banner.png', ['alt' => 'banner']); ?> </div>
+        <div> <?= Html::img('@web/img/banner2.png', ['alt' => 'banner2']); ?> </div>
+        <div> <?= Html::img('@web/img/banner3.png', ['alt' => 'banner3']); ?> </div>
+        <div> <?= Html::img('@web/img/banner4.png', ['alt' => 'banner4']); ?> </div>
+        <div> <?= Html::img('@web/img/banner5.png', ['alt' => 'banner5']); ?> </div>
     </div>
 
     <?= Html::beginForm(['site/index'], 'get') ?>
@@ -53,7 +53,7 @@ $this->registerJS($js);
             <?php foreach ($canciones as $cancion) : ?>
                 <div class="row">
                     <div class="col">
-                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid']) ?>
+                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada']) ?>
                         <div>
                             <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                         </div>
@@ -66,7 +66,7 @@ $this->registerJS($js);
         <div class="d-none d-md-block col-lg-6 mt-5 order-0 order-lg-1">
             <div class="row ml-lg-5 user-info">
                 <div class="col-md-2 col-lg-3 p-0">
-                    <?= Html::img($usuario->url_image, ['class' => 'img-fluid']) ?>
+                    <?= Html::img($usuario->url_image, ['class' => 'img-fluid', 'alt' => 'user-image']) ?>
                 </div>
                 <div class="col-md-10 col-lg-9 my-auto">
                     <p><?= Yii::$app->user->identity->login ?></p>

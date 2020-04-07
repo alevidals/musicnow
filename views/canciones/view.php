@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Portada',
                 'value' => function ($model) {
-                    return Html::img($model->url_portada, ['class' => 'img-fluid', 'style' => 'max-width: 250px;']);
+                    return Html::img($model->url_portada, ['class' => 'img-fluid', 'style' => 'max-width: 250px;', 'alt' => 'portada']);
                 },
                 'format' => 'raw',
             ],

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => '',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::img($model->url_portada, ['width' => '47px']);
+                    return Html::img($model->url_portada, ['width' => '47px', 'alt' => 'portada']);
                 },
                 'format' => 'raw',
             ],
