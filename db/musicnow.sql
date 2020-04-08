@@ -105,6 +105,15 @@ CREATE TABLE comentarios
   , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS bloqueados CASCADE;
+
+CREATE TABLE bloqueados
+(
+    bloqueador_id BIGINT REFERENCES usuarios (id)
+  , bloqueado_id  BIGINT REFERENCES usuarios (id)
+  , PRIMARY KEY (bloqueador_id, bloqueado_id)
+);
+
 INSERT INTO roles (rol)
 VALUES ('admin')
      , ('usuario');

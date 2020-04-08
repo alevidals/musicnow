@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Bloqueados;
 use app\models\LoginForm;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
@@ -19,6 +20,10 @@ use yii\web\UploadedFile;
  */
 class UsuariosController extends Controller
 {
+
+    const YOU_BLOCK = 1;
+    const OTHER_BLOCK = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -279,6 +284,17 @@ class UsuariosController extends Controller
             return $this->redirect(['site/index']);
         }
 
+        $bloqueo = Bloqueados::findOne(['bloqueador_id' => $id, 'bloqueado_id' => Yii::$app->user->id]);
+
+        if ($bloqueo !== null) {
+            $bloqueo = self::OTHER_BLOCK;
+        } else {
+            $bloqueo = Bloqueados::findOne(['bloqueador_id' => Yii::$app->user->id, 'bloqueado_id' => $id]);
+            if ($bloqueo !== null) {
+                $bloqueo = self::YOU_BLOCK;
+            }
+        }
+
         $canciones_id = $model->getCanciones()->select('id')->column();
         $canciones = $model->getCanciones()->all();
         $albumes = $model->getAlbumes()->all();
@@ -297,6 +313,7 @@ class UsuariosController extends Controller
             'seguidores' => $seguidores,
             'seguidos' => $seguidos,
             'likes' => $likes,
+            'bloqueo' => $bloqueo,
         ]);
     }
 
