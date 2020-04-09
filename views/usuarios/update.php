@@ -4,6 +4,29 @@ use kartik\datecontrol\DateControl;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
+$js = <<<EOT
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('.user-search-img').attr('src', e.target.result);
+            $('.user-search-img').css('width', '150px');
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('.file-input').on('change', function ev(e) {
+        readURL(this);
+    });
+
+EOT;
+
+$this->registerJS($js);
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
