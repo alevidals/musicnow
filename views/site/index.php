@@ -41,10 +41,10 @@ $this->registerJS($js);
 
     <?= Html::beginForm(['site/index'], 'get') ?>
                 <div class="form-group">
-                    <?= Html::textInput('cadena', $cadena, ['class' => 'form-control', 'placeholder' => 'Buscar...']) ?>
+                    <?= Html::textInput('cadena', $cadena, ['class' => 'form-control', 'placeholder' => Yii::t('app', 'Search') . '...']) ?>
                 </div>
                 <div class="form-group">
-                    <?= Html::submitButton('Buscar', ['class' => 'btn main-yellow']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn main-yellow']) ?>
                 </div>
     <?= Html::endForm() ?>
 

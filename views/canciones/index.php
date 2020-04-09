@@ -61,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_at:datetime',
             [
                 'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app', 'Actions'),
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {

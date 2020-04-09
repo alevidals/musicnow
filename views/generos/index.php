@@ -26,7 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'denominacion',
             'created_at:datetime',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app', 'Actions'),
+            ],
         ],
         'tableOptions' => [
             'class' => 'table admin-table '

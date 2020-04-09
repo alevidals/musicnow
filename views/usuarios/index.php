@@ -38,7 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'deleted_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app', 'Actions'),
+            ],
         ],
         'tableOptions' => [
             'class' => 'table admin-table '

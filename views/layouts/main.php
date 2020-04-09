@@ -92,11 +92,11 @@ $this->registerJS($js);
     if (!Yii::$app->user->isGuest) {
         if (Yii::$app->user->identity->rol == 1) {
             $items = [
-                ['label' => 'Home', 'url' => ['/site/admin-index']],
-                ['label' => 'Géneros', 'url' => ['/generos/index']],
-                ['label' => 'Álbumes', 'url' => ['/albumes/index']],
-                ['label' => 'Canciones', 'url' => ['/canciones/index']],
-                ['label' => 'Usuarios', 'url' => ['/usuarios/index']],
+                ['label' => Yii::t('app', 'Home'), 'url' => ['/site/admin-index']],
+                ['label' => Yii::t('app', 'Generos'), 'url' => ['/generos/index']],
+                ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
+                ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
+                ['label' => Yii::t('app', 'Usuarios'), 'url' => ['/usuarios/index']],
                 Yii::$app->user->isGuest ? (
                     [
                         'label' => 'Entra',
@@ -129,7 +129,7 @@ $this->registerJS($js);
                     ['label' => 'Canciones', 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
                     Yii::$app->user->isGuest ? (
                         [
-                            'label' => 'Entra',
+                            'label' => Yii::t('app', 'Entrar'),
                             'items' => [
                                 ['label' => 'Login', 'url' => ['/usuarios/login']],
                             ],
@@ -138,9 +138,9 @@ $this->registerJS($js);
                         [
                             'label' => Html::img(Yii::$app->user->identity->url_image, ['width' => '40px', 'alt' => 'logo']),
                             'items' => [
-                                ['label' => 'Mi cuenta', 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
+                                ['label' => Yii::t('app', 'My account'), 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
                                 [
-                                    'label' => 'Logout',
+                                    'label' => Yii::t('app', 'Logout'),
                                     'url' => [
                                         '/usuarios/logout',
                                         'method' => 'post',

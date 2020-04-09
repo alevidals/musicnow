@@ -79,7 +79,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                 <?= $form->field($loginFormModel, 'rememberMe')->checkbox()->label(Yii::t('app', 'Remember me')) ?>
 
                                 <div class="form-group row px-15">
-                                    <?= Html::submitButton('Login', ['class' => 'btn btn-warning btn-block rounded', 'name' => 'login-button']) ?>
+                                    <?= Html::submitButton(Yii::t('app', 'Entrar'), ['class' => 'btn btn-warning btn-block rounded', 'name' => 'login-button']) ?>
                                 </div>
 
                             <?php ActiveForm::end(); ?>

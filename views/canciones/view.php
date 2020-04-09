@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'album.titulo',
             'genero.denominacion',
             [
-                'label' => 'Canción',
+                'label' => Yii::t('app', 'Song'),
                 'value' => function ($model) {
                     return <<<EOT
                                 <audio controls>
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
             [
-                'label' => 'Portada',
+                'label' => Yii::t('app', 'Cover'),
                 'value' => function ($model) {
                     return Html::img($model->url_portada, ['class' => 'img-fluid', 'style' => 'max-width: 250px;', 'alt' => 'portada']);
                 },

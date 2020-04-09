@@ -87,6 +87,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'apellidos' => Yii::t('app', 'Apellidos'),
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),
+            'password_repeat' => Yii::t('app', 'Password Repeat'),
             'fnac' => Yii::t('app', 'Fnac'),
             'rol' => Yii::t('app', 'Rol'),
             'auth_key' => Yii::t('app', 'Auth Key'),

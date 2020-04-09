@@ -175,11 +175,11 @@ $this->registerJS($js);
 
     <div class="row text-white text-center mt-4">
         <div class="col">
-            <h4><span id="publicaciones"><?= $model->getCanciones()->count() ?></span> publicaciones</h4>
+            <h4><span id="publicaciones"><?= $model->getCanciones()->count() ?></span> <?= Yii::t('app', 'Posts') ?></h4>
         </div>
         <div class="col">
             <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
-                <h4><span id="seguidores"></span> seguidores</h4>
+                <h4><span id="seguidores"></span> <?= Yii::t('app', 'Followers') ?></h4>
             </button>
             <div class="modal fade" id="seguidores-list" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -212,7 +212,7 @@ $this->registerJS($js);
         </div>
         <div class="col">
             <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidos-list">
-                <h4><span id="seguidos"></span> seguidos</h4>
+                <h4><span id="seguidos"></span> <?= Yii::t('app', 'Following') ?></h4>
             </button>
             <div class="modal fade" id="seguidos-list" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -292,10 +292,10 @@ $this->registerJS($js);
     <?php else : ?>
         <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
             <li class="nav-item ml-auto">
-                <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true">Canciones</a>
+                <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true"><?= Yii::t('app', 'Canciones') ?></a>
             </li>
             <li class="nav-item mr-auto">
-                <a class="nav-link text-uppercase" id="albumes-tab" data-toggle="tab" href="#albumes" role="tab" aria-controls="albumes" aria-selected="false">Albumes</a>
+                <a class="nav-link text-uppercase" id="albumes-tab" data-toggle="tab" href="#albumes" role="tab" aria-controls="albumes" aria-selected="false"><?= Yii::t('app', 'Albumes') ?></a>
             </li>
         </ul>
 

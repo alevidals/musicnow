@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ComentariosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Comentarios');
+$this->title = Yii::t('app', 'Comments');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comentarios-index">
@@ -22,13 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'cancion.titulo',
-                'label' => 'Canción',
+                'label' => Yii::t('app', 'Canciones'),
             ],
-            'comentario',
+            [
+                'attribute' => 'comentario',
+                'label' => Yii::t('app', 'Comments')
+            ],
             'created_at:datetime',
 
             [
                 'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app', 'Actions'),
                 'template' => '{delete}',
             ],
         ],

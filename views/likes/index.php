@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'usuario_id',
             'cancion_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app', 'Actions'),
+            ],
         ],
         'tableOptions' => [
             'class' => 'table admin-table ',

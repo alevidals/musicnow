@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'bloqueador_id',
             'bloqueado_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app', 'Actions'),
+            ],
         ],
     ]); ?>
 

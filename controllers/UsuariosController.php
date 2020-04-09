@@ -189,10 +189,10 @@ class UsuariosController extends Controller
         if ($model->confirm_token === $confirm_token) {
             $model->confirm_token = null;
             $model->save();
-            Yii::$app->session->setFlash('success', 'Correo confirmado. Inicie sesión');
+            Yii::$app->session->setFlash('success', Yii::t('app', 'ConfirmedMail'));
             return $this->redirect(['usuarios/login']);
         }
-        Yii::$app->session->setFlash('error', 'El correo no se ha podido confirmar.');
+        Yii::$app->session->setFlash('error', Yii::t('app', 'CannotConfirm'));
         return $this->redirect(['site/index']);
     }
 
@@ -218,9 +218,9 @@ class UsuariosController extends Controller
                 $user = $loginModel->getUser();
                 if ($user !== null) {
                     if ($user->confirm_token !== null) {
-                        Yii::$app->session->setFlash('warning', 'Debes confirmar el correo.');
+                        Yii::$app->session->setFlash('warning', Yii::t('app', 'YouHaveToConfirm'));
                     } elseif ($user->deleted_at !== null) {
-                        Yii::$app->session->setFlash('error', 'La cuenta de este usuario está eliminada.');
+                        Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount'));
                     } else {
                         if ($loginModel->login()) {
                             Yii::debug($user);
@@ -245,9 +245,9 @@ class UsuariosController extends Controller
                 ], true);
 
                 if ($this->actionMail($userModel->email, $url)) {
-                    Yii::$app->session->setFlash('success', 'Se ha enviado un correo a su email. Por favor confirme su cuenta.');
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'ConfirmMail'));
                 } else {
-                    Yii::$app->session->setFlash('error', 'No se ha podido mandar el correo, inténtelo más tarde.');
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'ErrorMail'));
                 }
 
                 return $this->redirect(['usuarios/login']);
@@ -280,7 +280,7 @@ class UsuariosController extends Controller
         $model = Usuarios::findOne($id);
 
         if ($model === null) {
-            Yii::$app->session->setFlash('error', 'El usuario no existe');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'UserNotFound'));
             return $this->redirect(['site/index']);
         }
 
@@ -335,7 +335,7 @@ class UsuariosController extends Controller
             if ($model->save()) {
                 return $this->redirect(['usuarios/logout']);
             } else {
-                Yii::$app->session->setFlash('error', 'Se ha producido un error interno.');
+                Yii::$app->session->setFlash('error', Yii::t('app', 'InternalError'));
             }
         } else {
             return $this->redirect(['site/index']);
