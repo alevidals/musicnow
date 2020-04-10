@@ -173,7 +173,7 @@ class UsuariosController extends Controller
         return Yii::$app->mailer->compose('layouts/confirm-mail', ['content' => $url])
                 ->setFrom(Yii::$app->params['smtpUsername'])
                 ->setTo($email)
-                ->setSubject('Mensaje de confirmación para Mus!c Now')
+                ->setSubject(Yii::t('app', 'ConfirmMailSubject'))
                 ->send();
     }
 

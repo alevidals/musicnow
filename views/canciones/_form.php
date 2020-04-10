@@ -15,9 +15,9 @@ use yii\bootstrap4\Html;
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'album_id')->dropDownList($albumes) ?>
+    <?= $form->field($model, 'album_id')->dropDownList($albumes)->label(Yii::t('app', 'Album')) ?>
 
-    <?= $form->field($model, 'genero_id')->dropDownList($generos) ?>
+    <?= $form->field($model, 'genero_id')->dropDownList($generos)->label(Yii::t('app', 'Género')) ?>
 
     <?= $form->field($model, 'portada')->fileInput() ?>
 
@@ -29,10 +29,6 @@ use yii\bootstrap4\Html;
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success send-btn']) ?>
-    </div>
-
-    <div class="progress mt-5" id="bar">
-        <div class="progress-bar text-dark main-yellow font-weight-bold" id="uploaderBar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <?php ActiveForm::end(); ?>

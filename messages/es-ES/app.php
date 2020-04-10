@@ -109,4 +109,12 @@ return [
     'Accept' => 'Aceptar',
     'Reject' => 'Rechazar',
     'CookieMessage' => 'Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso.',
+    'Album' => 'Álbum',
+    'OneStep' => 'Estas a solo un paso de disfrutar de Mus!c Now.',
+    'VerifyEmail' => 'Verifica tu correo electrónico.',
+    'Verify' => 'Verificar',
+    'ConfirmMailSubject' => 'Mensaje de confirmación para Mus!c Now',
+    'Artists' => 'Artistas',
+    'Artist' => 'Artista',
+    'Order' => 'Order by',
 ];

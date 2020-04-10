@@ -84,6 +84,8 @@ class Canciones extends \yii\db\ActiveRecord
             'duracion' => Yii::t('app', 'Duracion'),
             'usuario_id' => Yii::t('app', 'Usuario ID'),
             'created_at' => Yii::t('app', 'Created At'),
+            'portada' => Yii::t('app', 'Cover'),
+            'cancion' => Yii::t('app', 'Song'),
         ];
     }
 
