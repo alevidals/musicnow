@@ -74,8 +74,8 @@ $this->registerJS($js);
             <?php foreach ($cancionesSearch->getModels() as $cancion) : ?>
             <div class="col-12 mt-3">
                 <div class="row">
-                    <div class="col-1">
-                        <?= Html::img($cancion->url_portada, ['width' => '80px', 'class' => 'd-inline-block', 'alt' => 'portada']) ?>
+                    <div class="col-3 col-md-2 col-lg-1">
+                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada']) ?>
                     </div>
                     <div class="col my-auto">
                         <p class="m-0 font-weight-bold"><?= $cancion->titulo ?></p>

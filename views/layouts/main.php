@@ -194,15 +194,15 @@ $this->registerJS($js);
     </div>
 </div>
 
-<div class="full-player">
-    <div class="info-song d-flex">
-        <img alt="song-cover">
-        <div class="mx-auto my-auto artist-info">
+<div class="full-player row ml-0">
+    <div class="info-song col-12 col-lg-4 col-xl-2 ml-0 row">
+        <img alt="song-cover col-2" height="60px">
+        <div class="artist-info my-auto col text-center">
             <p class="m-0"></p>
             <small class="text-white"></small>
         </div>
     </div>
-    <div class="player">
+    <div class="player col-12 col-lg-8 col-xl-10">
         <audio autoplay>
             <source>
         </audio>
