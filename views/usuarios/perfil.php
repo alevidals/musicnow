@@ -160,7 +160,7 @@ $this->registerJS($js);
             and $bloqueo != UsuariosController::YOU_BLOCK) : ?>
             <button class="btn main-yellow mt-4 follow"></button>
             <?= Html::a(
-                'Bloquear',
+                Yii::t('app', 'Block'),
                 ['bloqueados/bloquear', 'bloqueado_id' => $model->id],
                 [
                     'role' => 'button',
@@ -201,7 +201,7 @@ $this->registerJS($js);
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <div class="col-12">
-                                        <p class="my-auto">Parece que no te sigue nadie aún.</p>
+                                        <p class="my-auto"><?= Yii::t('app', 'NoFollowYou') ?></p>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -234,7 +234,7 @@ $this->registerJS($js);
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <div class="col-12">
-                                        <p class="my-auto">Parece que no sigues a nadie aún.</p>
+                                        <p class="my-auto"><?= Yii::t('app', 'YouDoNotFollow') ?></p>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -255,9 +255,9 @@ $this->registerJS($js);
                     <i class="fas fa-ellipsis-h"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <?= Html::a('Editar perfil', ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
+                    <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
                     <?= Html::a(
-                        'Eliminar imagen de perfil',
+                        Yii::t('app', 'DeleteProfileImage'),
                         ['usuarios/eliminar-imagen', 'id' => $model->id],
                         [
                             'class' => 'dropdown-item',
@@ -265,14 +265,14 @@ $this->registerJS($js);
                         ]
                     ) ?>
                     <?= Html::a(
-                        'Eliminar comentarios',
+                        Yii::t('app', 'DeleteComments'),
                         ['comentarios/index', 'user_id' => $model->id],
                         [
                             'class' => 'dropdown-item',
                         ]
                     ) ?>
                     <?= Html::a(
-                        'Eliminar cuenta',
+                        Yii::t('app', 'DeleteAccount'),
                         ['usuarios/eliminar-cuenta', 'id' => $model->id],
                         [
                             'class' => 'dropdown-item',
@@ -285,9 +285,9 @@ $this->registerJS($js);
     </div>
 
     <?php if ($bloqueo == UsuariosController::OTHER_BLOCK) : ?>
-        <h3>Este usuario te ha bloqueado.</>
+        <h3><?= Yii::t('app', 'OtherBlock') ?></>
     <?php elseif ($bloqueo == UsuariosController::YOU_BLOCK) : ?>
-        <h3>Has bloqueado a este usuario, ¿quieres desbloquearlo?</h3>
+        <h3><?= Yii::t('app', 'YouBlock') ?></h3>
         <?= Html::a('Desbloquear', ['bloqueados/bloquear', 'bloqueado_id' => $model->id], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
     <?php else : ?>
         <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
@@ -326,10 +326,10 @@ $this->registerJS($js);
                                                         <div class="row">
                                                             <?= Html::img($cancion->url_portada, ['class' => 'img-fluid col-12', 'alt' => 'profile-image']) ?>
                                                             <div class="col-12 mt-4">
-                                                                <textarea id="text-area-comment-<?= $cancion->id ?>" class="form-control text-area-comment" cols="30" rows="3" placeholder="Comentario..."></textarea>
-                                                                <div class="invalid-feedback">Debe tener como máximo 255 caracteres y no estar vacío.</div>
+                                                                <textarea id="text-area-comment-<?= $cancion->id ?>" class="form-control text-area-comment" cols="30" rows="3" placeholder="<?= Yii::t('app', 'Comment') . '...' ?>"></textarea>
+                                                                <div class="invalid-feedback"><?= Yii::t('app', 'MaxChar') ?></div>
                                                                 <div class="mt-3">
-                                                                    <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button">Comentar</button>
+                                                                    <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button"><?= Yii::t('app', 'CommentAction') ?></button>
                                                                     <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart text-danger"></i></button>
                                                                     <p class="d-inline-block"><span></span> like/s</p>
                                                                 </div>
@@ -355,7 +355,7 @@ $this->registerJS($js);
                     <?php else :?>
                         <div class="row mt-5 justify-content-center text-center">
                             <div class="col-12">
-                                <h2>Parece que no ha subido ninguna canción aún.</h2>
+                                <h2><?= Yii::t('app', 'NoSongs') ?></h2>
                             </div>
                             <div class="col-10 col-lg-6">
                                 <?= Html::img('@web/img/undraw_recording_lywr.png', ['class' => 'img-fluid', 'alt' => 'girl-music']) ?>
@@ -375,7 +375,7 @@ $this->registerJS($js);
                     <?php else : ?>
                         <div class="row mt-5 justify-content-center text-center">
                             <div class="col-12">
-                                <h2>Parece que no tiene ningún álbum aún.</h2>
+                                <h2><?= Yii::t('app', 'NoAlbums') ?></h2>
                             </div>
                             <div class="col-10 col-lg-4">
                                 <?= Html::img('@web/img/undraw_no_data_qbuo.png', ['class' => 'img-fluid', 'alt' => 'girl-music']) ?>

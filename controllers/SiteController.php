@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Canciones;
 use app\models\ContactForm;
 use app\models\Usuarios;
+use app\services\Utility;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -171,5 +172,11 @@ class SiteController extends Controller
     {
         setcookie('cookie-accept', 'true', time() + 3600 * 24 * 30);
         $this->goBack();
+    }
+
+    public function actionIdioma($lang)
+    {
+        setcookie('lang', $lang, time() + 3600 * 24 * 30);
+        return $this->redirect(['site/index']);
     }
 }
