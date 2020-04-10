@@ -101,8 +101,6 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function uploadImg($perfilImg)
     {
-        Yii::debug('jaja');
-        Yii::debug($this->image);
         if ($this->image !== null) {
             $this->url_image = Utility::uploadImageFirebase($this->image, $this->id, $perfilImg);
             $this->image_name = 'perfil.png';

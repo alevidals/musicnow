@@ -135,7 +135,6 @@ class Utility
         $factory = self::getFactory();
         $storage = $factory->createStorage();
         $bucket = $storage->getBucket(getenv('bucket'));
-        Yii::debug($filename);
         $bucket->upload(file_get_contents($origen), [
             'name' => 'canciones/' . $userId . '/' . $filename,
         ]);

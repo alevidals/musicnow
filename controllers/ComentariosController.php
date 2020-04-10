@@ -162,8 +162,6 @@ class ComentariosController extends Controller
         $model->save();
         $model->refresh();
 
-        Yii::debug($model);
-
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [
             'login' => $usuario->login,

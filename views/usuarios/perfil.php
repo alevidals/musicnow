@@ -122,7 +122,6 @@ $js = <<<EOT
                     comentario: comentario,
                 },
                 success: function (data) {
-                    console.log(data);
                     $('.row-comments').prepend(`
                         <div class="col-12 mt-3">
                             <div class="row">

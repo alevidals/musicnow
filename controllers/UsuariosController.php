@@ -223,7 +223,6 @@ class UsuariosController extends Controller
                         Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount'));
                     } else {
                         if ($loginModel->login()) {
-                            Yii::debug($user);
                             if ($user->rol == 1) {
                                 return $this->redirect(['site/admin-index']);
                             } else {

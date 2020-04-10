@@ -73,7 +73,11 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Usuarios::find()->where(['login' => $this->username])->one();
+            if (filter_var($this->username, FILTER_VALIDATE_EMAIL)) {
+                $this->_user = Usuarios::find()->where(['email' => $this->username])->one();
+            } else {
+                $this->_user = Usuarios::find()->where(['login' => $this->username])->one();
+            }
         }
 
         return $this->_user;
