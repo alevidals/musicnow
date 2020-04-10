@@ -57,7 +57,6 @@ Dialog::widget([
 
 $this->registerJS($js);
 
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -124,9 +123,17 @@ $this->registerJS($js);
             ];
         } else {
                 $items = [
-                    ['label' => 'Home', 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
-                    ['label' => 'Álbumes', 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
-                    ['label' => 'Canciones', 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
+                    [
+                        'label'=> Yii::t('app', 'Language'),
+                        'options' => ['class' => 'my-auto'],
+                        'items' => [
+                            ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
+                            ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
+                        ]
+                    ],
                     Yii::$app->user->isGuest ? (
                         [
                             'label' => Yii::t('app', 'Entrar'),
@@ -155,7 +162,16 @@ $this->registerJS($js);
                 ];
         }
     } else {
-        $items = [];
+        $items = [
+            [
+                'label'=> Yii::t('app', 'Language'),
+                'options' => ['class' => 'my-auto'],
+                'items' => [
+                    ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
+                    ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
+                ]
+            ],
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],

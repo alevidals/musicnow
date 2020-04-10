@@ -4,6 +4,8 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $log = require __DIR__ . '/log.php';
 
+$lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'es-ES';
+
 $config = [
     'id' => 'basic',
     'defaultRoute' => '/usuarios/login',
@@ -15,7 +17,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@uploads' => '@app/web/uploads',
     ],
-    'language' => 'es-ES',
+    'language' => $lang,
     // 'language' => 'en',
     'components' => [
         'request' => [
