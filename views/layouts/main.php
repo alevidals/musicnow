@@ -18,10 +18,12 @@ $this->registerJS(Utility::GET_COOKIE);
 
 $urlCookie = Url::to(['site/cookie']);
 
+$cookieMessage = Yii::t('app', 'CookieMessage');
+
 $js = <<<EOT
     if (getCookie('cookie-accept') == null) {
         $( document ).ready(function() {
-            krajeeDialogCust2.confirm("Utilizamos cookies para asegurar que damos la mejor experiencia al usuario en nuestra web. Si sigues utilizando este sitio asumiremos que estás de acuerdo.", function (result) {
+            krajeeDialogCust2.confirm("$cookieMessage", function (result) {
                 if (result) {
                     window.location="$urlCookie";
                 } else {
@@ -47,11 +49,10 @@ Dialog::widget([
         'size' => Dialog::SIZE_MEDIUM,
         'type' => Dialog::TYPE_WARNING,
         'title' => 'MUS!C NOW',
-        'message' => 'Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso.',
         'btnOKClass' => 'btn-warning',
-        'btnOKLabel' => 'Aceptar',
+        'btnOKLabel' => Yii::t('app', 'Accept'),
         'btnCancelClass' => 'btn-secondary',
-        'btnCancelLabel' => 'Rechazar',
+        'btnCancelLabel' => Yii::t('app', 'Reject'),
     ],
 ]);
 
