@@ -154,16 +154,15 @@ class SeguidoresController extends Controller
             ->andWhere([
                 'seguidor_id' => Yii::$app->user->id,
                 'seguido_id' => $seguido_id,
-            ])
-            ->one();
+            ]);
 
-        if ($seguir === null) {
+        if (!$seguir->exists()) {
             $seguir = new Seguidores();
             $seguir->seguidor_id = Yii::$app->user->id;
             $seguir->seguido_id = $seguido_id;
             $seguir->save();
             $res['textButton'] = Yii::t('app', 'Unfollow');
-        } elseif ($seguir !== null) {
+        } else {
             $this->findModel(Yii::$app->user->id, $seguido_id)->delete();
             $res['textButton'] = Yii::t('app', 'Follow');
         }
