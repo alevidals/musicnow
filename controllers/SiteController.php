@@ -77,7 +77,7 @@ class SiteController extends Controller
 
         $ids = $usuario->getSeguidos()->select('id')->column();
 
-        $canciones = Canciones::find('album a')->where(['IN', 'usuario_id', $ids])->orWhere(['usuario_id' => Yii::$app->user->id])->all();
+        $canciones = Canciones::find()->where(['IN', 'usuario_id', $ids])->orWhere(['usuario_id' => Yii::$app->user->id])->all();
 
         if (($cadena = Yii::$app->request->get('cadena', ''))) {
             return $this->redirect(['site/search', 'cadena' => $cadena]);

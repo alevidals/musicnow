@@ -144,7 +144,7 @@ $this->registerJS($js);
                         ]
                     ) : (
                         [
-                            'label' => Html::img(Yii::$app->user->identity->url_image, ['width' => '40px', 'alt' => 'logo']),
+                            'label' => Html::img(Yii::$app->user->identity->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo']),
                             'items' => [
                                 ['label' => Yii::t('app', 'My account'), 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
                                 [

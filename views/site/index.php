@@ -35,8 +35,6 @@ $js = <<<EOT
     $playSongCode
 EOT;
 
-Yii::debug($likes);
-
 $this->registerJS($js);
 
 ?>
@@ -113,11 +111,11 @@ $this->registerJS($js);
                 </div>
             <?php endforeach; ?>
         </div>
-        <a href="/index.php?r=usuarios%2Fperfil&id=<?= Yii::$app->user->id ?>">
+        <a class="perfil-link" href="/index.php?r=usuarios%2Fperfil&id=<?= Yii::$app->user->id ?>">
             <div class="d-none d-md-block col-lg-6 mt-5 order-0 order-lg-1">
                 <div class="row ml-lg-5 user-info">
                     <div class="col-md-2 col-lg-3 p-0">
-                        <?= Html::img($usuario->url_image, ['class' => 'img-fluid', 'alt' => 'user-image']) ?>
+                        <?= Html::img($usuario->url_image, ['class' => 'img-fluid user-search-img', 'alt' => 'user-image']) ?>
                     </div>
                     <div class="col-md-10 col-lg-9 my-auto">
                         <p><?= Yii::$app->user->identity->login ?></p>
