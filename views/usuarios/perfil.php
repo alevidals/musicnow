@@ -13,13 +13,9 @@ use yii\helpers\Url;
 
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
-$urlLike = Url::to(['likes/like']);
-$urlGetLikesData = Url::to(['likes/get-data']);
-$urlComment = Url::to(['comentarios/comentar']);
-$urlGetComments = Url::to(['canciones/comentarios']);
-$urlPerfil = Url::to(['usuarios/perfil']);
 
 $playSongCode = Utility::PLAY_SONG;
+$likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
 
 $js = <<<EOT
 
@@ -44,104 +40,7 @@ $js = <<<EOT
         });
     });
 
-    $('.like-btn').on('click', function ev(e) {
-        var cancion_id = $(this).attr('id').split('-')[1];
-        $.ajax({
-            'method': 'POST',
-            url: '$urlLike&cancion_id=' + cancion_id,
-            success: function (data) {
-                if (data.class == 'far') {
-                    $('#outerlike-' + cancion_id + ' i').removeClass('fas');
-                    $('#outerlike-' + cancion_id + ' i').addClass('far');
-                    $('#like-' + cancion_id + ' i').removeClass('fas');
-                    $('#like-' + cancion_id + ' i').addClass('far');
-                } else {
-                    $('#outerlike-' + cancion_id + ' i').removeClass('far');
-                    $('#outerlike-' + cancion_id + ' i').addClass('fas');
-                    $('#like-' + cancion_id + ' i').removeClass('far');
-                    $('#like-' + cancion_id + ' i').addClass('fas');
-                }
-                $('.like-btn ~ p span').html(data.likes);
-            }
-        });
-    });
-
-    $('.cancion').on('click', function ev(e) {
-        var cancion_id = $(this).data('target').split('-')[1];
-        $('#like-' + cancion_id + ' i').removeClass('fas far');
-        $.ajax({
-            'method': 'POST',
-            url: '$urlGetLikesData&cancion_id=' + cancion_id,
-            success: function (data) {
-                $('#like-' + cancion_id + ' i').addClass(data.class);
-                $('.like-btn ~ p span').html(data.likes);
-            }
-        });
-
-        $.ajax({
-            method: 'GET',
-            url: '$urlGetComments',
-            data: {
-                cancion_id: cancion_id
-            },
-            success: function (data) {
-                var comentarios = Object.entries(data);
-                $('.row-comments').empty();
-                comentarios.forEach(element => {
-                    $('.row-comments').append(`
-                        <div class="col-12 mt-3">
-                            <div class="row">
-                                <a href="$urlPerfil&id=\${element[1].id}">
-                                    <img class="user-search-img" src="\${element[1].url_image}" alt="perfil" width="50px" height="50px">
-                                </a>
-                                <div class="col">
-                                    <a href="$urlPerfil&id=\${element[1].id}">\${element[1].login}</a>
-                                    <small class="ml-1 comment-time">\${element[1].created_at}</small>
-                                    <p class="m-0">\${element[1].comentario}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                });
-            }
-        });
-
-    });
-
-    $('.comment-btn').on('click', function ev(e) {
-        var cancion_id = $(this).attr('id').split('-')[1];
-        var comentario = $('#text-area-comment-' + cancion_id).val();
-        if (comentario.length > 255 || comentario.length == 0) {
-            $('.invalid-feedback').show();
-        } else {
-            $('.invalid-feedback').hide();
-            $.ajax({
-                'method': 'POST',
-                url: '$urlComment&cancion_id=' + cancion_id,
-                data: {
-                    comentario: comentario,
-                },
-                success: function (data) {
-                    $('.row-comments').prepend(`
-                        <div class="col-12 mt-3">
-                            <div class="row">
-                                <a href="$urlPerfil&id=\${data.usuario_id}">
-                                    <img class="user-search-img" src="\${data.url_image}" alt="perfil" width="50px" height="50px">
-                                </a>
-                                <div class="col">
-                                    <a href="$urlPerfil&id=\${data.usuario_id}">\${data.login}</a>
-                                    <small class="ml-1 comment-time">\${data.created_at}</small>
-                                    <p>\${data.comentario}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                    $('.text-area-comment').val('');
-                }
-            });
-        }
-    });
-
+    $likeCommentProfile
     $playSongCode
 
 EOT;

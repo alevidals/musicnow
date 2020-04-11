@@ -83,9 +83,16 @@ class SiteController extends Controller
             return $this->redirect(['site/search', 'cadena' => $cadena]);
         }
 
+
+        $likes = $usuario
+            ->getLikes()
+            ->select('cancion_id')
+            ->column();
+
         return $this->render('index', [
             'canciones' => $canciones,
             'usuario' => $usuario,
+            'likes' => $likes,
             'cadena' => $cadena,
         ]);
     }
