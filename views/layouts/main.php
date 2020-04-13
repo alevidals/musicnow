@@ -38,10 +38,10 @@ $js = <<<EOT
     }
 
     setInterval(function(){
-        getNoReadMessages();
+        getNoReadMessagesMain();
     }, 5000);
 
-    function getNoReadMessages() {
+    function getNoReadMessagesMain() {
         $.ajax({
             method: 'GET',
             url: '$urlGetNoReadMessages&total=' + mensajes,
