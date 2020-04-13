@@ -17,10 +17,14 @@ AppAsset::register($this);
 $this->registerJS(Utility::GET_COOKIE);
 
 $urlCookie = Url::to(['site/cookie']);
+$urlGetNoReadMessages = Url::to(['usuarios/get-no-read-messages']);
 
 $cookieMessage = Yii::t('app', 'CookieMessage');
 
 $js = <<<EOT
+
+    var mensajes = 0;
+
     if (getCookie('cookie-accept') == null) {
         $( document ).ready(function() {
             krajeeDialogCust2.confirm("$cookieMessage", function (result) {
@@ -32,6 +36,19 @@ $js = <<<EOT
             });
         });
     }
+
+    setInterval(function(){
+        $.ajax({
+            method: 'GET',
+            url: '$urlGetNoReadMessages',
+            success: function (data) {
+                if (data > mensajes) {
+                    $('.chat-notification').trigger('play');
+                }
+                mensajes = data;
+            }
+        });
+    }, 5000);
 
     GreenAudioPlayer.init({
         selector: '.player',
@@ -127,6 +144,7 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => 'Chat', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
                     [
                         'label'=> Yii::t('app', 'Language'),
                         'options' => ['class' => 'my-auto'],
@@ -193,6 +211,10 @@ $this->registerJS($js);
         <?= $content ?>
     </div>
 </div>
+
+<audio class="chat-notification">
+    <source src="/sounds/notification.mp3">
+</audio>
 
 <div class="full-player row ml-0">
     <div class="info-song col-12 col-lg-4 col-xl-2 ml-0 row">

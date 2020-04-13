@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Bloqueados;
+use app\models\Chat;
+use app\models\Estados;
 use app\models\LoginForm;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
@@ -13,6 +15,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -223,6 +226,8 @@ class UsuariosController extends Controller
                         Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount'));
                     } else {
                         if ($loginModel->login()) {
+                            $user->estado_id = 2;
+                            $user->save();
                             if ($user->rol == 1) {
                                 return $this->redirect(['site/admin-index']);
                             } else {
@@ -269,6 +274,10 @@ class UsuariosController extends Controller
      */
     public function actionLogout()
     {
+        $model = $this->findModel(Yii::$app->user->id);
+        $model->estado_id = 1;
+        $model->save();
+
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -340,4 +349,39 @@ class UsuariosController extends Controller
             return $this->redirect(['site/index']);
         }
     }
+
+    public function actionEstados($id)
+    {
+        $usuario = Usuarios::findOne($id);
+        $seguidos = $usuario->getSeguidos()->all();
+
+        foreach ($seguidos as &$seguido) {
+            $seguido['estado_id'] = Estados::findOne($seguido['estado_id'])->estado;
+        }
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return $seguidos;
+    }
+
+    public function actionGetNoReadMessages($receptor_id = null)
+    {
+        $usuario = Usuarios::findOne(Yii::$app->user->id);
+
+        if ($receptor_id) {
+            $count = Chat::find()
+                ->where(['emisor_id' => $receptor_id])
+                ->andWhere(['receptor_id' => $usuario->id])
+                ->andWhere(['estado_id' => 3])
+                ->count();
+        } else {
+            $count = $usuario
+                ->getReceivedChats()
+                ->where(['estado_id' => 3])
+                ->count();
+        }
+
+        return $count;
+    }
+
 }

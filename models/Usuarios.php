@@ -24,15 +24,20 @@ use yii\web\UploadedFile;
  * @property string|null $image_name
  * @property string $created_at
  * @property string|null $deleted_at
+ * @property int $estado_id
  *
  * @property Albumes[] $albumes
  * @property Canciones[] $canciones
  * @property Comentarios[] $comentarios
  * @property Usuarios[] $seguidores
  * @property Usuarios[] $seguidos
+ * @property Estados $estado_id
  * @property Roles $rol
  * @property Likes[] $likes
  * @property Canciones[] $cancionesFavoritas
+ * @property Chat[] $sendchats
+ * @property Chat[] $receivedchats
+
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -60,7 +65,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREAR]],
             [['fnac', 'created_at', 'deleted_at'], 'safe'],
             [['rol'], 'default', 'value' => 2],
-            [['rol'], 'integer'],
+            [['estado_id'], 'default', 'value' => 1],
+            [['rol', 'estado_id'], 'integer'],
             [['image'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 150, 'maxWidth' => 500, 'minHeight' => 150, 'maxHeight' => 500],
             [['login'], 'string', 'max' => 50],
             [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name'], 'string', 'max' => 255],
@@ -71,6 +77,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['password'], 'trim', 'on' => [self::SCENARIO_CREAR, self::SCENARIO_UPDATE]],
             [['password_repeat'], 'trim', 'on' => [self::SCENARIO_CREAR]],
             [['password_repeat'], 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => [self::SCENARIO_CREAR, self::SCENARIO_UPDATE]],
+            [['estado_id'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::className(), 'targetAttribute' => ['estado_id' => 'id']],
             [['rol'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol' => 'id']],
         ];
     }
@@ -247,5 +254,34 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getComentarios()
     {
         return $this->hasMany(Comentarios::className(), ['usuario_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[Estado]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getEstado()
+    {
+        return $this->hasOne(Estados::className(), ['id' => 'estado_id']);
+    }
+
+    /** Gets query for [[SendChats]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getSendChats()
+    {
+        return $this->hasMany(Chat::className(), ['emisor_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[ReceivedChats]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getReceivedChats()
+    {
+        return $this->hasMany(Chat::className(), ['receptor_id' => 'id']);
     }
 }

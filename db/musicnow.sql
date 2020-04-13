@@ -4,9 +4,18 @@
 
 DROP TABLE IF EXISTS roles CASCADE;
 
-CREATE TABLE roles (
-  id BIGSERIAL PRIMARY KEY,
-  rol VARCHAR(255) NOT NULL
+CREATE TABLE roles
+(
+    id BIGSERIAL PRIMARY KEY
+  , rol VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS estados CASCADE;
+
+CREATE TABLE estados
+(
+    id     BIGSERIAL    PRIMARY KEY
+  , estado VARCHAR(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS usuarios CASCADE;
@@ -20,7 +29,8 @@ CREATE TABLE usuarios
   , email         VARCHAR(255)  NOT NULL UNIQUE
   , password      VARCHAR(255)  NOT NULL
   , fnac          DATE
-  , rol           BIGINT        NOT NULL REFERENCES roles (id) DEFAULT 2
+  , rol           BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
+  , estado_id     BIGINT        NOT NULL REFERENCES estados (id) DEFAULT 1
   , auth_key      VARCHAR(255)
   , confirm_token VARCHAR(255)
   , url_image     VARCHAR(2048)
@@ -105,6 +115,18 @@ CREATE TABLE comentarios
   , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS chat CASCADE;
+
+CREATE TABLE chat
+(
+    id            BIGSERIAL    PRIMARY KEY
+  , emisor_id     BIGINT       NOT NULL REFERENCES usuarios (id)
+  , receptor_id   BIGINT       NOT NULL REFERENCES usuarios (id)
+  , mensaje       TEXT         NOT NULL
+  , estado_id     BIGINT       NOT NULL REFERENCES estados  (id) DEFAULT 3
+  , created_at    TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 DROP TABLE IF EXISTS bloqueados CASCADE;
 
 CREATE TABLE bloqueados
@@ -117,6 +139,12 @@ CREATE TABLE bloqueados
 INSERT INTO roles (rol)
 VALUES ('admin')
      , ('usuario');
+
+INSERT INTO estados (estado)
+VALUES ('offline')
+     , ('online')
+     , ('no-read')
+     , ('read');
 
 INSERT INTO generos(denominacion)
 VALUES ('Pop'),
