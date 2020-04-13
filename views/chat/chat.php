@@ -164,6 +164,7 @@ $js = <<<EOT
     $('.start-chat').on('click', function ev(e) {
         var receptor_id = $(this).data('receptorid');
         getMessagesFromChat(receptor_id);
+        $('.send-chat').trigger('click');
     });
 EOT;
 
