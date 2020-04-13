@@ -77,7 +77,9 @@ kartik\icons\FontAwesomeAsset::register($this);
                                 <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
                                 <?= $form->field($loginFormModel, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
                                 <?= $form->field($loginFormModel, 'rememberMe')->checkbox()->label(Yii::t('app', 'Remember me')) ?>
-
+                                <div class="form-group">
+                                    <?= Html::a(Yii::t('app', 'reset-password'), ['usuarios/send-reset-pass']) ?>
+                                </div>
                                 <div class="form-group row px-15">
                                     <?= Html::submitButton(Yii::t('app', 'Entrar'), ['class' => 'btn btn-warning btn-block rounded', 'name' => 'login-button']) ?>
                                 </div>

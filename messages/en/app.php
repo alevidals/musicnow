@@ -117,4 +117,10 @@ return [
     'Artists' => 'Artistas',
     'Artist' => '',
     'Order' => 'Order by',
+    'reset-password' => 'Forgot your password?',
+    'click-to-reset' => 'Click here to reset your password.',
+    'pass-mail-send' => 'An email has been sent to your email account to reset your password.',
+    'pass-changed' => 'The password has been changed successfully.',
+    'change-password' => 'Change your password',
+    'enter-mail' => 'Enter your email',
 ];

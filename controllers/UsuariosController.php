@@ -171,9 +171,9 @@ class UsuariosController extends Controller
      * @param string $body cuerpo que se enviará al correo
      * @return bool  true si se envía o false si hay error
      */
-    public function actionMail($email, $url)
+    public function actionMail($email, $url, $layout)
     {
-        return Yii::$app->mailer->compose('layouts/confirm-mail', ['content' => $url])
+        return Yii::$app->mailer->compose('layouts/' . $layout, ['content' => $url])
                 ->setFrom(Yii::$app->params['smtpUsername'])
                 ->setTo($email)
                 ->setSubject(Yii::t('app', 'ConfirmMailSubject'))
@@ -248,7 +248,7 @@ class UsuariosController extends Controller
                     'confirm_token' => $userModel->confirm_token,
                 ], true);
 
-                if ($this->actionMail($userModel->email, $url)) {
+                if ($this->actionMail($userModel->email, $url, 'confirm-mail')) {
                     Yii::$app->session->setFlash('success', Yii::t('app', 'ConfirmMail'));
                 } else {
                     Yii::$app->session->setFlash('error', Yii::t('app', 'ErrorMail'));
@@ -384,4 +384,46 @@ class UsuariosController extends Controller
         return $count;
     }
 
+    public function actionSendResetPass()
+    {
+        $model = new Usuarios();
+
+        if (Yii::$app->request->post('Usuarios')['email']) {
+            $email = Yii::$app->request->post('Usuarios')['email'];
+            $model = Usuarios::findOne(['email' => $email]);
+            if ($model) {
+                $url = Url::to([
+                    'usuarios/reset-pass',
+                    'id' => $model->id,
+                ], true);
+                if ($this->actionMail($model->email, $url, 'reset-pass-mail')) {
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'pass-mail-send'));
+                } else {
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'ErrorMail'));
+                }
+                return $this->redirect(['usuarios/login']);
+            }
+        }
+
+        return $this->render('reset-pass-email', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionResetPass($id)
+    {
+        $model = Usuarios::findOne($id);
+        $model->scenario = Usuarios::SCENARIO_UPDATE;
+        $model->password = '';
+        $model->password_repeat = '';
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'pass-changed'));
+            return $this->redirect(['usuarios/login']);
+        }
+
+        return $this->render('reset-pass-form', [
+            'model' => $model
+        ]);
+    }
 }

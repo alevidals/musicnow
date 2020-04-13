@@ -117,4 +117,10 @@ return [
     'Artists' => 'Artistas',
     'Artist' => 'Artista',
     'Order' => 'Order by',
+    'reset-password' => '¿Has olvidado la contraseña?',
+    'click-to-reset' => 'Pulsa aquí para restablecer tu contraseña.',
+    'pass-mail-send' => 'Se ha enviado un email a tu cuenta de correo para restablecer la contraseña.',
+    'pass-changed' => 'La contraseña se ha cambiado con éxito.',
+    'change-password' => 'Cambia la contraseña',
+    'enter-email' => 'Introduzca su email',
 ];
