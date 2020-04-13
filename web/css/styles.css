@@ -193,6 +193,12 @@ label {
     text-align: center;
 }
 
+.modal-header {
+    background-color: #202020;
+    border-bottom: none;
+    border-radius: 0%;
+}
+
 .modal-body {
     background-color: #181818;
 }
@@ -234,6 +240,8 @@ label {
 
 .custom-overflow {
     max-height: 600px;
+    height: 600px;
+    overflow-y: auto;
     word-break: break-all;
 }
 
@@ -348,4 +356,11 @@ input, select {
 
 .form-control:focus {
     box-shadow: none !important;
+}
+
+.message {
+    border-radius: 5px;
+    color: black !important;
+    background-color: #ffba00;
+    padding: 7px;
 }
