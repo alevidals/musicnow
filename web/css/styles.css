@@ -64,7 +64,8 @@ p,
 .dropdown-item:hover,
 .custom-control-input.is-valid~.custom-control-label,
 input,
-.site-admin-index i {
+.site-admin-index i,
+.toast-body {
     color: white !important;
 }
 
@@ -369,4 +370,13 @@ input, select {
 }
 .my-message {
     background-color: #ffba00;
+}
+
+.toast-header {
+    background-color: #ffba00;
+    border-bottom: none;
+}
+
+.toast-body {
+    background-color: #202020;
 }

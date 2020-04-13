@@ -364,24 +364,33 @@ class UsuariosController extends Controller
         return $seguidos;
     }
 
-    public function actionGetNoReadMessages($receptor_id = null)
+    public function actionGetNoReadMessages($receptor_id = null, $total = null)
     {
         $usuario = Usuarios::findOne(Yii::$app->user->id);
 
         if ($receptor_id) {
-            $count = Chat::find()
+            $res = Chat::find()
                 ->where(['emisor_id' => $receptor_id])
                 ->andWhere(['receptor_id' => $usuario->id])
                 ->andWhere(['estado_id' => 3])
                 ->count();
         } else {
-            $count = $usuario
-                ->getReceivedChats()
-                ->where(['estado_id' => 3])
-                ->count();
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            $mensajes = (new \yii\db\Query())
+                ->select(['mensaje', 'c.created_at', 'url_image', 'login'])
+                ->from('chat c')
+                ->leftJoin('usuarios', 'usuarios.id = c.emisor_id')
+                ->where(['c.estado_id' => 3])
+                ->andWhere(['receptor_id' => $usuario->id])
+                ->orderBy(['c.created_at' => SORT_DESC]);
+
+            $mensajes->limit($mensajes->count() - $total);
+            $res['mensajes'] = $mensajes->all();
+            $res['count'] = $mensajes->count();
         }
 
-        return $count;
+        return $res;
     }
 
     public function actionSendResetPass()

@@ -38,17 +38,48 @@ $js = <<<EOT
     }
 
     setInterval(function(){
+        getNoReadMessages();
+    }, 5000);
+
+    function getNoReadMessages() {
         $.ajax({
             method: 'GET',
-            url: '$urlGetNoReadMessages',
+            url: '$urlGetNoReadMessages&total=' + mensajes,
             success: function (data) {
-                if (data > mensajes) {
-                    $('.chat-notification').trigger('play');
+                if (data.count > 0) {
+                    $('.messages-number').html(data.count);
+                } else {
+                    $('.messages-number').html('');
                 }
-                mensajes = data;
+                if (data.count > mensajes) {
+                    $('.chat-notification').trigger('play');
+                    $('.alert-box').html('');
+                    data.mensajes.forEach(element => {
+                        var time = element.created_at.split(' ')[1];
+                        $('.alert-box').append(`
+                            <a href="/index.php?r=chat/chat" class="text-decoration-none">
+                                <div class="toast" data-delay="5000">
+                                    <div class="toast-header">
+                                        <img src="\${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                        <strong class="mr-auto">\${element.login}</strong>
+                                        <small class="ml-3">\${time}</small>
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="toast-body">
+                                        \${element.mensaje}
+                                    </div>
+                                </div>
+                            </a>
+                        `);
+                    });
+                    $('.toast').toast('show');
+                }
+                mensajes = data.count;
             }
         });
-    }, 5000);
+    }
 
     GreenAudioPlayer.init({
         selector: '.player',
@@ -92,6 +123,11 @@ $this->registerJS($js);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative;">
+        <div class="alert-box" style="position: absolute; top: 50px; right: 70px; z-index: 1050;">
+        </div>
+    </div>
 
 <div class="wrap">
     <?php
@@ -144,7 +180,7 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
-                    ['label' => 'Chat', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
+                    ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
                     [
                         'label'=> Yii::t('app', 'Language'),
                         'options' => ['class' => 'my-auto'],
