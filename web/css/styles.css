@@ -361,6 +361,12 @@ input, select {
 .message {
     border-radius: 5px;
     color: black !important;
-    background-color: #ffba00;
     padding: 7px;
+}
+
+.other-message {
+    background-color: #ffd86d;
+}
+.my-message {
+    background-color: #ffba00;
 }

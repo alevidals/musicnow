@@ -75,14 +75,14 @@ $js = <<<EOT
                 data.historial.forEach(element => {
                     if (element.emisor_id != receptor_id) {
                         $('#chat-history-' + receptor_id).append(`
-                            <p class="text-right"><span class="message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></span></p>
+                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                         `);
                         if (element.estado_id == 4) {
                             $('.read-tick').addClass('text-primary');
                         }
                     } else {
                         $('#chat-history-' + receptor_id).append(`
-                            <p><span class="message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></span></p>
+                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
                         `);
                     }
                 });
@@ -94,6 +94,7 @@ $js = <<<EOT
         $('.chat-history').each(function() {
             var receptor_id = $(this).data('receptorid');
             getMessagesFromChat(receptor_id);
+            $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
         });
     }
 
@@ -113,14 +114,14 @@ $js = <<<EOT
                 data.forEach(element => {
                     if (element.emisor_id != receptor_id) {
                         $('#chat-history-' + receptor_id).append(`
-                            <p class="text-right"><span class="message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></span></p>
+                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                         `);
                         if (element.estado_id == 4) {
                             $('.read-tick').addClass('text-primary');
                         }
                     } else {
                         $('#chat-history-' + receptor_id).append(`
-                            <p><span class="message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></span></p>
+                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
                         `);
                     }
                 });
@@ -147,11 +148,14 @@ $js = <<<EOT
                     data.forEach(element => {
                         if (element.emisor_id != receptor_id) {
                             $('#chat-history-' + receptor_id).append(`
-                                <p class="text-right"><span class="message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></span></p>
+                                <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                             `);
+                            if (element.estado_id == 4) {
+                                $('.read-tick').addClass('text-primary');
+                            }
                         } else {
                             $('#chat-history-' + receptor_id).append(`
-                                <p><span class="message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></span></p>
+                                <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
                             `);
                         }
                     });
