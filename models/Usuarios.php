@@ -27,6 +27,7 @@ use yii\web\UploadedFile;
  * @property int $estado_id
  *
  * @property Albumes[] $albumes
+ * @property Usuarios[] $bloqueados
  * @property Canciones[] $canciones
  * @property Comentarios[] $comentarios
  * @property Usuarios[] $seguidores
@@ -283,5 +284,15 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getReceivedChats()
     {
         return $this->hasMany(Chat::className(), ['receptor_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[Bloqueados]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getBloqueados()
+    {
+        return $this->hasMany(Usuarios::className(), ['id' => 'bloqueador_id'])->viaTable('bloqueados', ['bloqueado_id' => 'id']);
     }
 }
