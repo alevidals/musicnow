@@ -185,7 +185,7 @@ $this->registerJS($js);
         'brandLabel' => Html::img('@web/img/logo.png', ['class' => 'navbar-logo', 'alt' => 'logo']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-expand-md fixed-top',
+            'class' => 'navbar-dark navbar-expand-md fixed-top',
         ],
         'collapseOptions' => [
             'class' => 'justify-content-end',
