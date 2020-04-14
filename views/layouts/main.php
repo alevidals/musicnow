@@ -18,12 +18,18 @@ $this->registerJS(Utility::GET_COOKIE);
 
 $urlCookie = Url::to(['site/cookie']);
 $urlGetNoReadMessages = Url::to(['usuarios/get-no-read-messages']);
+$urlGetNewFollowers = Url::to(['usuarios/get-new-followers']);
+$urlGetFollowersNumber = Url::to(['usuarios/get-followers-data']);
 
+$followMessage = Yii::t('app', 'followMessage');
 $cookieMessage = Yii::t('app', 'CookieMessage');
 
 $js = <<<EOT
 
     var mensajes = 0;
+    var seguidores = 0;
+
+    getFollowersNumber();
 
     if (getCookie('cookie-accept') == null) {
         $( document ).ready(function() {
@@ -37,11 +43,54 @@ $js = <<<EOT
         });
     }
 
+    function getFollowersNumber() {
+        $.ajax({
+            method: 'GET',
+            url: '$urlGetFollowersNumber',
+            success: function (data) {
+                seguidores = data;
+            }
+        });
+    }
+
     setInterval(function(){
-        getNoReadMessagesMain();
+        getNewNotifications();
     }, 5000);
 
-    function getNoReadMessagesMain() {
+    function getNewNotifications() {
+        // NUEVOS SEGUIDORES
+        $.ajax({
+            method: 'GET',
+            url: '$urlGetNewFollowers&total=' + seguidores,
+            success: function (data) {
+                if (data.count > seguidores) {
+                    $('.alert-box').html('');
+                    console.log(data.seguidores);
+                    data.seguidores.forEach(element => {
+                        $('.alert-box').append(`
+                                <a href="/index.php?r=usuarios/perfil&id=\${element.id}" class="text-decoration-none">
+                                    <div class="toast mb-2" data-delay="5000">
+                                        <div class="toast-header">
+                                            <img src="\${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                            <strong class="mr-auto">\${element.login}</strong>
+                                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="toast-body">
+                                            ¡<span class="font-weight-bold">\${element.login}</span> $followMessage!
+                                        </div>
+                                    </div>
+                                </a>
+                        `);
+                    });
+                    $('.toast').toast('show');
+                }
+                seguidores = data.count;
+            }
+        });
+
+        // NUEVOS MENSAJES
         $.ajax({
             method: 'GET',
             url: '$urlGetNoReadMessages&total=' + mensajes,
@@ -125,7 +174,7 @@ $this->registerJS($js);
 <?php $this->beginBody() ?>
 
     <div aria-live="polite" aria-atomic="true" style="position: relative;">
-        <div class="alert-box" style="position: absolute; top: 50px; right: 70px; z-index: 1050;">
+        <div class="alert-box" style="position: fixed; top: 50px; right: 70px; z-index: 1050;">
         </div>
     </div>
 

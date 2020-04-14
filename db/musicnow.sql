@@ -90,9 +90,9 @@ DROP TABLE IF EXISTS seguidores CASCADE;
 
 CREATE TABLE seguidores
 (
-    seguidor_id BIGINT REFERENCES usuarios (id)
-  , seguido_id BIGINT REFERENCES usuarios (id)
-  , PRIMARY KEY (seguidor_id, seguido_id)
+     id          BIGSERIAL PRIMARY KEY
+  ,  seguidor_id BIGINT REFERENCES usuarios (id)
+  , seguido_id   BIGINT REFERENCES usuarios (id)
 );
 
 DROP TABLE IF EXISTS likes CASCADE;
