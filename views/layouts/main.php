@@ -58,7 +58,7 @@ $js = <<<EOT
                         var time = element.created_at.split(' ')[1];
                         $('.alert-box').append(`
                             <a href="/index.php?r=chat/chat" class="text-decoration-none">
-                                <div class="toast" data-delay="5000">
+                                <div class="toast mb-2" data-delay="5000">
                                     <div class="toast-header">
                                         <img src="\${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
                                         <strong class="mr-auto">\${element.login}</strong>
@@ -136,7 +136,7 @@ $this->registerJS($js);
         'brandLabel' => Html::img('@web/img/logo.png', ['class' => 'navbar-logo', 'alt' => 'logo']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-dark bg-dark navbar-expand-md fixed-top',
+            'class' => 'navbar-expand-md fixed-top',
         ],
         'collapseOptions' => [
             'class' => 'justify-content-end',
@@ -145,11 +145,26 @@ $this->registerJS($js);
     if (!Yii::$app->user->isGuest) {
         if (Yii::$app->user->identity->rol == 1) {
             $items = [
+                [
+                    'label' => '<i class="fas fa-sun"></i>
+                                <div class="custom-control custom-switch d-inline-block">
+                                    <input type="checkbox" class="custom-control-input " id="darkSwitch">
+                                    <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+                                </div>'
+                ],
                 ['label' => Yii::t('app', 'Home'), 'url' => ['/site/admin-index']],
                 ['label' => Yii::t('app', 'Generos'), 'url' => ['/generos/index']],
                 ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
                 ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
                 ['label' => Yii::t('app', 'Usuarios'), 'url' => ['/usuarios/index']],
+                [
+                    'label'=> Yii::t('app', 'Language'),
+                    'options' => ['class' => 'my-auto'],
+                    'items' => [
+                        ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
+                        ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
+                    ]
+                ],
                 Yii::$app->user->isGuest ? (
                     [
                         'label' => 'Entra',
@@ -181,6 +196,14 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
+                    [
+                        'label' => '<i class="fas fa-sun"></i>
+                                    <div class="custom-control custom-switch d-inline-block">
+                                        <input type="checkbox" class="custom-control-input " id="darkSwitch">
+                                        <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+                                    </div>',
+                        'options' => ['class' => 'my-auto']
+                    ],
                     [
                         'label'=> Yii::t('app', 'Language'),
                         'options' => ['class' => 'my-auto'],
@@ -224,7 +247,14 @@ $this->registerJS($js);
                 'items' => [
                     ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
                     ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
-                ]
+                ],
+            ],
+            [
+                'label' => '<i class="fas fa-sun"></i>
+                            <div class="custom-control custom-switch d-inline-block">
+                                <input type="checkbox" class="custom-control-input " id="darkSwitch">
+                                <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+                            </div>'
             ],
         ];
     }
@@ -257,7 +287,7 @@ $this->registerJS($js);
         <img alt="song-cover col-2" height="60px">
         <div class="artist-info my-auto col text-center">
             <p class="m-0"></p>
-            <small class="text-white"></small>
+            <small></small>
         </div>
     </div>
     <div class="player col-12 col-lg-8 col-xl-10">

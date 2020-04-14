@@ -78,7 +78,7 @@ $js = <<<EOT
                             <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                         `);
                         if (element.estado_id == 4) {
-                            $('.read-tick').addClass('text-primary');
+                            $('.read-tick').addClass('read-message');
                         }
                     } else {
                         $('#chat-history-' + receptor_id).append(`
@@ -117,7 +117,7 @@ $js = <<<EOT
                             <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                         `);
                         if (element.estado_id == 4) {
-                            $('.read-tick').addClass('text-primary');
+                            $('.read-tick').addClass('read-message');
                         }
                     } else {
                         $('#chat-history-' + receptor_id).append(`
@@ -130,7 +130,7 @@ $js = <<<EOT
         });
     });
 
-    $('textarea').on('keydown', function ev(e) {
+    $('input').on('keydown', function ev(e) {
         var key = (event.keyCode ? event.keyCode : event.which);
         if (key == 13) {
             var receptor_id = $(this).attr('id').split('-')[2];
@@ -148,10 +148,10 @@ $js = <<<EOT
                     data.forEach(element => {
                         if (element.emisor_id != receptor_id) {
                             $('#chat-history-' + receptor_id).append(`
-                                <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                                <p class="message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                             `);
                             if (element.estado_id == 4) {
-                                $('.read-tick').addClass('text-primary');
+                                $('.read-tick').addClass('read-message');
                             }
                         } else {
                             $('#chat-history-' + receptor_id).append(`
@@ -184,7 +184,7 @@ $this->title = Yii::t('app', 'Chats');
             <div id="<?= $seguido->id ?>" class="col-12 mb-5">
                 <h4 class="d-inline-block"><?= $seguido->login ?></h4>
                 <span class="status badge badge-success d-inline-block"><?= $seguido->getEstado()->one()->estado ?></span>
-                <span class="badge badge-warning" id="messages-number-<?= $seguido->id ?>"></span>
+                <span class="badge badge-warning messages-number" id="messages-number-<?= $seguido->id ?>"></span>
                 <button class="btn main-yellow start-chat d-block" data-receptorid="<?= $seguido->id ?>" data-toggle="modal" data-target="#chat-<?= $seguido->id ?>">Chat</button>
                 <div class="modal fade" id="chat-<?= $seguido->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -202,7 +202,7 @@ $this->title = Yii::t('app', 'Chats');
                                     <div class="chat-history custom-overflow pr-2 pt-2" data-receptorid="<?= $seguido->id ?>" id="chat-history-<?= $seguido->id ?>">
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="chat-message-<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control"></textarea>
+                                        <input type="text" name="chat-message<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <button type="button" id="<?= $seguido->id ?>" class="btn main-yellow send-chat">Send</button>
