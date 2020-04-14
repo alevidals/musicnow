@@ -435,4 +435,30 @@ class UsuariosController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionGetNewFollowers($total)
+    {
+        $res = [];
+
+        $seguidores = (new \yii\db\Query())
+            ->select(['usuarios.login', 'url_image', 'usuarios.id'])
+            ->from('seguidores s')
+            ->leftJoin('usuarios', 's.seguidor_id = usuarios.id')
+            ->where(['seguido_id' => Yii::$app->user->id])
+            ->orderBy(['s.id' => SORT_DESC]);
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $seguidores->limit($seguidores->count() - $total);
+        $res['seguidores'] = $seguidores->all();
+        $res['count'] = $seguidores->count();
+
+        return $res;
+    }
+
+    public function actionGetFollowersData()
+    {
+        $model = Usuarios::findOne(Yii::$app->user->id);
+        return $model->getSeguidores()->count();
+    }
 }
