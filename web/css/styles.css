@@ -2,15 +2,19 @@
 
 * {
     font-family: 'Raleway', sans-serif;
+    color: #000 !important;
 }
 
-.navbar,
-.footer {
-    background-color: #202020 !important;
+.status {
+    color: #fff !important;
 }
 
-body {
-    background-color: #181818;
+.btn.btn-secondary {
+    color: #fff !important;
+}
+
+.navbar {
+    background-color: #ccc !important;
 }
 
 .footer {
@@ -18,8 +22,17 @@ body {
     color: white !important;
 }
 
-.breadcrumb {
-    background-color: #383838;
+.normal-link,
+[data-theme="dark"] .normal-link {
+    color: #007bff !important;
+}
+
+.share-buttons i:not(.fa-heart) {
+    color: #fff !important;
+}
+
+.fa-heart {
+    color: red !important;
 }
 
 /* width */
@@ -46,35 +59,8 @@ body {
     background-color: #ffba00
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-.summary,
-.admin-table td,
-.dropdown-item,
-.form-control-file,
-.bootstrap-dialog-message,
-.nav-pills .nav-item .nav-link,
-.small-artist,
-.dots-menu,
-.dropdown-item:hover,
-.custom-control-input.is-valid~.custom-control-label,
-input,
-.site-admin-index i,
-.toast-body {
-    color: white !important;
-}
-
-label {
-    color: #9b9b9b;
-}
-
 .admin-table thead {
-    background-color: #181818;
+    background-color: #ccc;
 }
 
 .admin-table a,
@@ -84,13 +70,18 @@ label {
 }
 
 .admin-table tbody {
-    background-color: #383838;
+    background-color: #eee;
 }
+
+.admin-table th {
+    color: #ffba00;
+}
+
 
 .nav-pills .nav-item .active {
     border: 1px solid #ffba00;
     background-color: #ffba00;
-    color: #000;
+    color: #000 !important;
 }
 
 .nav-pills .nav-item:hover {
@@ -137,10 +128,10 @@ label {
 
 #register-form fieldset,
 #login-form {
-    background: #343434;
     border: 0 none;
     border-radius: 0px;
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    background: #eee;
     padding: 20px 30px;
     box-sizing: border-box;
     width: 80%;
@@ -157,7 +148,7 @@ label {
 .fs-title {
     font-size: 18px;
     text-transform: uppercase;
-    color: #ffba00;
+    color: #ffba00 !important;
     margin-bottom: 10px;
     letter-spacing: 2px;
     font-weight: bold;
@@ -168,18 +159,7 @@ label {
     background-color: #ffba00;
 }
 
-.dropdown-menu,
-.dropdown-item.active {
-    background-color: #4A4A4A;
-}
 
-.dropdown-item:hover {
-    background-color: #181818;
-}
-
-.admin-table th {
-    color: #ffba00;
-}
 
 .h1-error {
     font-size: 150px;
@@ -194,14 +174,15 @@ label {
     text-align: center;
 }
 
+
+
 .modal-header {
-    background-color: #202020;
     border-bottom: none;
     border-radius: 0%;
 }
 
 .modal-body {
-    background-color: #181818;
+    background-color: #eee;
 }
 
 .dots-menu {
@@ -224,19 +205,11 @@ label {
     opacity: 0.5;
 }
 
-.filepond--panel-root {
-    background-color: #383838;
-}
-
 .outline-transparent {
     background-color: transparent;
     border: none;
     outline: none !important;
     color: white;
-}
-
-.bootstrap-dialog-title {
-    color: #000 !important;
 }
 
 .custom-overflow {
@@ -309,8 +282,12 @@ label {
     display: inline-block;
 }
 
+.green-audio-player {
+    background-color: #eee;
+}
+
 .full-player {
-    background-color: #1a1a1a;
+    background-color: #eee;
     height: 60px;
 }
 
@@ -329,7 +306,8 @@ label {
     right: 10%;
 }
 
-input, select {
+input,
+select {
     background-color: transparent !important;
     border: 0 !important;
     border-bottom: 2px solid #9b9b9b !important;
@@ -365,9 +343,14 @@ input, select {
     padding: 7px;
 }
 
+.messages-number {
+    color: #000 !important;
+}
+
 .other-message {
     background-color: #ffd86d;
 }
+
 .my-message {
     background-color: #ffba00;
 }
@@ -378,5 +361,110 @@ input, select {
 }
 
 .toast-body {
+    background-color: #eee;
+}
+
+.read-message,
+[data-theme="dark"] .read-message {
+    color: #00f !important;
+}
+
+
+
+/* Dark mode */
+
+[data-theme="dark"] * {
+    color: #fff !important;
+}
+
+[data-theme="dark"] {
+    background-color: #181818 !important;
+}
+
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .footer {
+    background-color: #202020 !important;
+}
+
+[data-theme="dark"] .nav-link {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="dark"] th,
+[data-theme="dark"] th a {
+    color: #ffba00 !important;
+}
+
+[data-theme="dark"] .btn {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .breadcrumb {
+    background-color: #383838;
+}
+
+
+[data-theme="dark"] label {
+    color: #9b9b9b !important;
+}
+
+[data-theme="dark"] .admin-table thead {
+    background-color: #181818;
+}
+
+[data-theme="dark"] .admin-table a,
+[data-theme="dark"] .action-column,
+[data-theme="dark"] .breadcrumb a {
+    color: #ffbb00;
+}
+
+[data-theme="dark"] .admin-table tbody {
+    background-color: #383838;
+}
+
+[data-theme="dark"] .admin-table th {
+    color: #ffba00;
+}
+
+[data-theme="dark"] #register-form fieldset,
+[data-theme="dark"] #login-form {
+    background: #343434;
+}
+
+[data-theme="dark"] .dropdown-menu,
+[data-theme="dark"] .dropdown-item.active {
+    background-color: #4A4A4A;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: #181818;
+}
+
+[data-theme="dark"] .bootstrap-dialog-title {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .modal-header {
     background-color: #202020;
+}
+
+[data-theme="dark"] .modal-body {
+    background-color: #181818;
+}
+
+[data-theme="dark"] .full-player {
+    background-color: #1a1a1a;
+    height: 60px;
+}
+
+[data-theme="dark"] .green-audio-player {
+    background-color: #1A1A1A;
+}
+
+[data-theme="dark"] .toast-body {
+    background-color: #202020;
+}
+
+[data-theme="dark"] .message * {
+    color: #000 !important;
 }

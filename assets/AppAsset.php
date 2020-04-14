@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         'js/owl.carousel.js',
         'js/owl.autoplay.js',
         'js/green-audio-player.min.js',
+        'js/dark-mode-switch.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
