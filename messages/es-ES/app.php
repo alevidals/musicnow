@@ -125,4 +125,9 @@ return [
     'enter-email' => 'Introduzca su email',
     'followMessage'=> 'ha empezado a seguirte',
     'DeleteProfileBanner' => 'Eliminar banner',
+    'RecoveredAccount' => 'Su cuenta ha sido recuperada.',
+    'CannotRecover' => 'No se ha podido recuperar',
+    'EmailSended' => 'Se ha enviado un email a tu cuenta.',
+    'Recover' =>  'Restaurar',
+    'ToRecover' => 'Para recuperar su cuenta pulse aquí',
 ];

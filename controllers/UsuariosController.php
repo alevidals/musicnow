@@ -11,6 +11,7 @@ use app\models\UsuariosSearch;
 use app\services\Utility;
 use DateTime;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
@@ -224,10 +225,15 @@ class UsuariosController extends Controller
             if ($loginModel->load(Yii::$app->request->post())) {
                 $user = $loginModel->getUser();
                 if ($user !== null) {
-                    if ($user->confirm_token !== null) {
+                    if ($user->deleted_at !== null) {
+                        $url = Url::to(
+                            ['usuarios/enviar-email-recuperacion', 'id' => $user->id],
+                            true
+                        );
+                        Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount') . ' ' . Html::a(Yii::t('app', 'Recover'), $url));
+                    }
+                    elseif ($user->confirm_token !== null) {
                         Yii::$app->session->setFlash('warning', Yii::t('app', 'YouHaveToConfirm'));
-                    } elseif ($user->deleted_at !== null) {
-                        Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount'));
                     } else {
                         if ($loginModel->login()) {
                             $user->estado_id = 2;
@@ -474,5 +480,38 @@ class UsuariosController extends Controller
     {
         $model = Usuarios::findOne(Yii::$app->user->id);
         return $model->getSeguidores()->count();
+    }
+
+    public function actionEnviarEmailRecuperacion($id)
+    {
+        $model = Usuarios::findOne($id);
+        $model->confirm_token = Yii::$app->security->generateRandomString(255);
+        $model->save();
+
+        $url = Url::to([
+            'usuarios/recuperar',
+            'id' => $model->id,
+            'confirm_token' => $model->confirm_token
+        ], true);
+
+        $this->actionMail($model->email, $url, 'confirm-restore-account');
+
+        Yii::$app->session->setFlash('success', Yii::t('app', 'EmailSended'));
+
+        return $this->goBack();
+    }
+
+    public function actionRecuperar($id, $confirm_token)
+    {
+        $model = $this->findModel($id);
+        if ($model->confirm_token === $confirm_token) {
+            $model->confirm_token = null;
+            $model->deleted_at = null;
+            $model->save();
+            Yii::$app->session->setFlash('success', Yii::t('app', 'RecoveredAccount'));
+            return $this->redirect(['usuarios/login']);
+        }
+        Yii::$app->session->setFlash('error', Yii::t('app', 'CannotRecover'));
+        return $this->redirect(['site/index']);
     }
 }

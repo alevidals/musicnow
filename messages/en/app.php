@@ -125,4 +125,9 @@ return [
     'enter-mail' => 'Enter your email',
     'followMessage' => 'has started to follow you',
     'DeleteProfileBanner' => 'Delete profile banner',
+    'RecoveredAccount' => 'Your account has been recovered.',
+    'CannotRecover' => 'Your account could not be recovered.',
+    'EmailSended' => 'An email has been sent to your account.',
+    'Recover' =>  '',
+    'ToRecover' => 'To recover your account click here'
 ];
