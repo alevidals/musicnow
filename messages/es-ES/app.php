@@ -123,5 +123,6 @@ return [
     'pass-changed' => 'La contraseña se ha cambiado con éxito.',
     'change-password' => 'Cambia la contraseña',
     'enter-email' => 'Introduzca su email',
-    'followMessage'=> 'ha empezado a seguirte'
+    'followMessage'=> 'ha empezado a seguirte',
+    'DeleteProfileBanner' => 'Eliminar banner',
 ];

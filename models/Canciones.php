@@ -92,7 +92,7 @@ class Canciones extends \yii\db\ActiveRecord
     public function uploadPortada()
     {
         if ($this->portada !== null) {
-            $uploadedImageInfo = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id);
+            $uploadedImageInfo = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id, Utility::PORTADA);
             $this->url_portada = $uploadedImageInfo['url'];
             $this->image_name = $uploadedImageInfo['image_name'];
         }

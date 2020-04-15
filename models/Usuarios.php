@@ -22,6 +22,8 @@ use yii\web\UploadedFile;
  * @property string|null $confirm_token
  * @property string|null $url_image
  * @property string|null $image_name
+ * @property string|null $url_banner
+ * @property string|null $banner_name
  * @property string $created_at
  * @property string|null $deleted_at
  * @property int $estado_id
@@ -47,6 +49,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
     public $password_repeat;
     public $image;
+    public $banner;
 
     /**
      * {@inheritdoc}
@@ -69,9 +72,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['estado_id'], 'default', 'value' => 1],
             [['rol', 'estado_id'], 'integer'],
             [['image'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 150, 'maxWidth' => 500, 'minHeight' => 150, 'maxHeight' => 500],
+            [['banner'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 1110, 'maxWidth' => 2659, 'minHeight' => 483, 'maxHeight' => 500],
             [['login'], 'string', 'max' => 50],
-            [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name'], 'string', 'max' => 255],
-            [['url_image'], 'string', 'max' => 2048],
+            [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name', 'banner_name'], 'string', 'max' => 255],
+            [['url_image', 'url_banner'], 'string', 'max' => 2048],
             [['email'], 'unique'],
             [['email'], 'email'],
             [['login'], 'unique'],
@@ -104,14 +108,27 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'url_image' => Yii::t('app', 'Url Image'),
             'image_name' => Yii::t('app', 'Image Name'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
+            'url_banner' => Yii::t('app', 'Url Banner'),
+            'banner_name' => Yii::t('app', 'Banner Name'),
         ];
     }
 
-    public function uploadImg($perfilImg)
+    public function uploadImg($type)
     {
-        if ($this->image !== null) {
-            $this->url_image = Utility::uploadImageFirebase($this->image, $this->id, $perfilImg);
-            $this->image_name = 'perfil.png';
+        switch ($type) {
+            case Utility::PERFIL:
+                if ($this->image !== null) {
+                    $this->url_image = Utility::uploadImageFirebase($this->image, $this->id, $type);
+                    $this->image_name = 'perfil.png';
+                }
+            break;
+            case Utility::BANNER:
+                if ($this->banner !== null) {
+                    $this->url_banner = Utility::uploadImageFirebase($this->banner, $this->id, $type);
+                    $this->banner_name = 'banner.png';
+                    Yii::debug($this);
+                }
+            break;
         }
     }
 

@@ -9,6 +9,11 @@ use Yii;
 
 class Utility
 {
+
+    const PERFIL = 'img_perfil';
+    const BANNER = 'img_banner';
+    const PORTADA = 'img_portada';
+
     const GET_COOKIE = <<<EOT
         function getCookie(name) {
             var dc = document.cookie;
@@ -191,23 +196,44 @@ class Utility
         ->withDatabaseUri(getenv('databaseUri'));
     }
 
-    public static function uploadImageFirebase($img, $userId, $perfilImg = false)
+    public static function uploadImageFirebase($img, $userId, $type)
     {
         $filename = str_replace(' ', '', $img->basename) . (new DateTime())->format('Y-m-d_H:i:s') . '.' . $img->extension;
         $origen = Yii::getAlias('@uploads/' . $filename);
         $img->saveAs($origen);
+        $res = '';
 
-        if ($perfilImg) {
-            $name = 'images/perfil/' . $userId . '/perfil.png';
-            $url_name = getenv('url_prefix') . 'images%2Fperfil%2F' . $userId . '%2Fperfil.png' . getenv('url_suffix');
-            $size = 150;
-        } else {
-            $name = 'images/portada/' . $userId . '/' . $filename;
-            $url_name = getenv('url_prefix') . 'images%2Fportada%2F' . $userId . '%2F' . $filename . getenv('url_suffix');
-            $size = 500;
+        switch ($type) {
+            case self::PERFIL:
+                $name = 'images/perfil/' . $userId . '/perfil.png';
+                $url_name = getenv('url_prefix') . 'images%2Fperfil%2F' . $userId . '%2Fperfil.png' . getenv('url_suffix');
+                $width = 150;
+                $height = 150;
+                $res = $url_name;
+            break;
+            case self::PORTADA:
+                $name = 'images/portada/' . $userId . '/' . $filename;
+                $url_name = getenv('url_prefix') . 'images%2Fportada%2F' . $userId . '%2F' . $filename . getenv('url_suffix');
+                $width = 500;
+                $height = 500;
+                $res = [
+                    'url' => $url_name,
+                    'image_name' => $filename
+                ];
+            break;
+            case self::BANNER:
+                $name = 'images/perfil/' . $userId . '/banner.png';
+                $url_name = getenv('url_prefix') . 'images%2Fperfil%2F' . $userId . '%2Fbanner.png' . getenv('url_suffix');
+                $width = 1110;
+                $height = 201;
+                $res = $url_name;
+            break;
+            default:
+                break;
         }
 
-        \yii\imagine\Image::resize($origen, $size, $size)->save($origen);
+
+        \yii\imagine\Image::resize($origen, $width, $height)->save($origen);
 
         $factory = self::getFactory();
         $storage = $factory->createStorage();
@@ -216,14 +242,7 @@ class Utility
             'name' => $name,
         ]);
         unlink($origen);
-        if ($perfilImg) {
-            return $url_name;
-        } else {
-            return [
-                'url' => $url_name,
-                'image_name' => $filename
-            ];
-        }
+        return $res;
     }
 
     public static function uploadFileFirebase($file, $userId)
