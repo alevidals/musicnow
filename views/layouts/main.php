@@ -12,6 +12,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 $this->registerJS(Utility::GET_COOKIE);
@@ -37,6 +38,17 @@ $js = <<<EOT
             getNewNotifications();
         }, 5000);
     }
+
+    $(window).on('pjax:start', function (){
+        setTimeout(function () {
+            $(".owl-carousel").owlCarousel({
+                loop: true,
+                autoplay:true,
+                autoplayTimeout:4000,
+                items : 1
+            });
+        }, 500);
+    });
 
 
     if (getCookie('cookie-accept') == null) {
@@ -175,6 +187,7 @@ $this->registerJS($js);
     <?php $this->head() ?>
 </head>
 <body>
+<?php Pjax::begin(); ?>
 <?php $this->beginBody() ?>
 
     <div aria-live="polite" aria-atomic="true" style="position: relative;">
@@ -334,6 +347,8 @@ $this->registerJS($js);
 <audio class="chat-notification">
     <source src="/sounds/notification.mp3">
 </audio>
+
+<?php Pjax::end(); ?>
 
 <div class="full-player row ml-0">
     <div class="info-song col-12 col-lg-4 col-xl-2 ml-0 row">

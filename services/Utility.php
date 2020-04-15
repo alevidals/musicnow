@@ -37,7 +37,7 @@ class Utility
 
     const PLAY_SONG = <<<EOT
         var firstTime = true;
-        $('.play-btn').on('click', function ev(e) {
+        $('body').on('click', '.play-btn', function ev(e) {
             var cancion_id = $(this).attr('id').split('-')[1];
             $.ajax({
                 method: 'GET',
@@ -74,7 +74,7 @@ class Utility
     EOT;
 
     const LIKE_COMMENT_PROFILE = <<<EOT
-        $('.like-btn').on('click', function ev(e) {
+        $('body').on('click', '.like-btn', function ev(e) {
             var cancion_id = $(this).attr('id').split('-')[1];
             $.ajax({
                 'method': 'POST',
@@ -96,7 +96,7 @@ class Utility
             });
         });
 
-        $('.cancion').on('click', function ev(e) {
+        $('body').on('click', '.cancion', function ev(e) {
             var cancion_id = $(this).data('target').split('-')[1];
             $('#like-' + cancion_id + ' i').removeClass('fas far');
             $.ajax({
@@ -138,7 +138,7 @@ class Utility
 
         });
 
-        $('.comment-btn').on('click', function ev(e) {
+        $('body').on('click', '.comment-btn', function ev(e) {
             var cancion_id = $(this).attr('id').split('-')[1];
             var comentario = $('#text-area-comment-' + cancion_id).val();
             if (comentario.length > 255 || comentario.length == 0) {
