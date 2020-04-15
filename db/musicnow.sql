@@ -22,21 +22,23 @@ DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios
 (
-    id            BIGSERIAL     PRIMARY KEY
-  , login         VARCHAR(50)   NOT NULL UNIQUE
-  , nombre        VARCHAR(255)  NOT NULL
-  , apellidos     VARCHAR(255)  NOT NULL
-  , email         VARCHAR(255)  NOT NULL UNIQUE
-  , password      VARCHAR(255)  NOT NULL
-  , fnac          DATE
-  , rol           BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
-  , estado_id     BIGINT        NOT NULL REFERENCES estados (id) DEFAULT 1
-  , auth_key      VARCHAR(255)
-  , confirm_token VARCHAR(255)
-  , url_image     VARCHAR(2048)
-  , image_name    VARCHAR(255)
-  , created_at    TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
-  , deleted_at    TIMESTAMP(0)
+    id             BIGSERIAL     PRIMARY KEY
+  , login          VARCHAR(50)   NOT NULL UNIQUE
+  , nombre         VARCHAR(255)  NOT NULL
+  , apellidos      VARCHAR(255)  NOT NULL
+  , email          VARCHAR(255)  NOT NULL UNIQUE
+  , password       VARCHAR(255)  NOT NULL
+  , fnac           DATE
+  , rol            BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
+  , estado_id      BIGINT        NOT NULL REFERENCES estados (id) DEFAULT 1
+  , auth_key       VARCHAR(255)
+  , confirm_token  VARCHAR(255)
+  , url_image      VARCHAR(2048)
+  , image_name     VARCHAR(255)
+  , url_banner     VARCHAR(2048)
+  , banner_name    VARCHAR(255)
+  , created_at     TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
+  , deleted_at     TIMESTAMP(0)
 );
 
 DROP TABLE IF EXISTS generos CASCADE;

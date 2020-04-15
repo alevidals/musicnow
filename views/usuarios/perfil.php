@@ -51,7 +51,11 @@ $this->registerJS($js);
 
 <div class="usuarios-view">
 
-    <?= Html::img('@web/img/banner.png', ['class' => 'img-fluid', 'alt' => 'banner']) ?>
+    <?php if ($model->url_banner) : ?>
+        <?= Html::img($model->url_banner, ['class' => 'img-fluid', 'alt' => 'banner']) ?>
+
+    <?php endif; ?>
+
 
     <?php if ($model->id != Yii::$app->user->id) : ?>
         <?php if ($bloqueo != UsuariosController::OTHER_BLOCK
@@ -157,6 +161,14 @@ $this->registerJS($js);
                     <?= Html::a(
                         Yii::t('app', 'DeleteProfileImage'),
                         ['usuarios/eliminar-imagen', 'id' => $model->id],
+                        [
+                            'class' => 'dropdown-item',
+                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']
+                        ]
+                    ) ?>
+                    <?= Html::a(
+                        Yii::t('app', 'DeleteProfileBanner'),
+                        ['usuarios/eliminar-banner', 'id' => $model->id],
                         [
                             'class' => 'dropdown-item',
                             'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']

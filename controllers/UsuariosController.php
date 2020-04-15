@@ -8,6 +8,7 @@ use app\models\Estados;
 use app\models\LoginForm;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
+use app\services\Utility;
 use DateTime;
 use Yii;
 use yii\filters\AccessControl;
@@ -118,7 +119,10 @@ class UsuariosController extends Controller
         $model->scenario = Usuarios::SCENARIO_UPDATE;
 
         $model->image = UploadedFile::getInstance($model, 'image');
-        $model->uploadImg(true);
+        $model->uploadImg(Utility::PERFIL);
+
+        $model->banner = UploadedFile::getInstance($model, 'banner');
+        $model->uploadImg(Utility::BANNER);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['perfil', 'id' => $model->id]);
@@ -329,6 +333,16 @@ class UsuariosController extends Controller
     {
         $model = $this->findModel($id);
         $model->url_image = Yii::$app->params['defaultImgProfile'];
+        if ($model->save()) {
+            return $this->goBack();
+        }
+    }
+
+    public function actionEliminarBanner($id)
+    {
+        $model = $this->findModel($id);
+        $model->url_banner = null;
+        $model->banner_name = null;
         if ($model->save()) {
             return $this->goBack();
         }
