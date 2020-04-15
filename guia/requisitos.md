@@ -901,6 +901,15 @@
 | **Entrega**     | v3             |
 | **Incidencia**  | [100](https://github.com/alevidals/musicnow/issues/100) |
 
+| **R101**     | **Escuchar la canción  través de la página.**         |
+| --------------: | :------------------- |
+| **Descripción** | La canción se deberá seguir escuchando mientras navegas por la página de modo que la página tendrá que ser cargada mediante la tecnología AJAX.             |
+| **Prioridad**   | Opcional           |
+| **Tipo**        | Funcional                |
+| **Complejidad** | Media         |
+| **Entrega**     | v3             |
+| **Incidencia**  | [134](https://github.com/alevidals/musicnow/issues/134) |
+
 
 ## Cuadro resumen
 
@@ -1006,3 +1015,4 @@
 | (**R98**) Modo claro/oscuro | Opcional | Funcional | Media | v3 | | **Incidencia**  | [98](https://github.com/alevidals/musicnow/issues/98) |
 | (**R99**) Notificar al usuario. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [99](https://github.com/alevidals/musicnow/issues/99) |
 | (**R100**) Agregar el link de un videoclip a la canción. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [100](https://github.com/alevidals/musicnow/issues/100) |
+| (**R101**) Escuchar la canción  través de la página. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [134](https://github.com/alevidals/musicnow/issues/134) |
