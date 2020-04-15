@@ -399,7 +399,7 @@ select {
 
 /* Dark mode */
 
-[data-theme="dark"] * {
+[data-theme="dark"] *:not(.alert) {
     color: #fff !important;
 }
 

@@ -24,12 +24,20 @@ $urlGetFollowersNumber = Url::to(['usuarios/get-followers-data']);
 $followMessage = Yii::t('app', 'followMessage');
 $cookieMessage = Yii::t('app', 'CookieMessage');
 
+$isLogued = !Yii::$app->user->isGuest;
+
 $js = <<<EOT
 
     var mensajes = 0;
     var seguidores = 0;
 
-    getFollowersNumber();
+    if ('$isLogued') {
+        getFollowersNumber();
+        setInterval(function () {
+            getNewNotifications();
+        }, 5000);
+    }
+
 
     if (getCookie('cookie-accept') == null) {
         $( document ).ready(function() {
@@ -52,10 +60,6 @@ $js = <<<EOT
             }
         });
     }
-
-    setInterval(function(){
-        getNewNotifications();
-    }, 5000);
 
     function getNewNotifications() {
         // NUEVOS SEGUIDORES
