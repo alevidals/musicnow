@@ -50,7 +50,7 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
 // $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
 ?>
-<div class="usuarios-update">
+<div class="usuarios-update container">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -58,7 +58,11 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
         <div clss="col-lg-6 text-center">
             <div class="form-group field-usuarios-banner">
                 <label class="img-edit" for="usuarios-banner">
-                    <img class="user-search-banner" src="<?= $model->url_banner ?>" alt="profile-img">
+                    <?php if ($model->url_banner) : ?>
+                        <img class="user-search-banner img-fluid" src="<?= $model->url_banner ?>" alt="profile-img">
+                    <?php else : ?>
+                        <p>Banner</p>
+                    <?php endif; ?>
                     <i class="fas fa-pen edit-image-icon-banner"></i>
                 </label>
                 <?= $form->field($model, 'banner')->fileInput(['class' => 'file-input-banner form-control-file d-none'])->label(false) ?>
@@ -69,7 +73,7 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
         <div clss="col-lg-6 text-center">
             <div class="form-group field-usuarios-image">
                 <label class="img-edit" for="usuarios-image">
-                    <img class="user-search-img profile-img" src="<?= $model->url_image ?>" alt="profile-img">
+                    <img class="user-search-img profile-img img-fluid" src="<?= $model->url_image ?>" alt="profile-img">
                     <i class="fas fa-pen edit-image-icon-image"></i>
                 </label>
                 <?= $form->field($model, 'image')->fileInput(['class' => 'file-input form-control-file d-none'])->label(false) ?>
@@ -104,8 +108,8 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
             ->widget(
                 DateControl::classname(),
                 [
-                'type' => DateControl::FORMAT_DATE,
-                'displayFormat' => 'php:d-m-Y',
+                    'type' => DateControl::FORMAT_DATE,
+                    'displayFormat' => 'php:d-m-Y',
                 ]
             ); ?>
         </div>

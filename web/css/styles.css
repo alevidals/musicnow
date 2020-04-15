@@ -41,6 +41,10 @@
     color: #007bff !important;
 }
 
+.krajee-datepicker {
+    padding-left: 10px !important;
+}
+
 .share-buttons i:not(.fa-heart) {
     color: #fff !important;
 }
@@ -505,5 +509,9 @@ select {
 }
 
 [data-theme="dark"] .edit-image-icon-banner {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .kv-dp-icon {
     color: #000 !important;
 }
