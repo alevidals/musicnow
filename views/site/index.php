@@ -46,7 +46,7 @@ $sort = Yii::$app->request->get('sort');
         <div> <?= Html::img('@web/img/banner5.png', ['alt' => 'banner5']); ?> </div>
     </div>
 
-    <?= Html::beginForm(['site/index'], 'get', ['data-pjax' => '']) ?>
+    <?= Html::beginForm(['site/index'], 'get', ['data-pjax' => 'true']) ?>
             <div class="form-group">
                 <?= Html::textInput('cadena', $cadena, ['class' => 'form-control', 'placeholder' => Yii::t('app', 'Search') . '...']) ?>
             </div>

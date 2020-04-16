@@ -128,7 +128,7 @@ $this->title = Yii::t('app', 'Chats');
                                     <div class="chat-history custom-overflow pr-2 pt-2" data-receptorid="<?= $seguido->id ?>" id="chat-history-<?= $seguido->id ?>">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="chat-message<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control">
+                                        <input type="text" name="chat-message<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control chat-input">
                                     </div>
                                     <div class="form-group">
                                         <button type="button" id="<?= $seguido->id ?>" class="btn main-yellow send-chat">Send</button>

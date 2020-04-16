@@ -13,6 +13,7 @@ use yii\helpers\Url;
 
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
+$urlGetLikes = Url::to(['canciones/get-likes']);
 
 $js = <<<EOT
 
@@ -33,6 +34,25 @@ $js = <<<EOT
             success: function (data) {
                 $('.follow').html(data.textButton);
                 $('#seguidores').html(data.seguidores);
+            }
+        });
+    });
+
+    $('body').on('click', '.like-list', function ev(e) {
+        var cancion_id = $(this).data('song');
+        $.ajax({
+            method: 'GET',
+            'url': '$urlGetLikes&cancion_id=' + cancion_id,
+            success: function (data) {
+                $('.like-row').html('');
+                data.forEach(element => {
+                    $('.like-row').append(`
+                        <div class="col-12">
+                                <img src="\${element.url_image}" class="d-inline-block user-search-img my-auto" width="30px" alt="like">
+                                <p class="d-inline-block my-auto">\${element.login}</p>
+                        </div>
+                    `);
+                });
             }
         });
     });
@@ -235,7 +255,22 @@ $this->registerJS($js);
                                                                 <div class="mt-3">
                                                                     <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button"><?= Yii::t('app', 'CommentAction') ?></button>
                                                                     <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart text-danger"></i></button>
-                                                                    <p class="d-inline-block"><span></span> like/s</p>
+                                                                    <p class="d-inline-block">
+                                                                        <span></span>
+                                                                        <button class="outline-transparent like-list" data-song="<?= $cancion->id ?>" type="button" data-toggle="modal" data-target="#likes-list">
+                                                                            like/s
+                                                                        </button>
+                                                                    </p>
+                                                                    <div class="modal fade" id="likes-list" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-body">
+                                                                                    <div class="like-row">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

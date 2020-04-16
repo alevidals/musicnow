@@ -209,4 +209,20 @@ class CancionesController extends Controller
 
         return $comentarios;
     }
+
+    public function actionGetLikes($cancion_id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $canciones = (new \yii\db\Query())
+            ->select(['usuarios.login', 'usuarios.url_image', 'usuarios.id'])
+            ->from('likes l')
+            ->leftJoin('usuarios', 'l.usuario_id = usuarios.id')
+            ->where(['cancion_id' => $cancion_id])
+            ->all();
+
+        Yii::debug($canciones);
+
+        return $canciones;
+    }
 }

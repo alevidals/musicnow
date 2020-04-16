@@ -103,7 +103,7 @@ $js = <<<EOT
         });
     });
 
-    $('body').on('keydown', 'input', function ev(e) {
+    $('body').on('keydown', '.chat-input', function ev(e) {
         var key = (event.keyCode ? event.keyCode : event.which);
         if (key == 13) {
             var receptor_id = $(this).attr('id').split('-')[2];
@@ -146,6 +146,7 @@ $js = <<<EOT
     }
 
     $(window).on('pjax:start', function (){
+        $.pjax.reload({container: "#p0", timeout: false});
         setTimeout(function () {
             $(".owl-carousel").owlCarousel({
                 loop: true,
