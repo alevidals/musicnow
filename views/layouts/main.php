@@ -30,6 +30,7 @@ $js = <<<EOT
 
     var mensajes = 0;
     var seguidores = 0;
+    var songs = [];
 
     if ('$isLogued') {
         getFollowersNumber();
@@ -344,7 +345,7 @@ $this->registerJS($js);
         </div>
     </div>
     <div class="player col-12 col-lg-8 col-xl-10">
-        <audio autoplay>
+        <audio id="audio" autoplay>
             <source>
         </audio>
     </div>

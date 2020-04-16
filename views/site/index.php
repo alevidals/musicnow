@@ -5,6 +5,7 @@
 use app\services\Utility;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
+use yii\web\View;
 
 $this->title = 'My Yii Application';
 
@@ -15,10 +16,12 @@ $urlGetLikesData = Url::to(['likes/get-data']);
 $urlComment = Url::to(['comentarios/comentar']);
 $urlGetComments = Url::to(['canciones/comentarios']);
 $urlPerfil = Url::to(['usuarios/perfil']);
+$urlGetSongData = Url::to(['canciones/get-song-data']);
 
 $likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
 
 $js = <<<EOT
+
     $(document).ready(function(){
         $(".owl-carousel").owlCarousel({
             loop: true,
@@ -31,6 +34,56 @@ $js = <<<EOT
     $likeCommentProfile
     // CÓDIGO PARA REPRODUCIR LA CANCIÓN
     $playSongCode
+
+    $('.add-btn').on('click', function ev() {
+        var cancion_id = $(this).data('song');
+        $.ajax({
+            method: 'GET',
+            url: '$urlGetSongData&cancion_id=' + cancion_id,
+            success: function (data) {
+                songs.push({
+                    url_cancion: data.url_cancion,
+                    url_portada: data.url_portada,
+                    titulo: data.titulo,
+                    album: data.album,
+                });
+                var audio = document.getElementById('audio');
+                var source = $('.player audio source')[0];
+                if (audio.paused) {
+                    if ($('.loading').length) {
+                        $('.loading').remove();
+                        $('.play-pause-btn').remove();
+                        $('.controls').remove();
+                        $('.volume').remove();
+                        $('.download').remove();
+                    }
+                    GreenAudioPlayer.init({
+                        selector: '.player',
+                        stopOthersOnPlay: true,
+                        showDownloadButton: true,
+                    });
+                    var cancion = songs.shift();
+                    $('.info-song img').attr('src', cancion.url_portada);
+                    $('.player audio source').attr('src', cancion.url_cancion);
+                    $('.artist-info p').html(cancion.titulo);
+                    $('.artist-info small').html(cancion.album);
+                    $('.full-player').css('display', 'flex');
+                    $('.player').css('display', 'flex');
+                    var audio = document.getElementById('audio');
+                    audio.addEventListener('ended', () =>  {
+                        if (songs.length > 0) {
+                            var cancion = songs.shift();
+                            $('.info-song img').attr('src', cancion.url_portada);
+                            $('.player audio source').attr('src', cancion.url_cancion);
+                            $('.artist-info p').html(cancion.titulo);
+                            $('.artist-info small').html(cancion.album);
+                            $('.play-pause-btn').trigger('click');
+                        }
+                    });
+                }
+            }
+        });
+    });
 EOT;
 
 $this->registerJS($js);
@@ -65,8 +118,9 @@ $this->registerJS($js);
                                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
                                 <div class="share-buttons">
                                     <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                    <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
+                                    <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent bubbly-button like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
                                     <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
+                                    <button data-song="<?= $cancion->id ?>" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="layer"></div>
                             </div>
