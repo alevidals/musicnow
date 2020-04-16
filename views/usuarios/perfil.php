@@ -2,7 +2,6 @@
 
 use app\controllers\UsuariosController;
 use app\services\Utility;
-use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
@@ -14,6 +13,9 @@ use yii\helpers\Url;
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 $urlGetLikes = Url::to(['canciones/get-likes']);
+
+$playSongCode = Utility::PLAY_SONG;
+$likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
 
 $js = <<<EOT
 
@@ -27,7 +29,7 @@ $js = <<<EOT
         }
     });
 
-    $('body').on('click', '.follow', function ev(e) {
+    $('.follow').on('click', function ev(e) {
         $.ajax({
             'method': 'POST',
             'url': '$urlFollow',
@@ -38,7 +40,7 @@ $js = <<<EOT
         });
     });
 
-    $('body').on('click', '.like-list', function ev(e) {
+    $('.like-list').on('click', function ev(e) {
         var cancion_id = $(this).data('song');
         $.ajax({
             method: 'GET',
@@ -56,6 +58,9 @@ $js = <<<EOT
             }
         });
     });
+
+    $likeCommentProfile
+    $playSongCode
 
 EOT;
 
@@ -82,8 +87,8 @@ $this->registerJS($js);
                     'role' => 'button',
                     'class' => 'btn main-yellow mt-4',
                     'data' => [
-                        'confirm' => '¿Estás seguro? Si sigues al usuario dejaras de seguirlo.', 'method' => 'post'
-                    ]
+                        'confirm' => '¿Estás seguro? Si sigues al usuario dejaras de seguirlo.', 'method' => 'post',
+                    ],
                 ]
             ) ?>
         <?php endif; ?>
@@ -173,19 +178,19 @@ $this->registerJS($js);
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
                     <?= Html::a(
-                        Yii::t('app', 'DeleteProfileImage'),
-                        ['usuarios/eliminar-imagen', 'id' => $model->id],
-                        [
+                Yii::t('app', 'DeleteProfileImage'),
+                ['usuarios/eliminar-imagen', 'id' => $model->id],
+                [
                             'class' => 'dropdown-item',
-                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']
+                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                         ]
-                    ) ?>
+            ) ?>
                     <?= Html::a(
                         Yii::t('app', 'DeleteProfileBanner'),
                         ['usuarios/eliminar-banner', 'id' => $model->id],
                         [
                             'class' => 'dropdown-item',
-                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']
+                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                         ]
                     ) ?>
                     <?= Html::a(
@@ -200,7 +205,7 @@ $this->registerJS($js);
                         ['usuarios/eliminar-cuenta', 'id' => $model->id],
                         [
                             'class' => 'dropdown-item',
-                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post']
+                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                         ]
                     ) ?>
                 </div>
@@ -265,6 +270,7 @@ $this->registerJS($js);
                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-body">
+                                                                                    <h4>Likes</h4>
                                                                                     <div class="like-row">
                                                                                     </div>
                                                                                 </div>

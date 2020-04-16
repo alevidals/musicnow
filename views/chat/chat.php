@@ -1,7 +1,6 @@
 <?php
 
 use yii\bootstrap4\Html;
-use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -9,26 +8,27 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $urlStatus = Url::to(['usuarios/estados', 'id' => $usuario->id]);
+$urlSendChat = Url::to(['chat/send-chat']);
 $urlGetChatHistory = Url::to(['chat/get-chat']);
 $urlGetNoReadMessages = Url::to(['usuarios/get-no-read-messages']);
 
 $js = <<<EOT
 
-    getStatusFromUsers();
-
     var interval;
+
+    getStatusFromUsers();
 
     setInterval(function(){
         getStatusFromUsers();
     }, 5000);
 
-    $('body').on('show.bs.modal', '.modal', function (e) {
+    $('.modal').on('show.bs.modal', function (e) {
         interval = setInterval(function(){
             updateChatHistory();
         }, 5000);
     });
 
-    $('body').on('hide.bs.modal', '.modal', function (e) {
+    $('.modal').on('hide.bs.modal', function (e) {
         clearInterval(interval);
     });
 
@@ -67,7 +67,7 @@ $js = <<<EOT
 
     function getMessagesFromChat(receptor_id) {
         $.ajax({
-            method: 'GET',
+            method: 'POST',
             url: '$urlGetChatHistory&receptor_id=' + receptor_id,
             success: function (data) {
                 $('#chat-history-' + receptor_id).html('');
@@ -96,6 +96,79 @@ $js = <<<EOT
             $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
         });
     }
+
+    $('.send-chat').on('click', function ev(e) {
+        var receptor_id = $(this).attr('id');
+        var mensaje = $('#chat-message-' + receptor_id).val().trim();
+        $.ajax({
+            method: 'POST',
+            url: '$urlSendChat',
+            data: {
+                receptor_id: receptor_id,
+                mensaje: mensaje
+            },
+            success: function(data) {
+                $('#chat-message-' + receptor_id).val('');
+                $('#chat-history-' + receptor_id).html('')
+                data.forEach(element => {
+                    if (element.emisor_id != receptor_id) {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                        `);
+                        if (element.estado_id == 4) {
+                            $('.read-tick').addClass('read-message');
+                        }
+                    } else {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
+                        `);
+                    }
+                });
+                $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+            }
+        });
+    });
+
+    $('input').on('keydown', function ev(e) {
+        var key = (event.keyCode ? event.keyCode : event.which);
+        if (key == 13) {
+            var receptor_id = $(this).attr('id').split('-')[2];
+            var mensaje = $('#chat-message-' + receptor_id).val().trim();
+            $.ajax({
+                method: 'POST',
+                url: '$urlSendChat',
+                data: {
+                    receptor_id: receptor_id,
+                    mensaje: mensaje
+                },
+                success: function(data) {
+                    $('#chat-message-' + receptor_id).val('');
+                    $('#chat-history-' + receptor_id).html('')
+                    data.forEach(element => {
+                        if (element.emisor_id != receptor_id) {
+                            $('#chat-history-' + receptor_id).append(`
+                                <p class="message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                            `);
+                            if (element.estado_id == 4) {
+                                $('.read-tick').addClass('read-message');
+                            }
+                        } else {
+                            $('#chat-history-' + receptor_id).append(`
+                                <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
+                            `);
+                        }
+                    });
+                    $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+                }
+            });
+        }
+    });
+
+    $('.start-chat').on('click', function ev(e) {
+        var receptor_id = $(this).data('receptorid');
+        getMessagesFromChat(receptor_id);
+        $('.send-chat').trigger('click');
+    });
 EOT;
 
 $this->registerJS($js);
@@ -128,7 +201,7 @@ $this->title = Yii::t('app', 'Chats');
                                     <div class="chat-history custom-overflow pr-2 pt-2" data-receptorid="<?= $seguido->id ?>" id="chat-history-<?= $seguido->id ?>">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="chat-message<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control chat-input">
+                                        <input type="text" name="chat-message<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <button type="button" id="<?= $seguido->id ?>" class="btn main-yellow send-chat">Send</button>

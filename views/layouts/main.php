@@ -12,7 +12,6 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\Pjax;
 
 AppAsset::register($this);
 $this->registerJS(Utility::GET_COOKIE);
@@ -25,118 +24,12 @@ $urlGetFollowersNumber = Url::to(['usuarios/get-followers-data']);
 $followMessage = Yii::t('app', 'followMessage');
 $cookieMessage = Yii::t('app', 'CookieMessage');
 
-$urlGetChatHistory = Url::to(['chat/get-chat']);
-$urlSendChat = Url::to(['chat/send-chat']);
-
-$playSongCode = Utility::PLAY_SONG;
-$likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
-
 $isLogued = !Yii::$app->user->isGuest;
 
 $js = <<<EOT
 
-    $playSongCode
-    $likeCommentProfile
-
-    $('body').on('click', '.start-chat', function ev(e) {
-        var receptor_id = $(this).data('receptorid');
-        getMessagesFromChat(receptor_id);
-        $('.send-chat').trigger('click');
-    });
-
     var mensajes = 0;
     var seguidores = 0;
-
-    function getMessagesFromChat(receptor_id) {
-        $.ajax({
-            method: 'GET',
-            url: '$urlGetChatHistory&receptor_id=' + receptor_id,
-            success: function (data) {
-                $('#chat-history-' + receptor_id).html('');
-                data.historial.forEach(element => {
-                    if (element.emisor_id != receptor_id) {
-                        $('#chat-history-' + receptor_id).append(`
-                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
-                        `);
-                        if (element.estado_id == 4) {
-                            $('.read-tick').addClass('read-message');
-                        }
-                    } else {
-                        $('#chat-history-' + receptor_id).append(`
-                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
-                        `);
-                    }
-                });
-            }
-        });
-    }
-
-    $('body').on('click', '.send-chat', function ev(e) {
-        var receptor_id = $(this).attr('id');
-        var mensaje = $('#chat-message-' + receptor_id).val().trim();
-        $.ajax({
-            method: 'POST',
-            url: '$urlSendChat',
-            data: {
-                receptor_id: receptor_id,
-                mensaje: mensaje
-            },
-            success: function(data) {
-                $('#chat-message-' + receptor_id).val('');
-                $('#chat-history-' + receptor_id).html('')
-                data.forEach(element => {
-                    if (element.emisor_id != receptor_id) {
-                        $('#chat-history-' + receptor_id).append(`
-                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
-                        `);
-                        if (element.estado_id == 4) {
-                            $('.read-tick').addClass('read-message');
-                        }
-                    } else {
-                        $('#chat-history-' + receptor_id).append(`
-                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
-                        `);
-                    }
-                });
-                $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
-            }
-        });
-    });
-
-    $('body').on('keydown', '.chat-input', function ev(e) {
-        var key = (event.keyCode ? event.keyCode : event.which);
-        if (key == 13) {
-            var receptor_id = $(this).attr('id').split('-')[2];
-            var mensaje = $('#chat-message-' + receptor_id).val().trim();
-            $.ajax({
-                method: 'POST',
-                url: '$urlSendChat',
-                data: {
-                    receptor_id: receptor_id,
-                    mensaje: mensaje
-                },
-                success: function(data) {
-                    $('#chat-message-' + receptor_id).val('');
-                    $('#chat-history-' + receptor_id).html('')
-                    data.forEach(element => {
-                        if (element.emisor_id != receptor_id) {
-                            $('#chat-history-' + receptor_id).append(`
-                                <p class="message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
-                            `);
-                            if (element.estado_id == 4) {
-                                $('.read-tick').addClass('read-message');
-                            }
-                        } else {
-                            $('#chat-history-' + receptor_id).append(`
-                                <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
-                            `);
-                        }
-                    });
-                    $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
-                }
-            });
-        }
-    });
 
     if ('$isLogued') {
         getFollowersNumber();
@@ -144,18 +37,6 @@ $js = <<<EOT
             getNewNotifications();
         }, 5000);
     }
-
-    $(window).on('pjax:start', function (){
-        $.pjax.reload({container: "#p0", timeout: false});
-        setTimeout(function () {
-            $(".owl-carousel").owlCarousel({
-                loop: true,
-                autoplay:true,
-                autoplayTimeout:4000,
-                items : 1
-            });
-        }, 500);
-    });
 
 
     if (getCookie('cookie-accept') == null) {
@@ -294,7 +175,6 @@ $this->registerJS($js);
     <?php $this->head() ?>
 </head>
 <body>
-<?php Pjax::begin(); ?>
 <?php $this->beginBody() ?>
 
     <div aria-live="polite" aria-atomic="true" style="position: relative;">
@@ -323,7 +203,7 @@ $this->registerJS($js);
                                 <div class="custom-control custom-switch d-inline-block">
                                     <input type="checkbox" class="custom-control-input " id="darkSwitch">
                                     <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
-                                </div>'
+                                </div>',
                 ],
                 ['label' => Yii::t('app', 'Home'), 'url' => ['/site/admin-index']],
                 ['label' => Yii::t('app', 'Generos'), 'url' => ['/generos/index']],
@@ -331,12 +211,12 @@ $this->registerJS($js);
                 ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
                 ['label' => Yii::t('app', 'Usuarios'), 'url' => ['/usuarios/index']],
                 [
-                    'label'=> Yii::t('app', 'Language'),
+                    'label' => Yii::t('app', 'Language'),
                     'options' => ['class' => 'my-auto'],
                     'items' => [
                         ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
                         ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
-                    ]
+                    ],
                 ],
                 Yii::$app->user->isGuest ? (
                     [
@@ -364,7 +244,7 @@ $this->registerJS($js);
                 ),
             ];
         } else {
-                $items = [
+            $items = [
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
@@ -375,15 +255,15 @@ $this->registerJS($js);
                                         <input type="checkbox" class="custom-control-input " id="darkSwitch">
                                         <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
                                     </div>',
-                        'options' => ['class' => 'my-auto']
+                        'options' => ['class' => 'my-auto'],
                     ],
                     [
-                        'label'=> Yii::t('app', 'Language'),
+                        'label' => Yii::t('app', 'Language'),
                         'options' => ['class' => 'my-auto'],
                         'items' => [
                             ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
                             ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
-                        ]
+                        ],
                     ],
                     Yii::$app->user->isGuest ? (
                         [
@@ -415,7 +295,7 @@ $this->registerJS($js);
     } else {
         $items = [
             [
-                'label'=> Yii::t('app', 'Language'),
+                'label' => Yii::t('app', 'Language'),
                 'options' => ['class' => 'my-auto'],
                 'items' => [
                     ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
@@ -427,14 +307,14 @@ $this->registerJS($js);
                             <div class="custom-control custom-switch d-inline-block">
                                 <input type="checkbox" class="custom-control-input " id="darkSwitch">
                                 <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
-                            </div>'
+                            </div>',
             ],
         ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
-        'encodeLabels'=> false,
-        'items' => $items
+        'encodeLabels' => false,
+        'items' => $items,
     ]);
     NavBar::end();
     ?>
@@ -454,8 +334,6 @@ $this->registerJS($js);
 <audio class="chat-notification">
     <source src="/sounds/notification.mp3">
 </audio>
-
-<?php Pjax::end(); ?>
 
 <div class="full-player row ml-0">
     <div class="info-song col-12 col-lg-4 col-xl-2 ml-0 row">

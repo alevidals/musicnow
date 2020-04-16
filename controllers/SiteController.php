@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\models\Canciones;
 use app\models\ContactForm;
 use app\models\Usuarios;
-use app\services\Utility;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -32,7 +31,7 @@ class SiteController extends Controller
                         'matchCallback' => function ($rules, $action) {
                             return Yii::$app->user->identity->login === 'admin'
                                 && Yii::$app->user->identity->rol === 1;
-                        }
+                        },
                     ],
                     [
                         'actions' => ['logout', 'index'],
@@ -79,49 +78,8 @@ class SiteController extends Controller
 
         $canciones = Canciones::find()->where(['IN', 'usuario_id', $ids])->orWhere(['usuario_id' => Yii::$app->user->id])->all();
 
-        $usuariosSearch = new ActiveDataProvider([
-            'query' => Usuarios::find()->where('1=0'),
-        ]);
-        $cancionesSearch = new ActiveDataProvider([
-            'query' => Canciones::find()->where('1=0'),
-        ]);
-
         if (($cadena = Yii::$app->request->get('cadena', ''))) {
-            $usuariosSearch = new ActiveDataProvider([
-                'query' => Usuarios::find()
-                    ->where(['ilike', 'login', $cadena])
-                    ->orWhere(['ilike', 'email', $cadena])
-                    ->andWhere(['!=', 'rol', 1]),
-            ]);
-
-            $userIds = Usuarios::find()
-                ->select('id')
-                ->where(['ilike', 'login', $cadena])
-                ->andWhere(['!=', 'rol', 1])
-                ->column();
-
-            $adminIds = Usuarios::find()
-                ->select('id')
-                ->where(['ilike', 'login', $cadena])
-                ->andWhere(['=', 'rol', 1])
-                ->column();
-
-            $cancionesSearch = new ActiveDataProvider([
-                'query' => Canciones::findWithTotalLikes()
-                    ->joinWith('usuario u')
-                    ->joinWith('genero g')
-                    ->where(['ilike', 'titulo', $cadena])
-                    ->orWhere(['IN', 'canciones.usuario_id', $userIds])
-                    ->andWhere(['NOT IN', 'canciones.usuario_id', $adminIds])
-                    ->addGroupBy(['g.denominacion', 'u.login']),
-                'sort' => [
-                    'attributes' => [
-                        'u.login',
-                        'g.denominacion',
-                        'likes',
-                    ],
-                ],
-            ]);
+            return $this->redirect(['site/search', 'cadena' => $cadena]);
         }
 
         $likes = $usuario
@@ -134,8 +92,6 @@ class SiteController extends Controller
             'usuario' => $usuario,
             'likes' => $likes,
             'cadena' => $cadena,
-            'cancionesSearch' => $cancionesSearch,
-            'usuariosSearch' => $usuariosSearch,
         ]);
     }
 
@@ -143,7 +99,52 @@ class SiteController extends Controller
     {
         return $this->render('admin-index');
     }
-    
+
+    public function actionSearch($cadena)
+    {
+        $usuariosSearch = new ActiveDataProvider([
+            'query' => Usuarios::find()
+                ->where(['ilike', 'login', $cadena])
+                ->orWhere(['ilike', 'email', $cadena])
+                ->andWhere(['!=', 'rol', 1]),
+        ]);
+
+        $userIds = Usuarios::find()
+            ->select('id')
+            ->where(['ilike', 'login', $cadena])
+            ->andWhere(['!=', 'rol', 1])
+            ->column();
+
+        $adminIds = Usuarios::find()
+            ->select('id')
+            ->where(['ilike', 'login', $cadena])
+            ->andWhere(['=', 'rol', 1])
+            ->column();
+
+        $cancionesSearch = new ActiveDataProvider([
+            'query' => Canciones::findWithTotalLikes()
+                ->joinWith('usuario u')
+                ->joinWith('genero g')
+                ->where(['ilike', 'titulo', $cadena])
+                ->orWhere(['IN', 'canciones.usuario_id', $userIds])
+                ->andWhere(['NOT IN', 'canciones.usuario_id', $adminIds])
+                ->addGroupBy(['g.denominacion', 'u.login']),
+            'sort' => [
+                'attributes' => [
+                    'u.login',
+                    'g.denominacion',
+                    'likes',
+                ],
+            ],
+        ]);
+
+        return $this->render('search', [
+            'cadena' => $cadena,
+            'usuariosSearch' => $usuariosSearch,
+            'cancionesSearch' => $cancionesSearch,
+        ]);
+    }
+
     /**
      * Displays contact page.
      *
