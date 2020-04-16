@@ -98,7 +98,7 @@ $js = <<<EOT
         });
     }
 
-    $('.send-chat').on('click', function ev(e) {
+    $('body').on('click', '.send-chat', function ev(e) {
         var receptor_id = $(this).attr('id');
         var mensaje = $('#chat-message-' + receptor_id).val().trim();
         $.ajax({
@@ -130,7 +130,7 @@ $js = <<<EOT
         });
     });
 
-    $('input').on('keydown', function ev(e) {
+    $('body').on('keydown', 'input', function ev(e) {
         var key = (event.keyCode ? event.keyCode : event.which);
         if (key == 13) {
             var receptor_id = $(this).attr('id').split('-')[2];
@@ -165,7 +165,7 @@ $js = <<<EOT
         }
     });
 
-    $('.start-chat').on('click', function ev(e) {
+    $('body').on('click', '.start-chat', function ev(e) {
         var receptor_id = $(this).data('receptorid');
         getMessagesFromChat(receptor_id);
         $('.send-chat').trigger('click');

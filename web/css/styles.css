@@ -9,8 +9,16 @@
     color: #fff !important;
 }
 
+#p0 {
+    min-height: 100%;
+}
+
 .btn.btn-secondary {
     color: #fff !important;
+}
+
+.wrap {
+    min-height: 100%;
 }
 
 .navbar-dark .navbar-toggler {
