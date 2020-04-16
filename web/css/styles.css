@@ -400,14 +400,12 @@ select {
 
 .read-message,
 [data-theme="dark"] .read-message {
-    color: #00f !important;
+    color: blue !important;
 }
-
-
 
 /* Dark mode */
 
-[data-theme="dark"] *:not(.alert) {
+[data-theme="dark"] * {
     color: #fff !important;
 }
 
@@ -508,7 +506,12 @@ select {
     background-color: #202020;
 }
 
-[data-theme="dark"] .message * {
+[data-theme="dark"] .message {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .message,
+[data-theme="dark"] .message small{
     color: #000 !important;
 }
 
@@ -521,5 +524,13 @@ select {
 }
 
 [data-theme="dark"] .kv-dp-icon {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .alert{
+    color: #000 !important;
+}
+
+[data-theme="dark"] .alert span{
     color: #000 !important;
 }

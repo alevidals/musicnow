@@ -29,10 +29,6 @@ $js = <<<EOT
             items : 1
         });
     });
-
-    $likeCommentProfile
-    // CÓDIGO PARA REPRODUCIR LA CANCIÓN
-    $playSongCode
 EOT;
 
 $this->registerJS($js);

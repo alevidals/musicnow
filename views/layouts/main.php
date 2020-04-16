@@ -25,12 +25,118 @@ $urlGetFollowersNumber = Url::to(['usuarios/get-followers-data']);
 $followMessage = Yii::t('app', 'followMessage');
 $cookieMessage = Yii::t('app', 'CookieMessage');
 
+$urlGetChatHistory = Url::to(['chat/get-chat']);
+$urlSendChat = Url::to(['chat/send-chat']);
+
+$playSongCode = Utility::PLAY_SONG;
+$likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
+
 $isLogued = !Yii::$app->user->isGuest;
 
 $js = <<<EOT
 
+    $playSongCode
+    $likeCommentProfile
+
+    $('body').on('click', '.start-chat', function ev(e) {
+        var receptor_id = $(this).data('receptorid');
+        getMessagesFromChat(receptor_id);
+        $('.send-chat').trigger('click');
+    });
+
     var mensajes = 0;
     var seguidores = 0;
+
+    function getMessagesFromChat(receptor_id) {
+        $.ajax({
+            method: 'GET',
+            url: '$urlGetChatHistory&receptor_id=' + receptor_id,
+            success: function (data) {
+                $('#chat-history-' + receptor_id).html('');
+                data.historial.forEach(element => {
+                    if (element.emisor_id != receptor_id) {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                        `);
+                        if (element.estado_id == 4) {
+                            $('.read-tick').addClass('read-message');
+                        }
+                    } else {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
+                        `);
+                    }
+                });
+            }
+        });
+    }
+
+    $('body').on('click', '.send-chat', function ev(e) {
+        var receptor_id = $(this).attr('id');
+        var mensaje = $('#chat-message-' + receptor_id).val().trim();
+        $.ajax({
+            method: 'POST',
+            url: '$urlSendChat',
+            data: {
+                receptor_id: receptor_id,
+                mensaje: mensaje
+            },
+            success: function(data) {
+                $('#chat-message-' + receptor_id).val('');
+                $('#chat-history-' + receptor_id).html('')
+                data.forEach(element => {
+                    if (element.emisor_id != receptor_id) {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class=" message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                        `);
+                        if (element.estado_id == 4) {
+                            $('.read-tick').addClass('read-message');
+                        }
+                    } else {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
+                        `);
+                    }
+                });
+                $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+            }
+        });
+    });
+
+    $('body').on('keydown', 'input', function ev(e) {
+        var key = (event.keyCode ? event.keyCode : event.which);
+        if (key == 13) {
+            var receptor_id = $(this).attr('id').split('-')[2];
+            var mensaje = $('#chat-message-' + receptor_id).val().trim();
+            $.ajax({
+                method: 'POST',
+                url: '$urlSendChat',
+                data: {
+                    receptor_id: receptor_id,
+                    mensaje: mensaje
+                },
+                success: function(data) {
+                    $('#chat-message-' + receptor_id).val('');
+                    $('#chat-history-' + receptor_id).html('')
+                    data.forEach(element => {
+                        if (element.emisor_id != receptor_id) {
+                            $('#chat-history-' + receptor_id).append(`
+                                <p class="message my-message">\${element.mensaje}<small class="pl-2">\${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                            `);
+                            if (element.estado_id == 4) {
+                                $('.read-tick').addClass('read-message');
+                            }
+                        } else {
+                            $('#chat-history-' + receptor_id).append(`
+                                <p class="message other-message">\${element.mensaje}<small class="pl-2">\${element.created_at}</small></p>
+                            `);
+                        }
+                    });
+                    $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+                }
+            });
+        }
+    });
 
     if ('$isLogued') {
         getFollowersNumber();

@@ -14,9 +14,6 @@ use yii\helpers\Url;
 $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 
-$playSongCode = Utility::PLAY_SONG;
-$likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
-
 $js = <<<EOT
 
     $.ajax({
@@ -29,7 +26,7 @@ $js = <<<EOT
         }
     });
 
-    $('.follow').on('click', function ev(e) {
+    $('body').on('click', '.follow', function ev(e) {
         $.ajax({
             'method': 'POST',
             'url': '$urlFollow',
@@ -39,9 +36,6 @@ $js = <<<EOT
             }
         });
     });
-
-    $likeCommentProfile
-    $playSongCode
 
 EOT;
 
