@@ -340,8 +340,21 @@
     right: -1%;
 }
 
+.action-btn {
+    transition: all .3s ease;
+}
+
+.action-btn:hover {
+    transform: scale(1.5);
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+}
+
 input,
-select {
+select,
+textarea {
     background-color: transparent !important;
     border: 0 !important;
     border-bottom: 2px solid #9b9b9b !important;

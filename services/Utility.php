@@ -37,6 +37,7 @@ class Utility
     const PLAY_SONG = <<<'EOT'
         var firstTime = true;
         $('.play-btn').on('click', function ev(e) {
+            songs = [];
             var cancion_id = $(this).attr('id').split('-')[1];
             $.ajax({
                 method: 'GET',
@@ -67,6 +68,17 @@ class Utility
                         firstTime = false;
                     }
                     $('.player').css('display', 'flex');
+                    var audio = document.getElementById('audio');
+                    audio.addEventListener('ended', () =>  {
+                        if (songs.length > 0) {
+                            var cancion = songs.shift();
+                            $('.info-song img').attr('src', cancion.url_portada);
+                            $('.player audio source').attr('src', cancion.url_cancion);
+                            $('.artist-info p').html(cancion.titulo);
+                            $('.artist-info small').html(cancion.album);
+                            $('.play-pause-btn').trigger('click');
+                        }
+                    });
                 }
             });
         });
