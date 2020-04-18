@@ -12,6 +12,7 @@ use app\services\Utility;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -184,10 +185,10 @@ class CancionesController extends Controller
         $model = $this->findModel($cancion_id);
         $album = $model->getAlbum()->one()->titulo;
         return [
-            'url_cancion' => $model->url_cancion,
-            'url_portada' => $model->url_portada,
-            'titulo' => $model->titulo,
-            'album' => $album,
+            'url_cancion' => Html::encode($model->url_cancion),
+            'url_portada' => Html::encode($model->url_portada),
+            'titulo' => Html::encode($model->titulo),
+            'album' => Html::encode($album),
         ];
     }
 
@@ -204,7 +205,9 @@ class CancionesController extends Controller
             ->all();
 
         foreach ($comentarios as &$comentario) {
+            $comentario['login'] = Html::encode($comentario['login']);
             $comentario['created_at'] = Yii::$app->formatter->asRelativeTime($comentario['created_at']);
+            $comentario['comentario'] = Html::encode($comentario['comentario']);
         }
 
         return $comentarios;

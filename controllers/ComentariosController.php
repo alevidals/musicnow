@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Response;
 
 /**
@@ -164,8 +165,8 @@ class ComentariosController extends Controller
 
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [
-            'login' => $usuario->login,
-            'comentario' => $comentario,
+            'login' => Html::encode($usuario->login),
+            'comentario' => Html::encode($model->comentario),
             'usuario_id' => $usuario->id,
             'url_image' => $usuario->url_image,
             'created_at' => Yii::$app->formatter->asRelativeTime($model->created_at)

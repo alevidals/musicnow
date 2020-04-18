@@ -61,7 +61,7 @@ $this->registerJS($js);
                                 <div class="layer"></div>
                             </div>
                         </div>
-                        <h4 class="text-center mt-3 mb-5"><?= $cancion->titulo ?></h4>
+                        <h4 class="text-center mt-3 mb-5"><?= Html::encode($cancion->titulo) ?></h4>
                         <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
@@ -117,8 +117,8 @@ $this->registerJS($js);
                         <?= Html::img($usuario->url_image, ['class' => 'img-fluid user-search-img', 'alt' => 'user-image']) ?>
                     </div>
                     <div class="col-md-10 col-lg-9 my-auto">
-                        <p><?= Yii::$app->user->identity->login ?></p>
-                        <p><?= Yii::$app->user->identity->nombre . ' ' . Yii::$app->user->identity->apellidos ?></p>
+                        <p><?= Html::encode(Yii::$app->user->identity->login) ?></p>
+                        <p><?= Html::encode(Yii::$app->user->identity->nombre) . ' ' . Html::encode(Yii::$app->user->identity->apellidos) ?></p>
                     </div>
                 </div>
             </div>

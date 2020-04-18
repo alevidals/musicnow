@@ -181,7 +181,7 @@ $this->title = Yii::t('app', 'Chats');
         <div class="w-100 mb-5"></div>
         <?php foreach ($seguidos as $seguido) : ?>
             <div id="<?= $seguido->id ?>" class="col-12 mb-5">
-                <h4 class="d-inline-block"><?= $seguido->login ?></h4>
+                <h4 class="d-inline-block"><?= Html::encode($seguido->login) ?></h4>
                 <span class="status badge badge-success d-inline-block"><?= $seguido->getEstado()->one()->estado ?></span>
                 <span class="badge badge-warning messages-number" id="messages-number-<?= $seguido->id ?>"></span>
                 <button class="btn main-yellow start-chat d-block" data-receptorid="<?= $seguido->id ?>" data-toggle="modal" data-target="#chat-<?= $seguido->id ?>">Chat</button>
@@ -190,7 +190,7 @@ $this->title = Yii::t('app', 'Chats');
                         <div class="modal-content">
                             <div class="modal-header">
                                 <?= Html::img($seguido->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo']) ?>
-                                <h5 class="modal-title my-auto ml-3"><?= $seguido->login ?></h5>
+                                <h5 class="modal-title my-auto ml-3"><?= Html::encode($seguido->login) ?></h5>
                                 <span class="status badge badge-success my-auto ml-3"><?= $seguido->getEstado()->one()->estado ?></span>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="text-white"><i class="fas fa-times"></i></span>

@@ -66,7 +66,6 @@ $this->registerJS($js);
 
     <?php if ($model->url_banner) : ?>
         <?= Html::img($model->url_banner, ['class' => 'img-fluid', 'alt' => 'banner']) ?>
-
     <?php endif; ?>
 
 
@@ -109,7 +108,7 @@ $this->registerJS($js);
                                                     <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidor']) ?>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
+                                                    <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +141,7 @@ $this->registerJS($js);
                                                     <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidos']) ?>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="d-inline-block my-auto"><?= $usuario->login ?></p>
+                                                    <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +162,7 @@ $this->registerJS($js);
     <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3 user-search-img', 'alt' => 'profile-image']) ?>
 
     <div class="mt-3 d-flex">
-        <h1 class="d-inline-block"><?= $model->login?></h1>
+        <h1 class="d-inline-block"><?= Html::encode($model->login) ?></h1>
         <div class="dropdown d-inline-block ml-auto my-auto">
             <?php if ($model->id == Yii::$app->user->id) : ?>
                 <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -172,13 +171,13 @@ $this->registerJS($js);
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
                     <?= Html::a(
-                Yii::t('app', 'DeleteProfileImage'),
-                ['usuarios/eliminar-imagen', 'id' => $model->id],
-                [
+                        Yii::t('app', 'DeleteProfileImage'),
+                        ['usuarios/eliminar-imagen', 'id' => $model->id],
+                        [
                             'class' => 'dropdown-item',
                             'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                         ]
-            ) ?>
+                    ) ?>
                     <?= Html::a(
                         Yii::t('app', 'DeleteProfileBanner'),
                         ['usuarios/eliminar-banner', 'id' => $model->id],
@@ -239,7 +238,7 @@ $this->registerJS($js);
                                         <div class="layer"></div>
                                     </div>
                                 </div>
-                                <h5 class="text-center"><?= $cancion->titulo ?></h5>
+                                <h5 class="text-center"><?= Html::encode($cancion->titulo) ?></h5>
                                 <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
@@ -308,7 +307,7 @@ $this->registerJS($js);
                     <?php if (count($albumes) > 0) : ?>
                         <?php foreach ($albumes as $album) : ?>
                             <div class="col-lg-3">
-                                <h2><?= $album->titulo?></h2>
+                                <h2><?= Html::encode($album->titulo) ?></h2>
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>

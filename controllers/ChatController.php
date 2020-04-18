@@ -9,6 +9,7 @@ use app\models\Usuarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Response;
 
 /**
@@ -178,6 +179,7 @@ class ChatController extends Controller
 
         foreach ($historial as &$mensaje) {
             $mensaje['created_at'] = Yii::$app->formatter->asTime($mensaje['created_at']);
+            $mensaje['mensaje'] = Html::encode($mensaje['mensaje']);
         }
 
         Chat::updateAll(['estado_id' => 4], ['emisor_id' => $receptor_id, 'receptor_id' => $usuario->id, 'estado_id' => 3]);

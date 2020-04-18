@@ -406,7 +406,12 @@ class UsuariosController extends Controller
                 ->orderBy(['c.created_at' => SORT_DESC]);
 
             $mensajes->limit($mensajes->count() - $total);
-            $res['mensajes'] = $mensajes->all();
+            $mensajesEncoded = $mensajes->all();
+            foreach ($mensajesEncoded as &$mensaje) {
+                $mensaje['mensaje'] = Html::encode($mensaje['mensaje']);
+                $mensaje['login'] = Html::encode($mensaje['login']);
+            }
+            $res['mensajes'] = $mensajesEncoded;
             $res['count'] = $mensajes->count();
         }
 
@@ -467,10 +472,16 @@ class UsuariosController extends Controller
             ->where(['seguido_id' => Yii::$app->user->id])
             ->orderBy(['s.id' => SORT_DESC]);
 
+        $seguidoresEncoded = $seguidores->all();
+
+        foreach ($seguidoresEncoded as &$seguidor) {
+            $seguidor['login'] =  Html::encode($seguidor['login']);
+        }
+
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $seguidores->limit($seguidores->count() - $total);
-        $res['seguidores'] = $seguidores->all();
+        $res['seguidores'] = $seguidoresEncoded;
         $res['count'] = $seguidores->count();
 
         return $res;
@@ -519,8 +530,14 @@ class UsuariosController extends Controller
     {
         $usuario = Usuarios::findOne($usuario_id);
 
+        $playlists = $usuario->getPlaylists()->all();
+
+        foreach ($playlists as $playlist) {
+            $playlist['titulo'] = Html::encode($playlist['titulo']);
+        }
+
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return $usuario->getPlaylists()->all();
+        return $playlists;
     }
 }

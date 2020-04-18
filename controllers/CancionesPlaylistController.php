@@ -10,6 +10,7 @@ use app\models\Playlists;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Response;
 
 /**
@@ -147,7 +148,8 @@ class CancionesPlaylistController extends Controller
         $playlist = new Playlists(['id' => $playlist_id]);
         $canciones = $playlist->getCanciones()->all();
         foreach ($canciones as &$cancion) {
-            $cancion->album_id = Albumes::findOne($cancion->album_id)->titulo;
+            $cancion->titulo = Html::encode($cancion->titulo);
+            $cancion->album_id = Html::encode(Albumes::findOne($cancion->album_id)->titulo);
         }
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $canciones;

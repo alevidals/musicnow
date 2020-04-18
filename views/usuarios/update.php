@@ -77,8 +77,8 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
                     <i class="fas fa-pen edit-image-icon-image"></i>
                 </label>
                 <?= $form->field($model, 'image')->fileInput(['class' => 'file-input form-control-file d-none'])->label(false) ?>
-                <h5 class="mt-3"><?= $model->login ?></h5>
-                <h6><?= $model->nombre . ' ' . $model->apellidos ?></h6>
+                <h5 class="mt-3"><?= Html::encode($model->login) ?></h5>
+                <h6><?= Html::encode($model->nombre) . ' ' . Html::encode($model->apellidos) ?></h6>
             </div>
         </div>
 
