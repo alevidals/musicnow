@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
         'css/green-audio-player.min.css',
     ];
     public $js = [
+        'js/app.js',
         'js/owl.carousel.js',
         'js/owl.autoplay.js',
         'js/green-audio-player.min.js',
