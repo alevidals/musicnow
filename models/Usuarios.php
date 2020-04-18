@@ -31,6 +31,7 @@ use yii\web\UploadedFile;
  * @property Albumes[] $albumes
  * @property Usuarios[] $bloqueados
  * @property Canciones[] $canciones
+ * @property Playlists[] $playlists
  * @property Comentarios[] $comentarios
  * @property Usuarios[] $seguidores
  * @property Usuarios[] $seguidos
@@ -311,5 +312,15 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getBloqueados()
     {
         return $this->hasMany(Usuarios::className(), ['id' => 'bloqueador_id'])->viaTable('bloqueados', ['bloqueado_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[Playlists]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getPlaylists()
+    {
+        return $this->hasMany(Playlists::className(), ['usuario_id' => 'id']);
     }
 }

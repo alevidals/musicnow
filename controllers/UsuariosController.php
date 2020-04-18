@@ -514,4 +514,13 @@ class UsuariosController extends Controller
         Yii::$app->session->setFlash('error', Yii::t('app', 'CannotRecover'));
         return $this->redirect(['site/index']);
     }
+
+    public function actionGetPlaylists($usuario_id)
+    {
+        $usuario = Usuarios::findOne($usuario_id);
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return $usuario->getPlaylists()->all();
+    }
 }

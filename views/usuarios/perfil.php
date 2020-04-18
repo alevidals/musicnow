@@ -14,9 +14,6 @@ $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 $urlGetLikes = Url::to(['canciones/get-likes']);
 
-$playSongCode = Utility::PLAY_SONG;
-$likeCommentProfile = Utility::LIKE_COMMENT_PROFILE;
-
 $js = <<<EOT
 
     $.ajax({
@@ -58,9 +55,6 @@ $js = <<<EOT
             }
         });
     });
-
-    $likeCommentProfile
-    $playSongCode
 
 EOT;
 

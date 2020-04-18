@@ -4,7 +4,6 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
-use app\services\Utility;
 use app\widgets\Alert;
 use kartik\dialog\Dialog;
 use yii\bootstrap4\Breadcrumbs;
@@ -14,7 +13,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 AppAsset::register($this);
-$this->registerJS(Utility::GET_COOKIE);
+// $this->registerJS(Utility::GET_COOKIE);
 
 $urlCookie = Url::to(['site/cookie']);
 $urlGetNoReadMessages = Url::to(['usuarios/get-no-read-messages']);
@@ -27,11 +26,6 @@ $cookieMessage = Yii::t('app', 'CookieMessage');
 $isLogued = !Yii::$app->user->isGuest;
 
 $js = <<<EOT
-
-    var mensajes = 0;
-    var seguidores = 0;
-    var songs = [];
-
     if ('$isLogued') {
         getFollowersNumber();
         setInterval(function () {
@@ -249,6 +243,7 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
                     [
                         'label' => '<i class="fas fa-sun"></i>
@@ -337,15 +332,17 @@ $this->registerJS($js);
 </audio>
 
 <div class="full-player row ml-0">
-    <div class="info-song col-12 col-lg-4 col-xl-2 ml-0 row">
+    <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
         <img alt="song-cover col-2" height="60px">
-        <div class="artist-info my-auto col text-center">
-            <p class="m-0"></p>
-            <small></small>
-        </div>
+            <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
+            <div class="artist-info my-auto col text-center">
+                <p class="m-0"></p>
+                <small></small>
+            </div>
+            <button class="my-auto mr-2 action-btn forward-btn outline-transparent"><i class="fas fa-forward"></i></button>
     </div>
-    <div class="player col-12 col-lg-8 col-xl-10">
-        <audio id="audio" autoplay>
+    <div class="player col-12 col-lg-8 col-xl-9">
+        <audio id="audio">
             <source>
         </audio>
     </div>

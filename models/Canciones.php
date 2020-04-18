@@ -27,6 +27,8 @@ use yii\web\UploadedFile;
  * @property Comentarios[] $comentarios
  * @property Generos $genero
  * @property Usuarios $usuario
+ * @property CancionesPlaylist[] $cancionesPlaylists
+ * @property Playlists[] $playlists
  * @property Likes[] $likes
  * @property Usuarios[] $usuarios
  */
@@ -166,6 +168,7 @@ class Canciones extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Likes::className(), ['cancion_id' => 'id']);
     }
+
     /**
      * Gets query for [[Usuarios]].
      *
@@ -192,5 +195,25 @@ class Canciones extends \yii\db\ActiveRecord
             ->select(['canciones.*', 'COUNT(l.cancion_id) AS likes'])
             ->joinWith('likes l', false)
             ->groupBy('canciones.id');
+    }
+
+    /**
+    * Gets query for [[CancionesPlaylists]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getCancionesPlaylists()
+    {
+        return $this->hasMany(CancionesPlaylist::className(), ['cancion_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[Playlists]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getPlaylists()
+    {
+        return $this->hasMany(Playlists::className(), ['id' => 'playlist_id'])->viaTable('canciones_playlist', ['cancion_id' => 'id']);
     }
 }

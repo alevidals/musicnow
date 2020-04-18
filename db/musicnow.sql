@@ -122,8 +122,8 @@ DROP TABLE IF EXISTS chat CASCADE;
 CREATE TABLE chat
 (
     id            BIGSERIAL    PRIMARY KEY
-  , emisor_id     BIGINT       NOT NULL REFERENCES usuarios (id)
-  , receptor_id   BIGINT       NOT NULL REFERENCES usuarios (id)
+  , emisor_id     BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
+  , receptor_id   BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
   , mensaje       TEXT         NOT NULL
   , estado_id     BIGINT       NOT NULL REFERENCES estados  (id) DEFAULT 3
   , created_at    TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -136,6 +136,24 @@ CREATE TABLE bloqueados
     bloqueador_id BIGINT REFERENCES usuarios (id)
   , bloqueado_id  BIGINT REFERENCES usuarios (id)
   , PRIMARY KEY (bloqueador_id, bloqueado_id)
+);
+
+DROP TABLE IF EXISTS playlists CASCADE;
+
+CREATE TABLE playlists
+(
+    id         BIGSERIAL    PRIMARY KEY
+  , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
+  , titulo     VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS canciones_playlist;
+
+CREATE TABLE canciones_playlist
+(
+    playlist_id BIGINT NOT NULL REFERENCES playlists (id) ON DELETE CASCADE
+  , cancion_id  BIGINT NOT NULL REFERENCES canciones (id) ON DELETE CASCADE
+  , PRIMARY KEY (playlist_id, cancion_id)
 );
 
 INSERT INTO roles (rol)
