@@ -41,6 +41,7 @@ use yii\web\UploadedFile;
  * @property Canciones[] $cancionesFavoritas
  * @property Chat[] $sendchats
  * @property Chat[] $receivedchats
+ * @property Videoclips[] $videoclips
 
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
@@ -322,5 +323,15 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getPlaylists()
     {
         return $this->hasMany(Playlists::className(), ['usuario_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[Videoclips]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getVideoclips()
+    {
+        return $this->hasMany(Videoclips::className(), ['usuario_id' => 'id']);
     }
 }

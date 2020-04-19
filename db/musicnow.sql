@@ -156,6 +156,15 @@ CREATE TABLE canciones_playlist
   , PRIMARY KEY (playlist_id, cancion_id)
 );
 
+DROP TABLE IF EXISTS videoclips;
+
+CREATE TABLE videoclips
+(
+    id         BIGSERIAL    PRIMARY KEY
+  , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
+  , link       VARCHAR(255) NOT NULL
+);
+
 INSERT INTO roles (rol)
 VALUES ('admin')
      , ('usuario');

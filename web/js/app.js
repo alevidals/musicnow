@@ -243,6 +243,44 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
     })
 });
 
+$('body').on('click', '.add-videoclip-btn', function ev(e) {
+    e.preventDefault();
+    var link = $('#add-videoclip-form #link').val();
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=videoclips%2Fagregar',
+        data: {
+            link: link
+        },
+        success: function (data) {
+            if ($('.videoclip-warning').length) {
+                $('.videoclip-warning').remove();
+                $('#videoclips').append(`
+                    <div class="row row-videoclips">
+                        <div id="video-${data.id}" class="col-12 col-lg-6 mb-4">
+                            <button data-id="${data.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="${data.link}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            } else {
+                $('.row-videoclips').prepend(`
+                    <div id="video-${data.id}" class="col-12 col-lg-6 mb-4">
+                        <button data-id="${data.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="${data.link}" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `);
+            }
+            $('#add-videoclip-form').trigger("reset");
+            $('#videoclip-modal').modal('hide');
+        }
+    });
+});
+
 function initAudioPlayer() {
     GreenAudioPlayer.init({
         selector: '.player',
