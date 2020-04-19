@@ -1,7 +1,6 @@
 <?php
 
 use app\controllers\UsuariosController;
-use app\services\Utility;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
@@ -69,7 +68,10 @@ $js = <<<EOT
                 id: id
             },
             success: function (data) {
-                $('#video-' + data).remove();
+                $('#video-' + data).addClass('fall');
+                $('#video-' + data).on('transitionend', function ev(e) {
+                    $('#video-' + data).remove();
+                });
             }
         });
     }
@@ -106,70 +108,85 @@ $this->registerJS($js);
         <?php endif; ?>
     <?php endif; ?>
 
-    <div class="row text-white text-center mt-4">
-        <div class="col-12">
-            <h4><span id="publicaciones"><?= $model->getCanciones()->count() ?></span> <?= Yii::t('app', 'Posts') ?></h4>
+
+    <div class="d-flex mt-5">
+        <div>
+            <?= Html::img($model->url_image, ['width' => '90px', 'id' => 'image-perfil', 'class' => 'user-search-img mr-3', 'alt' => 'profile-image']) ?>
         </div>
-        <div class="col-12">
-            <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
-                <h4><span id="seguidores"></span> <?= Yii::t('app', 'Followers') ?></h4>
-            </button>
-            <div class="modal fade" id="seguidores-list" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="row">
-                                <?php if (count($seguidores) > 0) : ?>
-                                    <?php foreach ($seguidores as $usuario) : ?>
-                                        <div class="col-12">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidor']) ?>
+        <div class="w-100">
+            <div class="text-white text-center mt-4 d-flex justify-content-around">
+                <div>
+                    <span id="publicaciones" class="font-weight-bold"><?= $model->getCanciones()->count() ?></span>
+                    <p><?= Yii::t('app', 'Posts') ?></p>
+                </div>
+                <div>
+                    <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
+                        <div>
+                            <span id="seguidores" class="font-weight-bold"></span>
+                            <p><?= Yii::t('app', 'Followers') ?></p>
+                        </div>
+                    </button>
+                    <div class="modal fade" id="seguidores-list" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <?php if (count($seguidores) > 0) : ?>
+                                            <?php foreach ($seguidores as $usuario) : ?>
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidor']) ?>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col">
-                                                    <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
-                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <div class="col-12">
+                                                <p class="my-auto"><?= Yii::t('app', 'NoFollowYou') ?></p>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php else : ?>
-                                    <div class="col-12">
-                                        <p class="my-auto"><?= Yii::t('app', 'NoFollowYou') ?></p>
+                                        <?php endif; ?>
                                     </div>
-                                <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidos-list">
-                <h4><span id="seguidos"></span> <?= Yii::t('app', 'Following') ?></h4>
-            </button>
-            <div class="modal fade" id="seguidos-list" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="row">
-                                <?php if (count($seguidos) > 0) : ?>
-                                    <?php foreach ($seguidos as $usuario) : ?>
-                                        <div class="col-12">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidos']) ?>
+                <div>
+                    <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidos-list">
+                        <div>
+                            <span id="seguidos" class="font-weight-bold"></span>
+                            <p><?= Yii::t('app', 'Following') ?></p>
+                        </div>
+                    </button>
+                    <div class="modal fade" id="seguidos-list" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <?php if (count($seguidos) > 0) : ?>
+                                            <?php foreach ($seguidos as $usuario) : ?>
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidos']) ?>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col">
-                                                    <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
-                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <div class="col-12">
+                                                <p class="my-auto"><?= Yii::t('app', 'YouDoNotFollow') ?></p>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php else : ?>
-                                    <div class="col-12">
-                                        <p class="my-auto"><?= Yii::t('app', 'YouDoNotFollow') ?></p>
+                                        <?php endif; ?>
                                     </div>
-                                <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,7 +195,6 @@ $this->registerJS($js);
         </div>
     </div>
 
-    <?= Html::img($model->url_image, ['width' => '100px', 'id' => 'image-perfil', 'class' => 'mt-3 user-search-img', 'alt' => 'profile-image']) ?>
 
     <div class="mt-3 d-flex">
         <h1 class="d-inline-block"><?= Html::encode($model->login) ?></h1>
@@ -190,21 +206,21 @@ $this->registerJS($js);
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
                     <?= Html::a(
-                        Yii::t('app', 'DeleteProfileImage'),
-                        ['usuarios/eliminar-imagen', 'id' => $model->id],
-                        [
+                Yii::t('app', 'DeleteProfileImage'),
+                ['usuarios/eliminar-imagen', 'id' => $model->id],
+                [
                             'class' => 'dropdown-item',
                             'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                         ]
-                    ) ?>
+            ) ?>
                     <?= Html::a(
-                        Yii::t('app', 'DeleteProfileBanner'),
-                        ['usuarios/eliminar-banner', 'id' => $model->id],
-                        [
+                Yii::t('app', 'DeleteProfileBanner'),
+                ['usuarios/eliminar-banner', 'id' => $model->id],
+                [
                             'class' => 'dropdown-item',
                             'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                         ]
-                    ) ?>
+            ) ?>
                     <?= Html::a(
                         Yii::t('app', 'DeleteComments'),
                         ['comentarios/index', 'user_id' => $model->id],
@@ -366,7 +382,7 @@ $this->registerJS($js);
                 <?php if (count($videoclips) > 0) : ?>
                     <div class="row row-videoclips">
                         <?php foreach ($videoclips as $videoclip) : ?>
-                            <div id="video-<?= $videoclip->id ?>" class="col-12 col-lg-6 mb-4">
+                            <div id="video-<?= $videoclip->id ?>" class="col-12 col-lg-6 mb-4 fall-animation">
                                 <?php if ($model->id == Yii::$app->user->id) : ?>
                                     <button data-id="<?= $videoclip->id ?>" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
                                 <?php endif; ?>

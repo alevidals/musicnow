@@ -257,7 +257,7 @@ $('body').on('click', '.add-videoclip-btn', function ev(e) {
                 $('.videoclip-warning').remove();
                 $('#videoclips').append(`
                     <div class="row row-videoclips">
-                        <div id="video-${data.id}" class="col-12 col-lg-6 mb-4">
+                        <div id="video-${data.id}" class="col-12 col-lg-6 mb-4 fall-animation">
                             <button data-id="${data.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="${data.link}" allowfullscreen></iframe>
@@ -267,7 +267,7 @@ $('body').on('click', '.add-videoclip-btn', function ev(e) {
                 `);
             } else {
                 $('.row-videoclips').prepend(`
-                    <div id="video-${data.id}" class="col-12 col-lg-6 mb-4">
+                    <div id="video-${data.id}" class="col-12 col-lg-6 mb-4 fall-animation">
                         <button data-id="${data.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="${data.link}" allowfullscreen></iframe>
