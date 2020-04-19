@@ -14,6 +14,8 @@ $urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
 $urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 $urlGetLikes = Url::to(['canciones/get-likes']);
 
+$confirmMessage = Yii::t('app', 'Are you sure you want to delete this item?');
+
 $js = <<<EOT
 
     $.ajax({
@@ -56,6 +58,23 @@ $js = <<<EOT
         });
     });
 
+    $('body').on('click', '.remove-videoclip-btn', function ev(e) {
+    var id = $(this).data('id');
+    var accept = confirm('$confirmMessage');
+    if (accept) {
+        $.ajax({
+            method: 'POST',
+            url: '/index.php?r=videoclips%2Feliminar',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                $('#video-' + data).remove();
+            }
+        });
+    }
+});
+
 EOT;
 
 $this->registerJS($js);
@@ -88,10 +107,10 @@ $this->registerJS($js);
     <?php endif; ?>
 
     <div class="row text-white text-center mt-4">
-        <div class="col">
+        <div class="col-12">
             <h4><span id="publicaciones"><?= $model->getCanciones()->count() ?></span> <?= Yii::t('app', 'Posts') ?></h4>
         </div>
-        <div class="col">
+        <div class="col-12">
             <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidores-list">
                 <h4><span id="seguidores"></span> <?= Yii::t('app', 'Followers') ?></h4>
             </button>
@@ -124,7 +143,7 @@ $this->registerJS($js);
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-12">
             <button class="outline-transparent" type="button" data-toggle="modal" data-target="#seguidos-list">
                 <h4><span id="seguidos"></span> <?= Yii::t('app', 'Following') ?></h4>
             </button>
@@ -216,8 +235,11 @@ $this->registerJS($js);
             <li class="nav-item ml-auto">
                 <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true"><?= Yii::t('app', 'Canciones') ?></a>
             </li>
-            <li class="nav-item mr-auto">
+            <li class="nav-item">
                 <a class="nav-link text-uppercase" id="albumes-tab" data-toggle="tab" href="#albumes" role="tab" aria-controls="albumes" aria-selected="false"><?= Yii::t('app', 'Albumes') ?></a>
+            </li>
+            <li class="nav-item mr-auto">
+                <a class="nav-link text-uppercase" id="videoclips-tab" data-toggle="tab" href="#videoclips" role="tab" aria-controls="videoclips" aria-selected="false">Videoclips</a>
             </li>
         </ul>
 
@@ -291,7 +313,7 @@ $this->registerJS($js);
                             </div>
                         <?php endforeach; ?>
                     <?php else :?>
-                        <div class="row mt-5 justify-content-center text-center">
+                        <div class="row mt-5 justify-content-center text-center mx-0">
                             <div class="col-12">
                                 <h2><?= Yii::t('app', 'NoSongs') ?></h2>
                             </div>
@@ -311,7 +333,7 @@ $this->registerJS($js);
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <div class="row mt-5 justify-content-center text-center">
+                        <div class="row justify-content-center text-center mx-0">
                             <div class="col-12">
                                 <h2><?= Yii::t('app', 'NoAlbums') ?></h2>
                             </div>
@@ -321,6 +343,49 @@ $this->registerJS($js);
                         </div>
                     <?php endif; ?>
                 </div>
+            </div>
+            <div class="tab-pane fade" id="videoclips" role="tabpanel" aria-labelledby="videoclips-tab">
+                <?php if ($model->id == Yii::$app->user->id) : ?>
+                    <button class="action-btn outline-transparent mb-4" data-toggle="modal" data-target="#videoclip-modal"><i class="far fa-plus-square"></i></button>
+                    <div class="modal fade" id="videoclip-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <form id="add-videoclip-form">
+                                        <div class="form-group">
+                                            <label for="link">Youtube link</label>
+                                            <input class="form-control" type="text" name="link" id="link" placeholder="https://www.youtube.com/watch?v=KHAgoT4FZbc">
+                                        </div>
+                                        <button class="btn main-yellow add-videoclip-btn" type="submit">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (count($videoclips) > 0) : ?>
+                    <div class="row row-videoclips">
+                        <?php foreach ($videoclips as $videoclip) : ?>
+                            <div id="video-<?= $videoclip->id ?>" class="col-12 col-lg-6 mb-4">
+                                <?php if ($model->id == Yii::$app->user->id) : ?>
+                                    <button data-id="<?= $videoclip->id ?>" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
+                                <?php endif; ?>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="<?= $videoclip->link ?>" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <div class="row mt-5 justify-content-center text-center mx-0 videoclip-warning">
+                        <div class="col-12">
+                            <h2><?= Yii::t('app', 'NoVideoclips') ?></h2>
+                        </div>
+                        <div class="col-10 col-lg-4 mt-4">
+                            <?= Html::img('@web/img/undraw_video_influencer_9oyy.png', ['class' => 'img-fluid', 'alt' => 'girl-music']) ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     <?php endif; ?>

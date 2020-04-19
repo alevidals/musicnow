@@ -313,6 +313,8 @@ class UsuariosController extends Controller
             }
         }
 
+        $videoclips = $model->getVideoclips()->all();
+
         $canciones_id = $model->getCanciones()->select('id')->column();
         $canciones = $model->getCanciones()->all();
         $albumes = $model->getAlbumes()->all();
@@ -332,6 +334,7 @@ class UsuariosController extends Controller
             'seguidos' => $seguidos,
             'likes' => $likes,
             'bloqueo' => $bloqueo,
+            'videoclips' => $videoclips,
         ]);
     }
 
