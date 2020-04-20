@@ -17,7 +17,7 @@ class BloqueadosSearch extends Bloqueados
     public function rules()
     {
         return [
-            [['bloqueador_id', 'bloqueado_id'], 'integer'],
+            [['bloqueador.login', 'bloqueado.login'], 'safe'],
         ];
     }
 
@@ -30,6 +30,11 @@ class BloqueadosSearch extends Bloqueados
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['bloqueador.login'], ['bloqueado.login']);
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -39,13 +44,25 @@ class BloqueadosSearch extends Bloqueados
      */
     public function search($params)
     {
-        $query = Bloqueados::find();
+        $query = Bloqueados::find()
+            ->joinWith('bloqueador br')
+            ->joinWith('bloqueado b');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['bloqueador.login'] = [
+            'asc' => ['br.login' => SORT_ASC],
+            'desc' => ['br.login' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['bloqueado.login'] = [
+            'asc' => ['b.login' => SORT_ASC],
+            'desc' => ['b.login' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -55,10 +72,12 @@ class BloqueadosSearch extends Bloqueados
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'bloqueador_id' => $this->bloqueador_id,
-            'bloqueado_id' => $this->bloqueado_id,
+            'ilike', 'b.login', $this->getAttribute('bloqueado.login')
+        ]);
+
+        $query->andFilterWhere([
+            'ilike', 'br.login', $this->getAttribute('bloqueador.login')
         ]);
 
         return $dataProvider;

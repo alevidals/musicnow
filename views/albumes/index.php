@@ -18,16 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Albumes'), ['create'], ['class' => 'btn main-yellow']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <div class="mt-3"></div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             'titulo',
             [
-                'attribute' => 'usuario.nombre',
-                'label' => Yii::t('app', 'Nombre')
+                'attribute' => 'usuario.login',
+                'label' => 'Login'
             ],
             'anyo',
             'created_at:datetime',

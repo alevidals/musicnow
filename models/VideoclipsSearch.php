@@ -17,8 +17,7 @@ class VideoclipsSearch extends Videoclips
     public function rules()
     {
         return [
-            [['id', 'usuario_id'], 'integer'],
-            [['link'], 'safe'],
+            [['link', 'usuario.login'], 'safe'],
         ];
     }
 
@@ -31,6 +30,11 @@ class VideoclipsSearch extends Videoclips
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['usuario.login']);
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -40,13 +44,19 @@ class VideoclipsSearch extends Videoclips
      */
     public function search($params)
     {
-        $query = Videoclips::find();
+        $query = Videoclips::find()
+            ->joinWith('usuario u');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['usuario.login'] = [
+            'asc' => ['u.login' => SORT_ASC],
+            'desc' => ['u.login' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -55,14 +65,12 @@ class VideoclipsSearch extends Videoclips
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'usuario_id' => $this->usuario_id,
-        ]);
-
+        
         $query->andFilterWhere(['ilike', 'link', $this->link]);
+
+        $query->andFilterWhere([
+            'ilike', 'u.login', $this->getAttribute('usuario.login')
+        ]);
 
         return $dataProvider;
     }

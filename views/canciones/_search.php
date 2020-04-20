@@ -1,11 +1,17 @@
 <?php
 
+use app\models\Generos;
+use app\models\Usuarios;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CancionesSearch */
 /* @var $form yii\bootstrap4\ActiveForm */
+
+$generos = ['' => ''] + Generos::lista();
+$albumes = ['' => ''] + Usuarios::findOne(Yii::$app->user->id)->getAlbumes()->select('titulo')->indexBy('id')->column();
+
 ?>
 
 <div class="canciones-search">
@@ -15,33 +21,25 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
-    <?= $form->field($model, 'titulo') ?>
-
-    <?= $form->field($model, 'album_id') ?>
-
-    <?= $form->field($model, 'genero_id') ?>
-
-    <?= $form->field($model, 'url_cancion') ?>
-
-    <?php // echo $form->field($model, 'image_name') ?>
-
-    <?php // echo $form->field($model, 'usuario_id') ?>
-
-    <?php // echo $form->field($model, 'url_portada') ?>
-
-    <?php // echo $form->field($model, 'anyo') ?>
-
-    <?php // echo $form->field($model, 'duracion') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="filters mt-4">
+        <div class="row">
+            <div class="col-lg col-12">
+                <?= $form->field($model, 'titulo') ?>
+            </div>
+            <div class="col-lg col-12">
+                <?= $form->field($model, 'album_id')->label(Yii::t('app', 'Albumes'))->dropDownList($albumes) ?>
+            </div>
+            <div class="col-lg col-12">
+                <?= $form->field($model, 'genero_id')->label(Yii::t('app', 'Generos'))->dropDownList($generos) ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
 
 </div>

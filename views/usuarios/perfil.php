@@ -313,7 +313,7 @@ $this->registerJS($js);
                                             <label for="link">Youtube link</label>
                                             <input class="form-control" type="text" name="link" id="link" placeholder="https://www.youtube.com/watch?v=KHAgoT4FZbc">
                                         </div>
-                                        <button class="btn main-yellow add-videoclip-btn" type="submit">Enviar</button>
+                                        <button class="btn main-yellow add-videoclip-btn" type="submit"><?= Yii::t('app', 'Save') ?></button>
                                     </form>
                                 </div>
                             </div>

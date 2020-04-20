@@ -411,9 +411,6 @@ function removeActualData() {
     }
 }
 
-// a partir de aquí
-
-
 if (getCookie('cookie-accept') == null) {
     $( document ).ready(function() {
         var string = 'CookieMessage';
@@ -609,4 +606,8 @@ $('body').on('click', '.remove-videoclip-btn', function ev(e) {
 $('body').on('click', '.hide-player', function ev(e) {
     $('.hide-player i').toggleClass('rotate-190');
     $('.full-player').toggle('slide');
+});
+
+$('body').on('click', '.filter-btn', function ev(e) {
+    $('.filters').toggle('blind');
 });

@@ -19,7 +19,7 @@ class AlbumesSearch extends Albumes
     {
         return [
             [['id', 'usuario_id'], 'integer'],
-            [['titulo', 'created_at', 'usuario.nombre'], 'safe'],
+            [['titulo', 'created_at', 'usuario.login'], 'safe'],
             [['anyo'], 'number'],
         ];
     }
@@ -35,7 +35,7 @@ class AlbumesSearch extends Albumes
 
     public function attributes()
     {
-        return array_merge(parent::attributes(), ['usuario.nombre']);
+        return array_merge(parent::attributes(), ['usuario.login']);
     }
 
     /**
@@ -60,9 +60,9 @@ class AlbumesSearch extends Albumes
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['usuario.nombre'] = [
-            'asc' => ['u.nombre' => SORT_ASC],
-            'desc' => ['u.nombre' => SORT_DESC],
+        $dataProvider->sort->attributes['usuario.login'] = [
+            'asc' => ['u.login' => SORT_ASC],
+            'desc' => ['u.login' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -84,7 +84,7 @@ class AlbumesSearch extends Albumes
         $query->andFilterWhere(['ilike', 'titulo', $this->titulo]);
 
         $query->andFilterWhere([
-            'ilike', 'u.nombre', $this->getAttribute('usuario.nombre')
+            'ilike', 'u.login', $this->getAttribute('usuario.login')
         ]);
 
         return $dataProvider;

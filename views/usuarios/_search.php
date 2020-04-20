@@ -15,15 +15,27 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
-    <?= $form->field($model, 'login') ?>
-
-    <?= $form->field($model, 'nombre') ?>
-
-    <?= $form->field($model, 'apellidos') ?>
-
-    <?= $form->field($model, 'email') ?>
+    <div class="filters mt-4">
+        <div class="row">
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'login') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'nombre') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'apellidos') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'email') ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
 
     <?php // echo $form->field($model, 'url_image')?>
 
@@ -42,11 +54,6 @@ use yii\bootstrap4\ActiveForm;
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'deleted_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
 
     <?php ActiveForm::end(); ?>
 

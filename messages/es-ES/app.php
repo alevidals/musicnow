@@ -130,4 +130,5 @@ return [
     'EmailSended' => 'Se ha enviado un email a tu cuenta.',
     'Recover' =>  'Restaurar',
     'ToRecover' => 'Para recuperar su cuenta pulse aquí',
+    'ShowFilters' => 'Mostrar/ocultar filtros',
 ];

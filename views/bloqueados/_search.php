@@ -15,14 +15,22 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'bloqueador_id') ?>
+    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
-    <?= $form->field($model, 'bloqueado_id') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="filters mt-4">
+        <div class="row">
+            <div class="col 6">
+                <?= $form->field($model, 'bloqueado.login') ?>
+            </div>
+            <div class="col 6">
+                <?= $form->field($model, 'bloqueador.login') ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        </div>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 

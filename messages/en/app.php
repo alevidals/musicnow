@@ -129,5 +129,6 @@ return [
     'CannotRecover' => 'Your account could not be recovered.',
     'EmailSended' => 'An email has been sent to your account.',
     'Recover' =>  '',
-    'ToRecover' => 'To recover your account click here'
+    'ToRecover' => 'To recover your account click here',
+    'ShowFilters' => 'Show/hide filters',
 ];

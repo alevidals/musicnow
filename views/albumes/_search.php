@@ -15,19 +15,26 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
-    <?= $form->field($model, 'titulo') ?>
-
-    <?= $form->field($model, 'anyo') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <?= $form->field($model, 'usuario_id') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="filters mt-4">
+        <div class="row">
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'titulo') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'anyo') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'created_at') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'usuario.login') ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

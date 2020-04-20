@@ -15,19 +15,28 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
-    <?= $form->field($model, 'usuario_id') ?>
-
-    <?= $form->field($model, 'cancion_id') ?>
-
-    <?= $form->field($model, 'comentario') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="filters mt-4">
+        <div class="row">
+            <?php if (Yii::$app->user->identity->rol == 1) : ?>
+                <div class="col-lg-3 col-12">
+                    <?= $form->field($model, 'usuario.login') ?>
+                </div>
+            <?php endif; ?>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'cancion.titulo')->label(Yii::t('app', 'Song')) ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'comentario') ?>
+            </div>
+            <div class="col-lg-3 col-12">
+                <?= $form->field($model, 'created_at') ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

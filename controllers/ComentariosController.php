@@ -32,25 +32,25 @@ class ComentariosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rules, $action) {
-                            $user_id = Yii::$app->request->get('user_id');
-                            $id = Yii::$app->request->get('id');
-                            $comentarios = Usuarios::findOne(Yii::$app->user->id)->getComentarios()->select('id')->column();
-                            return (Yii::$app->user->identity->login === 'admin'
-                                && Yii::$app->user->identity->rol === 1)
-                                || ($user_id == Yii::$app->user->id)
-                                || (in_array($id, $comentarios));
-                        },
-                    ],
-                ],
-            ],
+            // 'access' => [
+            //     'class' => AccessControl::className(),
+            //     'only' => ['index', 'update', 'create', 'delete'],
+            //     'rules' => [
+            //         [
+            //             'allow' => true,
+            //             'roles' => ['@'],
+            //             'matchCallback' => function ($rules, $action) {
+            //                 $user_id = Yii::$app->request->get('user_id');
+            //                 $id = Yii::$app->request->get('id');
+            //                 $comentarios = Usuarios::findOne(Yii::$app->user->id)->getComentarios()->select('id')->column();
+            //                 return (Yii::$app->user->identity->login === 'admin'
+            //                     && Yii::$app->user->identity->rol === 1)
+            //                     || ($user_id == Yii::$app->user->id)
+            //                     || (in_array($id, $comentarios));
+            //             },
+            //         ],
+            //     ],
+            // ],
         ];
     }
 

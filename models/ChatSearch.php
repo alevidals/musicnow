@@ -4,7 +4,6 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Chat;
 
 /**
  * ChatSearch represents the model behind the search form of `app\models\Chat`.
@@ -17,8 +16,8 @@ class ChatSearch extends Chat
     public function rules()
     {
         return [
-            [['id', 'emisor_id', 'receptor_id', 'estado_id'], 'integer'],
-            [['mensaje', 'created_at'], 'safe'],
+            [['id', 'estado_id'], 'integer'],
+            [['mensaje', 'created_at', 'receptor.login', 'emisor.login'], 'safe'],
         ];
     }
 
@@ -31,8 +30,13 @@ class ChatSearch extends Chat
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['receptor.login'], ['emisor.login']);
+    }
+
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -40,13 +44,25 @@ class ChatSearch extends Chat
      */
     public function search($params)
     {
-        $query = Chat::find();
+        $query = Chat::find()
+            ->joinWith('receptor r')
+            ->joinWith('emisor e');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['emisor.login'] = [
+            'asc' => ['r.login' => SORT_ASC],
+            'desc' => ['r.login' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['receptor.login'] = [
+            'asc' => ['u.login' => SORT_ASC],
+            'desc' => ['u.login' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -66,6 +82,14 @@ class ChatSearch extends Chat
         ]);
 
         $query->andFilterWhere(['ilike', 'mensaje', $this->mensaje]);
+
+        $query->andFilterWhere([
+            'ilike', 'r.login', $this->getAttribute('receptor.login'),
+        ]);
+
+        $query->andFilterWhere([
+            'ilike', 'e.login', $this->getAttribute('emisor.login'),
+        ]);
 
         return $dataProvider;
     }

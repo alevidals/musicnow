@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -17,7 +18,7 @@ class ComentariosSearch extends Comentarios
     {
         return [
             [['id', 'usuario_id', 'cancion_id'], 'integer'],
-            [['comentario', 'created_at', 'cancion.titulo'], 'safe'],
+            [['comentario', 'created_at', 'cancion.titulo', 'usuario.login'], 'safe'],
         ];
     }
 
@@ -32,7 +33,7 @@ class ComentariosSearch extends Comentarios
 
     public function attributes()
     {
-        return array_merge(parent::attributes(), ['cancion.titulo']);
+        return array_merge(parent::attributes(), ['cancion.titulo'], ['usuario.login']);
     }
 
     /**
@@ -45,7 +46,8 @@ class ComentariosSearch extends Comentarios
     public function search($params)
     {
         $query = Comentarios::find()
-            ->joinWith('cancion c');
+            ->joinWith('cancion c')
+            ->joinWith('usuario u');
 
         // add conditions that should always apply here
 
@@ -56,6 +58,11 @@ class ComentariosSearch extends Comentarios
         $dataProvider->sort->attributes['cancion.titulo'] = [
             'asc' => ['c.titulo' => SORT_ASC],
             'desc' => ['c.titulo' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['usuario.login'] = [
+            'asc' => ['u.login' => SORT_ASC],
+            'desc' => ['u.login' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -79,6 +86,12 @@ class ComentariosSearch extends Comentarios
         $query->andFilterWhere([
             'ilike', 'c.titulo', $this->getAttribute('cancion.titulo'),
         ]);
+
+        $query->andFilterWhere([
+            'ilike', 'u.login', $this->getAttribute('usuario.login'),
+        ]);
+
+        Yii::debug($query->createCommand()->rawSql);
 
         return $dataProvider;
     }

@@ -17,7 +17,7 @@ class SeguidoresSearch extends Seguidores
     public function rules()
     {
         return [
-            [['seguidor_id', 'seguido_id'], 'integer'],
+            [['seguidor.login', 'seguido.login'], 'safe'],
         ];
     }
 
@@ -30,6 +30,11 @@ class SeguidoresSearch extends Seguidores
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['seguidor.login'], ['seguido.login']);
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -39,13 +44,25 @@ class SeguidoresSearch extends Seguidores
      */
     public function search($params)
     {
-        $query = Seguidores::find();
+        $query = Seguidores::find()
+            ->joinWith('seguidor segr')
+            ->joinWith('seguido seg');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['seguidor.login'] = [
+            'asc' => ['segr.login' => SORT_ASC],
+            'desc' => ['segr.login' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['seguido.login'] = [
+            'asc' => ['seg.login' => SORT_ASC],
+            'desc' => ['seg.login' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -55,10 +72,12 @@ class SeguidoresSearch extends Seguidores
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'seguidor_id' => $this->seguidor_id,
-            'seguido_id' => $this->seguido_id,
+            'ilike', 'segr.login', $this->getAttribute('seguidor.login')
+        ]);
+
+        $query->andFilterWhere([
+            'ilike', 'seg.login', $this->getAttribute('seguido.login')
         ]);
 
         return $dataProvider;

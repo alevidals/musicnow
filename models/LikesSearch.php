@@ -17,7 +17,7 @@ class LikesSearch extends Likes
     public function rules()
     {
         return [
-            [['usuario_id', 'cancion_id'], 'integer'],
+            [['usuario.login', 'cancion.titulo'], 'safe'],
         ];
     }
 
@@ -30,6 +30,11 @@ class LikesSearch extends Likes
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['usuario.login'], ['cancion.titulo']);
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -39,13 +44,24 @@ class LikesSearch extends Likes
      */
     public function search($params)
     {
-        $query = Likes::find();
+        $query = Likes::find()
+            ->joinWith('usuario u')
+            ->joinWith('cancion c');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['usuario.login'] = [
+            'asc' => ['u.login' => SORT_ASC],
+            'desc' => ['u.login' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['cancion.titulo'] = [
+            'asc' => ['c.titulo' => SORT_ASC],
+            'desc' => ['c.titulo' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -55,10 +71,12 @@ class LikesSearch extends Likes
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'usuario_id' => $this->usuario_id,
-            'cancion_id' => $this->cancion_id,
+            'ilike', 'u.login', $this->getAttribute('usuario.login')
+        ]);
+
+        $query->andFilterWhere([
+            'ilike', 'c.titulo', $this->getAttribute('cancion.titulo')
         ]);
 
         return $dataProvider;

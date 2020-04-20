@@ -20,11 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Canciones'), ['create'], ['class' => 'btn main-yellow']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
+    <?php echo $this->render('_search', ['model' => $searchModel]);?>
+
+    <div class="mt-3"></div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             [
                 'label' => '',
