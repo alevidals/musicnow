@@ -5,6 +5,10 @@
     color: #000 !important;
 }
 
+#p0 {
+    min-height: 100%;
+}
+
 .status {
     color: #fff !important;
 }
@@ -15,6 +19,24 @@
 
 .wrap {
     min-height: 100%;
+}
+
+.fa-chevron-left {
+    transition: all .3s ease;
+}
+
+.hide-player {
+    height: 60px;
+    width: 60px;
+    background-color:#ccc !important;
+}
+
+.rotate-190 {
+    -webkit-transform: rotate(190deg);
+    -moz-transform: rotate(190deg);
+    -o-transform: rotate(190deg);
+    -ms-transform: rotate(190deg);
+    transform: rotate(190deg);
 }
 
 .navbar-dark .navbar-toggler {
@@ -529,7 +551,7 @@ textarea {
 }
 
 [data-theme="dark"] .message,
-[data-theme="dark"] .message small{
+[data-theme="dark"] .message small {
     color: #000 !important;
 }
 
@@ -545,10 +567,14 @@ textarea {
     color: #000 !important;
 }
 
-[data-theme="dark"] .alert{
+[data-theme="dark"] .alert {
     color: #000 !important;
 }
 
-[data-theme="dark"] .alert span{
+[data-theme="dark"] .alert span {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .hide-player {
     color: #000 !important;
 }
