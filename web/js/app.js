@@ -25,10 +25,8 @@ function initTheme() {
 // me quedo aqui justo pego esto
 function resetTheme() {
     if ($('#darkSwitch')[0].checked) {
-        $('body').attr('jiome', 'asd');
         $('body').attr('data-theme', 'dark');
         localStorage.setItem('darkSwitch', 'dark');
-        // document.body.setAttribute('data-theme', 'dark');
     } else {
         $('body').removeAttr('data-theme');
         localStorage.removeItem('darkSwitch');
@@ -418,13 +416,23 @@ function removeActualData() {
 
 if (getCookie('cookie-accept') == null) {
     $( document ).ready(function() {
-        krajeeDialogCust2.confirm("jiome", function (result) {
-            if (result) {
-                window.location="/index.php?r=site%2Fcookie";
-            } else {
-                window.location="http://google.es";
+        var string = 'CookieMessage';
+        $.ajax({
+            method: 'GET',
+            url: '/index.php?r=site%2Fget-translate',
+            data: {
+                string: string
+            },
+            success: function (data) {
+                krajeeDialogCust2.confirm(data, function (result) {
+                    if (result) {
+                        window.location="/index.php?r=site%2Fcookie";
+                    } else {
+                        window.location="http://google.es";
+                    }
+                });
             }
-        });
+        })
     });
 }
 
@@ -552,7 +560,7 @@ $('body').on('click', '.like-list', function ev(e) {
     var cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        'url': '/index.php?r=canciones/get-likes&cancion_id=' + cancion_id,
+        url: '/index.php?r=canciones/get-likes&cancion_id=' + cancion_id,
         success: function (data) {
             $('.like-row').html('');
             data.forEach(element => {
@@ -569,22 +577,33 @@ $('body').on('click', '.like-list', function ev(e) {
 
 $('body').on('click', '.remove-videoclip-btn', function ev(e) {
     var id = $(this).data('id');
-    var accept = confirm('jime');
-    if (accept) {
-        $.ajax({
-            method: 'POST',
-            url: '/index.php?r=videoclips%2Feliminar',
-            data: {
-                id: id
-            },
-            success: function (data) {
-                $('#video-' + data).addClass('fall');
-                $('#video-' + data).on('transitionend', function ev(e) {
-                    $('#video-' + data).remove();
-                });
-            }
-        });
-    }
+    var string = 'Are you sure you want to delete this item?';
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=site%2Fget-translate',
+        data: {
+            string: string
+        },
+        success: function (data) {
+            krajeeDialogCust2.confirm(data, function (result) {
+                if (result) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '/index.php?r=videoclips%2Feliminar',
+                        data: {
+                            id: id
+                        },
+                        success: function (data) {
+                            $('#video-' + data).addClass('fall');
+                            $('#video-' + data).on('transitionend', function ev(e) {
+                                $('#video-' + data).remove();
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
 });
 
 $('body').on('click', '.hide-player', function ev(e) {

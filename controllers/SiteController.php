@@ -228,4 +228,9 @@ class SiteController extends Controller
         setcookie('lang', $lang, time() + 3600 * 24 * 30);
         return $this->redirect(['site/index']);
     }
+
+    public function actionGetTranslate($string)
+    {
+        return Yii::t('app', $string);
+    }
 }
