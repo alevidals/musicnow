@@ -4,6 +4,38 @@ var songs = [];
 var actualSong = 0;
 var playlist = [];
 
+checkTheme();
+
+function checkTheme() {
+    if ($('#darkSwitch').length) {
+        initTheme();
+    }
+}
+
+$('body').on('change', '#darkSwitch', function ev(e) {
+    resetTheme();
+});
+
+function initTheme() {
+    const darkThemeSelected = localStorage.getItem('darkSwitch') !== null && localStorage.getItem('darkSwitch') === 'dark';
+    $('#darkSwitch')[0].checked = darkThemeSelected;
+    darkThemeSelected ? $('body').attr('data-theme', 'dark') : $('body').removeAttr('data-theme');
+}
+
+// me quedo aqui justo pego esto
+function resetTheme() {
+    if ($('#darkSwitch')[0].checked) {
+        $('body').attr('jiome', 'asd');
+        $('body').attr('data-theme', 'dark');
+        localStorage.setItem('darkSwitch', 'dark');
+        // document.body.setAttribute('data-theme', 'dark');
+    } else {
+        $('body').removeAttr('data-theme');
+        localStorage.removeItem('darkSwitch');
+    }
+}
+
+
 function getCookie(name) {
     var dc = document.cookie;
     var prefix = name + "=";
@@ -24,7 +56,7 @@ function getCookie(name) {
 }
 
 var firstTime = true;
-$('.play-btn').on('click', function ev(e) {
+$('body').on('click', '.play-btn', function ev(e) {
     songs = [];
     var cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
@@ -42,9 +74,9 @@ $('.play-btn').on('click', function ev(e) {
             });
             addNewData(data);
             $('.play-pause-btn').trigger('click');
-            $('.full-player').css('display', 'flex');
+            $('.audio-player').css('display', 'flex');
             if (firstTime) {
-                $('.full-player').effect('slide','slow');
+                $('.audio-player').effect('slide','slow');
                 firstTime = false;
             }
             $('.player').css('display', 'flex');
@@ -63,7 +95,7 @@ $('.play-btn').on('click', function ev(e) {
     });
 });
 
-$('.like-btn').on('click', function ev(e) {
+$('body').on('click', '.like-btn', function ev(e) {
     var cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         'method': 'POST',
@@ -85,7 +117,7 @@ $('.like-btn').on('click', function ev(e) {
     });
 });
 
-$('.cancion').on('click', function ev(e) {
+$('body').on('click', '.cancion', function ev(e) {
     var cancion_id = $(this).data('target').split('-')[1];
     $('#like-' + cancion_id + ' i').removeClass('fas far');
     $.ajax({
@@ -127,7 +159,7 @@ $('.cancion').on('click', function ev(e) {
 
 });
 
-$('.playlist-btn').on('click', function ev(e) {
+$('body').on('click', '.playlist-btn', function ev(e) {
     var usuario_id = $(this).data('user');
     var cancion_id = $(this).data('song');
     $.ajax({
@@ -162,7 +194,7 @@ $('.playlist-btn').on('click', function ev(e) {
     });
 });
 
-$('.comment-btn').on('click', function ev(e) {
+$('body').on('click', '.comment-btn', function ev(e) {
     var cancion_id = $(this).attr('id').split('-')[1];
     var comentario = $('#text-area-comment-' + cancion_id).val();
     if (comentario.length > 255 || comentario.length == 0) {
@@ -292,7 +324,7 @@ function initAudioPlayer() {
 function addInfoSongQueue() {
     var cancion = songs.shift();
     addNewData(cancion);
-    $('.full-player').css('display', 'flex');
+    $('.audio-player').css('display', 'flex');
     $('.player').css('display', 'flex');
     var audio = $('#audio')[0];
     audio.addEventListener('ended', () =>  {
@@ -307,7 +339,7 @@ function addInfoSongQueue() {
 function refreshSongPlaylist() {
     var cancion = playlist[actualSong];
     addNewData(cancion);
-    $('.full-player').css('display', 'flex');
+    $('.audio-player').css('display', 'flex');
     $('.player').css('display', 'flex');
     var audio = $('#audio')[0];
     audio.addEventListener('ended', () =>  {
@@ -380,3 +412,182 @@ function removeActualData() {
         $('.download').remove();
     }
 }
+
+// a partir de aquí
+
+
+if (getCookie('cookie-accept') == null) {
+    $( document ).ready(function() {
+        krajeeDialogCust2.confirm("jiome", function (result) {
+            if (result) {
+                window.location="/index.php?r=site%2Fcookie";
+            } else {
+                window.location="http://google.es";
+            }
+        });
+    });
+}
+
+function getFollowersNumber() {
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=usuarios%2Fget-followers-data',
+        success: function (data) {
+            seguidores = data;
+        }
+    });
+}
+
+function getNewNotifications() {
+    // NUEVOS SEGUIDORES
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=usuarios%2Fget-new-followers&total=' + seguidores,
+        success: function (data) {
+            if (data.count > seguidores) {
+                $('.alert-box').html('');
+                data.seguidores.forEach(element => {
+                    $('.alert-box').append(`
+                            <a href="/index.php?r=usuarios/perfil&id=${element.id}" class="text-decoration-none">
+                                <div class="toast mb-2" data-delay="5000">
+                                    <div class="toast-header">
+                                        <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                        <strong class="mr-auto">${element.login}</strong>
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="toast-body">
+                                        ¡<span class="font-weight-bold">${element.login}</span> $followMessage!
+                                    </div>
+                                </div>
+                            </a>
+                    `);
+                });
+                $('.toast').toast('show');
+            }
+            seguidores = data.count;
+        }
+    });
+
+    // NUEVOS MENSAJES
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=usuarios%2Fget-no-read-messages&total=' + mensajes,
+        success: function (data) {
+            if (data.count > 0) {
+                $('.messages-number').html(data.count);
+            } else {
+                $('.messages-number').html('');
+            }
+            if (data.count > mensajes) {
+                $('.chat-notification').trigger('play');
+                $('.alert-box').html('');
+                data.mensajes.forEach(element => {
+                    var time = element.created_at.split(' ')[1];
+                    $('.alert-box').append(`
+                        <a href="/index.php?r=chat/chat" class="text-decoration-none">
+                            <div class="toast mb-2" data-delay="5000">
+                                <div class="toast-header">
+                                    <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                    <strong class="mr-auto">${element.login}</strong>
+                                    <small class="ml-3">${time}</small>
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    ${element.mensaje}
+                                </div>
+                            </div>
+                        </a>
+                    `);
+                });
+                $('.toast').toast('show');
+            }
+            mensajes = data.count;
+        }
+    });
+}
+
+$(window).on('pjax:start', function (){
+    setTimeout(function () {
+        getFollowersData()
+        checkTheme();
+        $(".owl-carousel-index").owlCarousel({
+            loop: true,
+            autoplay:true,
+            autoplayTimeout:4000,
+            items : 1
+        });
+    }, 500);
+});
+
+$('body').on('click', '.follow', function ev(e) {
+    $.ajax({
+        'method': 'POST',
+        'url': '/index.php?r=seguidores%2Ffollow&seguido_id=' + $('.user-id').text(),
+        success: function (data) {
+            $('.follow').html(data.textButton);
+            $('#seguidores').html(data.seguidores);
+        }
+    });
+});
+
+function getFollowersData() {
+    if ($('.user-id').length) {
+        $.ajax({
+            'method': 'GET',
+            'url': '/index.php?r=seguidores%2Fget-data&seguido_id=' + $('.user-id').text(),
+            success: function (data) {
+                $('.follow').html(data.textButton);
+                $('#seguidores').html(data.seguidores);
+                $('#seguidos').html(data.seguidos);
+            },
+        });
+    }
+}
+
+$('body').on('click', '.like-list', function ev(e) {
+    var cancion_id = $(this).data('song');
+    $.ajax({
+        method: 'GET',
+        'url': '/index.php?r=canciones/get-likes&cancion_id=' + cancion_id,
+        success: function (data) {
+            $('.like-row').html('');
+            data.forEach(element => {
+                $('.like-row').append(`
+                    <div class="col-12">
+                            <img src="${element.url_image}" class="d-inline-block user-search-img my-auto" width="30px" alt="like">
+                            <p class="d-inline-block my-auto">${element.login}</p>
+                    </div>
+                `);
+            });
+        }
+    });
+});
+
+$('body').on('click', '.remove-videoclip-btn', function ev(e) {
+    var id = $(this).data('id');
+    var accept = confirm('jime');
+    if (accept) {
+        $.ajax({
+            method: 'POST',
+            url: '/index.php?r=videoclips%2Feliminar',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                $('#video-' + data).addClass('fall');
+                $('#video-' + data).on('transitionend', function ev(e) {
+                    $('#video-' + data).remove();
+                });
+            }
+        });
+    }
+});
+
+$('body').on('click', '.hide-player', function ev(e) {
+    $('.hide-player i').toggleClass('rotate-190');
+    $('.full-player').toggle('slide');
+});

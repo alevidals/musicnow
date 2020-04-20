@@ -8,74 +8,13 @@ use yii\helpers\Url;
 /* @var $model app\models\Usuarios */
 
 \yii\web\YiiAsset::register($this);
-
-$urlFollow = Url::to(['seguidores/follow', 'seguido_id' => $model->id]);
-$urlGetFollowData = Url::to(['seguidores/get-data', 'seguido_id' => $model->id]);
 $urlGetLikes = Url::to(['canciones/get-likes']);
 
 $confirmMessage = Yii::t('app', 'Are you sure you want to delete this item?');
 
 $js = <<<EOT
 
-    $.ajax({
-        'method': 'GET',
-        'url': '$urlGetFollowData',
-        success: function (data) {
-            $('.follow').html(data.textButton);
-            $('#seguidores').html(data.seguidores);
-            $('#seguidos').html(data.seguidos);
-        }
-    });
-
-    $('.follow').on('click', function ev(e) {
-        $.ajax({
-            'method': 'POST',
-            'url': '$urlFollow',
-            success: function (data) {
-                $('.follow').html(data.textButton);
-                $('#seguidores').html(data.seguidores);
-            }
-        });
-    });
-
-    $('.like-list').on('click', function ev(e) {
-        var cancion_id = $(this).data('song');
-        $.ajax({
-            method: 'GET',
-            'url': '$urlGetLikes&cancion_id=' + cancion_id,
-            success: function (data) {
-                $('.like-row').html('');
-                data.forEach(element => {
-                    $('.like-row').append(`
-                        <div class="col-12">
-                                <img src="\${element.url_image}" class="d-inline-block user-search-img my-auto" width="30px" alt="like">
-                                <p class="d-inline-block my-auto">\${element.login}</p>
-                        </div>
-                    `);
-                });
-            }
-        });
-    });
-
-    $('body').on('click', '.remove-videoclip-btn', function ev(e) {
-    var id = $(this).data('id');
-    var accept = confirm('$confirmMessage');
-    if (accept) {
-        $.ajax({
-            method: 'POST',
-            url: '/index.php?r=videoclips%2Feliminar',
-            data: {
-                id: id
-            },
-            success: function (data) {
-                $('#video-' + data).addClass('fall');
-                $('#video-' + data).on('transitionend', function ev(e) {
-                    $('#video-' + data).remove();
-                });
-            }
-        });
-    }
-});
+    getFollowersData();
 
 EOT;
 
@@ -84,6 +23,8 @@ $this->registerJS($js);
 ?>
 
 <div class="usuarios-view">
+
+    <span class="d-none user-id"><?= $model->id ?></span>
 
     <?php if ($model->url_banner) : ?>
         <?= Html::img($model->url_banner, ['class' => 'img-fluid', 'alt' => 'banner']) ?>
@@ -206,21 +147,21 @@ $this->registerJS($js);
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
                     <?= Html::a(
-                Yii::t('app', 'DeleteProfileImage'),
-                ['usuarios/eliminar-imagen', 'id' => $model->id],
-                [
-                            'class' => 'dropdown-item',
-                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                        ]
-            ) ?>
+                        Yii::t('app', 'DeleteProfileImage'),
+                        ['usuarios/eliminar-imagen', 'id' => $model->id],
+                        [
+                                    'class' => 'dropdown-item',
+                                    'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
+                                ]
+                    ) ?>
                     <?= Html::a(
-                Yii::t('app', 'DeleteProfileBanner'),
-                ['usuarios/eliminar-banner', 'id' => $model->id],
-                [
-                            'class' => 'dropdown-item',
-                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                        ]
-            ) ?>
+                        Yii::t('app', 'DeleteProfileBanner'),
+                        ['usuarios/eliminar-banner', 'id' => $model->id],
+                        [
+                                    'class' => 'dropdown-item',
+                                    'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
+                                ]
+                    ) ?>
                     <?= Html::a(
                         Yii::t('app', 'DeleteComments'),
                         ['comentarios/index', 'user_id' => $model->id],

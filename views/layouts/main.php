@@ -11,6 +11,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 // $this->registerJS(Utility::GET_COOKIE);
@@ -33,107 +34,11 @@ $js = <<<EOT
         }, 5000);
     }
 
-
-    if (getCookie('cookie-accept') == null) {
-        $( document ).ready(function() {
-            krajeeDialogCust2.confirm("$cookieMessage", function (result) {
-                if (result) {
-                    window.location="$urlCookie";
-                } else {
-                    window.location="http://google.es";
-                }
-            });
-        });
-    }
-
-    function getFollowersNumber() {
-        $.ajax({
-            method: 'GET',
-            url: '$urlGetFollowersNumber',
-            success: function (data) {
-                seguidores = data;
-            }
-        });
-    }
-
-    function getNewNotifications() {
-        // NUEVOS SEGUIDORES
-        $.ajax({
-            method: 'GET',
-            url: '$urlGetNewFollowers&total=' + seguidores,
-            success: function (data) {
-                if (data.count > seguidores) {
-                    $('.alert-box').html('');
-                    console.log(data.seguidores);
-                    data.seguidores.forEach(element => {
-                        $('.alert-box').append(`
-                                <a href="/index.php?r=usuarios/perfil&id=\${element.id}" class="text-decoration-none">
-                                    <div class="toast mb-2" data-delay="5000">
-                                        <div class="toast-header">
-                                            <img src="\${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
-                                            <strong class="mr-auto">\${element.login}</strong>
-                                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="toast-body">
-                                            ¡<span class="font-weight-bold">\${element.login}</span> $followMessage!
-                                        </div>
-                                    </div>
-                                </a>
-                        `);
-                    });
-                    $('.toast').toast('show');
-                }
-                seguidores = data.count;
-            }
-        });
-
-        // NUEVOS MENSAJES
-        $.ajax({
-            method: 'GET',
-            url: '$urlGetNoReadMessages&total=' + mensajes,
-            success: function (data) {
-                if (data.count > 0) {
-                    $('.messages-number').html(data.count);
-                } else {
-                    $('.messages-number').html('');
-                }
-                if (data.count > mensajes) {
-                    $('.chat-notification').trigger('play');
-                    $('.alert-box').html('');
-                    data.mensajes.forEach(element => {
-                        var time = element.created_at.split(' ')[1];
-                        $('.alert-box').append(`
-                            <a href="/index.php?r=chat/chat" class="text-decoration-none">
-                                <div class="toast mb-2" data-delay="5000">
-                                    <div class="toast-header">
-                                        <img src="\${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
-                                        <strong class="mr-auto">\${element.login}</strong>
-                                        <small class="ml-3">\${time}</small>
-                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="toast-body">
-                                        \${element.mensaje}
-                                    </div>
-                                </div>
-                            </a>
-                        `);
-                    });
-                    $('.toast').toast('show');
-                }
-                mensajes = data.count;
-            }
-        });
-    }
-
     GreenAudioPlayer.init({
         selector: '.player',
         stopOthersOnPlay: true
     });
-    $('.full-player').css('display', 'none');
+    $('.audio-player').css('display', 'none');
     $('.player').css('display', 'none');
 EOT;
 
@@ -170,6 +75,7 @@ $this->registerJS($js);
     <?php $this->head() ?>
 </head>
 <body>
+<?php Pjax::begin(); ?>
 <?php $this->beginBody() ?>
 
     <div aria-live="polite" aria-atomic="true" style="position: relative;">
@@ -327,26 +233,36 @@ $this->registerJS($js);
     </div>
 </div>
 
+<?php Pjax::end(); ?>
+
 <audio class="chat-notification">
     <source src="/sounds/notification.mp3">
 </audio>
 
-<div class="full-player row ml-0">
-    <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
-        <img alt="song-cover col-2" height="60px">
-            <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
-            <div class="artist-info my-auto col text-center">
-                <p class="m-0"></p>
-                <small></small>
-            </div>
-            <button class="my-auto mr-2 action-btn forward-btn outline-transparent"><i class="fas fa-forward"></i></button>
+<div class="audio-player fixed-bottom">
+    <div>
+        <button class="outline-transparent hide-player">
+            <i class="fas fa-chevron-left"></i>
+        </button>
     </div>
-    <div class="player col-12 col-lg-8 col-xl-9">
-        <audio id="audio">
-            <source>
-        </audio>
+    <div class="full-player w-100 row ml-0">
+        <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
+            <img alt="song-cover col-2" height="60px">
+                <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
+                <div class="artist-info my-auto col text-center">
+                    <p class="m-0"></p>
+                    <small></small>
+                </div>
+                <button class="my-auto mr-2 action-btn forward-btn outline-transparent"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="player col-12 col-lg-8 col-xl-9">
+            <audio id="audio">
+                <source>
+            </audio>
+        </div>
     </div>
 </div>
+
 
 <footer class="footer">
     <div class="container">
