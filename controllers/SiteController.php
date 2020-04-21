@@ -76,7 +76,11 @@ class SiteController extends Controller
 
         $ids = $usuario->getSeguidos()->select('id')->column();
 
-        $canciones = Canciones::find()->where(['IN', 'usuario_id', $ids])->orWhere(['usuario_id' => Yii::$app->user->id])->all();
+        $canciones = Canciones::find()
+            ->where(['IN', 'usuario_id', $ids])
+            ->orWhere(['usuario_id' => Yii::$app->user->id])
+            ->limit(2)
+            ->all();
 
         $usuariosSearch = new ActiveDataProvider([
             'query' => Usuarios::find()->where('1=0'),
@@ -232,5 +236,26 @@ class SiteController extends Controller
     public function actionGetTranslate($string)
     {
         return Yii::t('app', $string);
+    }
+
+    public function actionGetMorePosts($offset)
+    {
+        $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
+
+        $ids = $usuario->getSeguidos()->select('id')->column();
+
+        $canciones = Canciones::find()
+            ->where(['IN', 'usuario_id', $ids])
+            ->orWhere(['usuario_id' => Yii::$app->user->id])
+            ->offset($offset)
+            ->limit(10)
+            ->all();
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return [
+            'canciones' => $canciones,
+            'usuario' => $usuario,
+        ];
     }
 }

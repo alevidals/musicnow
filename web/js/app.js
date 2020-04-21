@@ -3,6 +3,7 @@ var seguidores = 0;
 var songs = [];
 var actualSong = 0;
 var playlist = [];
+var offset = 10;
 
 checkTheme();
 
@@ -610,4 +611,91 @@ $('body').on('click', '.hide-player', function ev(e) {
 
 $('body').on('click', '.filter-btn', function ev(e) {
     $('.filters').toggle('blind');
+});
+
+$(window).on('scroll', function () {
+    if ($('.owl-carousel-index').length) {
+        var scrollHeight = $(document).height();
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+            $.ajax({
+                method: 'GET',
+                url: '/index.php?r=site%2Fget-more-posts',
+                data: {
+                    offset: offset
+                },
+                success: function (data) {
+                    offset = offset + 10;
+                    data.canciones.forEach(element => {
+                        $('.canciones-container').append(`
+                            <div class="row">
+                                <div class="col">
+                                    <div class="song-container">
+                                        <div class="box-3">
+                                            <img class="img-fluid" alt="portada" src="${element.url_portada}">
+                                            <div class="share-buttons">
+                                                <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
+                                                <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
+                                                <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${data.id}"><i class="far fa-comment"></i></button>
+                                                <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
+                                                <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
+                                            </div>
+                                            <div class="layer"></div>
+                                        </div>
+                                    </div>
+                                    <h4 class="text-center mt-3 mb-5">${element.titulo}</h4>
+                                    <div class="modal fade" id="song-${element.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <img class="img-fluid col-12" alt="profile-image" src="${element.url_portada}">
+                                                                <div class="col-12 mt-4">
+                                                                    <textarea id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="<?= Yii::t('app', 'Comment') . '...' ?>"></textarea>
+                                                                    <div class="invalid-feedback"><?= Yii::t('app', 'MaxChar') ?></div>
+                                                                    <div class="mt-3">
+                                                                        <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button"><?= Yii::t('app', 'CommentAction') ?></button>
+                                                                        <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart text-danger"></i></button>
+                                                                        <p class="d-inline-block"><span></span> like/s</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 ">
+                                                            <div class="row">
+                                                                <div class="col-12 custom-overflow">
+                                                                    <!-- COMENTARIOS  -->
+                                                                    <div class="row row-comments">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h2 class="text-center">Playlists</h2>
+                                                    <div class="row row-playlists">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                }
+            });
+        }
+    } else {
+        offset = 10;
+    }
 });

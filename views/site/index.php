@@ -91,7 +91,7 @@ $this->registerJS($js);
     <?php endif ?>
 
     <div class="row">
-        <div class="col-12 col-lg-6 mt-5 order-1 order-lg-0">
+        <div class="col-12 col-lg-6 mt-5 order-1 order-lg-0 canciones-container">
             <?php foreach ($canciones as $cancion) : ?>
                 <div class="row">
                     <div class="col">
