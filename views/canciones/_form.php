@@ -11,7 +11,7 @@ use yii\bootstrap4\Html;
 
 <div class="canciones-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 

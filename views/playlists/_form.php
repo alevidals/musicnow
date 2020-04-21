@@ -10,8 +10,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="playlists-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

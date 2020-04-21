@@ -10,7 +10,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="bloqueados-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
 
     <?= $form->field($model, 'bloqueador_id')->textInput() ?>
 

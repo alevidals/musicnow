@@ -10,8 +10,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="chat-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
     <?= $form->field($model, 'emisor_id')->textInput() ?>
 
     <?= $form->field($model, 'receptor_id')->textInput() ?>

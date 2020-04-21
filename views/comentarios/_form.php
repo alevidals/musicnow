@@ -10,8 +10,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="comentarios-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
     <?= $form->field($model, 'usuario_id')->textInput() ?>
 
     <?= $form->field($model, 'cancion_id')->textInput() ?>

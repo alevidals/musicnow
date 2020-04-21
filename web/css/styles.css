@@ -32,7 +32,7 @@
 .hide-player {
     height: 60px;
     width: 60px;
-    background-color:#ccc !important;
+    background-color: #ccc !important;
 }
 
 .rotate-190 {
@@ -101,6 +101,20 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #ffffff;
+}
+
+.fa-spinner {
+    animation: full-rotate 1s linear infinite;
+}
+
+@keyframes full-rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .main-yellow {
@@ -580,5 +594,9 @@ textarea {
 }
 
 [data-theme="dark"] .hide-player {
+    color: #000 !important;
+}
+
+[data-theme="dark"] .fa-spinner {
     color: #000 !important;
 }

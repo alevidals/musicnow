@@ -682,7 +682,7 @@ $(window).on('scroll', function () {
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <h2 class="text-center">Playlists</h2>
-                                                    <div class="row row-playlists">
+                                                    <div class="row row-playl   ists">
                                                     </div>
                                                 </div>
                                             </div>
@@ -698,4 +698,8 @@ $(window).on('scroll', function () {
     } else {
         offset = 10;
     }
+});
+
+$('body').on('submit', '.create-form', function ev(e) {
+    $('.form-group button').html('<i class="fas fa-spinner"></i>');
 });

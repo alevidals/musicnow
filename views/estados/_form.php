@@ -10,8 +10,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="estados-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
     <?= $form->field($model, 'estado')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

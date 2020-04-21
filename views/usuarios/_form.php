@@ -11,8 +11,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="usuarios-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'create-form']]); ?>
     <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
