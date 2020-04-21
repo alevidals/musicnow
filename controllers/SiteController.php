@@ -251,11 +251,17 @@ class SiteController extends Controller
             ->limit(10)
             ->all();
 
+       $likes = $usuario
+            ->getLikes()
+            ->select('cancion_id')
+            ->column();
+
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         return [
             'canciones' => $canciones,
             'usuario' => $usuario,
+            'likes' => $likes,
         ];
     }
 }

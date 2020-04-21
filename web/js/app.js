@@ -635,7 +635,7 @@ $(window).on('scroll', function () {
                                             <img class="img-fluid" alt="portada" src="${element.url_portada}">
                                             <div class="share-buttons">
                                                 <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                                <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
+                                                <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart text-danger"></i></button>
                                                 <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${data.id}"><i class="far fa-comment"></i></button>
                                                 <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
                                                 <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
