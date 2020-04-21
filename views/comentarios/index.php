@@ -24,14 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'cancion.titulo',
-                'label' => Yii::t('app', 'Canciones'),
+                'label' => Yii::t('app', 'Cancion'),
             ],
             [
                 'attribute' => 'comentario',
-                'label' => Yii::t('app', 'Comments')
+                'label' => Yii::t('app', 'Comment')
             ],
-            'created_at:datetime',
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app', 'Actions'),

@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Videoclips'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="mt-3"></div>

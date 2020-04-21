@@ -7,16 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CancionesPlaylistSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Canciones Playlists');
+$this->title = Yii::t('app', 'Canciones-Playlists');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="canciones-playlist-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Canciones Playlist'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,12 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'playlist_id',
-            'cancion_id',
-
+            [
+                'attribute' => 'playlist.titulo',
+                'label' => 'Playlist'
+            ],
+            [
+                'attribute' => 'cancion.titulo',
+                'label' => Yii::t('app', 'Cancion')
+            ],
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+            'tableOptions' => [
+            'class' => 'table admin-table ',
         ],
     ]); ?>
 

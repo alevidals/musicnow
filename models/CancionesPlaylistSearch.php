@@ -17,7 +17,7 @@ class CancionesPlaylistSearch extends CancionesPlaylist
     public function rules()
     {
         return [
-            [['playlist_id', 'cancion_id'], 'integer'],
+            [['playlist.titulo', 'cancion.titulo'], 'safe'],
         ];
     }
 
@@ -30,6 +30,11 @@ class CancionesPlaylistSearch extends CancionesPlaylist
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['playlist.titulo'], ['cancion.titulo']);
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -39,13 +44,25 @@ class CancionesPlaylistSearch extends CancionesPlaylist
      */
     public function search($params)
     {
-        $query = CancionesPlaylist::find();
+        $query = CancionesPlaylist::find()
+            ->joinWith('cancion c')
+            ->joinWith('playlist p');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['cancion.titulo'] = [
+            'asc' => ['c.titulo' => SORT_ASC],
+            'desc' => ['c.titulo' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['playlist.titulo'] = [
+            'asc' => ['p.titulo' => SORT_ASC],
+            'desc' => ['p.titulo' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -55,10 +72,12 @@ class CancionesPlaylistSearch extends CancionesPlaylist
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'playlist_id' => $this->playlist_id,
-            'cancion_id' => $this->cancion_id,
+            'ilike', 'c.titulo', $this->getAttribute('cancion.titulo')
+        ]);
+
+        $query->andFilterWhere([
+            'ilike', 'p.titulo', $this->getAttribute('playlist.titulo')
         ]);
 
         return $dataProvider;

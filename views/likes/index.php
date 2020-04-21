@@ -23,8 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
         // 'filterModel' => $searchModel,
         'columns' => [
             'usuario.login',
-            'cancion.titulo',
-
+            [
+                'attribute' => 'cancion.titulo',
+                'label' => Yii::t('app', 'Cancion')
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'asd',

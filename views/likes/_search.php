@@ -15,7 +15,7 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
+    <button class="btn btn-primary filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
     <div class="filters mt-4">
         <div class="row">
@@ -27,7 +27,7 @@ use yii\bootstrap4\ActiveForm;
             </div>
         </div>
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
 

@@ -16,34 +16,35 @@ $counter = 1;
 ?>
 <div class="playlists-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn main-yellow']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
+                'metho
+                d' => 'post',
             ],
         ]) ?>
     </p>
 
-    <h2><?= Html::encode($model->titulo) ?></h2>
+    <h2 class="text-center"><?= Html::encode($model->titulo) ?></h2>
 
-    <button id="<?= $model->id ?>" class="outline-transparent action-btn play-playlist-btn">
-        <i class="fas fa-play"></i>
-    </button>
+    <?php if (count($canciones) > 0) : ?>
+        <button id="<?= $model->id ?>" class="outline-transparent action-btn play-playlist-btn">
+            <i class="fas fa-play"></i>
+        </button>
+    <?php else : ?>
+        <p><?= Yii::t('app', 'NoSongs') ?></p>
+    <?php endif; ?>
 
-    <div class="row">
+    <div class="row mt-3">
         <?php foreach ($canciones as $cancion) : ?>
-            <div class="col-12 playlist-cancion">
+            <div class="col-12 playlist-cancion mb-3">
                 <h5 class="d-inline-block"><?= $counter++; ?></h5>
                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px']) ?>
                 <h5 class="d-inline-block ml-3"><?= Html::encode($cancion->titulo) ?></h5>
             </div>
         <?php endforeach ?>
-
     </div>
-
 </div>

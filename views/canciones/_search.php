@@ -21,7 +21,7 @@ $albumes = ['' => ''] + Usuarios::findOne(Yii::$app->user->id)->getAlbumes()->se
         'method' => 'get',
     ]); ?>
 
-    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
+    <button class="btn btn-primary filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
     <div class="filters mt-4">
         <div class="row">
@@ -36,7 +36,7 @@ $albumes = ['' => ''] + Usuarios::findOne(Yii::$app->user->id)->getAlbumes()->se
             </div>
         </div>
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-secondary']) ?>
         </div>
         <?php ActiveForm::end(); ?>
     </div>

@@ -26,13 +26,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
-            'bloqueador.login',
-            'bloqueado.login',
-
+            [
+                'attribute' => 'bloqueador.login',
+                'label' => Yii::t('app', 'Bloqueador')
+            ],
+            [
+                'attribute' => 'bloqueado.login',
+                'label' => Yii::t('app', 'Bloqueado')
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app', 'Actions'),
             ],
+        ],
+        'tableOptions' => [
+            'class' => 'table admin-table ',
         ],
     ]); ?>
 

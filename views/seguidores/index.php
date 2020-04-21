@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SeguidoresSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Seguidores');
+$this->title = Yii::t('app', 'Followers');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="seguidores-index">
@@ -26,9 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
-            'seguidor.login',
-            'seguido.login',
-
+            [
+                'attribute' => 'seguidor.login',
+                'label' => Yii::t('app', 'Seguidor')
+            ],
+            [
+                'attribute' => 'seguido.login',
+                'label' => Yii::t('app', 'Seguido')
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app', 'Actions'),

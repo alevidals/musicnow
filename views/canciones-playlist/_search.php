@@ -15,19 +15,19 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
+    <button class="btn btn-primary filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
     <div class="filters mt-4">
         <div class="row">
             <div class="col-6">
-                <?= $form->field($model, 'playlist_id') ?>
+                <?= $form->field($model, 'playlist.titulo')->label('Playlist') ?>
             </div>
             <div class="col-6">
-                <?= $form->field($model, 'cancion_id') ?>
+                <?= $form->field($model, 'cancion.titulo')->label(Yii::t('app', 'Cancion')) ?>
             </div>
         </div>
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
 

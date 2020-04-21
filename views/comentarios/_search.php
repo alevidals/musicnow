@@ -15,7 +15,7 @@ use yii\bootstrap4\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <button class="btn main-yellow filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
+    <button class="btn btn-primary filter-btn" type="button"><?= Yii::t('app', 'ShowFilters') ?></button>
 
     <div class="filters mt-4">
         <div class="row">
@@ -24,18 +24,15 @@ use yii\bootstrap4\ActiveForm;
                     <?= $form->field($model, 'usuario.login') ?>
                 </div>
             <?php endif; ?>
-            <div class="col-lg-3 col-12">
+            <div class="col-lg col-12">
                 <?= $form->field($model, 'cancion.titulo')->label(Yii::t('app', 'Song')) ?>
             </div>
-            <div class="col-lg-3 col-12">
-                <?= $form->field($model, 'comentario') ?>
-            </div>
-            <div class="col-lg-3 col-12">
-                <?= $form->field($model, 'created_at') ?>
+            <div class="col-lg col-12">
+                <?= $form->field($model, 'comentario')->label(Yii::t('app', 'Comment')) ?>
             </div>
         </div>
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-secondary']) ?>
         </div>
     </div>
 

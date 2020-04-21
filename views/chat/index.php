@@ -26,13 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
-            'emisor.login',
-            'receptor.login',
+            [
+                'attribute' => 'emisor.login',
+                'label' => Yii::t('app', 'Emisor'),
+            ],
+            [
+                'attribute' => 'receptor.login',
+                'label' => Yii::t('app', 'Receptor'),
+            ],
             'mensaje:text',
-            'estado.estado',
-            //'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'tableOptions' => [
+            'class' => 'table admin-table ',
         ],
     ]); ?>
 
