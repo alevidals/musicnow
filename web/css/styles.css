@@ -17,6 +17,11 @@
     height: 60px;
 }
 
+.invalid-feedback {
+    font-weight: bold;
+    color: #f00 !important;
+}
+
 .btn.btn-secondary {
     color: #fff !important;
 }
@@ -599,4 +604,8 @@ textarea {
 
 [data-theme="dark"] .fa-spinner {
     color: #000 !important;
+}
+
+[data-theme="dark"] .invalid-feedback {
+    color: #f00 !important;
 }

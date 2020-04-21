@@ -682,7 +682,7 @@ $(window).on('scroll', function () {
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <h2 class="text-center">Playlists</h2>
-                                                    <div class="row row-playl   ists">
+                                                    <div class="row row-playlists">
                                                     </div>
                                                 </div>
                                             </div>
