@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'playlist_id',
             'cancion_id',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>

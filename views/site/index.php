@@ -100,7 +100,7 @@ $this->registerJS($js);
                                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
                                 <div class="share-buttons">
                                     <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                    <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent bubbly-button like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart text-danger"></i></button>
+                                    <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent bubbly-button like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart red-hearth"></i></button>
                                     <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
                                     <button data-song="<?= $cancion->id ?>" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
                                     <button data-song="<?= $cancion->id ?>" data-user="<?= Yii::$app->user->id ?>" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
@@ -122,7 +122,7 @@ $this->registerJS($js);
                                                         <div class="invalid-feedback"><?= Yii::t('app', 'MaxChar') ?></div>
                                                         <div class="mt-3">
                                                             <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button"><?= Yii::t('app', 'CommentAction') ?></button>
-                                                            <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart text-danger"></i></button>
+                                                            <button type="button" id="like-<?= $cancion->id ?>" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart red-hearth"></i></button>
                                                             <p class="d-inline-block"><span></span> like/s</p>
                                                         </div>
                                                     </div>

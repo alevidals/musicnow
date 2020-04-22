@@ -27,6 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'tableOptions' => [
+            'class' => 'table admin-table ',
+        ],
     ]); ?>
 
 

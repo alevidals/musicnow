@@ -645,7 +645,7 @@ $(window).on('scroll', function () {
                                             <img class="img-fluid" alt="portada" src="${element.url_portada}">
                                             <div class="share-buttons">
                                                 <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                                <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart text-danger"></i></button>
+                                                <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart red-hearth"></i></button>
                                                 <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${data.id}"><i class="far fa-comment"></i></button>
                                                 <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
                                                 <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
@@ -667,7 +667,7 @@ $(window).on('scroll', function () {
                                                                     <div class="invalid-feedback"><?= Yii::t('app', 'MaxChar') ?></div>
                                                                     <div class="mt-3">
                                                                         <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button"><?= Yii::t('app', 'CommentAction') ?></button>
-                                                                        <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart text-danger"></i></button>
+                                                                        <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart red-hearth"></i></button>
                                                                         <p class="d-inline-block"><span></span> like/s</p>
                                                                     </div>
                                                                 </div>

@@ -35,6 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => Yii::t('app', 'Actions'),
             ],
         ],
+        'tableOptions' => [
+            'class' => 'table admin-table ',
+        ],
     ]); ?>
 
 

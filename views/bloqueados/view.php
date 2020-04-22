@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'bloqueador_id',
             'bloqueado_id',
         ],
+        'options' => [
+            'class' => 'table admin-table'
+        ],
     ]) ?>
 
 </div>
