@@ -446,33 +446,43 @@ function getFollowersNumber() {
 
 function getNewNotifications() {
     // NUEVOS SEGUIDORES
+    var string = 'followMessage';
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Fget-new-followers&total=' + seguidores,
-        success: function (data) {
-            if (data.count > seguidores) {
-                $('.alert-box').html('');
-                data.seguidores.forEach(element => {
-                    $('.alert-box').append(`
-                            <a href="/index.php?r=usuarios/perfil&id=${element.id}" class="text-decoration-none">
-                                <div class="toast mb-2" data-delay="5000">
-                                    <div class="toast-header">
-                                        <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
-                                        <strong class="mr-auto">${element.login}</strong>
-                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="toast-body">
-                                        ¡<span class="font-weight-bold">${element.login}</span> $followMessage!
-                                    </div>
-                                </div>
-                            </a>
-                    `);
-                });
-                $('.toast').toast('show');
-            }
-            seguidores = data.count;
+        url: '/index.php?r=site%2Fget-translate',
+        data: {
+            string: string
+        },
+        success: function (message) {
+            $.ajax({
+                method: 'GET',
+                url: '/index.php?r=usuarios%2Fget-new-followers&total=' + seguidores,
+                success: function (data) {
+                    if (data.count > seguidores) {
+                        $('.alert-box').html('');
+                        data.seguidores.forEach(element => {
+                            $('.alert-box').append(`
+                                    <a href="/index.php?r=usuarios/perfil&id=${element.id}" class="text-decoration-none">
+                                        <div class="toast mb-2" data-delay="5000">
+                                            <div class="toast-header">
+                                                <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                                <strong class="mr-auto">${element.login}</strong>
+                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body">
+                                                ¡<span class="font-weight-bold">${element.login}</span> ${message}!
+                                            </div>
+                                        </div>
+                                    </a>
+                            `);
+                        });
+                        $('.toast').toast('show');
+                    }
+                    seguidores = data.count;
+                }
+            });
         }
     });
 
