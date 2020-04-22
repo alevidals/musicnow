@@ -84,10 +84,6 @@
     color: #fff !important;
 }
 
-.fa-heart {
-    color: red !important;
-}
-
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -314,7 +310,6 @@
 }
 
 .box-3 {
-    background-color: #2ec0f9;
     transition: 1s;
     display: flex;
     justify-content: center;
@@ -468,7 +463,11 @@ textarea {
 
 /* Dark mode */
 
-[data-theme="dark"] * {
+[data-theme="dark"] *:not(i) {
+    color: #fff !important;
+}
+
+[data-theme="dark"] i:not(.fa-heart) {
     color: #fff !important;
 }
 
