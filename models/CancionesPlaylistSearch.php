@@ -52,6 +52,9 @@ class CancionesPlaylistSearch extends CancionesPlaylist
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $dataProvider->sort->attributes['cancion.titulo'] = [

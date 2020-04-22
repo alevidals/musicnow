@@ -58,6 +58,9 @@ class AlbumesSearch extends Albumes
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $dataProvider->sort->attributes['usuario.login'] = [

@@ -52,6 +52,9 @@ class SeguidoresSearch extends Seguidores
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $dataProvider->sort->attributes['seguidor.login'] = [

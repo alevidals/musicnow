@@ -53,11 +53,13 @@ class ComentariosSearch extends Comentarios
             $query->where(['comentarios.usuario_id' => Yii::$app->user->id]);
         }
 
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $dataProvider->sort->attributes['cancion.titulo'] = [

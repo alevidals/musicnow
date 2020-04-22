@@ -58,8 +58,12 @@ class CancionesSearch extends Canciones
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
+            'pagination' => [
+                'pageSize' => 5,
+            ],
             'query' => $query,
         ]);
+
 
         $dataProvider->sort->attributes['album.titulo'] = [
             'asc' => ['a.titulo' => SORT_ASC],

@@ -52,6 +52,9 @@ class BloqueadosSearch extends Bloqueados
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $dataProvider->sort->attributes['bloqueador.login'] = [

@@ -51,6 +51,9 @@ class VideoclipsSearch extends Videoclips
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $dataProvider->sort->attributes['usuario.login'] = [
@@ -65,7 +68,7 @@ class VideoclipsSearch extends Videoclips
             // $query->where('0=1');
             return $dataProvider;
         }
-        
+
         $query->andFilterWhere(['ilike', 'link', $this->link]);
 
         $query->andFilterWhere([
