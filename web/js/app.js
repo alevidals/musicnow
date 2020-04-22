@@ -414,15 +414,15 @@ function removeActualData() {
 
 if (getCookie('cookie-accept') == null) {
     $( document ).ready(function() {
-        var string = 'CookieMessage';
+        var strings = ['CookieMessage'];
         $.ajax({
             method: 'GET',
             url: '/index.php?r=site%2Fget-translate',
             data: {
-                string: string
+                strings: strings
             },
             success: function (data) {
-                krajeeDialogCust2.confirm(data, function (result) {
+                krajeeDialogCust2.confirm(data[0], function (result) {
                     if (result) {
                         window.location="/index.php?r=site%2Fcookie";
                     } else {
@@ -446,12 +446,12 @@ function getFollowersNumber() {
 
 function getNewNotifications() {
     // NUEVOS SEGUIDORES
-    var string = 'followMessage';
+    var strings = ['followMessage'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
         data: {
-            string: string
+            strings: strings
         },
         success: function (message) {
             $.ajax({
@@ -472,7 +472,7 @@ function getNewNotifications() {
                                                 </button>
                                             </div>
                                             <div class="toast-body">
-                                                ¡<span class="font-weight-bold">${element.login}</span> ${message}!
+                                                ¡<span class="font-weight-bold">${element.login}</span> ${message[0]}!
                                             </div>
                                         </div>
                                     </a>
@@ -585,15 +585,15 @@ $('body').on('click', '.like-list', function ev(e) {
 
 $('body').on('click', '.remove-videoclip-btn', function ev(e) {
     var id = $(this).data('id');
-    var string = 'Are you sure you want to delete this item?';
+    var strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
         data: {
-            string: string
+            strings: strings
         },
         success: function (data) {
-            krajeeDialogCust2.confirm(data, function (result) {
+            krajeeDialogCust2.confirm(data[0], function (result) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
@@ -628,57 +628,79 @@ $(window).on('scroll', function () {
         var scrollHeight = $(document).height();
         var scrollPosition = $(window).height() + $(window).scrollTop();
         if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+            var strings = ['Comment', 'MaxChar'];
             $.ajax({
-                method: 'GET',
-                url: '/index.php?r=site%2Fget-more-posts',
-                data: {
-                    offset: offset
-                },
-                success: function (data) {
-                    offset = offset + 10;
-                    data.canciones.forEach(element => {
-                        $('.canciones-container').append(`
-                            <div class="row">
-                                <div class="col">
-                                    <div class="song-container">
-                                        <div class="box-3">
-                                            <img class="img-fluid" alt="portada" src="${element.url_portada}">
-                                            <div class="share-buttons">
-                                                <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                                <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart red-hearth"></i></button>
-                                                <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${data.id}"><i class="far fa-comment"></i></button>
-                                                <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
-                                                <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
-                                            </div>
-                                            <div class="layer"></div>
-                                        </div>
-                                    </div>
-                                    <h4 class="text-center mt-3 mb-5">${element.titulo}</h4>
-                                    <div class="modal fade" id="song-${element.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-8">
-                                                            <div class="row">
-                                                                <img class="img-fluid col-12" alt="profile-image" src="${element.url_portada}">
-                                                                <div class="col-12 mt-4">
-                                                                    <textarea id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="<?= Yii::t('app', 'Comment') . '...' ?>"></textarea>
-                                                                    <div class="invalid-feedback"><?= Yii::t('app', 'MaxChar') ?></div>
-                                                                    <div class="mt-3">
-                                                                        <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button"><?= Yii::t('app', 'CommentAction') ?></button>
-                                                                        <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart red-hearth"></i></button>
-                                                                        <p class="d-inline-block"><span></span> like/s</p>
+                    method: 'GET',
+                    url: '/index.php?r=site%2Fget-translate',
+                    data: {
+                        strings: strings
+                    },
+                    success: function (strings) {
+                        $.ajax({
+                            method: 'GET',
+                            url: '/index.php?r=site%2Fget-more-posts',
+                            data: {
+                                offset: offset
+                            },
+                            success: function (data) {
+                                offset = offset + 10;
+                                data.canciones.forEach(element => {
+                                    $('.canciones-container').append(`
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="song-container">
+                                                    <div class="box-3">
+                                                        <img class="img-fluid" alt="portada" src="${element.url_portada}">
+                                                        <div class="share-buttons">
+                                                            <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
+                                                            <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart red-hearth"></i></button>
+                                                            <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${element.id}"><i class="far fa-comment"></i></button>
+                                                            <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
+                                                            <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
+                                                        </div>
+                                                        <div class="layer"></div>
+                                                    </div>
+                                                </div>
+                                                <h4 class="text-center mt-3 mb-5">${element.titulo}</h4>
+                                                <div class="modal fade" id="song-${element.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-8">
+                                                                        <div class="row">
+                                                                            <img class="img-fluid col-12" alt="profile-image" src="${element.url_portada}">
+                                                                            <div class="col-12 mt-4">
+                                                                                <textarea id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="${strings[0]}"></textarea>
+                                                                                <div class="invalid-feedback">${strings[1]}</div>
+                                                                                <div class="mt-3">
+                                                                                    <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button">${strings[0]}</button>
+                                                                                    <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart red-hearth"></i></button>
+                                                                                    <p class="d-inline-block"><span></span> like/s</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 ">
+                                                                        <div class="row">
+                                                                            <div class="col-12 custom-overflow">
+                                                                                <!-- COMENTARIOS  -->
+                                                                                <div class="row row-comments">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4 ">
-                                                            <div class="row">
-                                                                <div class="col-12 custom-overflow">
-                                                                    <!-- COMENTARIOS  -->
-                                                                    <div class="row row-comments">
-                                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <h2 class="text-center">Playlists</h2>
+                                                                <div class="row row-playlists">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -686,23 +708,11 @@ $(window).on('scroll', function () {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <h2 class="text-center">Playlists</h2>
-                                                    <div class="row row-playlists">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `);
-                    });
-                }
+                                    `);
+                                });
+                            }
+                        });
+                    }
             });
         }
     } else {

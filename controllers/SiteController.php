@@ -233,9 +233,18 @@ class SiteController extends Controller
         return $this->redirect(['site/index']);
     }
 
-    public function actionGetTranslate($string)
+    public function actionGetTranslate()
     {
-        return Yii::t('app', $string);
+        $strings = Yii::$app->request->get('strings');
+
+        foreach ($strings as &$string) {
+            $string = Yii::t('app', $string);
+        }
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return $strings;
+
     }
 
     public function actionGetMorePosts($offset)
@@ -251,7 +260,7 @@ class SiteController extends Controller
             ->limit(10)
             ->all();
 
-       $likes = $usuario
+        $likes = $usuario
             ->getLikes()
             ->select('cancion_id')
             ->column();
