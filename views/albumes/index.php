@@ -9,6 +9,24 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Albumes');
 $this->params['breadcrumbs'][] = $this->title;
+
+$columns = [
+    'titulo',
+    'anyo',
+    'created_at:datetime',
+    [
+        'class' => 'yii\grid\ActionColumn',
+        'header' => Yii::t('app', 'Actions'),
+    ],
+];
+
+if (Yii::$app->user->identity->rol == 1) {
+    $columns = array_merge([[
+        'attribute' => 'usuario.login',
+        'label' => 'Login',
+    ]], $columns);
+}
+
 ?>
 <div class="albumes-index">
 
@@ -25,19 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
-        'columns' => [
-            'titulo',
-            [
-                'attribute' => 'usuario.login',
-                'label' => 'Login'
-            ],
-            'anyo',
-            'created_at:datetime',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => Yii::t('app', 'Actions'),
-            ],
-        ],
+        'columns' => $columns,
         'tableOptions' => [
             'class' => 'table admin-table '
         ]

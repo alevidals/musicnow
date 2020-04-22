@@ -26,7 +26,7 @@ return [
     'Create Canciones' => 'Añadir una canción',
     'Create Generos' => 'Añadir un género',
     'Create Usuarios' => 'Añadir un usuario',
-    'Created At' => 'Creado en',
+    'Created At' => 'Creado el',
     'Delete' => 'Eliminar',
     'Denominacion' => 'Denominación',
     'Duracion' => 'Duración',

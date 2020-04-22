@@ -9,6 +9,31 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Comments');
 $this->params['breadcrumbs'][] = $this->title;
+
+$columns = [
+    [
+        'attribute' => 'cancion.titulo',
+        'label' => Yii::t('app', 'Cancion'),
+    ],
+    [
+        'attribute' => 'comentario',
+        'label' => Yii::t('app', 'Comment'),
+    ],
+    [
+        'class' => 'yii\grid\ActionColumn',
+        'header' => Yii::t('app', 'Actions'),
+        'template' => '{delete}',
+    ],
+];
+
+if (Yii::$app->user->identity->rol == 1) {
+    $columns = array_merge([[
+        'attribute' => 'usuario.login',
+        'label' => 'Login',
+    ]], $columns);
+}
+
+
 ?>
 <div class="comentarios-index">
 
@@ -21,21 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
-        'columns' => [
-            [
-                'attribute' => 'cancion.titulo',
-                'label' => Yii::t('app', 'Cancion'),
-            ],
-            [
-                'attribute' => 'comentario',
-                'label' => Yii::t('app', 'Comment')
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => Yii::t('app', 'Actions'),
-                'template' => '{delete}',
-            ],
-        ],
+        'columns' => $columns,
         'tableOptions' => [
             'class' => 'table admin-table ',
         ],

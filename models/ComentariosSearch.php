@@ -49,6 +49,11 @@ class ComentariosSearch extends Comentarios
             ->joinWith('cancion c')
             ->joinWith('usuario u');
 
+        if (Yii::$app->user->identity->rol != 1) {
+            $query->where(['comentarios.usuario_id' => Yii::$app->user->id]);
+        }
+
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

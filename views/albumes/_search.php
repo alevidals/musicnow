@@ -19,6 +19,11 @@ use yii\bootstrap4\ActiveForm;
 
     <div class="filters mt-4">
         <div class="row">
+            <?php if (Yii::$app->user->identity->rol == 1) : ?>
+                <div class="col-lg-3 col-12">
+                    <?= $form->field($model, 'usuario.login') ?>
+                </div>
+            <?php endif; ?>
             <div class="col-lg-3 col-12">
                 <?= $form->field($model, 'titulo') ?>
             </div>
@@ -27,9 +32,6 @@ use yii\bootstrap4\ActiveForm;
             </div>
             <div class="col-lg-3 col-12">
                 <?= $form->field($model, 'created_at') ?>
-            </div>
-            <div class="col-lg-3 col-12">
-                <?= $form->field($model, 'usuario.login') ?>
             </div>
         </div>
         <div class="form-group">

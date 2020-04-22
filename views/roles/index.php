@@ -26,11 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'rol',
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app', 'Actions'),

@@ -20,7 +20,7 @@ use yii\bootstrap4\Html;
     <div class="filters mt-4">
         <div class="row">
             <div class="col-6">
-                <?= $form->field($model, 'usuario_id') ?>
+                <?= $form->field($model, 'usuario.login') ?>
             </div>
             <div class="col-6">
                 <?= $form->field($model, 'titulo') ?>

@@ -20,10 +20,10 @@ use yii\bootstrap4\ActiveForm;
     <div class="filters mt-4">
         <div class="row">
             <div class="col 6">
-                <?= $form->field($model, 'bloqueado.login')->label(Yii::t('app', 'Bloqueador')) ?>
+                <?= $form->field($model, 'bloqueador.login')->label(Yii::t('app', 'Bloqueador')) ?>
             </div>
             <div class="col 6">
-                <?= $form->field($model, 'bloqueador.login')->label(Yii::t('app', 'Bloqueado')) ?>
+                <?= $form->field($model, 'bloqueado.login')->label(Yii::t('app', 'Bloqueado')) ?>
             </div>
         </div>
         <div class="form-group">

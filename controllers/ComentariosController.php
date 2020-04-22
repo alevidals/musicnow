@@ -60,7 +60,7 @@ class ComentariosController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ComentariosSearch(['usuario_id' => Yii::$app->user->id]);
+        $searchModel = new ComentariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

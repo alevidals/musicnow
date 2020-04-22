@@ -9,6 +9,18 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Playlists');
 $this->params['breadcrumbs'][] = $this->title;
+
+$columns = [
+    'titulo',
+    ['class' => 'yii\grid\ActionColumn'],
+];
+
+if (Yii::$app->user->identity->rol == 1) {
+    $columns = array_merge([[
+        'attribute' => 'usuario.login'
+    ]], $columns);
+}
+
 ?>
 <div class="playlists-index">
 
@@ -25,10 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
-        'columns' => [
-            'titulo',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+        'columns' => $columns,
         'tableOptions' => [
             'class' => 'table admin-table ',
         ],

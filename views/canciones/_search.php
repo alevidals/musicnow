@@ -25,6 +25,11 @@ $albumes = ['' => ''] + Usuarios::findOne(Yii::$app->user->id)->getAlbumes()->se
 
     <div class="filters mt-4">
         <div class="row">
+            <?php if (Yii::$app->user->identity->rol == 1) : ?>
+                <div class="col-lg col-12">
+                    <?= $form->field($model, 'usuario.login') ?>
+                </div>
+            <?php endif; ?>
             <div class="col-lg col-12">
                 <?= $form->field($model, 'titulo') ?>
             </div>
