@@ -723,3 +723,10 @@ $(window).on('scroll', function () {
 $('body').on('submit', '.create-form', function ev(e) {
     $('.form-group button').html('<i class="fas fa-spinner"></i>');
 });
+
+$('body').on('keyup', '.usuarios-update input', function ev(e) {
+    var target = $(this).data('target');
+    if (target !== undefined && $('.update-' + target).length) {
+        $('.update-' + target).text($(this).val());
+    }
+});

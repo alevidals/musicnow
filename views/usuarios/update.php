@@ -77,8 +77,8 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
                     <i class="fas fa-pen edit-image-icon-image"></i>
                 </label>
                 <?= $form->field($model, 'image')->fileInput(['class' => 'file-input form-control-file d-none'])->label(false) ?>
-                <h5 class="mt-3"><?= Html::encode($model->login) ?></h5>
-                <h6><?= Html::encode($model->nombre) . ' ' . Html::encode($model->apellidos) ?></h6>
+                <h5 class="mt-3 update-login"><?= Html::encode($model->login) ?></h5>
+                <h6><span class="update-nombre"><?= Html::encode($model->nombre)?></span> <span class="update-apellidos"><?= Html::encode($model->apellidos)?></span></h6>
             </div>
         </div>
 
@@ -86,16 +86,16 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
         <div class="w-100"></div>
 
         <div class="col-lg-6">
-            <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'login')->textInput(['maxlength' => true, 'data-target' => 'login']) ?>
         </div>
 
         <div class="w-100"></div>
 
         <div class="col-lg-3">
-            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'data-target' => 'nombre']) ?>
         </div>
         <div class="col-lg-3">
-            <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true, 'data-target' => 'apellidos']) ?>
         </div>
 
         <div class="w-100"></div>
