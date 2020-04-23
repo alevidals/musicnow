@@ -31,15 +31,24 @@ class SeguidoresController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['follow'],
+                'only' => ['index', 'update', 'create', 'delete', 'follow'],
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['index', 'update', 'create', 'delete'],
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            return Yii::$app->user->identity->rol === 1;
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['follow'],
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
                             $seguido_id = Yii::$app->request->get('seguido_id');
                             return $seguido_id != Yii::$app->user->id;
-                        },
+                        }
                     ],
                 ],
             ],

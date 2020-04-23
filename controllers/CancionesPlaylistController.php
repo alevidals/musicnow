@@ -7,6 +7,7 @@ use Yii;
 use app\models\CancionesPlaylist;
 use app\models\CancionesPlaylistSearch;
 use app\models\Playlists;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,6 +29,19 @@ class CancionesPlaylistController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'create', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            return Yii::$app->user->identity->rol === 1;
+                        }
+                    ],
                 ],
             ],
         ];

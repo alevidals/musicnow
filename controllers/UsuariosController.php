@@ -43,15 +43,23 @@ class UsuariosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete', 'imagen', 'eliminar-cuenta'],
+                'only' => ['index', 'update', 'create', 'delete', 'eliminar-cuenta'],
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['index', 'create', 'delete', 'update'],
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            return Yii::$app->user->identity->rol === 1;
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update', 'eliminar-cuenta'],
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
                             $id = Yii::$app->request->get('id');
-                            return Yii::$app->user->identity->rol === 1
-                                || ($id == Yii::$app->user->id);
+                            return $id == Yii::$app->user->id;
                         },
                     ],
                 ],
