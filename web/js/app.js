@@ -726,11 +726,25 @@ $('body').on('keyup', '.usuarios-update input', function ev(e) {
 
 $('body').on('click', '.delete-comment-btn', function ev(e) {
     var comentario_id = $(this).data('comentario');
+    var strings = ['Are you sure you want to delete this item?'];
     $.ajax({
-        method: 'POST',
-        url: '/index.php?r=comentarios%2Fdelete&id=' + comentario_id,
-        success: function (data) {
-            $('.row-comments #' + comentario_id).remove();
+        method: 'GET',
+        url: '/index.php?r=site%2Fget-translate',
+        data: {
+            strings: strings,
+        },
+        success: function(strings) {
+            krajeeDialogCust2.confirm(strings[0], function (result) {
+                if (result) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '/index.php?r=comentarios%2Fdelete&id=' + comentario_id,
+                        success: function (data) {
+                            $('.row-comments #' + comentario_id).remove();
+                        }
+                    });
+                }
+            });
         }
     });
 });
