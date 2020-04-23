@@ -144,4 +144,5 @@ return [
     'Estado' => 'Status',
     'Estados' => 'Status',
     'AddStatus' => 'Add a status',
+    'Resend' => '',
 ];

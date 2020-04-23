@@ -204,6 +204,23 @@ class UsuariosController extends Controller
         return $this->redirect(['site/index']);
     }
 
+    public function actionResendConfirmMail($email, $id, $confirm_token)
+    {
+        $url = Url::to([
+            'usuarios/activar',
+            'id' => $id,
+            'confirm_token' => $confirm_token,
+        ], true);
+
+        if ($this->actionMail($email, $url, 'confirm-mail')) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'ConfirmMail'));
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'ErrorMail'));
+        }
+
+        return $this->goBack();
+    }
+
     /**
      * Autentifica al usuario si envía el formulario de login o lo
      * registra si envía el formulario de registro.
@@ -230,10 +247,16 @@ class UsuariosController extends Controller
                             ['usuarios/enviar-email-recuperacion', 'id' => $user->id],
                             true
                         );
-                        Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount') . ' ' . Html::a(Yii::t('app', 'Recover'), $url));
+                        Yii::$app->session->setFlash('error', Yii::t('app', 'DeletedAccount') . ' ' . Html::a(Yii::t('app', 'Recover'), $url, ['class' => 'normal-link']));
                     }
                     elseif ($user->confirm_token !== null) {
-                        Yii::$app->session->setFlash('warning', Yii::t('app', 'YouHaveToConfirm'));
+                        $url = Url::to([
+                            'usuarios/resend-confirm-mail',
+                            'email' => $user->email,
+                            'id' => $user->id,
+                            'confirm_token' => $user->confirm_token,
+                        ]);
+                        Yii::$app->session->setFlash('warning', Yii::t('app', 'YouHaveToConfirm') . ' ' . Html::a(Yii::t('app', 'Resend'), $url, ['class' => 'normal-link']));
                     } else {
                         if ($loginModel->login()) {
                             $user->estado_id = 2;
