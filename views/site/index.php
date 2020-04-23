@@ -142,20 +142,20 @@ $this->registerJS($js);
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <h2 class="text-center">Playlists</h2>
-                                        <div class="row row-playlists">
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h2 class="text-center">Playlists</h2>
+                            <div class="row row-playlists">
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
         </div>
         <a class="perfil-link" href="/index.php?r=usuarios%2Fperfil&id=<?= Yii::$app->user->id ?>">
             <div class="d-none d-md-block col-lg-6 mt-5 order-0 order-lg-1">

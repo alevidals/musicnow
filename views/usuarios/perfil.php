@@ -205,7 +205,7 @@ $this->registerJS($js);
                 <div class="row">
                     <?php if (count($canciones) > 0) : ?>
                         <?php foreach ($canciones as $cancion) : ?>
-                            <div class="col-12 col-md-4 col-lg-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                                 <div class="song-container">
                                     <div class="box-3">
                                         <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
@@ -213,6 +213,8 @@ $this->registerJS($js);
                                             <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                             <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart red-hearth"></i></button>
                                             <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
+                                            <button data-song="<?= $cancion->id ?>" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
+                                            <button data-song="<?= $cancion->id ?>" data-user="<?= Yii::$app->user->id ?>" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
                                         </div>
                                         <div class="layer"></div>
                                     </div>
@@ -269,6 +271,17 @@ $this->registerJS($js);
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                    <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h2 class="text-center">Playlists</h2>
+                                    <div class="row row-playlists">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <?php else :?>
                         <div class="row mt-5 justify-content-center text-center mx-0">
                             <div class="col-12">
