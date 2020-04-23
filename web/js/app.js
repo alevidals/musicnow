@@ -135,19 +135,21 @@ $('body').on('click', '.cancion', function ev(e) {
             cancion_id: cancion_id
         },
         success: function (data) {
-            var comentarios = Object.entries(data);
             $('.row-comments').empty();
-            comentarios.forEach(element => {
+            data.comentarios.forEach(element => {
                 $('.row-comments').append(`
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-3" id="${element.comentario_id}">
                         <div class="row">
-                            <a href="/index.php?r=usuarios%2Fperfil&id=${element[1].id}">
-                                <img class="user-search-img" src="${element[1].url_image}" alt="perfil" width="50px" height="50px">
+                            <a href="/index.php?r=usuarios%2Fperfil&id=${element.id}">
+                                <img class="user-search-img" src="${element.url_image}" alt="perfil" width="50px" height="50px">
                             </a>
                             <div class="col">
-                                <a href="/index.php?r=usuarios%2Fperfil&id=${element[1].id}">${element[1].login}</a>
-                                <small class="ml-1 comment-time">${element[1].created_at}</small>
-                                <p class="m-0">${element[1].comentario}</p>
+                                <a href="/index.php?r=usuarios%2Fperfil&id=${element.id}">${element.login}</a>
+                                <small class="ml-1 comment-time">${element.created_at}</small>
+                                <p class="m-0">
+                                    ${element.comentario}
+                                    ${(data.owner || data.loggedUserId == element.id) ? '<button class="btn d-inline outline-transparent delete-comment-btn" data-comentario="' + element.comentario_id + '"><i class="fas fa-trash text-danger"></i></button>' : ''}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -185,7 +187,6 @@ $('body').on('click', '.playlist-btn', function ev(e) {
                         playlist_id: playlist_id,
                     },
                     success: function (data) {
-                        console.log(data);
                     }
                 });
             });
@@ -208,7 +209,7 @@ $('body').on('click', '.comment-btn', function ev(e) {
             },
             success: function (data) {
                 $('.row-comments').prepend(`
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-3" id="${data.comentario_id}">
                         <div class="row">
                             <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">
                                 <img class="user-search-img" src="${data.url_image}" alt="perfil" width="50px" height="50px">
@@ -216,7 +217,10 @@ $('body').on('click', '.comment-btn', function ev(e) {
                             <div class="col">
                                 <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">${data.login}</a>
                                 <small class="ml-1 comment-time">${data.created_at}</small>
-                                <p>${data.comentario}</p>
+                                <p>
+                                    ${data.comentario}
+                                    <button class="btn d-inline outline-transparent delete-comment-btn" data-comentario="${data.comentario_id}"><i class="fas fa-trash text-danger"></i></button>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -718,4 +722,15 @@ $('body').on('keyup', '.usuarios-update input', function ev(e) {
     if (target !== undefined && $('.update-' + target).length) {
         $('.update-' + target).text($(this).val());
     }
+});
+
+$('body').on('click', '.delete-comment-btn', function ev(e) {
+    var comentario_id = $(this).data('comentario');
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=comentarios%2Fdelete&id=' + comentario_id,
+        success: function (data) {
+            $('.row-comments #' + comentario_id).remove();
+        }
+    });
 });

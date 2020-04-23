@@ -196,8 +196,13 @@ class CancionesController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
+        $owner = Canciones::find()
+            ->where(['id' => $cancion_id])
+            ->andWhere(['usuario_id' => Yii::$app->user->id])
+            ->exists();
+
         $comentarios = (new \yii\db\Query())
-            ->select(['usuarios.id', 'usuarios.login', 'comentario', 'usuarios.url_image', 'c.created_at'])
+            ->select(['usuarios.id', 'usuarios.login', 'comentario', 'usuarios.url_image', 'c.created_at', 'c.id as comentario_id'])
             ->from('comentarios c')
             ->leftJoin('usuarios', 'usuarios.id = c.usuario_id')
             ->where(['cancion_id' => $cancion_id])
@@ -210,7 +215,11 @@ class CancionesController extends Controller
             $comentario['comentario'] = Html::encode($comentario['comentario']);
         }
 
-        return $comentarios;
+        return [
+            'comentarios' => $comentarios,
+            'owner' => $owner,
+            'loggedUserId' => Yii::$app->user->id,
+        ];
     }
 
     public function actionGetLikes($cancion_id)

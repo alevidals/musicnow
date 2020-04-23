@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Canciones;
 use Yii;
 use app\models\Comentarios;
 use app\models\ComentariosSearch;
@@ -131,7 +132,7 @@ class ComentariosController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['comentarios/index', 'user_id' => Yii::$app->user->id]);
+        return Yii::t('app', 'Are you sure you want to delete this item?');
     }
 
     /**
@@ -163,14 +164,20 @@ class ComentariosController extends Controller
         $model->save();
         $model->refresh();
 
+        $owner = Canciones::find()
+            ->where(['id' => $cancion_id])
+            ->andWhere(['usuario_id' => Yii::$app->user->id])
+            ->exists();
+
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [
             'login' => Html::encode($usuario->login),
             'comentario' => Html::encode($model->comentario),
             'usuario_id' => $usuario->id,
             'url_image' => $usuario->url_image,
-            'created_at' => Yii::$app->formatter->asRelativeTime($model->created_at)
-
+            'created_at' => Yii::$app->formatter->asRelativeTime($model->created_at),
+            'owner' => $owner,
+            'comentario_id' => $model->id,
         ];
     }
 }
