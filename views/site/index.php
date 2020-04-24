@@ -68,9 +68,9 @@ $this->registerJS($js);
                 <?= Yii::t('app', 'Order') ?>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <?= Html::a(Yii::t('app', 'Artist'), ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'u.login' : '-u.login')], ['class' => 'dropdown-item']) ?>
-                <?= Html::a(Yii::t('app', 'Género'), ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'g.denominacion' : '-g.denominacion')], ['class' => 'dropdown-item']) ?>
-                <?= Html::a('Likes', ['site/search', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'likes' : '-likes')], ['class' => 'dropdown-item']) ?>
+                <?= Html::a(Yii::t('app', 'Artist'), ['index', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'u.login' : '-u.login')], ['class' => 'dropdown-item']) ?>
+                <?= Html::a(Yii::t('app', 'Género'), ['index', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'g.denominacion' : '-g.denominacion')], ['class' => 'dropdown-item']) ?>
+                <?= Html::a('Likes', ['index', 'cadena' => $cadena, 'sort' => ($sort[0] == '-' ? 'likes' : '-likes')], ['class' => 'dropdown-item']) ?>
             </div>
         </div>
         <div class="row">
