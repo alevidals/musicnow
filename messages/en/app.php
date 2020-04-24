@@ -145,4 +145,5 @@ return [
     'Estados' => 'Status',
     'AddStatus' => 'Add a status',
     'Resend' => '',
+    'PleaseContact' => 'Please contact us if you think this is a server error. Thank you.'
 ];

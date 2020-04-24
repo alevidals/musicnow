@@ -18,7 +18,7 @@ $this->title = $name;
             <h1 class="h1-error"><?= Html::encode($exception->statusCode) ?></h1>
 
             <p class="font-weight-bold">
-                Please contact us if you think this is a server error. Thank you.
+                <?= Yii::t('app', 'PleaseContact') ?>
             </p>
         </div>
         <div class="col-12 col-lg-6 align-self-center">
