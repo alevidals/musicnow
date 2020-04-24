@@ -97,7 +97,7 @@ $this->registerJS($js);
         ],
     ]);
     if (!Yii::$app->user->isGuest) {
-        if (Yii::$app->user->identity->rol == 1) {
+        if (Yii::$app->user->identity->rol_id == 1) {
             $items = [
                 [
                     'label' => '<i class="fas fa-sun"></i>

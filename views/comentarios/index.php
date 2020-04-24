@@ -26,7 +26,7 @@ $columns = [
     ],
 ];
 
-if (Yii::$app->user->identity->rol == 1) {
+if (Yii::$app->user->identity->rol_id == 1) {
     $columns = array_merge([[
         'attribute' => 'usuario.login',
         'label' => 'Login',

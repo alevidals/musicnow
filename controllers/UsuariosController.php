@@ -50,7 +50,7 @@ class UsuariosController extends Controller
                         'actions' => ['index', 'create', 'delete', 'update'],
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
-                            return Yii::$app->user->identity->rol === 1;
+                            return Yii::$app->user->identity->rol_id === 1;
                         },
                     ],
                     [
@@ -269,7 +269,7 @@ class UsuariosController extends Controller
                         if ($loginModel->login()) {
                             $user->estado_id = 2;
                             $user->save();
-                            if ($user->rol == 1) {
+                            if ($user->rol_id == 1) {
                                 return $this->redirect(['site/admin-index']);
                             } else {
                                 return $this->redirect(['site/index']);

@@ -29,7 +29,7 @@ CREATE TABLE usuarios
   , email          VARCHAR(255)  NOT NULL UNIQUE
   , password       VARCHAR(255)  NOT NULL
   , fnac           DATE
-  , rol            BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
+  , rol_id         BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
   , estado_id      BIGINT        NOT NULL REFERENCES estados (id) DEFAULT 1
   , auth_key       VARCHAR(255)
   , confirm_token  VARCHAR(255)
@@ -180,7 +180,7 @@ VALUES ('Pop'),
        ('Rap'),
        ('Flamenco');
 
-INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol)
+INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol_id)
 VALUES ('admin', 'admin', 'admin', 'admin@admin.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),
        ('usuario1', 'usuario1', 'usuario1', 'usuario1@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2),
        ('usuario2', 'usuario2', 'usuario2', 'usuario2@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2);

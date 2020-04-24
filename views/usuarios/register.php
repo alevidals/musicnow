@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <?= $form->field($model, 'email')->textInput()->label('Email*', ['class' => 'col-12']) ?>
             <?= $form->field($model, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12']) ?>
-            <?= $form->field($model, 'rol')->textInput()->label('Rol', ['class' => 'col-12']) ?>
+            <?= $form->field($model, 'rol_id')->textInput()->label('Rol', ['class' => 'col-12']) ?>
             <?= Html::button(Yii::t('app', 'Anterior'), ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
             <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
     <?php ActiveForm::end(); ?>

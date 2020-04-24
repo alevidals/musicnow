@@ -51,7 +51,7 @@ class CancionesSearch extends Canciones
             ->joinWith('genero g')
             ->joinWith('usuario u');
 
-        if (Yii::$app->user->identity->rol != 1) {
+        if (Yii::$app->user->identity->rol_id != 1) {
             $query->where(['canciones.usuario_id' => Yii::$app->user->id]);
         }
 

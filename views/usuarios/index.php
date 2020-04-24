@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="mt-3"></div>
-    
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'apellidos',
             'email:email',
-            'rol',
+            'rol.rol',
             //'password',
             //'url_image:url',
             //'image_name',

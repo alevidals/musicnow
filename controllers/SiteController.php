@@ -29,8 +29,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
-                            return Yii::$app->user->identity->login === 'admin'
-                                && Yii::$app->user->identity->rol === 1;
+                            return Yii::$app->user->identity->rol_id === 1;
                         },
                     ],
                     [
@@ -95,19 +94,19 @@ class SiteController extends Controller
                 'query' => Usuarios::find()
                     ->where(['ilike', 'login', $cadena])
                     ->orWhere(['ilike', 'email', $cadena])
-                    ->andWhere(['!=', 'rol', 1]),
+                    ->andWhere(['!=', 'rol_id', 1]),
             ]);
 
             $userIds = Usuarios::find()
                 ->select('id')
                 ->where(['ilike', 'login', $cadena])
-                ->andWhere(['!=', 'rol', 1])
+                ->andWhere(['!=', 'rol_id', 1])
                 ->column();
 
             $adminIds = Usuarios::find()
                 ->select('id')
                 ->where(['ilike', 'login', $cadena])
-                ->andWhere(['=', 'rol', 1])
+                ->andWhere(['=', 'rol_id', 1])
                 ->column();
 
             $cancionesSearch = new ActiveDataProvider([
@@ -154,19 +153,19 @@ class SiteController extends Controller
             'query' => Usuarios::find()
                 ->where(['ilike', 'login', $cadena])
                 ->orWhere(['ilike', 'email', $cadena])
-                ->andWhere(['!=', 'rol', 1]),
+                ->andWhere(['!=', 'rol_id', 1]),
         ]);
 
         $userIds = Usuarios::find()
             ->select('id')
             ->where(['ilike', 'login', $cadena])
-            ->andWhere(['!=', 'rol', 1])
+            ->andWhere(['!=', 'rol_id', 1])
             ->column();
 
         $adminIds = Usuarios::find()
             ->select('id')
             ->where(['ilike', 'login', $cadena])
-            ->andWhere(['=', 'rol', 1])
+            ->andWhere(['=', 'rol_id', 1])
             ->column();
 
         $cancionesSearch = new ActiveDataProvider([
@@ -244,7 +243,6 @@ class SiteController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         return $strings;
-
     }
 
     public function actionGetMorePosts($offset)

@@ -17,8 +17,8 @@ class UsuariosSearch extends Usuarios
     public function rules()
     {
         return [
-            [['id', 'rol'], 'integer'],
-            [['login', 'nombre', 'apellidos', 'email', 'password', 'fnac', 'auth_key', 'confirm_token','url_image', 'image_name', 'created_at', 'deleted_at'], 'safe'],
+            [['id', 'rol_id'], 'integer'],
+            [['login', 'nombre', 'apellidos', 'email', 'password', 'fnac', 'auth_key', 'confirm_token','url_image', 'image_name', 'created_at', 'deleted_at', 'rol.rol'], 'safe'],
         ];
     }
 
@@ -31,6 +31,11 @@ class UsuariosSearch extends Usuarios
         return Model::scenarios();
     }
 
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['rol.rol']);
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -40,7 +45,8 @@ class UsuariosSearch extends Usuarios
      */
     public function search($params)
     {
-        $query = Usuarios::find();
+        $query = Usuarios::find()
+            ->joinWith('rol r');
 
         // add conditions that should always apply here
 
@@ -50,6 +56,11 @@ class UsuariosSearch extends Usuarios
                 'pageSize' => 5,
             ],
         ]);
+
+        $dataProvider->sort->attributes['rol.rol'] = [
+            'asc' => ['r.rol' => SORT_ASC],
+            'desc' => ['r.rol' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -63,7 +74,7 @@ class UsuariosSearch extends Usuarios
         $query->andFilterWhere([
             'id' => $this->id,
             'fnac' => $this->fnac,
-            'rol' => $this->rol,
+            'rol_id' => $this->rol_id,
             'created_at' => $this->created_at,
             'deleted_at' => $this->deleted_at,
         ]);
@@ -76,7 +87,8 @@ class UsuariosSearch extends Usuarios
             ->andFilterWhere(['ilike', 'auth_key', $this->auth_key])
             ->andFilterWhere(['ilike', 'url_image', $this->url_image])
             ->andFilterWhere(['ilike', 'image_name', $this->image_name])
-            ->andFilterWhere(['ilike', 'confirm_token', $this->confirm_token]);
+            ->andFilterWhere(['ilike', 'confirm_token', $this->confirm_token])
+            ->andFilterWhere(['ilike', 'r.rol', $this->getAttribute('rol.rol')]);
 
         return $dataProvider;
     }

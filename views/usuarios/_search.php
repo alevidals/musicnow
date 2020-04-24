@@ -19,17 +19,20 @@ use yii\bootstrap4\ActiveForm;
 
     <div class="filters mt-4">
         <div class="row">
-            <div class="col-lg-3 col-12">
+            <div class="col-lg col-12">
                 <?= $form->field($model, 'login') ?>
             </div>
-            <div class="col-lg-3 col-12">
+            <div class="col-lg col-12">
                 <?= $form->field($model, 'nombre') ?>
             </div>
-            <div class="col-lg-3 col-12">
+            <div class="col-lg col-12">
                 <?= $form->field($model, 'apellidos') ?>
             </div>
-            <div class="col-lg-3 col-12">
+            <div class="col-lg col-12">
                 <?= $form->field($model, 'email') ?>
+            </div>
+            <div class="col-lg col-12">
+                <?= $form->field($model, 'rol.rol') ?>
             </div>
         </div>
         <div class="form-group">
@@ -45,7 +48,7 @@ use yii\bootstrap4\ActiveForm;
 
     <?php // echo $form->field($model, 'fnac') ?>
 
-    <?php // echo $form->field($model, 'rol') ?>
+    <?php // echo $form->field($model, 'rol_id') ?>
 
     <?php // echo $form->field($model, 'auth_key') ?>
 

@@ -17,7 +17,7 @@ use yii\web\UploadedFile;
  * @property string $email
  * @property string $password
  * @property string|null $fnac
- * @property int $rol
+ * @property int $rol_id
  * @property string|null $auth_key
  * @property string|null $confirm_token
  * @property string|null $url_image
@@ -70,9 +70,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['login', 'nombre', 'apellidos', 'email'], 'required'],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CREAR]],
             [['fnac', 'created_at', 'deleted_at'], 'safe'],
-            [['rol'], 'default', 'value' => 2],
+            [['rol_id'], 'default', 'value' => 2],
             [['estado_id'], 'default', 'value' => 1],
-            [['rol', 'estado_id'], 'integer'],
+            [['rol_id', 'estado_id'], 'integer'],
             [['image'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 150, 'maxWidth' => 500, 'minHeight' => 150, 'maxHeight' => 500],
             [['banner'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 1110, 'maxWidth' => 2659, 'minHeight' => 483, 'maxHeight' => 500],
             [['login'], 'string', 'max' => 50],
@@ -85,7 +85,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['password_repeat'], 'trim', 'on' => [self::SCENARIO_CREAR]],
             [['password_repeat'], 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => [self::SCENARIO_CREAR, self::SCENARIO_UPDATE]],
             [['estado_id'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::className(), 'targetAttribute' => ['estado_id' => 'id']],
-            [['rol'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol' => 'id']],
+            [['rol_id'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['rol_id' => 'id']],
         ];
     }
 
@@ -103,7 +103,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'password' => Yii::t('app', 'Password'),
             'password_repeat' => Yii::t('app', 'Password Repeat'),
             'fnac' => Yii::t('app', 'Fnac'),
-            'rol' => Yii::t('app', 'Rol'),
+            'rol_id' => Yii::t('app', 'Rol'),
             'auth_key' => Yii::t('app', 'Auth Key'),
             'confirm_token' => Yii::t('app', 'Confirm Token'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -223,7 +223,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getRol()
     {
-        return $this->hasOne(Roles::className(), ['id' => 'rol']);
+        return $this->hasOne(Roles::className(), ['id' => 'rol_id']);
     }
 
     /**

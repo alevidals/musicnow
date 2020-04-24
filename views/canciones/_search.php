@@ -25,7 +25,7 @@ $albumes = ['' => ''] + Usuarios::findOne(Yii::$app->user->id)->getAlbumes()->se
 
     <div class="filters mt-4">
         <div class="row">
-            <?php if (Yii::$app->user->identity->rol == 1) : ?>
+            <?php if (Yii::$app->user->identity->rol_id == 1) : ?>
                 <div class="col-lg col-12">
                     <?= $form->field($model, 'usuario.login') ?>
                 </div>
@@ -34,7 +34,7 @@ $albumes = ['' => ''] + Usuarios::findOne(Yii::$app->user->id)->getAlbumes()->se
                 <?= $form->field($model, 'titulo') ?>
             </div>
             <div class="col-lg col-12">
-                <?= $form->field($model, 'album_id')->label(Yii::t('app', 'Albumes'))->dropDownList($albumes) ?>
+                <?= $form->field($model, 'album.titulo')->label(Yii::t('app', 'Albumes')) ?>
             </div>
             <div class="col-lg col-12">
                 <?= $form->field($model, 'genero_id')->label(Yii::t('app', 'Generos'))->dropDownList($generos) ?>

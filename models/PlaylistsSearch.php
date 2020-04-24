@@ -49,7 +49,7 @@ class PlaylistsSearch extends Playlists
         $query = Playlists::find()
             ->joinWith('usuario u');
 
-        if (Yii::$app->user->identity->rol != 1) {
+        if (Yii::$app->user->identity->rol_id != 1) {
             $query->where(['usuario_id' => Yii::$app->user->id]);
         }
 

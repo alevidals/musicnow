@@ -38,7 +38,7 @@ class ChatController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
-                            return Yii::$app->user->identity->rol === 1;
+                            return Yii::$app->user->identity->rol_id === 1;
                         }
                     ],
                 ],
