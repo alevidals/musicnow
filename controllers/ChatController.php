@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Chat;
 use app\models\ChatSearch;
+use app\models\Seguidores;
 use app\models\Usuarios;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -146,7 +147,16 @@ class ChatController extends Controller
     {
 
         $usuario = Usuarios::findOne(Yii::$app->user->id);
-        $seguidos = $usuario->getSeguidos()->all();
+
+        $seguidoresIds = Seguidores::find()
+            ->select('seguidores.seguido_id')
+            ->innerJoin('seguidores s2', 'seguidores.seguidor_id = s2.seguido_id AND seguidores.seguido_id = s2.seguidor_id')
+            ->where(['seguidores.seguidor_id' => $usuario->id])
+            ->column();
+
+        $seguidos = Usuarios::find()
+            ->where(['IN', 'id', $seguidoresIds])
+            ->all();
 
         return $this->render('chat', [
             'usuario' => $usuario,
