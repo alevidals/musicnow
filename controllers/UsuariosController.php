@@ -506,7 +506,9 @@ class UsuariosController extends Controller
             ->where(['seguido_id' => Yii::$app->user->id])
             ->orderBy(['s.id' => SORT_DESC]);
 
-        $seguidoresEncoded = $seguidores->all();
+        $seguidoresEncoded = $seguidores
+            ->limit($seguidores->count() - $total)
+            ->all();
 
         foreach ($seguidoresEncoded as &$seguidor) {
             $seguidor['login'] =  Html::encode($seguidor['login']);
@@ -514,7 +516,6 @@ class UsuariosController extends Controller
 
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $seguidores->limit($seguidores->count() - $total);
         $res['seguidores'] = $seguidoresEncoded;
         $res['count'] = $seguidores->count();
 

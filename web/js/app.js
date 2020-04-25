@@ -1,5 +1,5 @@
 var mensajes = 0;
-var seguidores = 0;
+var seguidores;
 var songs = [];
 var actualSong = 0;
 var playlist = [];
@@ -461,6 +461,7 @@ function getFollowersNumber() {
 function getNewNotifications() {
     // NUEVOS SEGUIDORES
     var strings = ['followMessage'];
+    console.log('seg = ' +seguidores);
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -472,8 +473,8 @@ function getNewNotifications() {
                 method: 'GET',
                 url: '/index.php?r=usuarios%2Fget-new-followers&total=' + seguidores,
                 success: function (data) {
+                    console.log(data);
                     if (data.count > seguidores) {
-                        $('.alert-box').html('');
                         data.seguidores.forEach(element => {
                             $('.alert-box').append(`
                                     <a href="/index.php?r=usuarios/perfil&id=${element.id}" class="text-decoration-none">
@@ -512,7 +513,6 @@ function getNewNotifications() {
             }
             if (data.count > mensajes) {
                 $('.chat-notification').trigger('play');
-                $('.alert-box').html('');
                 data.mensajes.forEach(element => {
                     var time = element.created_at.split(' ')[1];
                     $('.alert-box').append(`
