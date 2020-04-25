@@ -609,6 +609,21 @@ textarea {
     color: #f00 !important;
 }
 
+[data-theme="dark"] .page-link {
+    border-color: #181818 !important;
+    background-color: #383838 !important;
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+    z-index: 3;
+    color: #383838 !important;
+    border-color: #181818;
+    background-color: #ffba00 !important;
+}
+[data-theme="dark"] .pagination li a:focus {
+    color: #ffba00 !important;
+}
+
 .red-hearth {
     color: #f00 !important;
 }

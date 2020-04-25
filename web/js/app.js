@@ -461,7 +461,6 @@ function getFollowersNumber() {
 function getNewNotifications() {
     // NUEVOS SEGUIDORES
     var strings = ['followMessage'];
-    console.log('seg = ' +seguidores);
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -473,7 +472,6 @@ function getNewNotifications() {
                 method: 'GET',
                 url: '/index.php?r=usuarios%2Fget-new-followers&total=' + seguidores,
                 success: function (data) {
-                    console.log(data);
                     if (data.count > seguidores) {
                         data.seguidores.forEach(element => {
                             $('.alert-box').append(`
