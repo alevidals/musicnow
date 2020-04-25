@@ -31,6 +31,7 @@ $js = <<<EOT
         getFollowersNumber();
         setInterval(function () {
             getNewNotifications();
+            getStatusFromUsers();
         }, 5000);
     }
 

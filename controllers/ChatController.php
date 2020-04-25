@@ -176,14 +176,14 @@ class ChatController extends Controller
         $chat->mensaje = $post['mensaje'];
         $chat->save();
 
-        $historial = $this->actionGetChat($receptor_id)['historial'];
+        $historial = $this->actionGetChat($receptor_id, false)['historial'];
 
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         return $historial;
     }
 
-    public function actionGetChat($receptor_id)
+    public function actionGetChat($receptor_id, $refresh)
     {
         $usuario = Usuarios::findOne(Yii::$app->user->id);
 
@@ -200,13 +200,23 @@ class ChatController extends Controller
             ->orderBy(['c.created_at' => SORT_ASC])
             ->all();
 
-
         foreach ($historial as &$mensaje) {
             $mensaje['created_at'] = Yii::$app->formatter->asTime($mensaje['created_at']);
             $mensaje['mensaje'] = Html::encode($mensaje['mensaje']);
         }
 
-        Chat::updateAll(['estado_id' => 4], ['emisor_id' => $receptor_id, 'receptor_id' => $usuario->id, 'estado_id' => 3]);
+        if ($refresh) {
+            $chats = Chat::find()
+                ->where(['emisor_id' => $receptor_id])
+                ->andWhere(['receptor_id' => $usuario->id])
+                ->andWhere(['estado_id' => 3])
+                ->all();
+
+            foreach ($chats as $chat) {
+                $chat->estado_id = 4;
+                $chat->save();
+            }
+        }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
 

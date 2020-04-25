@@ -404,9 +404,9 @@ class UsuariosController extends Controller
         }
     }
 
-    public function actionEstados($id)
+    public function actionEstados()
     {
-        $usuario = Usuarios::findOne($id);
+        $usuario = Usuarios::findOne(Yii::$app->user->id);
         $seguidos = $usuario->getSeguidos()->all();
 
         foreach ($seguidos as &$seguido) {

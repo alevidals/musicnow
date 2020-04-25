@@ -4,8 +4,19 @@ var songs = [];
 var actualSong = 0;
 var playlist = [];
 var offset = 10;
+var interval;
 
 checkTheme();
+
+$('body').on('show.bs.modal', '.modal', function (e) {
+    interval = setInterval(function(){
+        updateChatHistory();
+    }, 5000);
+});
+
+$('body').on('hide.bs.modal', '.modal', function (e) {
+    clearInterval(interval);
+});
 
 function checkTheme() {
     if ($('#darkSwitch').length) {
@@ -23,7 +34,6 @@ function initTheme() {
     darkThemeSelected ? $('body').attr('data-theme', 'dark') : $('body').removeAttr('data-theme');
 }
 
-// me quedo aqui justo pego esto
 function resetTheme() {
     if ($('#darkSwitch')[0].checked) {
         $('body').attr('data-theme', 'dark');
@@ -747,4 +757,143 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
             });
         }
     });
+});
+
+function getStatusFromUsers() {
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=usuarios%2Festados',
+        success: function (data) {
+            data.forEach(element => {
+                var id = element.id;
+                if (element.estado_id == 'online') {
+                    $('#' + id + ' .status').removeClass('badge-danger');
+                    $('#' + id + ' .status').addClass('badge-success');
+                } else {
+                    $('#' + id + ' .status').removeClass('badge-success');
+                    $('#' + id + ' .status').addClass('badge-danger');
+                }
+                $('#' + id + ' .status').html(element.estado_id);
+                getNoReadMessages(id);
+            });
+        }
+    });
+}
+
+function getNoReadMessages(receptor_id) {
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=usuarios%2Fget-no-read-messages&receptor_id=' + receptor_id,
+        success: function (data) {
+            if (data != 0) {
+                $('#messages-number-' + receptor_id).html(data);
+            } else {
+                $('#messages-number-' + receptor_id).html('');
+            }
+        }
+    });
+}
+
+function getMessagesFromChat(receptor_id, refresh) {
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=chat%2Fget-chat&receptor_id=' + receptor_id + '&refresh=' + refresh,
+        success: function (data) {
+            $('#chat-history-' + receptor_id).html('');
+            data.historial.forEach(element => {
+                if (element.emisor_id != receptor_id) {
+                    $('#chat-history-' + receptor_id).append(`
+                        <p class=" message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                    `);
+                    if (element.estado_id == 4) {
+                        $('.read-tick').addClass('read-message');
+                    }
+                } else {
+                    $('#chat-history-' + receptor_id).append(`
+                        <p class="message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
+                    `);
+                }
+            });
+        }
+    });
+}
+
+function updateChatHistory() {
+    $('.chat-history').each(function() {
+        var receptor_id = $(this).data('receptorid');
+        getMessagesFromChat(receptor_id, false);
+        $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+    });
+}
+
+$('body').on('click', '.send-chat', function ev(e) {
+    var receptor_id = $(this).attr('id');
+    var mensaje = $('#chat-message-' + receptor_id).val().trim();
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=chat%2Fsend-chat',
+        data: {
+            receptor_id: receptor_id,
+            mensaje: mensaje
+        },
+        success: function(data) {
+            $('#chat-message-' + receptor_id).val('');
+            $('#chat-history-' + receptor_id).html('')
+            data.forEach(element => {
+                if (element.emisor_id != receptor_id) {
+                    $('#chat-history-' + receptor_id).append(`
+                        <p class=" message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                    `);
+                    if (element.estado_id == 4) {
+                        $('.read-tick').addClass('read-message');
+                    }
+                } else {
+                    $('#chat-history-' + receptor_id).append(`
+                        <p class="message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
+                    `);
+                }
+            });
+            $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+        }
+    });
+});
+
+$('body').on('keydown', '.chat-input', function ev(e) {
+    var key = (event.keyCode ? event.keyCode : event.which);
+    if (key == 13) {
+        var receptor_id = $(this).attr('id').split('-')[2];
+        var mensaje = $('#chat-message-' + receptor_id).val().trim();
+        $.ajax({
+            method: 'POST',
+            url: '/index.php?r=chat%2Fsend-chat',
+            data: {
+                receptor_id: receptor_id,
+                mensaje: mensaje
+            },
+            success: function(data) {
+                $('#chat-message-' + receptor_id).val('');
+                $('#chat-history-' + receptor_id).html('')
+                data.forEach(element => {
+                    if (element.emisor_id != receptor_id) {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class="message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                        `);
+                        if (element.estado_id == 4) {
+                            $('.read-tick').addClass('read-message');
+                        }
+                    } else {
+                        $('#chat-history-' + receptor_id).append(`
+                            <p class="message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
+                        `);
+                    }
+                });
+                $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
+            }
+        });
+    }
+});
+
+$('body').on('click', '.start-chat', function ev(e) {
+    var receptor_id = $(this).data('receptorid');
+    getMessagesFromChat(receptor_id, true);
 });
