@@ -822,7 +822,6 @@ function updateChatHistory() {
     $('.chat-history').each(function() {
         var receptor_id = $(this).data('receptorid');
         getMessagesFromChat(receptor_id, false);
-        $('#chat-history-' + receptor_id).scrollTop($('#chat-history-' + receptor_id)[0].scrollHeight);
     });
 }
 
@@ -896,4 +895,5 @@ $('body').on('keydown', '.chat-input', function ev(e) {
 $('body').on('click', '.start-chat', function ev(e) {
     var receptor_id = $(this).data('receptorid');
     getMessagesFromChat(receptor_id, true);
+    $('.send-chat').trigger('click');
 });
