@@ -334,4 +334,16 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Videoclips::className(), ['usuario_id' => 'id']);
     }
+
+    public static function findMutualFollow()
+    {
+        $seguidoresIds = Seguidores::find()
+            ->select('seguidores.seguido_id')
+            ->innerJoin('seguidores s2', 'seguidores.seguidor_id = s2.seguido_id AND seguidores.seguido_id = s2.seguidor_id')
+            ->where(['seguidores.seguidor_id' => Yii::$app->user->id])
+            ->column();
+
+        return static::find()
+            ->where(['IN', 'id', $seguidoresIds]);
+    }
 }

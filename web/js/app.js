@@ -895,3 +895,59 @@ $('body').on('click', '.start-chat', function ev(e) {
     getMessagesFromChat(receptor_id, true);
     $('.send-chat').trigger('click');
 });
+
+$('body').on('keyup', '#search-users', function ev(e) {
+    var text = $(this).val();
+    if (text != '') {
+        $('.chat-list').hide();
+        $.ajax({
+            method: 'GET',
+            url: '/index.php?r=chat%2Fget-users',
+            data: {
+                text: text
+            },
+            success: function (data) {
+                $('.search-box').empty();
+                data.forEach(element => {
+                    $('.search-box').append(`
+                    <div id="${element.id}" class="col-12 mb-5">
+                        <h4 class="d-inline-block">${element.login}</h4>
+                        <span class="status badge badge-success d-inline-block">${element.estado_id}</span>
+                        <span class="badge badge-warning" id="messages-number-${element.id}"></span>
+                        <button class="btn main-yellow start-chat d-block" data-receptorid="${element.id}" data-toggle="modal" data-target="#chat-${element.id}">Chat</button>
+                        <div class="modal fade" id="chat-${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <img src="${element.url_image}" class="user-search-img" width="40px" alt="logo"?>
+                                        <h5 class="modal-title my-auto ml-3">${element.login}</h5>
+                                        <span class="status badge badge-success my-auto ml-3">${element.estado_id}</span>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-white"><i class="fas fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="user-chat-${element.id}" class="user-chat">
+                                            <div class="chat-history custom-overflow pr-2 pt-2" data-receptorid="${element.id}" id="chat-history-${element.id}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="chat-message${element.id}" id="chat-message-${element.id}" class="form-control chat-input">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="button" id="${element.id}" class="btn main-yellow send-chat">Send</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                });
+            }
+        });
+    } else {
+        $('.chat-list').show();
+        $('.search-box').empty();
+    }
+});

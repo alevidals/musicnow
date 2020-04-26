@@ -145,21 +145,10 @@ class ChatController extends Controller
 
     public function actionChat()
     {
-
-        $usuario = Usuarios::findOne(Yii::$app->user->id);
-
-        $seguidoresIds = Seguidores::find()
-            ->select('seguidores.seguido_id')
-            ->innerJoin('seguidores s2', 'seguidores.seguidor_id = s2.seguido_id AND seguidores.seguido_id = s2.seguidor_id')
-            ->where(['seguidores.seguidor_id' => $usuario->id])
-            ->column();
-
-        $seguidos = Usuarios::find()
-            ->where(['IN', 'id', $seguidoresIds])
+        $seguidos = Usuarios::findMutualFollow()
             ->all();
 
         return $this->render('chat', [
-            'usuario' => $usuario,
             'seguidos' => $seguidos
         ]);
     }
@@ -206,16 +195,7 @@ class ChatController extends Controller
         }
 
         if ($refresh) {
-            $chats = Chat::find()
-                ->where(['emisor_id' => $receptor_id])
-                ->andWhere(['receptor_id' => $usuario->id])
-                ->andWhere(['estado_id' => 3])
-                ->all();
-
-            foreach ($chats as $chat) {
-                $chat->estado_id = 4;
-                $chat->save();
-            }
+            Chat::updateAll(['estado_id' => 4], ['emisor_id' => $receptor_id, 'receptor_id' => $usuario->id, 'estado_id' => 3]);
         }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -225,5 +205,20 @@ class ChatController extends Controller
             'emisor' => $usuario->login,
             'receptor' => Usuarios::findOne($receptor_id)->login,
         ];
+    }
+
+    public function actionGetUsers($text)
+    {
+        $usuarios = Usuarios::findMutualFollow()
+            ->andWhere(['ilike', 'login', $text])
+            ->all();
+
+        foreach ($usuarios as &$usuario) {
+            $usuario->estado_id = $usuario->getEstado()->one()->estado;
+        }
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return $usuarios;
     }
 }

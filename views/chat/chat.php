@@ -11,8 +11,17 @@ $this->title = Yii::t('app', 'Chats');
 ?>
 <div class="chat-chat">
 
-    <div class="row">
-        <div class="w-100 mb-5"></div>
+    <div>
+        <div class="form-group mb-5">
+            <input class="form-control" type="text" name="searchUsers" id="search-users">
+        </div>
+    </div>
+
+    <div class="search-box row">
+
+    </div>
+
+    <div class="row chat-list">
         <?php foreach ($seguidos as $seguido) : ?>
             <div id="<?= $seguido->id ?>" class="col-12 mb-5">
                 <h4 class="d-inline-block"><?= Html::encode($seguido->login) ?></h4>
