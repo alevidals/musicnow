@@ -15,9 +15,14 @@ $columns = [
     'anyo',
     'created_at:datetime',
     [
+        'attribute' => 'total',
+        'label' => Yii::t('app', 'Canciones')
+    ],
+    [
         'class' => 'yii\grid\ActionColumn',
         'header' => Yii::t('app', 'Actions'),
     ],
+
 ];
 
 if (Yii::$app->user->identity->rol_id == 1) {

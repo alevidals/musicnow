@@ -19,6 +19,8 @@ use Yii;
  */
 class Albumes extends \yii\db\ActiveRecord
 {
+    private $_total = null;
+
     /**
      * {@inheritdoc}
      */
@@ -99,4 +101,27 @@ class Albumes extends \yii\db\ActiveRecord
             ->indexBy('id')
             ->column();
     }
+
+    public function setTotal($total)
+    {
+        $this->_total = $total;
+    }
+
+    public function getTotal()
+    {
+        if ($this->_total === null && !$this->isNewRecord) {
+            $this->setTotal($this->getCanciones()->count());
+        }
+        return $this->_total;
+    }
+
+    public static function findWithTotal()
+    {
+        return static::find()
+            ->select(['albumes.*', 'COUNT(c.id) AS total'])
+            ->joinWith('canciones c', false)
+            ->groupBy('albumes.id');
+    }
+
+
 }
