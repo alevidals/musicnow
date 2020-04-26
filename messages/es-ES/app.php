@@ -146,5 +146,7 @@ return [
     'AddStatus' => 'Agregar un estado',
     'Resend' => 'Reenviar',
     'PleaseContact' => 'Por favor, contacte con nosotros si crees que es un error del servidor. Gracias.',
-    'UserSearch' => 'Busca un chat...'
+    'UserSearch' => 'Busca un chat...',
+    'Add' => 'Añadir',
+    'NoVideoclips' => 'Parece que no hay ningún videoclips aún',
 ];

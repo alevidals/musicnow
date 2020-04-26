@@ -17,6 +17,11 @@
     height: 60px;
 }
 
+table i:hover {
+    opacity: .5;
+    transform: scale(1.2);
+}
+
 .invalid-feedback {
     font-weight: bold;
     color: #f00 !important;
@@ -630,4 +635,8 @@ textarea {
 
 [data-theme="dark"] option {
     background-color: #383838 !important;
+}
+
+[data-theme="dark"] table i {
+    color: #ffba00 !important;
 }

@@ -306,7 +306,7 @@ $this->registerJS($js);
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <div class="row justify-content-center text-center mx-0">
+                        <div class="row mt-5 justify-content-center text-center mx-0">
                             <div class="col-12">
                                 <h2><?= Yii::t('app', 'NoAlbums') ?></h2>
                             </div>
@@ -319,7 +319,12 @@ $this->registerJS($js);
             </div>
             <div class="tab-pane fade" id="videoclips" role="tabpanel" aria-labelledby="videoclips-tab">
                 <?php if ($model->id == Yii::$app->user->id) : ?>
-                    <button class="action-btn outline-transparent mb-4" data-toggle="modal" data-target="#videoclip-modal"><i class="far fa-plus-square"></i></button>
+                    <button class="action-btn outline-transparent mb-4" data-toggle="modal" data-target="#videoclip-modal">
+                        <div class="d-flex">
+                            <i class="far fa-plus-square"></i>
+                            <h2 class="ml-3"><?= Yii::t('app', 'Add') ?></h2>
+                        </div>
+                    </button>
                     <div class="modal fade" id="videoclip-modal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">

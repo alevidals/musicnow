@@ -146,5 +146,7 @@ return [
     'AddStatus' => 'Add a status',
     'Resend' => '',
     'PleaseContact' => 'Please contact us if you think this is a server error. Thank you.',
-    'UserSearch' => 'Search a chat...'
+    'UserSearch' => 'Search a chat...',
+    'Add' => '',
+    'NoVideoclips' => "Looks like there's no video clip yet.",
 ];
