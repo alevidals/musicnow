@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Chat;
 use app\models\Seguidores;
 use app\models\SeguidoresSearch;
 use app\models\Usuarios;
@@ -212,6 +213,12 @@ class SeguidoresController extends Controller
 
     public function actionDeleteFollower($seguidor_id)
     {
-        $this->findModel($seguidor_id, Yii::$app->user->id)->delete();
+        $userId = Yii::$app->user->id;
+        $model = $this->findModel($seguidor_id, $userId);
+        if ($model->delete()) {
+            Chat::updateAll(['estado_id' => 4], ['emisor_id' => $seguidor_id, 'receptor_id' => $userId, 'estado_id' => 3]);
+            Chat::updateAll(['estado_id' => 4], ['emisor_id' => $userId, 'receptor_id' => $seguidor_id, 'estado_id' => 3]);
+        }
+
     }
 }
