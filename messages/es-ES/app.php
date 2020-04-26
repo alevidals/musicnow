@@ -145,5 +145,6 @@ return [
     'Estados' => '',
     'AddStatus' => 'Agregar un estado',
     'Resend' => 'Reenviar',
-    'PleaseContact' => 'Por favor, contacte con nosotros si crees que es un error del servidor. Gracias.'
+    'PleaseContact' => 'Por favor, contacte con nosotros si crees que es un error del servidor. Gracias.',
+    'UserSearch' => 'Busca un chat...'
 ];

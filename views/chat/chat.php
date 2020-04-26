@@ -11,23 +11,23 @@ $this->title = Yii::t('app', 'Chats');
 ?>
 <div class="chat-chat">
 
-    <div>
-        <div class="form-group mb-5">
-            <input class="form-control" type="text" name="searchUsers" id="search-users">
+    <div class="row justify-content-center mt-3">
+        <div class="form-group mb-5 col-12 col-md-4">
+            <input class="form-control" type="text" name="searchUsers" id="search-users" placeholder="<?= Yii::t('app', 'UserSearch') ?>">
         </div>
     </div>
 
     <div class="search-box row">
-
     </div>
 
     <div class="row chat-list">
         <?php foreach ($seguidos as $seguido) : ?>
             <div id="<?= $seguido->id ?>" class="col-12 mb-5">
-                <h4 class="d-inline-block"><?= Html::encode($seguido->login) ?></h4>
-                <span class="status badge badge-success d-inline-block"><?= $seguido->getEstado()->one()->estado ?></span>
+                <?= Html::img($seguido->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo']) ?>
+                <h4 class="d-inline-block m-0 py-auto"><?= Html::encode($seguido->login) ?></h4>
+                <span class="status badge d-inline-block"><?= $seguido->getEstado()->one()->estado ?></span>
                 <span class="badge badge-warning" id="messages-number-<?= $seguido->id ?>"></span>
-                <button class="btn main-yellow start-chat d-block" data-receptorid="<?= $seguido->id ?>" data-toggle="modal" data-target="#chat-<?= $seguido->id ?>">Chat</button>
+                <button class="btn main-yellow btn-sm start-chat" data-receptorid="<?= $seguido->id ?>" data-toggle="modal" data-target="#chat-<?= $seguido->id ?>">Chat</button>
                 <div class="modal fade" id="chat-<?= $seguido->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">

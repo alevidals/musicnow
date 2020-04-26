@@ -7,6 +7,7 @@ var offset = 10;
 var interval;
 
 checkTheme();
+getStatusFromUsers();
 
 $('body').on('show.bs.modal', '.modal', function (e) {
     interval = setInterval(function(){
@@ -911,10 +912,11 @@ $('body').on('keyup', '#search-users', function ev(e) {
                 data.forEach(element => {
                     $('.search-box').append(`
                     <div id="${element.id}" class="col-12 mb-5">
+                        <img src="${element.url_image}" class="user-search-img" width="40px" alt="logo"?>
                         <h4 class="d-inline-block">${element.login}</h4>
                         <span class="status badge badge-success d-inline-block">${element.estado_id}</span>
                         <span class="badge badge-warning" id="messages-number-${element.id}"></span>
-                        <button class="btn main-yellow start-chat d-block" data-receptorid="${element.id}" data-toggle="modal" data-target="#chat-${element.id}">Chat</button>
+                        <button class="btn main-yellow start-chat" data-receptorid="${element.id}" data-toggle="modal" data-target="#chat-${element.id}">Chat</button>
                         <div class="modal fade" id="chat-${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
