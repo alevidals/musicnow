@@ -953,3 +953,32 @@ $('body').on('keyup', '#search-users', function ev(e) {
         $('.search-box').empty();
     }
 });
+
+$('body').on('click', '.delete-follow-btn', function ev(e) {
+    var strings = ['Are you sure you want to delete this item?'];
+    var seguidor_id = $(this).data('follower_id');
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=site%2Fget-translate',
+        data: {
+            strings: strings
+        },
+        success: function (data) {
+            krajeeDialogCust2.confirm(data[0], function (result) {
+                if (result) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '/index.php?r=seguidores%2Fdelete-follower&seguidor_id=' + seguidor_id,
+                        success: function (data) {
+                            $('#follower-' + seguidor_id).addClass('fall');
+                            $('#follower-' + seguidor_id).on('transitionend', function ev(e){
+                                $('#follower-' + seguidor_id).remove();
+                                getFollowersData();
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});

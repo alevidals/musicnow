@@ -209,4 +209,9 @@ class SeguidoresController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $res;
     }
+
+    public function actionDeleteFollower($seguidor_id)
+    {
+        $this->findModel($seguidor_id, Yii::$app->user->id)->delete();
+    }
 }

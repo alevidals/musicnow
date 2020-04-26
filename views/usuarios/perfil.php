@@ -13,9 +13,7 @@ $urlGetLikes = Url::to(['canciones/get-likes']);
 $confirmMessage = Yii::t('app', 'Are you sure you want to delete this item?');
 
 $js = <<<EOT
-
     getFollowersData();
-
 EOT;
 
 $this->registerJS($js);
@@ -74,13 +72,18 @@ $this->registerJS($js);
                                     <div class="row">
                                         <?php if (count($seguidores) > 0) : ?>
                                             <?php foreach ($seguidores as $usuario) : ?>
-                                                <div class="col-12">
+                                                <div class="col-12 fall-animation" id="follower-<?= $usuario->id ?>">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <?= Html::img($model->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidor']) ?>
+                                                            <?= Html::img($usuario->url_image, ['class' => 'd-inline-block user-search-img my-auto', 'width' => '30px', 'alt' => 'seguidor']) ?>
                                                         </div>
                                                         <div class="col">
                                                             <p class="d-inline-block my-auto"><?= Html::encode($usuario->login) ?></p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button data-follower_id="<?= $usuario->id ?>" class="outline-transparent delete-follow-btn">
+                                                                <i class="fas fa-trash text-danger"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
