@@ -627,3 +627,7 @@ textarea {
 .red-hearth {
     color: #f00 !important;
 }
+
+[data-theme="dark"] option {
+    background-color: #383838 !important;
+}
