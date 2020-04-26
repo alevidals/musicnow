@@ -7,6 +7,7 @@ use Yii;
 /**
  * This is the model class for table "seguidores".
  *
+ * @property int $id
  * @property int $seguidor_id
  * @property int $seguido_id
  *
@@ -44,6 +45,7 @@ class Seguidores extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => Yii::t('app', 'ID'),
             'seguidor_id' => Yii::t('app', 'Seguidor ID'),
             'seguido_id' => Yii::t('app', 'Seguido ID'),
         ];
