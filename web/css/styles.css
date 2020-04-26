@@ -17,7 +17,7 @@
     height: 60px;
 }
 
-table i:hover {
+table i:hover, .delete-song-playlist-btn:hover {
     opacity: .5;
     transform: scale(1.2);
 }

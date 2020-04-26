@@ -16,14 +16,15 @@ $counter = 1;
 ?>
 <div class="playlists-view">
 
+    <span class="d-none playlist-id"><?= $model->id ?></span>
+
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn main-yellow']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'metho
-                d' => 'post',
+                'method' => 'post',
             ],
         ]) ?>
     </p>
@@ -40,10 +41,13 @@ $counter = 1;
 
     <div class="row mt-3">
         <?php foreach ($canciones as $cancion) : ?>
-            <div class="col-12 playlist-cancion mb-3">
-                <h5 class="d-inline-block"><?= $counter++; ?></h5>
+            <div class="col-12 playlist-cancion mb-4 fall-animation" id="<?= $cancion->id ?>">
+                <h6 class="d-inline-block"><?= $counter++; ?></h6>
                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px']) ?>
                 <h5 class="d-inline-block ml-3"><?= Html::encode($cancion->titulo) ?></h5>
+                <button class="outline-transparent delete-song-playlist-btn float-right" data-song-id="<?= $cancion->id ?>">
+                    <i class="fas fa-trash text-danger"></i>
+                </button>
             </div>
         <?php endforeach ?>
     </div>

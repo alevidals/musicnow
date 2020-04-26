@@ -149,4 +149,6 @@ return [
     'UserSearch' => 'Busca un chat...',
     'Add' => 'Añadir',
     'NoVideoclips' => 'Parece que no hay ningún videoclips aún',
+    'Create Playlists' => 'Crear una playlist',
+    'DeleteSongName' => '¿Estás seguro de que desea eliminar la canción',
 ];

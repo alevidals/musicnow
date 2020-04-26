@@ -955,8 +955,8 @@ $('body').on('keyup', '#search-users', function ev(e) {
 });
 
 $('body').on('click', '.delete-follow-btn', function ev(e) {
-    var strings = ['Are you sure you want to delete this item?'];
     var seguidor_id = $(this).data('follower_id');
+    var strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -974,6 +974,36 @@ $('body').on('click', '.delete-follow-btn', function ev(e) {
                             $('#follower-' + seguidor_id).on('transitionend', function ev(e){
                                 $('#follower-' + seguidor_id).remove();
                                 getFollowersData();
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+$('body').on('click', '.delete-song-playlist-btn', function ev(e) {
+    var cancion_id = $(this).data('song-id');
+    var playlist_id = $('.playlist-id').text();
+    var strings = ['DeleteSongName'];
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=site%2Fget-translate',
+        data: {
+            strings: strings
+        },
+        success: function (data) {
+            var message = data[0] + ' ' + $('#' + cancion_id + ' h5').text() + '?';
+            krajeeDialogCust2.confirm(message, function (result) {
+                if (result) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '/index.php?r=canciones-playlist%2Fdelete&cancion_id=' + cancion_id + '&playlist_id=' + playlist_id,
+                        success: function (data) {
+                            $('#' + cancion_id).addClass('fall');
+                            $('#' + cancion_id).on('transitionend', function ev(e){
+                                $('#' + cancion_id).remove();
                             });
                         }
                     });

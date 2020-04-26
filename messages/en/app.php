@@ -149,4 +149,6 @@ return [
     'UserSearch' => 'Search a chat...',
     'Add' => '',
     'NoVideoclips' => "Looks like there's no video clip yet.",
+    'Create Playlists' => 'Add a playlist',
+    'DeleteSongName' => 'Are you sure you want to delete the song',
 ];

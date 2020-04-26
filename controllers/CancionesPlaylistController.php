@@ -33,7 +33,7 @@ class CancionesPlaylistController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete'],
+                'only' => ['index', 'update', 'create'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -126,8 +126,6 @@ class CancionesPlaylistController extends Controller
     public function actionDelete($playlist_id, $cancion_id)
     {
         $this->findModel($playlist_id, $cancion_id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**
