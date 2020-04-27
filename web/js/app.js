@@ -1000,16 +1000,16 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
             strings: strings
         },
         success: function (data) {
-            var message = data[0] + ' ' + $('#' + cancion_id + ' h5').text() + '?';
+            var message = data[0] + ' ' + $('#song-' + cancion_id + ' h5').text() + '?';
             krajeeDialogCust2.confirm(message, function (result) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
                         url: '/index.php?r=canciones-playlist%2Fdelete&cancion_id=' + cancion_id + '&playlist_id=' + playlist_id,
                         success: function (data) {
-                            $('#' + cancion_id).addClass('fall');
-                            $('#' + cancion_id).on('transitionend', function ev(e){
-                                $('#' + cancion_id).remove();
+                            $('#song-' + cancion_id).addClass('fall');
+                            $('#song-' + cancion_id).on('transitionend', function ev(e){
+                                $('#song-' + cancion_id).remove();
                             });
                         }
                     });
