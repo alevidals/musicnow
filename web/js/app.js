@@ -1046,8 +1046,8 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
 $('body').on('change', '.is-album-check', function ev(e) {
     if ($(this).prop('checked')) {
         $('.field-canciones-album_id').show();
-        $('#canciones-album_id').attr('name', "Canciones['album_id']");
-        $('#canciones-album_id').prev().attr('name', "Canciones['album_id']");
+        $('#canciones-album_id').attr('name', 'Canciones[album_id]');
+        $('#canciones-album_id').prev().attr('name', 'Canciones[album_id]');
         $('#canciones-portada').removeAttr('name');
         $('#canciones-portada').prev().removeAttr('name');
         $('.field-canciones-portada').hide();
