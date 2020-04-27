@@ -28,7 +28,6 @@ $this->registerJS($js);
         <?= Html::img($model->url_banner, ['class' => 'img-fluid', 'alt' => 'banner']) ?>
     <?php endif; ?>
 
-
     <?php if ($model->id != Yii::$app->user->id) : ?>
         <?php if ($bloqueo != UsuariosController::OTHER_BLOCK
             and $bloqueo != UsuariosController::YOU_BLOCK) : ?>
@@ -40,7 +39,7 @@ $this->registerJS($js);
                     'role' => 'button',
                     'class' => 'btn main-yellow mt-4',
                     'data' => [
-                        'confirm' => '¿Estás seguro? Si sigues al usuario dejaras de seguirlo.', 'method' => 'post',
+                        'confirm' => Yii::t('app', 'SureLock'), 'method' => 'post',
                     ],
                 ]
             ) ?>
@@ -186,10 +185,21 @@ $this->registerJS($js);
     </div>
 
     <?php if ($bloqueo == UsuariosController::OTHER_BLOCK) : ?>
+        <?= Html::a(
+            Yii::t('app', 'Block'),
+            ['bloqueados/bloquear', 'bloqueado_id' => $model->id],
+            [
+                'role' => 'button',
+                'class' => 'btn main-yellow my-4',
+                'data' => [
+                    'confirm' => Yii::t('app', 'SureLock'), 'method' => 'post',
+                ],
+            ]
+        ) ?>
         <h3><?= Yii::t('app', 'OtherBlock') ?></>
     <?php elseif ($bloqueo == UsuariosController::YOU_BLOCK) : ?>
         <h3><?= Yii::t('app', 'YouBlock') ?></h3>
-        <?= Html::a('Desbloquear', ['bloqueados/bloquear', 'bloqueado_id' => $model->id], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
+        <?= Html::a(Yii::t('app', 'Desbloquear'), ['bloqueados/bloquear', 'bloqueado_id' => $model->id], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
     <?php else : ?>
         <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
             <li class="nav-item ml-auto">

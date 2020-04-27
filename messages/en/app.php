@@ -152,4 +152,6 @@ return [
     'Create Playlists' => 'Add a playlist',
     'DeleteSongName' => 'Are you sure you want to delete the song',
     'BelongAlbum' => 'Does this song belong to an album?',
+    'Desbloquear' => 'Unlock',
+    'SureLock' => 'Are you sure? If you follow the user you will stop following them.',
 ];

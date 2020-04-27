@@ -152,4 +152,6 @@ return [
     'Create Playlists' => 'Crear una playlist',
     'DeleteSongName' => '¿Estás seguro de que desea eliminar la canción',
     'BelongAlbum' => '¿Esta canción pertenece a un albúm?',
+    'Desbloquear' => '',
+    'SureLock' => '¿Estás seguro? Si sigues al usuario dejaras de seguirlo.',
 ];
