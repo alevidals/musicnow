@@ -193,7 +193,9 @@ class CancionesController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = $this->findModel($cancion_id);
-        $album = $model->getAlbum()->one()->titulo;
+        if ($model->album != null) {
+            $album = $model->getAlbum()->one()->titulo;
+        }
         return [
             'url_cancion' => Html::encode($model->url_cancion),
             'url_portada' => Html::encode($model->url_portada),

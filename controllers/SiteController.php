@@ -78,7 +78,7 @@ class SiteController extends Controller
         $canciones = Canciones::find()
             ->where(['IN', 'usuario_id', $ids])
             ->orWhere(['usuario_id' => Yii::$app->user->id])
-            ->limit(2)
+            ->limit(10)
             ->all();
 
         $usuariosSearch = new ActiveDataProvider([
