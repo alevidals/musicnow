@@ -447,7 +447,7 @@ textarea:focus {
 }
 
 .fall {
-    transform: translateY(8rem) rotateZ(20deg);
+    transform: translateX(10rem);
     opacity: 0;
 }
 
