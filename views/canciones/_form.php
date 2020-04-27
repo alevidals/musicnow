@@ -15,11 +15,16 @@ use yii\bootstrap4\Html;
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 
+    <div class="custom-control custom-switch mb-3">
+        <input type="checkbox" class="custom-control-input is-album-check" id="customSwitch1" checked>
+        <label class="custom-control-label" for="customSwitch1"><?= Yii::t('app', 'BelongAlbum') ?></label>
+    </div>
+
     <?= $form->field($model, 'album_id')->dropDownList($albumes)->label(Yii::t('app', 'Album')) ?>
 
     <?= $form->field($model, 'genero_id')->dropDownList($generos)->label(Yii::t('app', 'Género')) ?>
 
-    <?= $form->field($model, 'portada')->fileInput() ?>
+    <?= $form->field($model, 'portada')->fileInput(['name' => '']) ?>
 
     <?= $form->field($model, 'cancion')->fileInput() ?>
 

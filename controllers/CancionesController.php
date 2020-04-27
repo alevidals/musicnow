@@ -86,14 +86,22 @@ class CancionesController extends Controller
         $model = new Canciones(['usuario_id' => Yii::$app->user->id]);
 
         if (Yii::$app->request->isPost) {
-            $model->portada = UploadedFile::getInstance($model, 'portada');
-            $model->uploadPortada();
+            if (isset($_POST['Canciones']['portada'])) {
+                $model->portada = UploadedFile::getInstance($model, 'portada');
+                $model->uploadPortada();
+            }
             $model->cancion = UploadedFile::getInstance($model, 'cancion');
             $model->uploadCancion();
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if (!isset($_POST['Canciones']['portada'])) {
+                $model->url_portada = $model->getAlbum()->one()->url_portada;
+                $model->image_name = $model->getAlbum()->one()->image_name;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         $usuario = Usuarios::findOne(Yii::$app->user->id);
@@ -157,7 +165,9 @@ class CancionesController extends Controller
         $model = $this->findModel($id);
 
         $model->delete();
-        $model->deletePortada();
+        if ($model->album_id == null) {
+            $model->deletePortada();
+        }
         $model->deleteCancion();
 
         return $this->redirect(['index']);

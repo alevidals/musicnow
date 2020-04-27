@@ -69,7 +69,7 @@ CREATE TABLE canciones
 (
     id           BIGSERIAL     PRIMARY KEY
   , titulo       VARCHAR(255)  NOT NULL
-  , album_id     BIGINT        NOT NULL REFERENCES albumes (id)
+  , album_id     BIGINT                 REFERENCES albumes (id)
   , genero_id    BIGINT        NOT NULL REFERENCES generos (id)
   , url_cancion  VARCHAR(2048) NOT NULL
   , song_name    VARCHAR(255)  NOT NULL

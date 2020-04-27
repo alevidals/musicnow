@@ -17,28 +17,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="canciones-update">
 
-<?php $form = ActiveForm::begin(); ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Html::activeHiddenInput($model, 'id')?>
-
-    <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'album_id')->dropDownList($albumes) ?>
-
-    <?= $form->field($model, 'genero_id')->dropDownList($generos) ?>
-
-    <?= $form->field($model, 'portada')->fileInput() ?>
-
-    <?= $form->field($model, 'cancion')->fileInput() ?>
-
-    <?= $form->field($model, 'anyo')->textInput() ?>
-
-    <?= $form->field($model, 'duracion')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success send-btn']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
+    <?= $this->render('_form', [
+        'model' => $model,
+        'generos' => $generos,
+        'albumes' => $albumes,
+    ]) ?>
 
 </div>

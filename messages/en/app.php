@@ -151,4 +151,5 @@ return [
     'NoVideoclips' => "Looks like there's no video clip yet.",
     'Create Playlists' => 'Add a playlist',
     'DeleteSongName' => 'Are you sure you want to delete the song',
+    'BelongAlbum' => 'Does this song belong to an album?',
 ];

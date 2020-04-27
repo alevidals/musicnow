@@ -56,7 +56,7 @@ if (Yii::$app->user->identity->rol_id == 1) {
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Playlists'), ['create'], ['class' => 'btn main-yellow']) ?>
+        <?= Html::a(Yii::t('app', 'Create Playlists'), ['create'], ['class' => 'btn main-yellow', 'data-pjax' => 0]) ?>
     </p>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>

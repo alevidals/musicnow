@@ -11,7 +11,7 @@ use yii\web\UploadedFile;
  *
  * @property int $id
  * @property string $titulo
- * @property int $album_id
+ * @property int|null $album_id
  * @property int $genero_id
  * @property string $url_cancion
  * @property string $song_name
@@ -52,7 +52,7 @@ class Canciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titulo', 'album_id', 'genero_id', 'url_cancion', 'song_name', 'url_portada', 'image_name', 'anyo', 'duracion', 'usuario_id'], 'required'],
+            [['titulo', 'genero_id', 'url_cancion', 'song_name', 'url_portada', 'image_name', 'anyo', 'duracion', 'usuario_id'], 'required'],
             [['album_id', 'genero_id', 'usuario_id'], 'default', 'value' => null],
             [['album_id', 'genero_id', 'usuario_id'], 'integer'],
             [['anyo'], 'number'],
@@ -126,7 +126,7 @@ class Canciones extends \yii\db\ActiveRecord
      */
     public function getAlbumesCanciones()
     {
-        return $this->hasMany(AlbumesCanciones::className(), ['canciones_id' => 'id'])->inverseOf('canciones');
+        return $this->hasMany(AlbumesCanciones::className(), ['canciones_id' => 'id']);
     }
 
     /**
@@ -136,7 +136,7 @@ class Canciones extends \yii\db\ActiveRecord
      */
     public function getAlbum()
     {
-        return $this->hasOne(Albumes::className(), ['id' => 'album_id'])->inverseOf('canciones');
+        return $this->hasOne(Albumes::className(), ['id' => 'album_id']);
     }
 
     /**
@@ -146,7 +146,7 @@ class Canciones extends \yii\db\ActiveRecord
      */
     public function getGenero()
     {
-        return $this->hasOne(Generos::className(), ['id' => 'genero_id'])->inverseOf('canciones');
+        return $this->hasOne(Generos::className(), ['id' => 'genero_id']);
     }
 
     /**
