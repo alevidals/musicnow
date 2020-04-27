@@ -2,20 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Albumes;
 use Yii;
-use app\models\Playlists;
-use app\models\PlaylistsSearch;
-use yii\bootstrap4\Html;
+use app\models\AlbumesCanciones;
+use app\models\AlbumesCancionesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
 
 /**
- * PlaylistsController implements the CRUD actions for Playlists model.
+ * AlbumesCancionesController implements the CRUD actions for AlbumesCanciones model.
  */
-class PlaylistsController extends Controller
+class AlbumesCancionesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -33,12 +30,12 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * Lists all Playlists models.
+     * Lists all AlbumesCanciones models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PlaylistsSearch();
+        $searchModel = new AlbumesCancionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,32 +45,30 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * Displays a single Playlists model.
-     * @param integer $id
+     * Displays a single AlbumesCanciones model.
+     * @param integer $album_id
+     * @param integer $canciones_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($album_id, $canciones_id)
     {
-        $model = $this->findModel($id);
-
         return $this->render('view', [
-            'model' => $model,
-            'canciones' => $model->getCanciones()->all(),
+            'model' => $this->findModel($album_id, $canciones_id),
         ]);
     }
 
     /**
-     * Creates a new Playlists model.
+     * Creates a new AlbumesCanciones model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Playlists(['usuario_id' => Yii::$app->user->id]);
+        $model = new AlbumesCanciones();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'album_id' => $model->album_id, 'canciones_id' => $model->canciones_id]);
         }
 
         return $this->render('create', [
@@ -82,18 +77,19 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * Updates an existing Playlists model.
+     * Updates an existing AlbumesCanciones model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $album_id
+     * @param integer $canciones_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($album_id, $canciones_id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($album_id, $canciones_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'album_id' => $model->album_id, 'canciones_id' => $model->canciones_id]);
         }
 
         return $this->render('update', [
@@ -102,46 +98,34 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * Deletes an existing Playlists model.
+     * Deletes an existing AlbumesCanciones model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $album_id
+     * @param integer $canciones_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($album_id, $canciones_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($album_id, $canciones_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Playlists model based on its primary key value.
+     * Finds the AlbumesCanciones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Playlists the loaded model
+     * @param integer $album_id
+     * @param integer $canciones_id
+     * @return AlbumesCanciones the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($album_id, $canciones_id)
     {
-        if (($model = Playlists::findOne($id)) !== null) {
+        if (($model = AlbumesCanciones::findOne(['album_id' => $album_id, 'canciones_id' => $canciones_id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-    }
-
-    public function actionGetSongs($playlist_id)
-    {
-        $playlist = new Playlists(['id' => $playlist_id]);
-        $canciones = $playlist->getCanciones()->all();
-        foreach ($canciones as &$cancion) {
-            $cancion->titulo = Html::encode($cancion->titulo);
-            if ($cancion->album_id != null) {
-                $cancion->album_id = Html::encode(Albumes::findOne($cancion->album_id)->titulo);
-            }
-        }
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return $canciones;
     }
 }

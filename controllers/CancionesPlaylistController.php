@@ -154,16 +154,4 @@ class CancionesPlaylistController extends Controller
         $cancion_playlist->playlist_id = $playlist_id;
         $cancion_playlist->save();
     }
-
-    public function actionGetSongs($playlist_id)
-    {
-        $playlist = new Playlists(['id' => $playlist_id]);
-        $canciones = $playlist->getCanciones()->all();
-        foreach ($canciones as &$cancion) {
-            $cancion->titulo = Html::encode($cancion->titulo);
-            $cancion->album_id = Html::encode(Albumes::findOne($cancion->album_id)->titulo);
-        }
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return $canciones;
-    }
 }

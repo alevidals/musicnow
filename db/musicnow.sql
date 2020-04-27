@@ -86,9 +86,9 @@ DROP TABLE IF EXISTS albumes_canciones CASCADE;
 
 CREATE TABLE albumes_canciones
 (
-    id           BIGSERIAL PRIMARY KEY
-  , album_id     BIGINT    NOT NULL REFERENCES albumes (id)
+  album_id     BIGINT    NOT NULL REFERENCES albumes (id)
   , canciones_id BIGINT    NOT NULL REFERENCES canciones (id)
+  , PRIMARY KEY (album_id, canciones_id)
 );
 
 DROP TABLE IF EXISTS seguidores CASCADE;

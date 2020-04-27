@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "albumes_canciones".
  *
- * @property int $id
  * @property int $album_id
  * @property int $canciones_id
  *
@@ -33,6 +32,7 @@ class AlbumesCanciones extends \yii\db\ActiveRecord
             [['album_id', 'canciones_id'], 'required'],
             [['album_id', 'canciones_id'], 'default', 'value' => null],
             [['album_id', 'canciones_id'], 'integer'],
+            [['album_id', 'canciones_id'], 'unique', 'targetAttribute' => ['album_id', 'canciones_id']],
             [['album_id'], 'exist', 'skipOnError' => true, 'targetClass' => Albumes::className(), 'targetAttribute' => ['album_id' => 'id']],
             [['canciones_id'], 'exist', 'skipOnError' => true, 'targetClass' => Canciones::className(), 'targetAttribute' => ['canciones_id' => 'id']],
         ];
@@ -44,7 +44,6 @@ class AlbumesCanciones extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
             'album_id' => Yii::t('app', 'Album ID'),
             'canciones_id' => Yii::t('app', 'Canciones ID'),
         ];
@@ -57,7 +56,7 @@ class AlbumesCanciones extends \yii\db\ActiveRecord
      */
     public function getAlbum()
     {
-        return $this->hasOne(Albumes::className(), ['id' => 'album_id'])->inverseOf('albumesCanciones');
+        return $this->hasOne(Albumes::className(), ['id' => 'album_id']);
     }
 
     /**
@@ -67,6 +66,6 @@ class AlbumesCanciones extends \yii\db\ActiveRecord
      */
     public function getCanciones()
     {
-        return $this->hasOne(Canciones::className(), ['id' => 'canciones_id'])->inverseOf('albumesCanciones');
+        return $this->hasOne(Canciones::className(), ['id' => 'canciones_id']);
     }
 }

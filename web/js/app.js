@@ -272,7 +272,31 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
     var playlist_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=canciones-playlist%2Fget-songs&playlist_id=' + playlist_id,
+        url: '/index.php?r=playlists%2Fget-songs&playlist_id=' + playlist_id,
+        success: function(data) {
+            data.forEach(element => {
+                playlist.push({
+                    url_cancion: element.url_cancion,
+                    url_portada: element.url_portada,
+                    titulo: element.titulo,
+                    album: element.album_id,
+                });
+            });
+            removeActualData();
+            initAudioPlayer();
+            refreshSongPlaylist();
+            $('.play-pause-btn').trigger('click');
+        }
+    })
+});
+
+$('body').on('click', '.play-album-btn', function ev(e) {
+    playlist = [];
+    actualSong = 0;
+    var album_id = $(this).attr('id');
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=albumes%2Fget-songs&album_id=' + album_id,
         success: function(data) {
             data.forEach(element => {
                 playlist.push({

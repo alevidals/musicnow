@@ -5,10 +5,12 @@ namespace app\controllers;
 use Yii;
 use app\models\Albumes;
 use app\models\AlbumesSearch;
+use yii\bootstrap4\Html;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -64,8 +66,12 @@ class AlbumesController extends Controller
      */
     public function actionView($id)
     {
+
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'canciones' => $model->getCanciones()->all(),
         ]);
     }
 
@@ -151,5 +157,17 @@ class AlbumesController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    public function actionGetSongs($album_id)
+    {
+        $album = new Albumes(['id' => $album_id]);
+        $canciones = $album->getCanciones()->all();
+        foreach ($canciones as &$cancion) {
+            $cancion->titulo = Html::encode($cancion->titulo);
+            $cancion->album_id = Html::encode(Albumes::findOne($cancion->album_id)->titulo);
+        }
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $canciones;
     }
 }

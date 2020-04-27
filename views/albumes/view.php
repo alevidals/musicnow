@@ -10,13 +10,14 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Albumes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+$counter = 1;
+
 ?>
 <div class="albumes-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn main-yellow']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -26,17 +27,30 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'titulo',
-            'usuario.nombre',
-            'anyo',
-            'created_at:datetime',
-        ],
-        'options' => [
-            'class' => 'table admin-table'
-        ],
-    ]) ?>
+    <div class="text-center">
+        <?= Html::img($model->url_portada, ['width' => '300px']) ?>
+        <h2 class="mt-3"><?= Html::encode($model->titulo) ?></h2>
+    </div>
+
+    <?php if (count($canciones) > 0) : ?>
+        <button id="<?= $model->id ?>" class="outline-transparent action-btn play-album-btn">
+            <i class="fas fa-play"></i>
+        </button>
+    <?php else : ?>
+        <p><?= Yii::t('app', 'NoSongs') ?></p>
+    <?php endif; ?>
+
+    <div class="row mt-3">
+        <?php foreach ($canciones as $cancion) : ?>
+            <div class="col-12 playlist-cancion mb-4 fall-animation" id="song-<?= $cancion->id ?>">
+                <h6 class="d-inline-block"><?= $counter++; ?></h6>
+                <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px']) ?>
+                <h5 class="d-inline-block ml-3"><?= Html::encode($cancion->titulo) ?></h5>
+                <?php if ($cancion->explicit) : ?>
+                    <span class="ml-3 badge explicit-badge">EXPLICIT</span>
+                <?php endif; ?>
+            </div>
+        <?php endforeach ?>
+    </div>
 
 </div>
