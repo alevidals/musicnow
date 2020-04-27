@@ -98,6 +98,7 @@ $('body').on('click', '.play-btn', function ev(e) {
                     $('.player audio source').attr('src', cancion.url_cancion);
                     $('.artist-info p').html(cancion.titulo);
                     $('.artist-info small').html(cancion.album);
+                    audio.load();
                     $('.play-pause-btn').trigger('click');
                 }
             });
@@ -345,6 +346,7 @@ function addInfoSongQueue() {
         if (songs.length > 0) {
             var cancion = songs.shift();
             addNewData(cancion);
+            audio.load();
             $('.play-pause-btn').trigger('click');
         }
     });
@@ -361,6 +363,7 @@ function refreshSongPlaylist() {
             actualSong++;
             var cancion = playlist[actualSong];
             addNewData(cancion);
+            audio.load();
             $('.play-pause-btn').trigger('click');
         }
     });
@@ -386,6 +389,7 @@ $('body').on('click', '.backward-btn', function ev(e) {
                 actualSong++;
                 var cancion = playlist[actualSong];
                 addNewData(cancion);
+                audio.load();
                 $('.play-pause-btn').trigger('click');
             }
         });
@@ -404,13 +408,15 @@ $('body').on('click', '.forward-btn', function ev(e) {
         removeActualData();
         initAudioPlayer();
         var cancion = songs.shift();
-        addNewData(cancion);
         var audio = $('#audio')[0];
+        addNewData(cancion);
+        audio.load();
         $('.play-pause-btn').trigger('click');
         audio.addEventListener('ended', () =>  {
             if (songs.length > 0) {
                 var cancion = songs.shift();
                 addNewData(cancion);
+                audio.load();
                 $('.play-pause-btn').trigger('click');
             }
         });
