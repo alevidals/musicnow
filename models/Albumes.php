@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\services\Utility;
 use Yii;
 
 /**
@@ -10,6 +11,8 @@ use Yii;
  * @property int $id
  * @property string $titulo
  * @property float $anyo
+ * @property string $image_name
+ * @property string $url_portada
  * @property string $created_at
  * @property int $usuario_id
  *
@@ -20,6 +23,7 @@ use Yii;
 class Albumes extends \yii\db\ActiveRecord
 {
     private $_total = null;
+    public $portada;
 
     /**
      * {@inheritdoc}
@@ -35,12 +39,14 @@ class Albumes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titulo', 'anyo', 'usuario_id'], 'required'],
+            [['titulo', 'anyo', 'image_name', 'url_portada', 'usuario_id'], 'required'],
             [['anyo'], 'number'],
             [['created_at'], 'safe'],
             [['usuario_id'], 'default', 'value' => null],
             [['usuario_id'], 'integer'],
-            [['titulo'], 'string', 'max' => 255],
+            [['portada'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 500, 'maxWidth' => 1000, 'minHeight' => 500, 'maxHeight' => 1000],
+            [['titulo', 'image_name'], 'string', 'max' => 255],
+            [['url_portada'], 'string', 'max' => 2048],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
     }
@@ -54,6 +60,8 @@ class Albumes extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'titulo' => Yii::t('app', 'Titulo'),
             'anyo' => Yii::t('app', 'Anyo'),
+            'image_name' => Yii::t('app', 'Image Name'),
+            'url_portada' => Yii::t('app', 'Url Portada'),
             'created_at' => Yii::t('app', 'Created At'),
             'usuario_id' => Yii::t('app', 'Usuario ID'),
         ];
@@ -76,7 +84,7 @@ class Albumes extends \yii\db\ActiveRecord
      */
     public function getAlbumesCanciones()
     {
-        return $this->hasMany(AlbumesCanciones::className(), ['album_id' => 'id'])->inverseOf('album');
+        return $this->hasMany(AlbumesCanciones::className(), ['album_id' => 'id']);
     }
 
     /**
@@ -86,7 +94,7 @@ class Albumes extends \yii\db\ActiveRecord
      */
     public function getCanciones()
     {
-        return $this->hasMany(Canciones::className(), ['album_id' => 'id'])->inverseOf('album');
+        return $this->hasMany(Canciones::className(), ['album_id' => 'id']);
     }
 
     /**
@@ -123,5 +131,18 @@ class Albumes extends \yii\db\ActiveRecord
             ->groupBy('albumes.id');
     }
 
+    public function uploadPortada()
+    {
+        if ($this->portada !== null) {
+            $uploadedImageInfo = Utility::uploadImageFirebase($this->portada, Yii::$app->user->id, Utility::PORTADA);
+            $this->url_portada = $uploadedImageInfo['url'];
+            $this->image_name = $uploadedImageInfo['image_name'];
+        }
+    }
+
+    public function deletePortada()
+    {
+        Utility::deleteFileFirebase('images/portada/' . Yii::$app->user->id . '/' . $this->image_name);
+    }
 
 }

@@ -72,7 +72,6 @@ class Utility
                 break;
         }
 
-
         \yii\imagine\Image::resize($origen, $width, $height)->save($origen);
 
         $factory = self::getFactory();

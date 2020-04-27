@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * AlbumesController implements the CRUD actions for Albumes model.
@@ -77,6 +78,11 @@ class AlbumesController extends Controller
     {
         $model = new Albumes(['usuario_id' => Yii::$app->user->id]);
 
+        if (Yii::$app->request->isPost) {
+            $model->portada = UploadedFile::getInstance($model, 'portada');
+            $model->uploadPortada();
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -97,6 +103,14 @@ class AlbumesController extends Controller
     {
         $model = $this->findModel($id);
 
+        if (Yii::$app->request->isPost) {
+            $model->portada = UploadedFile::getInstance($model, 'portada');
+            if ($model->portada !== null) {
+                $model->deletePortada();
+                $model->uploadPortada();
+            }
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -115,7 +129,10 @@ class AlbumesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        $model->delete();
+        $model->deletePortada();
 
         return $this->redirect(['index']);
     }
