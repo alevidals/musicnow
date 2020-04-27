@@ -19,6 +19,7 @@ use yii\web\UploadedFile;
  * @property string $image_name
  * @property float $anyo
  * @property string $duracion
+ * @property bool $explicit
  * @property int $usuario_id
  * @property string $created_at
  *
@@ -52,7 +53,7 @@ class Canciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titulo', 'genero_id', 'url_cancion', 'song_name', 'url_portada', 'image_name', 'anyo', 'duracion', 'usuario_id'], 'required'],
+            [['titulo', 'genero_id', 'url_cancion', 'song_name', 'url_portada', 'image_name', 'anyo', 'duracion', 'explicit', 'usuario_id'], 'required'],
             [['album_id', 'genero_id', 'usuario_id'], 'default', 'value' => null],
             [['album_id', 'genero_id', 'usuario_id'], 'integer'],
             [['anyo'], 'number'],
@@ -80,6 +81,7 @@ class Canciones extends \yii\db\ActiveRecord
             'genero_id' => Yii::t('app', 'Genero ID'),
             'url_cancion' => Yii::t('app', 'Url Cancion'),
             'song_name' => Yii::t('app', 'Song Name'),
+            'explicit' => Yii::t('app', 'Explicit'), 
             'image_name' => Yii::t('app', 'Image Name'),
             'url_portada' => Yii::t('app', 'Url Portada'),
             'anyo' => Yii::t('app', 'Anyo'),

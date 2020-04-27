@@ -199,6 +199,7 @@ class CancionesController extends Controller
             'url_portada' => Html::encode($model->url_portada),
             'titulo' => Html::encode($model->titulo),
             'album' => Html::encode($album),
+            'explicit' => ($model->explicit) ? true : false,
         ];
     }
 

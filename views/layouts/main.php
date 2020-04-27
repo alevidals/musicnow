@@ -240,7 +240,7 @@ $this->registerJS($js);
     <source src="/sounds/notification.mp3">
 </audio>
 
-<div class="audio-player fixed-bottom">
+<div class="audio-player fixed-player">
     <div>
         <button class="outline-transparent hide-player">
             <i class="fas fa-chevron-left"></i>

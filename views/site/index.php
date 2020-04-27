@@ -108,7 +108,12 @@ $this->registerJS($js);
                                 <div class="layer"></div>
                             </div>
                         </div>
-                        <h4 class="text-center mt-3 mb-5"><?= Html::encode($cancion->titulo) ?></h4>
+                        <div class="text-center w-100 my-3">
+                            <h4 class="text-center d-inline-block"><?= Html::encode($cancion->titulo) ?></h4>
+                            <?php if ($cancion->explicit) : ?>
+                                <span class="ml-3 badge explicit-badge">EXPLICIT</span>
+                            <?php endif; ?>
+                        </div>
                         <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">

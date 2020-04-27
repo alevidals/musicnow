@@ -189,6 +189,16 @@ table i:hover, .delete-song-playlist-btn:hover {
     }
 }
 
+@media (max-width: 992px) {
+    .fixed-player {
+        position: fixed;
+        right: 0;
+        bottom: 60px !important;
+        left: 0;
+        z-index: 1030;
+    }
+}
+
 .px-15 {
     padding-right: 15px !important;
     padding-left: 15px !important;
@@ -408,6 +418,19 @@ input:focus,
 select:focus,
 textarea:focus {
     border-bottom: 2px solid #ffba00 !important;
+}
+
+.fixed-player {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.explicit-badge {
+    background-color: #000;
+    color: #fff !important;
 }
 
 .comment-time {
@@ -649,4 +672,9 @@ textarea:focus {
 
 [data-theme="dark"] table i {
     color: #ffba00 !important;
+}
+
+[data-theme="dark"] .explicit-badge {
+    background-color: #fff;
+    color: #000 !important;
 }

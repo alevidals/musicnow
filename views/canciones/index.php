@@ -35,17 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw',
             ],
-            [
-                'label' => '',
-                'value' => function ($model, $key, $index, $column) {
-                    return <<<EOT
-                                <audio controls>
-                                    <source src="$model->url_cancion">
-                                </audio>
-                        EOT;
-                },
-                'format' => 'raw',
-            ],
             'titulo',
             [
                 'attribute' => 'album.titulo',
@@ -57,6 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'anyo',
             'usuario.login',
+            [
+                'attribute' => 'explicit',
+                'value' => function ($model, $key, $index, $column) {
+                    if ($model->explicit) {
+                        return '<span class="badge explicit-badge">EXPLICIT</span>';
+                    } else {
+                        return 'No';
+                    }
+                },
+                'format' => 'raw',
+            ],
             // 'duracion',
             //'song_name',
             //'image_name',

@@ -26,6 +26,8 @@ use yii\bootstrap4\Html;
 
     <?= $form->field($model, 'portada')->fileInput(['name' => '']) ?>
 
+    <?= $form->field($model, 'explicit')->checkbox() ?>
+
     <?= $form->field($model, 'cancion')->fileInput() ?>
 
     <?= $form->field($model, 'anyo')->textInput() ?>
