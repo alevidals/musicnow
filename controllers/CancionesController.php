@@ -197,8 +197,8 @@ class CancionesController extends Controller
             $album = $model->getAlbum()->one()->titulo;
         }
         return [
-            'url_cancion' => Html::encode($model->url_cancion),
-            'url_portada' => Html::encode($model->url_portada),
+            'url_cancion' => $model->url_cancion,
+            'url_portada' => $model->url_portada,
             'titulo' => Html::encode($model->titulo),
             'album' => Html::encode($album),
             'explicit' => ($model->explicit) ? true : false,
