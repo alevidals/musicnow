@@ -802,14 +802,14 @@ function getMessagesFromChat(receptor_id, refresh) {
             data.historial.forEach(element => {
                 if (element.emisor_id != receptor_id) {
                     $('#chat-history-' + receptor_id).append(`
-                        <p class=" message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                        <p class="ml-5 message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                     `);
                     if (element.estado_id == 4) {
                         $('.read-tick').addClass('read-message');
                     }
                 } else {
                     $('#chat-history-' + receptor_id).append(`
-                        <p class="message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
+                        <p class="mr-5 message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
                     `);
                 }
             });
@@ -840,14 +840,14 @@ $('body').on('click', '.send-chat', function ev(e) {
             data.forEach(element => {
                 if (element.emisor_id != receptor_id) {
                     $('#chat-history-' + receptor_id).append(`
-                        <p class=" message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                        <p class="ml-5 message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                     `);
                     if (element.estado_id == 4) {
                         $('.read-tick').addClass('read-message');
                     }
                 } else {
                     $('#chat-history-' + receptor_id).append(`
-                        <p class="message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
+                        <p class="mr-5 message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
                     `);
                 }
             });
@@ -874,14 +874,14 @@ $('body').on('keydown', '.chat-input', function ev(e) {
                 data.forEach(element => {
                     if (element.emisor_id != receptor_id) {
                         $('#chat-history-' + receptor_id).append(`
-                            <p class="message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
+                            <p class="ml-5  message my-message">${element.mensaje}<small class="pl-2">${element.created_at}<i class="fas fa-check-double pl-2 read-tick"></i></small></p>
                         `);
                         if (element.estado_id == 4) {
                             $('.read-tick').addClass('read-message');
                         }
                     } else {
                         $('#chat-history-' + receptor_id).append(`
-                            <p class="message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
+                            <p class="mr-5 message other-message">${element.mensaje}<small class="pl-2">${element.created_at}</small></p>
                         `);
                     }
                 });
