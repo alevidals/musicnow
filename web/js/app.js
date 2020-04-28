@@ -6,12 +6,41 @@ var playlist = [];
 var offset = 10;
 var interval;
 
+const PERFIL = 'perfil';
+const BANNER = 'banner';
+
 checkTheme();
 getStatusFromUsers();
 
 setInterval(() => {
     $('.alert-box .hide').remove();
 }, 120000);
+
+function readURL(input, target) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            if (target == PERFIL) {
+                $('.profile-img').attr('src', e.target.result);
+                $('.profile-img').css('width', '150px');
+            } else {
+                $('.user-search-banner').attr('src', e.target.result);
+                $('.user-search-banner').css('width', '1110px');
+            }
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$('.file-input').on('change', function ev(e) {
+    readURL(this, PERFIL);
+});
+
+$('.file-input-banner').on('change', function ev(e) {
+    readURL(this, BANNER);
+});
 
 $('body').on('show.bs.modal', '.modal', function (e) {
     interval = setInterval(function(){

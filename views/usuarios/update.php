@@ -4,41 +4,6 @@ use kartik\datecontrol\DateControl;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
-$js = <<<EOT
-
-    const PERFIL = 'perfil';
-    const BANNER = 'banner';
-
-    function readURL(input, target) {
-        if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            if (target == PERFIL) {
-                $('.profile-img').attr('src', e.target.result);
-                $('.profile-img').css('width', '150px');
-            } else {
-                $('.user-search-banner').attr('src', e.target.result);
-                $('.user-search-banner').css('width', '1110px');
-            }
-        }
-
-        reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $('.file-input').on('change', function ev(e) {
-        readURL(this, PERFIL);
-    });
-
-    $('.file-input-banner').on('change', function ev(e) {
-        readURL(this, BANNER);
-    });
-
-EOT;
-
-$this->registerJS($js);
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
@@ -59,11 +24,12 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
             <div class="form-group field-usuarios-banner">
                 <label class="img-edit" for="usuarios-banner">
                     <?php if ($model->url_banner) : ?>
-                        <img class="user-search-banner img-fluid" src="<?= $model->url_banner ?>" alt="profile-img">
+                        <img class="user-search-banner img-fluid" src="<?= $model->url_banner ?>" alt="Banner">
+                        <i class="fas fa-pen edit-image-icon-banner"></i>
                     <?php else : ?>
-                        <p>Banner</p>
+                        <img class="user-search-banner img-fluid" src=":" alt="Banner">
+                        <i class="fas fa-pen edit-image-icon-banner right-50"></i>
                     <?php endif; ?>
-                    <i class="fas fa-pen edit-image-icon-banner"></i>
                 </label>
                 <?= $form->field($model, 'banner')->fileInput(['class' => 'file-input-banner form-control-file d-none'])->label(false) ?>
             </div>
@@ -73,7 +39,7 @@ $this->title = Yii::t('app', 'Update Usuarios: {name}', [
         <div clss="col-lg-6 text-center">
             <div class="form-group field-usuarios-image">
                 <label class="img-edit" for="usuarios-image">
-                    <img class="user-search-img profile-img img-fluid" src="<?= $model->url_image ?>" alt="profile-img">
+                    <img class="user-search-img profile-img img-fluid" src="<?= $model->url_image ?>" alt="Image">
                     <i class="fas fa-pen edit-image-icon-image"></i>
                 </label>
                 <?= $form->field($model, 'image')->fileInput(['class' => 'file-input form-control-file d-none'])->label(false) ?>

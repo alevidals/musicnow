@@ -25,7 +25,7 @@ $this->registerJS($js);
     <span class="d-none user-id"><?= $model->id ?></span>
 
     <?php if ($model->url_banner) : ?>
-        <?= Html::img($model->url_banner, ['class' => 'img-fluid', 'alt' => 'banner']) ?>
+        <?= Html::img($model->url_banner, ['class' => 'mt-4 img-fluid', 'alt' => 'banner']) ?>
     <?php endif; ?>
 
     <?php if ($model->id != Yii::$app->user->id) : ?>
