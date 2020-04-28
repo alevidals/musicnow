@@ -154,4 +154,8 @@ return [
     'BelongAlbum' => '¿Esta canción pertenece a un albúm?',
     'Desbloquear' => '',
     'SureLock' => '¿Estás seguro? Si sigues al usuario dejaras de seguirlo.',
+    'EmptyField' => 'El campo está vacio o es incorrecto.',
+    'AddedVideoclip' => 'El videoclip se ha guardado con éxito',
+    'CorrectlyAdded' => 'se ha agregado a la playlist',
+    'AddedToQueue' => 'se ha agregado a la cola',
 ];

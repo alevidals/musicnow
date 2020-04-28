@@ -192,17 +192,21 @@ class CancionesController extends Controller
     public function actionGetSongData($cancion_id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
+
         $model = $this->findModel($cancion_id);
-        if ($model->album != null) {
-            $album = $model->getAlbum()->one()->titulo;
-        }
-        return [
+        $res = [
             'url_cancion' => $model->url_cancion,
             'url_portada' => $model->url_portada,
             'titulo' => Html::encode($model->titulo),
-            'album' => Html::encode($album),
             'explicit' => ($model->explicit) ? true : false,
+            'message' => Yii::t('app', 'AddedToQueue')
         ];
+
+        if ($model->album != null) {
+            $album = $model->getAlbum()->one()->titulo;
+            $res['album'] = Html::encode($album);
+        }
+        return $res;
     }
 
     public function actionComentarios($cancion_id)

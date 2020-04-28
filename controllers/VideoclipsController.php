@@ -143,14 +143,17 @@ class VideoclipsController extends Controller
     public function actionAgregar()
     {
         $link = Yii::$app->request->post('link');
+        Yii::$app->response->format = Response::FORMAT_JSON;
         if (!strpos($link, '/embed/')) {
             $link = 'https://www.youtube.com/embed/' . explode('=', $link)[1];
         }
         $videoclip = new Videoclips(['usuario_id' => Yii::$app->user->id]);
         $videoclip->link = $link;
         if ($videoclip->save()) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return $videoclip;
+            return [
+                'videoclip' => $videoclip,
+                'message' => Yii::t('app', 'AddedVideoclip'),
+            ];
         } else {
             Yii::$app->session->setFlash('error', Yii::t('app', 'CannotAddVideo'));
         }

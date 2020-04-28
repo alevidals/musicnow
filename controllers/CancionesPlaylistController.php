@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Albumes;
+use app\models\Canciones;
 use Yii;
 use app\models\CancionesPlaylist;
 use app\models\CancionesPlaylistSearch;
@@ -153,5 +154,12 @@ class CancionesPlaylistController extends Controller
         $cancion_playlist->cancion_id = $cancion_id;
         $cancion_playlist->playlist_id = $playlist_id;
         $cancion_playlist->save();
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'cancion' => Canciones::findOne($cancion_id)->titulo,
+            'message' => Yii::t('app', 'CorrectlyAdded'),
+            'playlist' => Playlists::findOne($playlist_id)->titulo,
+        ];
     }
 }

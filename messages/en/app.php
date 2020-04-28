@@ -154,4 +154,8 @@ return [
     'BelongAlbum' => 'Does this song belong to an album?',
     'Desbloquear' => 'Unlock',
     'SureLock' => 'Are you sure? If you follow the user you will stop following them.',
+    'EmptyField' => 'The field is empty or incorrect.',
+    'AddedVideoclip' => 'The videoclip has been saved successfully.',
+    'CorrectlyAdded' => 'has been added to the playlist',
+    'AddedToQueue' => 'has been added to the queue',
 ];

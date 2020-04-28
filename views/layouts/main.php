@@ -79,11 +79,6 @@ $this->registerJS($js);
 <?php Pjax::begin(); ?>
 <?php $this->beginBody() ?>
 
-    <div aria-live="polite" aria-atomic="true" style="position: relative;">
-        <div class="alert-box" style="position: fixed; top: 50px; right: 70px; z-index: 1050;">
-        </div>
-    </div>
-
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -239,6 +234,12 @@ $this->registerJS($js);
 <audio class="chat-notification">
     <source src="/sounds/notification.mp3">
 </audio>
+
+
+<div aria-live="polite" aria-atomic="true" style="position: relative;">
+    <div class="alert-box" style="position: fixed; top: 50px; right: 70px; z-index: 1050;">
+    </div>
+</div>
 
 <div class="audio-player fixed-player">
     <div>

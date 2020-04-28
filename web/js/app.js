@@ -9,6 +9,10 @@ var interval;
 checkTheme();
 getStatusFromUsers();
 
+setInterval(() => {
+    $('.alert-box .hide').remove();
+}, 120000);
+
 $('body').on('show.bs.modal', '.modal', function (e) {
     interval = setInterval(function(){
         updateChatHistory();
@@ -199,6 +203,20 @@ $('body').on('click', '.playlist-btn', function ev(e) {
                         playlist_id: playlist_id,
                     },
                     success: function (data) {
+                        $('.alert-box').prepend(`
+                            <div class="toast mb-2" data-delay="5000">
+                                <div class="toast-header">
+                                    <strong class="mr-auto">MUS!C NOW</strong>
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    <span class="font-weight-bold">${data.cancion}</span>${' ' + data.message + ' '}<span class="font-weight-bold">${data.playlist}</span>!
+                                </div>
+                            </div>
+                        `);
+                        $('.toast').not('.hide').toast('show');
                     }
                 });
             });
@@ -249,6 +267,20 @@ $('body').on('click', '.add-btn', function ev() {
         method: 'GET',
         url: '/index.php?r=canciones%2Fget-song-data&cancion_id=' + cancion_id,
         success: function (data) {
+            $('.alert-box').prepend(`
+                <div class="toast mb-2" data-delay="5000">
+                    <div class="toast-header">
+                        <strong class="mr-auto">MUS!C NOW</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        <span class="font-weight-bold">${data.titulo}</span>${' ' + data.message}!
+                    </div>
+                </div>
+            `);
+            $('.toast').not('.hide').toast('show');
             songs.push({
                 url_cancion: data.url_cancion,
                 url_portada: data.url_portada,
@@ -317,39 +349,61 @@ $('body').on('click', '.play-album-btn', function ev(e) {
 $('body').on('click', '.add-videoclip-btn', function ev(e) {
     e.preventDefault();
     var link = $('#add-videoclip-form #link').val();
-    $.ajax({
-        method: 'POST',
-        url: '/index.php?r=videoclips%2Fagregar',
-        data: {
-            link: link
-        },
-        success: function (data) {
-            if ($('.videoclip-warning').length) {
-                $('.videoclip-warning').remove();
-                $('#videoclips').append(`
-                    <div class="row row-videoclips">
-                        <div id="video-${data.id}" class="col-12 col-lg-6 mb-4 fall-animation">
-                            <button data-id="${data.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="${data.link}" allowfullscreen></iframe>
+    if (link == '') {
+        $('.invalid-videoclip').show();
+    } else if (!/.*www.youtube.com\/watch\?v=.{11}\b/.test(link)) {
+        $('.invalid-videoclip').show();
+    } else {
+        $.ajax({
+            method: 'POST',
+            url: '/index.php?r=videoclips%2Fagregar',
+            data: {
+                link: link
+            },
+            success: function (data) {
+                if ($('.videoclip-warning').length) {
+                    $('.videoclip-warning').remove();
+                    $('#videoclips').append(`
+                        <div class="row row-videoclips">
+                            <div id="video-${data.videoclip.id}" class="col-12 col-lg-6 mb-4 fall-animation">
+                                <button data-id="${data.videoclip.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="${data.videoclip.link}" allowfullscreen></iframe>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `);
-            } else {
-                $('.row-videoclips').prepend(`
-                    <div id="video-${data.id}" class="col-12 col-lg-6 mb-4 fall-animation">
-                        <button data-id="${data.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="${data.link}" allowfullscreen></iframe>
+                    `);
+                } else {
+                    $('.row-videoclips').prepend(`
+                        <div id="video-${data.videoclip.id}" class="col-12 col-lg-6 mb-4 fall-animation">
+                            <button data-id="${data.videoclip.id}" class="action-btn remove-videoclip-btn outline-transparent mb-4"><i class="fas fa-trash"></i></button>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="${data.videoclip.link}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    `);
+                }
+                $('#add-videoclip-form').trigger("reset");
+                $('#videoclip-modal').modal('hide');
+                $('.alert-box').prepend(`
+                    <div class="toast mb-2" data-delay="5000">
+                        <div class="toast-header">
+                            <strong class="mr-auto">MUS!C NOW</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            <span class="font-weight-bold">¡${data.message}!</span>
                         </div>
                     </div>
                 `);
+                $('.toast').not('.hide').toast('show');
+                $('.invalid-videoclip').hide();
+
             }
-            $('#add-videoclip-form').trigger("reset");
-            $('#videoclip-modal').modal('hide');
-        }
-    });
+        });
+    }
 });
 
 function initAudioPlayer() {
@@ -505,24 +559,22 @@ function getNewNotifications() {
                 success: function (data) {
                     if (data.count > seguidores) {
                         data.seguidores.forEach(element => {
-                            $('.alert-box').append(`
-                                    <a href="/index.php?r=usuarios/perfil&id=${element.id}" class="text-decoration-none">
-                                        <div class="toast mb-2" data-delay="5000">
-                                            <div class="toast-header">
-                                                <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
-                                                <strong class="mr-auto">${element.login}</strong>
-                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="toast-body">
-                                                ¡<span class="font-weight-bold">${element.login}</span> ${message[0]}!
-                                            </div>
-                                        </div>
-                                    </a>
+                            $('.alert-box').prepend(`
+                                <div class="toast mb-2" data-delay="5000">
+                                    <div class="toast-header">
+                                        <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                        <strong class="mr-auto">${element.login}</strong>
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="toast-body">
+                                        ¡<span class="font-weight-bold">${element.login}</span> ${message[0]}!
+                                    </div>
+                                </div>
                             `);
                         });
-                        $('.toast').toast('show');
+                        $('.toast').not('.hide').toast('show');
                     }
                     seguidores = data.count;
                 }
@@ -541,28 +593,29 @@ function getNewNotifications() {
                 $('.messages-number').html('');
             }
             if (data.count > mensajes) {
-                $('.chat-notification').trigger('play');
+                var notification = $('.chat-notification')[0];
+                if (notification.paused) {
+                    notification.play();
+                }
                 data.mensajes.forEach(element => {
                     var time = element.created_at.split(' ')[1];
-                    $('.alert-box').append(`
-                        <a href="/index.php?r=chat/chat" class="text-decoration-none">
-                            <div class="toast mb-2" data-delay="5000">
-                                <div class="toast-header">
-                                    <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
-                                    <strong class="mr-auto">${element.login}</strong>
-                                    <small class="ml-3">${time}</small>
-                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="toast-body">
-                                    ${element.mensaje}
-                                </div>
+                    $('.alert-box').prepend(`
+                        <div class="toast mb-2" data-delay="5000">
+                            <div class="toast-header">
+                                <img src="${element.url_image}" class="rounded mr-2 navbar-logo" alt="profile-img">
+                                <strong class="mr-auto">${element.login}</strong>
+                                <small class="ml-3">${time}</small>
+                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </a>
+                            <div class="toast-body">
+                                ${element.mensaje}
+                            </div>
+                        </div>
                     `);
                 });
-                $('.toast').toast('show');
+                $('.toast').not('.hide').toast('show');
             }
             mensajes = data.count;
         }
