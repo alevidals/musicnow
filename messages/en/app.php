@@ -102,6 +102,7 @@ return [
     'DeleteComments' => 'Delete comments',
     'DeleteAccount' => 'Delete account',
     'NoSongs' => "Looks like there's no song yet.",
+    'NoPlaylists' => "Looks like there's no playlist yet.",
     'NoAlbums' => "Looks like there's no album yet.",
     'Follow' => '',
     'Block' => '',
@@ -158,4 +159,5 @@ return [
     'AddedVideoclip' => 'The videoclip has been saved successfully.',
     'CorrectlyAdded' => 'has been added to the playlist',
     'AddedToQueue' => 'has been added to the queue',
+    'CopiedPlaylist' => 'The playlist has been copied',
 ];

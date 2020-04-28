@@ -102,6 +102,7 @@ return [
     'DeleteComments' => 'Eliminar comentarios',
     'DeleteAccount' => 'Eliminar cuenta',
     'NoSongs' => 'Parece que no hay ninguna canción aún.',
+    'NoPlaylists' => 'Parece que no hay ninguna playlist aún.',
     'NoAlbums' => 'Parece que no hay ningún álbum aún.',
     'Follow' => 'Seguir',
     'Block' => 'Bloquear',
@@ -158,4 +159,5 @@ return [
     'AddedVideoclip' => 'El videoclip se ha guardado con éxito',
     'CorrectlyAdded' => 'se ha agregado a la playlist',
     'AddedToQueue' => 'se ha agregado a la cola',
+    'CopiedPlaylist' => 'La playlist ha sido copiada.',
 ];

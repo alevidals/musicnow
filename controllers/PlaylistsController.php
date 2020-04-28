@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Albumes;
+use app\models\CancionesPlaylist;
 use Yii;
 use app\models\Playlists;
 use app\models\PlaylistsSearch;
@@ -143,5 +144,31 @@ class PlaylistsController extends Controller
         }
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $canciones;
+    }
+
+    public function actionCopiar()
+    {
+        $id = Yii::$app->request->post('id');
+
+        $copiedPlaylist = Playlists::findOne($id);
+        $playlist = new Playlists(['usuario_id' => Yii::$app->user->id]);
+        $playlist->titulo = $copiedPlaylist->titulo;
+
+        if ($playlist->save()) {
+            $copiedCancionesPlaylist = CancionesPlaylist::find()
+                ->where(['playlist_id' => $copiedPlaylist->id])
+                ->all();
+
+            foreach ($copiedCancionesPlaylist as $copy) {
+                $cancionesPlaylist = new CancionesPlaylist(['playlist_id' => $playlist->id]);
+                $cancionesPlaylist->cancion_id = $copy->cancion_id;
+                $cancionesPlaylist->save();
+            }
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return Yii::t('app', 'CopiedPlaylist');
+        }
+
+
     }
 }

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Bloqueados;
+use app\models\CancionesPlaylist;
 use app\models\Chat;
 use app\models\Estados;
 use app\models\LoginForm;
@@ -357,6 +358,9 @@ class UsuariosController extends Controller
             ->where(['IN', 'cancion_id', $canciones_id])
             ->column();
 
+        $playlistsWithSongsIds = CancionesPlaylist::find()->select('playlist_id')->column();
+        $playlists = $model->getPlaylists()->where(['in', 'id', $playlistsWithSongsIds]);
+
         return $this->render('perfil', [
             'model' => $model,
             'canciones' => $canciones,
@@ -366,6 +370,7 @@ class UsuariosController extends Controller
             'likes' => $likes,
             'bloqueo' => $bloqueo,
             'videoclips' => $videoclips,
+            'playlists' => $playlists->all(),
         ]);
     }
 

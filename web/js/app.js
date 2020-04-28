@@ -1142,3 +1142,30 @@ $('body').on('change', '.is-album-check', function ev(e) {
         $('.field-canciones-portada').show();
     }
 });
+
+$('body').on('click', '.copy-playlist-btn', function ev(e) {
+    var id = $(this).attr('id');
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=playlists%2Fcopiar',
+        data: {
+            id: id
+        },
+        success: function(data) {
+            $('.alert-box').prepend(`
+                <div class="toast mb-2" data-delay="5000">
+                    <div class="toast-header">
+                        <strong class="mr-auto">MUS!C NOW</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        <span class="font-weight-bold">${data}</span>!
+                    </div>
+                </div>
+            `);
+            $('.toast').not('.hide').toast('show');
+        }
+    });
+});
