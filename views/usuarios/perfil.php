@@ -147,7 +147,7 @@ $this->registerJS($js);
                     <i class="fas fa-ellipsis-h"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item']) ?>
+                    <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
                     <?= Html::a(
                         Yii::t('app', 'DeleteProfileImage'),
                         ['usuarios/eliminar-imagen', 'id' => $model->id],
@@ -226,8 +226,8 @@ $this->registerJS($js);
                                             <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                             <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart red-hearth"></i></button>
                                             <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-<?= $cancion->id ?>"><i class="far fa-comment"></i></button>
-                                            <button data-song="<?= $cancion->id ?>" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
-                                            <button data-song="<?= $cancion->id ?>" data-user="<?= Yii::$app->user->id ?>" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
+                                            <button data-song="<?= $cancion->id ?>" class="action-btn outline-transparent add-btn"><i class="fas fa-music"></i></button>
+                                            <button data-song="<?= $cancion->id ?>" data-user="<?= Yii::$app->user->id ?>" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-plus"></i></button>
                                         </div>
                                         <div class="layer"></div>
                                     </div>
