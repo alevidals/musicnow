@@ -311,8 +311,22 @@ $this->registerJS($js);
                 <div class="row">
                     <?php if (count($albumes) > 0) : ?>
                         <?php foreach ($albumes as $album) : ?>
-                            <div class="col-lg-3">
-                                <h2><?= Html::encode($album->titulo) ?></h2>
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                <div class="song-container">
+                                    <div class="box-3">
+                                        <?= Html::img($album->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
+                                        <div class="share-buttons">
+                                            <button id="<?= $album->id ?>" class="action-btn play-album-btn outline-transparent"><i class="fas fa-play"></i></button>
+                                            <?= Html::a(
+                                                '<i class="fas fa-eye"></i>',
+                                                ['albumes/view', 'id' => $album->id],
+                                                ['class' => 'action-btn outline-transparent', 'rol' => 'button']
+                                            ) ?>
+                                        </div>
+                                        <div class="layer"></div>
+                                    </div>
+                                </div>
+                                <h5 class="text-center"><?= Html::encode($album->titulo) ?></h5>
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>

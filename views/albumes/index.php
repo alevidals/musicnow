@@ -11,13 +11,20 @@ $this->title = Yii::t('app', 'Albumes');
 $this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
+    [
+        'label' => '',
+        'value' => function ($model, $key, $index, $column) {
+            return Html::img($model->url_portada, ['width' => '47px', 'alt' => 'portada']);
+        },
+        'format' => 'raw',
+    ],
     'titulo',
     'anyo',
-    'created_at:datetime',
     [
         'attribute' => 'total',
         'label' => Yii::t('app', 'Canciones')
     ],
+    'created_at:datetime',
     [
         'class' => 'yii\grid\ActionColumn',
         'header' => Yii::t('app', 'Actions'),
