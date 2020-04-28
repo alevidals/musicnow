@@ -348,8 +348,9 @@ class UsuariosController extends Controller
         $videoclips = $model->getVideoclips()->all();
 
         $canciones_id = $model->getCanciones()->select('id')->column();
-        $canciones = $model->getCanciones()->all();
-        $albumes = $model->getAlbumes()->all();
+        $canciones = $model->getCanciones();
+        $cancionesIds = $canciones->distinct()->select('album_id')->column();
+        $albumes = $model->getAlbumes()->where(['in', 'id', $cancionesIds])->all();
         $seguidores = $model->getSeguidores()->all();
         $seguidos = $model->getSeguidos()->all();
         $likes = Usuarios::findOne(Yii::$app->user->id)
@@ -357,13 +358,12 @@ class UsuariosController extends Controller
             ->select('cancion_id')
             ->where(['IN', 'cancion_id', $canciones_id])
             ->column();
-
         $playlistsWithSongsIds = CancionesPlaylist::find()->select('playlist_id')->column();
         $playlists = $model->getPlaylists()->where(['in', 'id', $playlistsWithSongsIds]);
 
         return $this->render('perfil', [
             'model' => $model,
-            'canciones' => $canciones,
+            'canciones' => $canciones->all(),
             'albumes' => $albumes,
             'seguidores' => $seguidores,
             'seguidos' => $seguidos,
