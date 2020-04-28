@@ -11,6 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Albumes'), 'url' => 
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
+
+
 $counter = 1;
 
 ?>
@@ -30,6 +32,7 @@ $counter = 1;
     <div class="text-center">
         <?= Html::img($model->url_portada, ['width' => '300px']) ?>
         <h2 class="mt-3"><?= Html::encode($model->titulo) ?></h2>
+        <h6><?= Yii::$app->formatter->asDuration($duration) ?></h6>
     </div>
 
     <?php if (count($canciones) > 0) : ?>
@@ -49,6 +52,7 @@ $counter = 1;
                 <?php if ($cancion->explicit) : ?>
                     <span class="ml-3 badge explicit-badge">EXPLICIT</span>
                 <?php endif; ?>
+                <span class="ml-3 float-right"><?= (new DateInterval($cancion->duracion))->format('%i:%S') ?></span>
             </div>
         <?php endforeach ?>
     </div>

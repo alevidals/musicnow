@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Albumes;
 use app\models\AlbumesSearch;
+use DateTime;
 use yii\bootstrap4\Html;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -68,10 +69,13 @@ class AlbumesController extends Controller
     {
 
         $model = $this->findModel($id);
+        $canciones = $model->getCanciones();
+        $duration = $canciones->sum('duracion');
 
         return $this->render('view', [
             'model' => $model,
-            'canciones' => $model->getCanciones()->all(),
+            'canciones' => $canciones->all(),
+            'duration' => $duration
         ]);
     }
 

@@ -28,11 +28,12 @@ use yii\bootstrap4\Html;
 
     <?= $form->field($model, 'explicit')->checkbox() ?>
 
-    <?= $form->field($model, 'cancion')->fileInput() ?>
+    <?= $form->field($model, 'cancion')->fileInput(['class' => 'song-file-input']) ?>
 
     <?= $form->field($model, 'anyo')->textInput() ?>
 
-    <?= $form->field($model, 'duracion')->textInput() ?>
+    <?= $form->field($model, 'duracion')->textInput(['disabled' => true, 'name' => '']) ?>
+    <?= Html::activeHiddenInput($model, 'duracion', ['id' => 'duration-hidden']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success send-btn']) ?>

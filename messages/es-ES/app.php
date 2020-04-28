@@ -160,4 +160,6 @@ return [
     'CorrectlyAdded' => 'se ha agregado a la playlist',
     'AddedToQueue' => 'se ha agregado a la cola',
     'CopiedPlaylist' => 'La playlist ha sido copiada.',
+    'Minutes' => 'Minutos',
+    'Seconds' => 'Segundos',
 ];

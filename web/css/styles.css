@@ -395,6 +395,11 @@ table i:hover, .delete-song-playlist-btn:hover {
     right: -1%;
 }
 
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #e9ecef !important;
+}
+
 .action-btn {
     transition: all .3s ease;
 }

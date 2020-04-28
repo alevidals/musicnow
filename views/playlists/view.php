@@ -29,7 +29,8 @@ $counter = 1;
         ]) ?>
     </p>
 
-    <h2 class="text-center"><?= Html::encode($model->titulo) ?></h2>
+    <h2><?= Html::encode($model->titulo) ?></h2>
+    <h6><?= Yii::$app->formatter->asDuration($duration) ?></h6>
 
     <?php if (count($canciones) > 0) : ?>
         <button id="<?= $model->id ?>" class="outline-transparent action-btn play-playlist-btn">
@@ -49,6 +50,7 @@ $counter = 1;
                     <span class="ml-3 badge explicit-badge">EXPLICIT</span>
                 <?php endif; ?>
                 <div class="float-right">
+                    <span class="ml-3"><?= (new DateInterval($cancion->duracion))->format('%i:%S') ?></span>
                     <button class="outline-transparent delete-song-playlist-btn" data-song-id="<?= $cancion->id ?>">
                         <i class="fas fa-trash text-danger"></i>
                     </button>

@@ -1169,3 +1169,27 @@ $('body').on('click', '.copy-playlist-btn', function ev(e) {
         }
     });
 });
+
+$('body').on('change', '.song-file-input', function ev(e) {
+    var target = e.currentTarget;
+    var file = target.files[0];
+    var reader = new FileReader();
+    if (target.files && file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            audio.src = e.target.result;
+            audio.addEventListener('loadedmetadata', function(){
+                var duration = audio.duration;
+                $('#canciones-duracion').val(parseInt(duration));
+                var minutes =  Math.floor(duration / 60);
+                var seconds = Math.trunc(duration % 60);
+                $('#duration-hidden').val(`PT${minutes}M${seconds}S`);
+                $('#canciones-duracion').val(`${minutes} m ${seconds} s`);
+            },false);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+});

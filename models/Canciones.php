@@ -81,7 +81,7 @@ class Canciones extends \yii\db\ActiveRecord
             'genero_id' => Yii::t('app', 'Genero ID'),
             'url_cancion' => Yii::t('app', 'Url Cancion'),
             'song_name' => Yii::t('app', 'Song Name'),
-            'explicit' => Yii::t('app', 'Explicit'), 
+            'explicit' => Yii::t('app', 'Explicit'),
             'image_name' => Yii::t('app', 'Image Name'),
             'url_portada' => Yii::t('app', 'Url Portada'),
             'anyo' => Yii::t('app', 'Anyo'),

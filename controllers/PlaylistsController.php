@@ -57,10 +57,13 @@ class PlaylistsController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $canciones = $model->getCanciones();
+        $duration = $canciones->sum('duracion');
 
         return $this->render('view', [
             'model' => $model,
-            'canciones' => $model->getCanciones()->all(),
+            'canciones' => $canciones->all(),
+            'duration' => $duration,
         ]);
     }
 
