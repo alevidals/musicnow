@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Chat;
 use app\models\Seguidores;
 use app\models\SeguidoresSearch;
+use app\models\SolicitudesSeguimiento;
 use app\models\Usuarios;
 use Yii;
 use yii\filters\AccessControl;
@@ -159,6 +160,7 @@ class SeguidoresController extends Controller
     public function actionFollow($seguido_id)
     {
         $res = [];
+        $usuarioSeguido = Usuarios::findOne($seguido_id);
 
         $seguir = Seguidores::find()
             ->andWhere([
@@ -166,18 +168,38 @@ class SeguidoresController extends Controller
                 'seguido_id' => $seguido_id,
             ]);
 
-        if (!$seguir->exists()) {
-            $seguir = new Seguidores();
-            $seguir->seguidor_id = Yii::$app->user->id;
-            $seguir->seguido_id = $seguido_id;
-            $seguir->save();
-            $res['textButton'] = Yii::t('app', 'Unfollow');
-        } else {
+        if ($seguir->exists()) {
             $this->findModel(Yii::$app->user->id, $seguido_id)->delete();
             $res['textButton'] = Yii::t('app', 'Follow');
+        } else {
+            if ($usuarioSeguido->privated_account) {
+                $solicitud = SolicitudesSeguimiento::find()
+                    ->andWhere([
+                        'seguidor_id' => Yii::$app->user->id,
+                        'seguido_id' => $seguido_id,
+                    ]);
+                if ($solicitud->exists()) {
+                    SolicitudesSeguimiento::findOne([
+                        'seguidor_id' => Yii::$app->user->id,
+                        'seguido_id' => $seguido_id,
+                    ])->delete();
+                    $res['textButton'] = Yii::t('app', 'Follow');
+                } else {
+                    $solicitud = new SolicitudesSeguimiento();
+                    $solicitud->seguidor_id = Yii::$app->user->id;
+                    $solicitud->seguido_id = $seguido_id;
+                    $solicitud->save();
+                    $res['textButton'] = Yii::t('app', 'Requested');
+                }
+            } else {
+                $seguir = new Seguidores();
+                $seguir->seguidor_id = Yii::$app->user->id;
+                $seguir->seguido_id = $seguido_id;
+                $seguir->save();
+                $res['textButton'] = Yii::t('app', 'Unfollow');
+            }
         }
 
-        $usuarioSeguido = Usuarios::findOne($seguido_id);
         $res['seguidores'] = $usuarioSeguido->getSeguidores()->count();
 
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -190,19 +212,28 @@ class SeguidoresController extends Controller
         $res = [];
 
         $res['textButton'] = Yii::t('app', 'Follow');
+        $user = Usuarios::findOne($seguido_id);
 
         $seguir = Seguidores::find()
             ->andWhere([
                 'seguidor_id' => Yii::$app->user->id,
                 'seguido_id' => $seguido_id,
-            ])
-            ->one();
+            ]);
 
-        if ($seguir !== null) {
+        if ($seguir->exists()) {
             $res['textButton'] = Yii::t('app', 'Unfollow');
+        } else {
+            if ($user->privated_account) {
+                $solicitud = SolicitudesSeguimiento::find()
+                    ->andWhere([
+                        'seguidor_id' => Yii::$app->user->id,
+                        'seguido_id' => $seguido_id,
+                    ]);
+                if ($solicitud->exists()) {
+                    $res['textButton'] = Yii::t('app', 'Requested');
+                }
+            }
         }
-
-        $user = Usuarios::findOne($seguido_id);
 
         $res['seguidores'] = $user->getSeguidores()->count();
         $res['seguidos'] = $user->getSeguidos()->count();
@@ -219,6 +250,28 @@ class SeguidoresController extends Controller
             Chat::updateAll(['estado_id' => 4], ['emisor_id' => $seguidor_id, 'receptor_id' => $userId, 'estado_id' => 3]);
             Chat::updateAll(['estado_id' => 4], ['emisor_id' => $userId, 'receptor_id' => $seguidor_id, 'estado_id' => 3]);
         }
+    }
 
+    public function actionSolicitud()
+    {
+        $seguidor_id = Yii::$app->request->post('seguidor_id');
+        $type = Yii::$app->request->post('type');
+
+        if ($type == 'accept') {
+            SolicitudesSeguimiento::findOne([
+                'seguidor_id' => $seguidor_id,
+                'seguido_id' => Yii::$app->user->id,
+            ])->delete();
+
+            $seguir = new Seguidores();
+            $seguir->seguidor_id = $seguidor_id;
+            $seguir->seguido_id = Yii::$app->user->id;
+            $seguir->save();
+        } elseif ($type == 'delete') {
+            SolicitudesSeguimiento::findOne([
+                'seguidor_id' => $seguidor_id,
+                'seguido_id' => Yii::$app->user->id,
+            ])->delete();
+        }
     }
 }

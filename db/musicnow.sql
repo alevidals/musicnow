@@ -22,23 +22,24 @@ DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios
 (
-    id             BIGSERIAL     PRIMARY KEY
-  , login          VARCHAR(50)   NOT NULL UNIQUE
-  , nombre         VARCHAR(255)  NOT NULL
-  , apellidos      VARCHAR(255)  NOT NULL
-  , email          VARCHAR(255)  NOT NULL UNIQUE
-  , password       VARCHAR(255)  NOT NULL
-  , fnac           DATE
-  , rol_id         BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
-  , estado_id      BIGINT        NOT NULL REFERENCES estados (id) DEFAULT 1
-  , auth_key       VARCHAR(255)
-  , confirm_token  VARCHAR(255)
-  , url_image      VARCHAR(2048)
-  , image_name     VARCHAR(255)
-  , url_banner     VARCHAR(2048)
-  , banner_name    VARCHAR(255)
-  , created_at     TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
-  , deleted_at     TIMESTAMP(0)
+    id               BIGSERIAL     PRIMARY KEY
+  , login            VARCHAR(50)   NOT NULL UNIQUE
+  , nombre           VARCHAR(255)  NOT NULL
+  , apellidos        VARCHAR(255)  NOT NULL
+  , email            VARCHAR(255)  NOT NULL UNIQUE
+  , password         VARCHAR(255)  NOT NULL
+  , fnac             DATE
+  , rol_id           BIGINT        NOT NULL REFERENCES roles   (id) DEFAULT 2
+  , estado_id        BIGINT        NOT NULL REFERENCES estados (id) DEFAULT 1
+  , auth_key         VARCHAR(255)
+  , confirm_token    VARCHAR(255)
+  , url_image        VARCHAR(2048)
+  , image_name       VARCHAR(255)
+  , url_banner       VARCHAR(2048)
+  , banner_name      VARCHAR(255)
+  , created_at       TIMESTAMP(0)  NOT NULL DEFAULT CURRENT_TIMESTAMP
+  , deleted_at       TIMESTAMP(0)
+  , privated_account BOOLEAN       NOT NULL DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS generos CASCADE;
@@ -167,6 +168,15 @@ CREATE TABLE videoclips
     id         BIGSERIAL    PRIMARY KEY
   , usuario_id BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
   , link       VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS solicitudes_seguimiento;
+
+CREATE TABLE solicitudes_seguimiento
+(
+    seguidor_id BIGINT NOT NULL REFERENCES usuarios (id)
+  , seguido_id  BIGINT NOT NULL REFERENCES usuarios (id)
+  , PRIMARY KEY (seguidor_id, seguido_id)
 );
 
 INSERT INTO roles (rol)

@@ -27,6 +27,7 @@ use yii\web\UploadedFile;
  * @property string $created_at
  * @property string|null $deleted_at
  * @property int $estado_id
+ * @property bool $privated_account
  *
  * @property Albumes[] $albumes
  * @property Usuarios[] $bloqueados
@@ -38,6 +39,7 @@ use yii\web\UploadedFile;
  * @property Estados $estado_id
  * @property Roles $rol
  * @property Likes[] $likes
+ * @property SolicitudesSeguimiento[] $solicitudesSeguimientos
  * @property Canciones[] $cancionesFavoritas
  * @property Chat[] $sendchats
  * @property Chat[] $receivedchats
@@ -75,6 +77,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['rol_id', 'estado_id'], 'integer'],
             [['image'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 150, 'maxWidth' => 500, 'minHeight' => 150, 'maxHeight' => 500],
             [['banner'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 1110, 'maxWidth' => 1110, 'minHeight' => 201, 'maxHeight' => 201],
+            [['privated_account'], 'boolean'],
             [['login'], 'string', 'max' => 50],
             [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name', 'banner_name'], 'string', 'max' => 255],
             [['url_image', 'url_banner'], 'string', 'max' => 2048],
@@ -112,6 +115,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'deleted_at' => Yii::t('app', 'Deleted At'),
             'url_banner' => Yii::t('app', 'Url Banner'),
             'banner_name' => Yii::t('app', 'Banner Name'),
+            'privated_account' => Yii::t('app', 'Privated Account'),
         ];
     }
 
@@ -333,6 +337,16 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getVideoclips()
     {
         return $this->hasMany(Videoclips::className(), ['usuario_id' => 'id']);
+    }
+
+    /**
+    * Gets query for [[SolicitudesSeguimientos]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getSolicitudesSeguimientos()
+    {
+        return $this->hasMany(SolicitudesSeguimiento::className(), ['seguido_id' => 'id']);
     }
 
     public static function findMutualFollow()

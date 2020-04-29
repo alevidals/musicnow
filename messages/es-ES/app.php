@@ -162,4 +162,10 @@ return [
     'CopiedPlaylist' => 'La playlist ha sido copiada.',
     'Minutes' => 'Minutos',
     'Seconds' => 'Segundos',
+    'WantToFollow' => 'quiere seguirte',
+    'NoNotification' => 'No tienes ninguna notificación.',
+    'NewNotification' => 'Tienes una nueva solicitud de seguimiento',
+    'Requested' => 'Solicitado',
+    'PrivatedAccount' => 'Esta cuenta es privada',
+    'FollowToSee' => 'Sigue esta cuenta para escuchar sus canciones',
 ];

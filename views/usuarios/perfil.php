@@ -138,108 +138,121 @@ $this->registerJS($js);
         </div>
     </div>
 
+    <?php if (Yii::$app->user->id == $model->id || !$model->privated_account || in_array(Yii::$app->user->id, $model->getSeguidores()->select('id')->column())) : ?>
 
-    <div class="mt-3 d-flex">
-        <h1 class="d-inline-block"><?= Html::encode($model->login) ?></h1>
-        <div class="dropdown d-inline-block ml-auto my-auto">
-            <?php if ($model->id == Yii::$app->user->id) : ?>
-                <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-h"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
-                    <?= Html::a(
-                        Yii::t('app', 'DeleteProfileImage'),
-                        ['usuarios/eliminar-imagen', 'id' => $model->id],
-                        [
-                                    'class' => 'dropdown-item',
-                                    'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                                ]
-                    ) ?>
-                    <?= Html::a(
-                        Yii::t('app', 'DeleteProfileBanner'),
-                        ['usuarios/eliminar-banner', 'id' => $model->id],
-                        [
-                                    'class' => 'dropdown-item',
-                                    'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                                ]
-                    ) ?>
-                    <?= Html::a(
-                        Yii::t('app', 'DeleteComments'),
-                        ['comentarios/index', 'user_id' => $model->id],
-                        [
-                            'class' => 'dropdown-item',
-                        ]
-                    ) ?>
-                    <?= Html::a(
-                        Yii::t('app', 'DeleteAccount'),
-                        ['usuarios/eliminar-cuenta', 'id' => $model->id],
-                        [
-                            'class' => 'dropdown-item',
-                            'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                        ]
-                    ) ?>
-                </div>
-            <?php endif; ?>
+        <div class="mt-3 d-flex">
+            <h1 class="d-inline-block"><?= Html::encode($model->login) ?></h1>
+            <div class="dropdown d-inline-block ml-auto my-auto">
+                <?php if ($model->id == Yii::$app->user->id) : ?>
+                    <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
+                        <?= Html::a(
+                            Yii::t('app', 'DeleteProfileImage'),
+                            ['usuarios/eliminar-imagen', 'id' => $model->id],
+                            [
+                                        'class' => 'dropdown-item',
+                                        'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
+                                    ]
+                        ) ?>
+                        <?= Html::a(
+                            Yii::t('app', 'DeleteProfileBanner'),
+                            ['usuarios/eliminar-banner', 'id' => $model->id],
+                            [
+                                        'class' => 'dropdown-item',
+                                        'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
+                                    ]
+                        ) ?>
+                        <?= Html::a(
+                            Yii::t('app', 'DeleteComments'),
+                            ['comentarios/index', 'user_id' => $model->id],
+                            [
+                                'class' => 'dropdown-item',
+                            ]
+                        ) ?>
+                        <?= Html::a(
+                            Yii::t('app', 'DeleteAccount'),
+                            ['usuarios/eliminar-cuenta', 'id' => $model->id],
+                            [
+                                'class' => 'dropdown-item',
+                                'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
+                            ]
+                        ) ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
-    </div>
 
-    <?php if ($bloqueo == UsuariosController::OTHER_BLOCK) : ?>
-        <?= Html::a(
-            Yii::t('app', 'Block'),
-            ['bloqueados/bloquear', 'bloqueado_id' => $model->id],
-            [
-                'role' => 'button',
-                'class' => 'btn main-yellow my-4',
-                'data' => [
-                    'confirm' => Yii::t('app', 'SureLock'), 'method' => 'post',
-                ],
-            ]
-        ) ?>
-        <h3><?= Yii::t('app', 'OtherBlock') ?></>
-    <?php elseif ($bloqueo == UsuariosController::YOU_BLOCK) : ?>
-        <h3><?= Yii::t('app', 'YouBlock') ?></h3>
-        <?= Html::a(Yii::t('app', 'Desbloquear'), ['bloqueados/bloquear', 'bloqueado_id' => $model->id], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
+        <?php if ($bloqueo == UsuariosController::OTHER_BLOCK) : ?>
+            <?= Html::a(
+                Yii::t('app', 'Block'),
+                ['bloqueados/bloquear', 'bloqueado_id' => $model->id],
+                [
+                    'role' => 'button',
+                    'class' => 'btn main-yellow my-4',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'SureLock'), 'method' => 'post',
+                    ],
+                ]
+            ) ?>
+            <h3><?= Yii::t('app', 'OtherBlock') ?></>
+        <?php elseif ($bloqueo == UsuariosController::YOU_BLOCK) : ?>
+            <h3><?= Yii::t('app', 'YouBlock') ?></h3>
+            <?= Html::a(Yii::t('app', 'Desbloquear'), ['bloqueados/bloquear', 'bloqueado_id' => $model->id], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
+        <?php else : ?>
+            <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
+                <li class="nav-item ml-auto">
+                    <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true"><?= Yii::t('app', 'Canciones') ?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" id="albumes-tab" data-toggle="tab" href="#albumes" role="tab" aria-controls="albumes" aria-selected="false"><?= Yii::t('app', 'Albumes') ?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" id="playlists-tab" data-toggle="tab" href="#playlists" role="tab" aria-controls="playlists1" aria-selected="false">Playlists</a>
+                </li>
+                <li class="nav-item mr-auto">
+                    <a class="nav-link text-uppercase" id="videoclips-tab" data-toggle="tab" href="#videoclips" role="tab" aria-controls="videoclips" aria-selected="false">Videoclips</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+
+                <?= $this->render('_perfil-canciones', [
+                    'canciones' => $canciones,
+                    'likes' => $likes,
+                ]) ?>
+
+                <?= $this->render('_perfil-albumes', [
+                    'albumes' => $albumes,
+                ]) ?>
+
+                <?= $this->render('_perfil-playlists', [
+                    'playlists' => $playlists,
+                    'model' => $model,
+                ]) ?>
+
+                <?= $this->render('_perfil-videoclips', [
+                    'videoclips' => $videoclips,
+                    'model' => $model,
+                ]) ?>
+
+            </div>
+        <?php endif; ?>
+
     <?php else : ?>
-        <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
-            <li class="nav-item ml-auto">
-                <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true"><?= Yii::t('app', 'Canciones') ?></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-uppercase" id="albumes-tab" data-toggle="tab" href="#albumes" role="tab" aria-controls="albumes" aria-selected="false"><?= Yii::t('app', 'Albumes') ?></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-uppercase" id="playlists-tab" data-toggle="tab" href="#playlists" role="tab" aria-controls="playlists1" aria-selected="false">Playlists</a>
-            </li>
-            <li class="nav-item mr-auto">
-                <a class="nav-link text-uppercase" id="videoclips-tab" data-toggle="tab" href="#videoclips" role="tab" aria-controls="videoclips" aria-selected="false">Videoclips</a>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="myTabContent">
-
-            <?= $this->render('_perfil-canciones', [
-                'canciones' => $canciones,
-                'likes' => $likes,
-            ]) ?>
-
-            <?= $this->render('_perfil-albumes', [
-                'albumes' => $albumes,
-            ]) ?>
-
-            <?= $this->render('_perfil-playlists', [
-                'playlists' => $playlists,
-                'model' => $model,
-            ]) ?>
-
-            <?= $this->render('_perfil-videoclips', [
-                'videoclips' => $videoclips,
-                'model' => $model,
-            ]) ?>
-
+        <div class="mt-3 d-flex">
+            <h2 class="my-auto">
+                <i class="fas fa-lock"></i>
+            </h2>
+            <div class="ml-3">
+                <p class="font-weight-bold m-0"><?= Yii::t('app', 'PrivatedAccount') ?></p>
+                <p class="m-0"><?= Yii::t('app', 'FollowToSee') ?></p>
+            </div>
         </div>
-    <?php endif; ?>
 
+    <?php endif; ?>
 
 
 </div>
