@@ -910,6 +910,15 @@
 | **Entrega**     | v3             |
 | **Incidencia**  | [134](https://github.com/alevidals/musicnow/issues/134) |
 
+| **R102**     | **Cuenta privada.**         |
+| --------------: | :------------------- |
+| **Descripción** | Posibilidad de que el usuario tenga la cuenta privada y solo puedan visitarla aquellos a los que le de permiso.             |
+| **Prioridad**   | Opcional           |
+| **Tipo**        | Funcional                |
+| **Complejidad** | Media         |
+| **Entrega**     | v3             |
+| **Incidencia**  | [141](https://github.com/alevidals/musicnow/issues/141) |
+
 
 ## Cuadro resumen
 
@@ -1016,3 +1025,4 @@
 | (**R99**) Notificar al usuario. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [99](https://github.com/alevidals/musicnow/issues/99) |
 | (**R100**) Agregar el link de un videoclip a la canción. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [100](https://github.com/alevidals/musicnow/issues/100) |
 | (**R101**) Escuchar la canción  través de la página. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [134](https://github.com/alevidals/musicnow/issues/134) |
+| (**R102**) Cuenta privada. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [141](https://github.com/alevidals/musicnow/issues/141) |
