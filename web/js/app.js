@@ -1,4 +1,5 @@
 var mensajes = 0;
+var solicitudes = 0;
 var seguidores;
 var songs = [];
 var actualSong = 0;
@@ -10,7 +11,6 @@ const PERFIL = 'perfil';
 const BANNER = 'banner';
 
 checkTheme();
-getStatusFromUsers();
 
 setInterval(() => {
     $('.alert-box .hide').remove();
@@ -649,12 +649,53 @@ function getNewNotifications() {
             mensajes = data.count;
         }
     });
+
+    // NUEVAS SOLICITUDES
+    getNewRequests();
+}
+
+function getNewRequests() {
+    $.ajax({
+        method: 'GET',
+        url: '/index.php?r=solicitudes-seguimiento%2Fget-total-solicitudes',
+        success: function (data) {
+            if (data.total != 0) {
+                $('.notifications-number').html(data.total);
+            };
+            if (data.total > solicitudes) {
+                $('.alert-box').prepend(`
+                    <div class="toast mb-2" data-delay="5000">
+                        <div class="toast-header">
+                            <strong class="mr-auto">MUS!C NOW</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            <span>${data.message}!</span>
+                        </div>
+                    </div>
+                `);
+                $('.toast').not('.hide').toast('show');
+            }
+            else if (data.total == 0) {
+                $('.notifications-number').html('');
+            }
+            solicitudes = data.total;
+        }
+    });
 }
 
 $(window).on('pjax:start', function (){
     setTimeout(function () {
         getFollowersData()
         checkTheme();
+        if (solicitudes > 0) {
+            $('.notifications-number').html(solicitudes);
+        }
+        if ($('#chat-page').length) {
+            getStatusFromUsers();
+        }
         $(".owl-carousel-index").owlCarousel({
             loop: true,
             autoplay:true,
@@ -1191,5 +1232,29 @@ $('body').on('change', '.song-file-input', function ev(e) {
 
         reader.readAsDataURL(file);
     }
+});
 
+$('body').on('click', '.request-btn', function ev(e) {
+    var seguidor_id = $(this).data('id');
+    var type = '';
+    if ($(this).hasClass('accept')) {
+        type = 'accept';
+    } else if ($(this).hasClass('delete')) {
+        type = 'delete';
+    }
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=seguidores%2Fsolicitud',
+        data: {
+            seguidor_id: seguidor_id,
+            type: type,
+        },
+        success: function (data) {
+            $('#notificacion-' + seguidor_id).addClass('fall');
+            getNewRequests();
+            $('#notificacion-' + seguidor_id).on('transitionend', function ev(e) {
+                $('#notificacion-' + seguidor_id).remove();
+            });
+        }
+    });
 });

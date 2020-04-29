@@ -162,4 +162,10 @@ return [
     'CopiedPlaylist' => 'The playlist has been copied',
     'Minutes' => '',
     'Seconds' => '',
+    'WantToFollow' => 'wants to follow you',
+    'NoNotification' => "You don't have any notification.",
+    'NewNotification' => 'You have a new follow-up request',
+    'Requested' => '',
+    'PrivatedAccount' => 'This account is private',
+    'FollowToSee' => 'Follow this account to heard their songs',
 ];

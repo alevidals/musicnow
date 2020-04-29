@@ -310,11 +310,11 @@ table i:hover, .delete-song-playlist-btn:hover {
 }
 
 .action-btn {
-    width: 50px;
-    height: 50px;
+    /* width: 50px;
+    height: 50px; */
     background: transparent;
     text-align: center;
-    padding-top: 8px;
+    /* padding-top: 8px; */
     box-sizing: border-box;
 }
 
@@ -405,7 +405,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 }
 
 .action-btn:hover {
-    transform: scale(1.5);
+    transform: scale(1.2)
 }
 
 .action-btn:active {
@@ -673,6 +673,10 @@ textarea:focus {
 
 .red-hearth {
     color: #f00 !important;
+}
+
+.green-check {
+    color: #0f0 !important;
 }
 
 [data-theme="dark"] option {

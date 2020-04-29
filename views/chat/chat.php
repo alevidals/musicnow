@@ -9,7 +9,7 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('app', 'Chats');
 ?>
-<div class="chat-chat">
+<div class="chat-chat" id="chat-page">
 
     <div class="row justify-content-center mt-3">
         <div class="form-group mb-5 col-12 col-md-4">

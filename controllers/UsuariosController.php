@@ -580,4 +580,26 @@ class UsuariosController extends Controller
 
         return $playlists;
     }
+
+    public function actionNotificaciones()
+    {
+        $model = Usuarios::findOne(Yii::$app->user->id);
+        $solicitudes = $model->getSolicitudesSeguimientos()->all();
+
+        $notificaciones = [];
+
+        foreach ($solicitudes as $solicitud) {
+            $usuarioSolicitud = Usuarios::findOne($solicitud->seguidor_id);
+            array_push($notificaciones, [
+                'url_image' => $usuarioSolicitud->url_image,
+                'login' => $usuarioSolicitud->login,
+                'id' => $usuarioSolicitud->id,
+            ]);
+        }
+
+        return $this->render('notificaciones', [
+            'model' => $model,
+            'notificaciones' => $notificaciones
+        ]);
+    }
 }

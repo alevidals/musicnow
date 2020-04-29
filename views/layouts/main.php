@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
+use app\models\Usuarios;
 use app\widgets\Alert;
 use kartik\dialog\Dialog;
 use yii\bootstrap4\Breadcrumbs;
@@ -14,21 +15,13 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 AppAsset::register($this);
-// $this->registerJS(Utility::GET_COOKIE);
-
-$urlCookie = Url::to(['site/cookie']);
-$urlGetNoReadMessages = Url::to(['usuarios/get-no-read-messages']);
-$urlGetNewFollowers = Url::to(['usuarios/get-new-followers']);
-$urlGetFollowersNumber = Url::to(['usuarios/get-followers-data']);
-
-$followMessage = Yii::t('app', 'followMessage');
-$cookieMessage = Yii::t('app', 'CookieMessage');
 
 $isLogued = !Yii::$app->user->isGuest;
 
 $js = <<<EOT
     if ('$isLogued') {
         getFollowersNumber();
+        getNewNotifications();
         setInterval(function () {
             getNewNotifications();
             getStatusFromUsers();
@@ -147,6 +140,7 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
+                    ['label' => 'Notificaciones<span class="badge badge-warning ml-1 notifications-number">', 'url' => ['/usuarios/notificaciones'], 'options' => ['class' => 'my-auto']],
                     [
                         'label' => '<i class="fas fa-sun"></i>
                                     <div class="custom-control custom-switch d-inline-block">
