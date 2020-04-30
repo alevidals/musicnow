@@ -169,4 +169,5 @@ return [
     'PrivatedAccount' => 'Esta cuenta es privada',
     'FollowToSee' => 'Sigue esta cuenta para escuchar sus canciones',
     'EnableDisablePrivateAccount' => 'Activar/desactivar cuenta privada',
+    'enter-email' => 'Introduzca su email por favor',
 ];
