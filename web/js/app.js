@@ -1258,3 +1258,16 @@ $('body').on('click', '.request-btn', function ev(e) {
         }
     });
 });
+
+$('body').on('click', '.btn-toggle-sidebar', function ev(e) {
+    $('#sidebar a.nav-link span').toggle();
+    if ($('#sidebar a.nav-link span').is(':hidden')) {
+        $('.btn-toggle-sidebar i').removeClass('fa-times');
+        $('.btn-toggle-sidebar i').addClass('fa-bars');
+        $('#sidebar a').css('width', 'fit-content');
+    } else {
+        $('.btn-toggle-sidebar i').removeClass('fa-bars');
+        $('.btn-toggle-sidebar i').addClass('fa-times');
+        $('#sidebar a').css('width', '100%');
+    }
+});

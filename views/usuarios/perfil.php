@@ -148,46 +148,7 @@ $this->registerJS($js);
                         <i class="fas fa-ellipsis-h"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <?= Html::a(Yii::t('app', 'ProfileEdit'), ['usuarios/update', 'id' => $model->id], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
-                        <?= Html::a(
-                            Yii::t('app', 'DeleteProfileImage'),
-                            ['usuarios/eliminar-imagen', 'id' => $model->id],
-                            [
-                                        'class' => 'dropdown-item',
-                                        'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                                    ]
-                        ) ?>
-                        <?= Html::a(
-                            Yii::t('app', 'DeleteProfileBanner'),
-                            ['usuarios/eliminar-banner', 'id' => $model->id],
-                            [
-                                        'class' => 'dropdown-item',
-                                        'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                                    ]
-                        ) ?>
-                        <?= Html::a(
-                            Yii::t('app', 'DeleteComments'),
-                            ['comentarios/index', 'user_id' => $model->id],
-                            [
-                                'class' => 'dropdown-item',
-                            ]
-                        ) ?>
-                        <?= Html::a(
-                            Yii::t('app', 'DeleteAccount'),
-                            ['usuarios/eliminar-cuenta', 'id' => $model->id],
-                            [
-                                'class' => 'dropdown-item',
-                                'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                            ]
-                        ) ?>
-                        <?= Html::a(
-                            Yii::t('app', 'EnableDisablePrivateAccount'),
-                            ['usuarios/act-desc-cuenta-privada', 'id' => $model->id],
-                            [
-                                'class' => 'dropdown-item',
-                                'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
-                            ]
-                        ) ?>
+                        <?= Html::a(Yii::t('app', 'ConfigureProfile'), ['usuarios/configurar', 'id' => $model->id], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
                     </div>
                 <?php endif; ?>
             </div>

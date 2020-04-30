@@ -8,6 +8,8 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Chats');
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="chat-chat" id="chat-page">
 

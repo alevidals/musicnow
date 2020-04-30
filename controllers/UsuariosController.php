@@ -379,7 +379,7 @@ class UsuariosController extends Controller
         $model = $this->findModel($id);
         $model->url_image = Yii::$app->params['defaultImgProfile'];
         if ($model->save()) {
-            return $this->goBack();
+            return $this->redirect(['usuarios/configurar', 'id' => $model->id]);
         }
     }
 
@@ -389,7 +389,7 @@ class UsuariosController extends Controller
         $model->url_banner = null;
         $model->banner_name = null;
         if ($model->save()) {
-            return $this->goBack();
+            return $this->redirect(['usuarios/configurar', 'id' => $model->id]);
         }
     }
 
@@ -616,5 +616,20 @@ class UsuariosController extends Controller
         $model->save();
 
         return $this->goHome();
+    }
+
+    public function actionConfigurar($id)
+    {
+        $model = Usuarios::findOne($id);
+
+        $model->scenario = Usuarios::SCENARIO_UPDATE;
+
+        $model->password = '';
+        $model->password_repeat = '';
+
+
+        return $this->render('configurar', [
+            'model' => $model
+        ]);
     }
 }

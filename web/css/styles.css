@@ -152,6 +152,10 @@ table i:hover, .delete-song-playlist-btn:hover {
     color: #000 !important;
 }
 
+.nav-pills .nav-link.active {
+    background-color: #ffba00;
+}
+
 .nav-pills .nav-item:hover {
     background-color: #ffbb0091;
     border-radius: 0.25rem;
@@ -449,6 +453,11 @@ textarea:focus {
 
 .site-admin-index i {
     font-size: 100px;
+}
+
+#sidebar a {
+    width: 100%;
+    white-space: nowrap;
 }
 
 .logo {

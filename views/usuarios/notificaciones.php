@@ -6,6 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
+$this->title = Yii::t('app', 'Notifications');
+$this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
     <h1 class="mt-3"><?= Yii::t('app', 'Notifications') ?></h1>

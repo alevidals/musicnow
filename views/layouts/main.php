@@ -136,25 +136,15 @@ $this->registerJS($js);
         } else {
             $items = [
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
-                    ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'options' => ['class' => 'my-auto']],
-                    ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'options' => ['class' => 'my-auto']],
-                    ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Notificaciones<span class="badge badge-warning ml-1 notifications-number">', 'url' => ['/usuarios/notificaciones'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'options' => ['class' => 'my-auto']],
                     [
-                        'label' => '<i class="fas fa-sun"></i>
-                                    <div class="custom-control custom-switch d-inline-block">
-                                        <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                                        <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
-                                    </div>',
-                        'options' => ['class' => 'my-auto'],
-                    ],
-                    [
-                        'label' => Yii::t('app', 'Language'),
+                        'label' => Yii::t('app', 'Manage'),
                         'options' => ['class' => 'my-auto'],
                         'items' => [
-                            ['label' => 'Español', 'url' => ['/site/idioma', 'lang' => 'es-ES']],
-                            ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
+                            ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
+                            ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
@@ -169,6 +159,7 @@ $this->registerJS($js);
                             'label' => Html::img(Yii::$app->user->identity->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo']),
                             'items' => [
                                 ['label' => Yii::t('app', 'My account'), 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
+                                ['label' => Yii::t('app', 'ConfigureProfile'), 'url' => ['usuarios/configurar', 'id' => Yii::$app->user->id]],
                                 [
                                     'label' => Yii::t('app', 'Logout'),
                                     'url' => [
@@ -263,7 +254,11 @@ $this->registerJS($js);
 <footer class="footer">
     <div class="container">
         <p class="float-left">&copy; My Company <?= date('Y') ?></p>
-
+        <i class="fas fa-sun"></i>
+        <div class="custom-control custom-switch d-inline-block">
+            <input type="checkbox" class="custom-control-input " id="darkSwitch">
+            <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+        </div>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
