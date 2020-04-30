@@ -348,8 +348,11 @@ class UsuariosController extends Controller
         $videoclips = $model->getVideoclips()->all();
 
         $canciones_id = $model->getCanciones()->select('id')->column();
-        $canciones = $model->getCanciones();
-        $cancionesIds = $canciones->distinct()->select('album_id')->column();
+        $canciones = $model->getCanciones()->all();
+        $cancionesIds = $model->getCanciones()
+            ->distinct()
+            ->select('album_id')
+            ->column();
         $albumes = $model->getAlbumes()->where(['in', 'id', $cancionesIds])->all();
         $seguidores = $model->getSeguidores()->all();
         $seguidos = $model->getSeguidos()->all();
@@ -363,7 +366,7 @@ class UsuariosController extends Controller
 
         return $this->render('perfil', [
             'model' => $model,
-            'canciones' => $canciones->all(),
+            'canciones' => $canciones,
             'albumes' => $albumes,
             'seguidores' => $seguidores,
             'seguidos' => $seguidos,
