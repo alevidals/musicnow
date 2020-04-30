@@ -180,6 +180,14 @@ $this->registerJS($js);
                                 'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
                             ]
                         ) ?>
+                        <?= Html::a(
+                            Yii::t('app', 'EnableDisablePrivateAccount'),
+                            ['usuarios/act-desc-cuenta-privada', 'id' => $model->id],
+                            [
+                                'class' => 'dropdown-item',
+                                'data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?'), 'method' => 'post'],
+                            ]
+                        ) ?>
                     </div>
                 <?php endif; ?>
             </div>

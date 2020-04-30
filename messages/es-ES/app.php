@@ -168,4 +168,5 @@ return [
     'Requested' => 'Solicitado',
     'PrivatedAccount' => 'Esta cuenta es privada',
     'FollowToSee' => 'Sigue esta cuenta para escuchar sus canciones',
+    'EnableDisablePrivateAccount' => 'Activar/desactivar cuenta privada',
 ];

@@ -602,4 +602,19 @@ class UsuariosController extends Controller
             'notificaciones' => $notificaciones
         ]);
     }
+
+    public function actionActDescCuentaPrivada($id)
+    {
+        $model = Usuarios::findOne($id);
+
+        if ($model->privated_account) {
+            $model->privated_account = false;
+        } else {
+            $model->privated_account = true;
+        }
+
+        $model->save();
+
+        return $this->goHome();
+    }
 }

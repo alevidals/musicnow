@@ -168,4 +168,5 @@ return [
     'Requested' => '',
     'PrivatedAccount' => 'This account is private',
     'FollowToSee' => 'Follow this account to heard their songs',
+    'EnableDisablePrivateAccount' => 'Enable/Disable private account',
 ];
