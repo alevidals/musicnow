@@ -199,6 +199,22 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             }
         } else {
             if ($this->scenario === self::SCENARIO_UPDATE) {
+                if ($this->privated_account == false) {
+                    $solicitudesPendientes = SolicitudesSeguimiento::find()
+                        ->select('seguidor_id')
+                        ->where(['seguido_id' => Yii::$app->user->id])
+                        ->all();
+                    foreach ($solicitudesPendientes as $solicitud) {
+                        (new Seguidores([
+                            'seguidor_id' => $solicitud->seguidor_id,
+                            'seguido_id' => Yii::$app->user->id
+                        ]))->save();
+                        SolicitudesSeguimiento::findOne([
+                            'seguidor_id' => $solicitud->seguidor_id,
+                            'seguido_id' => Yii::$app->user->id,
+                        ])->delete();
+                    }
+                }
                 if ($this->password === '') {
                     $this->password = $this->getOldAttribute('password');
                 } else {

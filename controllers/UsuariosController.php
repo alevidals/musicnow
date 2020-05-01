@@ -7,6 +7,8 @@ use app\models\CancionesPlaylist;
 use app\models\Chat;
 use app\models\Estados;
 use app\models\LoginForm;
+use app\models\Seguidores;
+use app\models\SolicitudesSeguimiento;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use app\services\Utility;
@@ -604,21 +606,6 @@ class UsuariosController extends Controller
             'model' => $model,
             'notificaciones' => $notificaciones
         ]);
-    }
-
-    public function actionActDescCuentaPrivada($id)
-    {
-        $model = Usuarios::findOne($id);
-
-        if ($model->privated_account) {
-            $model->privated_account = false;
-        } else {
-            $model->privated_account = true;
-        }
-
-        $model->save();
-
-        return $this->goHome();
     }
 
     public function actionConfigurar($id)
