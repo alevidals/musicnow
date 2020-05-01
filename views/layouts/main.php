@@ -145,6 +145,7 @@ $this->registerJS($js);
                         'items' => [
                             ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
                             ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
+                            ['label' => Yii::t('app', 'Comments'), 'url' => ['/comentarios/index']],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
