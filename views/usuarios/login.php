@@ -47,10 +47,10 @@ kartik\icons\FontAwesomeAsset::register($this);
 <div class="site-login container">
 
     <div class="text-center mt-5 mt-lg-0 mb-5">
-        <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto']) ?>
+        <?= Html::img('@web/img/music_now_letras.png', ['alt' => Yii::$app->name, 'class' => 'logo ml-auto opacity-animation']) ?>
     </div>
 
-    <ul class="nav nav-pills justify-content-center nav-fill mb-5 w-100" id="myTab" role="tablist">
+    <ul class="nav nav-pills justify-content-center nav-fill mb-5 w-100 opacity-animation" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active text-uppercase" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true"><?= Yii::t('app', 'Entrar') ?></a>
         </li>
@@ -63,9 +63,8 @@ kartik\icons\FontAwesomeAsset::register($this);
             <div class="row">
 
                 <div class="col-lg-6 align-self-center px-0">
-
                     <div class="row">
-                        <div class="mx-auto col-lg-12">
+                        <div class="col-lg-12 left-animation">
                             <?php $form = ActiveForm::begin([
                                 'id' => 'login-form',
                                 'layout' => 'horizontal',
@@ -89,7 +88,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <?= Html::img('@web/img/undraw_listening_1u79.png', ['alt' => 'girl-music', 'class' => ' img-fluid mt-4']) ?>
+                    <?= Html::img('@web/img/undraw_listening_1u79.png', ['alt' => 'girl-music', 'class' => ' img-fluid mt-4 opacity-animation']) ?>
                 </div>
             </div>
         </div>

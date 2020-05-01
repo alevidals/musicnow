@@ -16,6 +16,14 @@ setInterval(() => {
     $('.alert-box .hide').remove();
 }, 120000);
 
+$('.left-animation').animate({
+    marginLeft: 0
+}, 1200);
+
+$('.opacity-animation').animate({
+    opacity: 1
+}, 1000);
+
 function readURL(input, target) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

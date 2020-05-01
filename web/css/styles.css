@@ -13,6 +13,18 @@
     color: #fff !important;
 }
 
+.left-animation {
+    margin-left: -1000px;
+}
+
+.right-animation {
+    margin-right: -1000px;
+}
+
+.opacity-animation {
+    opacity: 0;
+}
+
 .card {
     border: none;
     border-radius: 0;
