@@ -79,6 +79,7 @@ class SiteController extends Controller
             ->where(['IN', 'usuario_id', $ids])
             ->orWhere(['usuario_id' => Yii::$app->user->id])
             ->limit(10)
+            ->orderBy(['created_at' => SORT_DESC])
             ->all();
 
         $usuariosSearch = new ActiveDataProvider([
@@ -251,11 +252,16 @@ class SiteController extends Controller
 
         $ids = $usuario->getSeguidos()->select('id')->column();
 
-        $canciones = Canciones::find()
+
+        $canciones = (new \yii\db\Query())
+            ->select(['c.*', 'u.login', 'u.url_image'])
+            ->from('canciones c')
+            ->leftJoin('usuarios u', 'u.id = c.usuario_id')
             ->where(['IN', 'usuario_id', $ids])
             ->orWhere(['usuario_id' => Yii::$app->user->id])
             ->offset($offset)
             ->limit(10)
+            ->orderBy(['c.created_at' => SORT_DESC])
             ->all();
 
         $likes = $usuario

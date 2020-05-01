@@ -812,46 +812,59 @@ $(window).on('scroll', function () {
                                 offset = offset + 10;
                                 data.canciones.forEach(element => {
                                     $('.canciones-container').append(`
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="song-container">
-                                                    <div class="box-3">
-                                                        <img class="img-fluid" alt="portada" src="${element.url_portada}">
-                                                        <div class="share-buttons">
-                                                            <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
-                                                            <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart red-hearth"></i></button>
-                                                            <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${element.id}"><i class="far fa-comment"></i></button>
-                                                            <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
-                                                            <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                <a href="index.php?r=usuarios%2Fperfil&id=${element.usuario_id}">
+                                                    <img class="user-search-img" width="40px" alt="logo" src="${element.url_image}">
+                                                    <span class="ml-3">${element.login}</span>
+                                                </a>
+                                            </div>
+                                            <div class="card-body py-0">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="song-container mt-3">
+                                                            <div class="box-3">
+                                                                <img class="img-fluid" alt="portada" src="${element.url_portada}">
+                                                                <div class="share-buttons">
+                                                                    <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
+                                                                    <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart red-hearth"></i></button>
+                                                                    <button class="action-btn outline-transparent cancion" data-toggle="modal" data-target="#song-${element.id}"><i class="far fa-comment"></i></button>
+                                                                    <button data-song="${element.id}" class="action-btn outline-transparent add-btn"><i class="fas fa-plus"></i></button>
+                                                                    <button data-song="${element.id}" data-user="${data.usuario.id}" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-music"></i></button>
+                                                                </div>
+                                                                <div class="layer"></div>
+                                                            </div>
                                                         </div>
-                                                        <div class="layer"></div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-center mt-3 mb-5">${element.titulo}</h4>
-                                                <div class="modal fade" id="song-${element.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-8">
+                                                        <div class="w-100 my-3">
+                                                            <h4 class="d-inline-block">${element.titulo}</h4>
+                                                            ${(element.explicit) ? '<span class="ml-3 badge explicit-badge">EXPLICIT</span>' : ''}
+                                                        </div>
+                                                        <div class="modal fade" id="song-${element.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
                                                                         <div class="row">
-                                                                            <img class="img-fluid col-12" alt="profile-image" src="${element.url_portada}">
-                                                                            <div class="col-12 mt-4">
-                                                                                <textarea id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="${strings[0]}"></textarea>
-                                                                                <div class="invalid-feedback">${strings[1]}</div>
-                                                                                <div class="mt-3">
-                                                                                    <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button">${strings[0]}</button>
-                                                                                    <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart red-hearth"></i></button>
-                                                                                    <p class="d-inline-block"><span></span> like/s</p>
+                                                                            <div class="col-lg-8">
+                                                                                <div class="row">
+                                                                                    <img class="img-fluid col-12" alt="profile-image" src="${element.url_portada}">
+                                                                                    <div class="col-12 mt-4">
+                                                                                        <textarea id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="${strings[0]}"></textarea>
+                                                                                        <div class="invalid-feedback">${strings[1]}</div>
+                                                                                        <div class="mt-3">
+                                                                                            <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button">${strings[0]}</button>
+                                                                                            <button type="button" id="like-${element.id}" class="btn-lg outline-transparent d-inline-block like-btn p-0 mx-2"><i class="fa-heart red-hearth"></i></button>
+                                                                                            <p class="d-inline-block"><span></span> like/s</p>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-4 ">
-                                                                        <div class="row">
-                                                                            <div class="col-12 custom-overflow">
-                                                                                <!-- COMENTARIOS  -->
-                                                                                <div class="row row-comments">
+                                                                            <div class="col-lg-4 ">
+                                                                                <div class="row">
+                                                                                    <div class="col-12 custom-overflow">
+                                                                                        <!-- COMENTARIOS  -->
+                                                                                        <div class="row row-comments">
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -860,7 +873,6 @@ $(window).on('scroll', function () {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
                                         </div>
                                     `);

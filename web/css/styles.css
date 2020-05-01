@@ -13,6 +13,19 @@
     color: #fff !important;
 }
 
+.card {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2),
+    0 2px 2px 0 rgba(0, 0, 0, .14),
+    0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.card .card-header {
+    border: none;
+    background-color: #ccc;
+}
+
 .height-60 {
     height: 60px;
 }
@@ -269,6 +282,10 @@ table i:hover, .delete-song-playlist-btn:hover {
     background-color: transparent;
     border: none;
     outline: none !important;
+}
+
+.modal-header {
+    background-color: #ccc;
 }
 
 .user-search-img {
@@ -699,4 +716,18 @@ textarea:focus {
 [data-theme="dark"] .explicit-badge {
     background-color: #fff;
     color: #000 !important;
+}
+
+[data-theme="dark"] .modal-header {
+    background-color: #202020;
+}
+
+[data-theme="dark"] .card {
+    border: none;
+    background-color: #4A4A4A;
+}
+
+[data-theme="dark"] .card .card-header {
+    border: none;
+    background-color: #202020;
 }

@@ -22,7 +22,7 @@ use yii\bootstrap4\Html;
                             <div class="layer"></div>
                         </div>
                     </div>
-                    <h5 class="text-center"><?= Html::encode($album->titulo) ?></h5>
+                    <h5 class="text-center my-3"><?= Html::encode($album->titulo) ?></h5>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
