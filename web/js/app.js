@@ -212,7 +212,7 @@ $('body').on('click', '.cancion', function ev(e) {
             $('.row-comments').empty();
             data.comentarios.forEach(element => {
                 $('.row-comments').append(`
-                    <div class="col-12 mt-3" id="${element.comentario_id}">
+                    <div class="col-12 mt-3" id="comentario-${element.comentario_id}">
                         <div class="row">
                             <a href="/index.php?r=usuarios%2Fperfil&id=${element.id}">
                                 <img class="user-search-img" src="${element.url_image}" alt="perfil" width="50px" height="50px">
@@ -297,7 +297,7 @@ $('body').on('click', '.comment-btn', function ev(e) {
             },
             success: function (data) {
                 $('.row-comments').prepend(`
-                    <div class="col-12 mt-3" id="${data.comentario_id}">
+                    <div class="col-12 mt-3" id="comentario-${data.comentario_id}">
                         <div class="row">
                             <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">
                                 <img class="user-search-img" src="${data.url_image}" alt="perfil" width="50px" height="50px">
@@ -935,7 +935,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
                         method: 'POST',
                         url: '/index.php?r=comentarios%2Fdelete&id=' + comentario_id,
                         success: function (data) {
-                            $('.row-comments #' + comentario_id).remove();
+                            $('.row-comments #comentario-' + comentario_id).remove();
                         }
                     });
                 }
