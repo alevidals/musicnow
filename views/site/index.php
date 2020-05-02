@@ -93,12 +93,13 @@ $this->registerJS($js);
     <div class="row">
         <div class="col-12 col-lg-6 mt-5 order-1 order-lg-0 canciones-container">
             <?php foreach ($canciones as $cancion) : ?>
-                <div class="card mb-3">
+                <div class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
                     <div class="card-header">
                         <?= Html::a(
-                            Html::img($cancion->getUsuario()->one()->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo']) .
-                            '<span class="ml-3">' . $cancion->getUsuario()->one()->login . '</span>',
-                            ['usuarios/perfil', 'id' => $cancion->usuario_id]
+                            Html::img($cancion->getUsuario()->one()->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo', 'itemprop' => 'image']) .
+                            '<span class="ml-3" itemprop="name">' . $cancion->getUsuario()->one()->login . '</span>',
+                            ['usuarios/perfil', 'id' => $cancion->usuario_id],
+                            ['itemprop' => 'byArtist', 'itemscope' => '', 'itemtype' => 'https://schema.org/Person']
                         ) ?>
                     </div>
                     <div class="card-body py-0">
@@ -106,7 +107,7 @@ $this->registerJS($js);
                             <div class="col">
                                 <div class="song-container mt-3">
                                     <div class="box-3">
-                                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
+                                        <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada', 'itemprop' => 'image'])?>
                                         <div class="share-buttons">
                                             <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                             <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent bubbly-button like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart red-hearth"></i></button>
@@ -118,11 +119,11 @@ $this->registerJS($js);
                                     </div>
                                 </div>
                                 <div class="w-100 my-3 text-truncate">
-                                    <h4 class="my-2"><?= Html::encode($cancion->titulo) ?></h4>
+                                    <h4 class="my-2" itemprop="name"><?= Html::encode($cancion->titulo) ?></h4>
                                     <?php if ($cancion->album_id !== null) : ?>
                                         <div class="my-2">
                                             <div class="w-100"></div>
-                                            <span><?= Html::encode($cancion->getAlbum()->one()->titulo) ?></span>
+                                            <span itemprop="inAlbum"><?= Html::encode($cancion->getAlbum()->one()->titulo) ?></span>
                                         </div>
                                     <?php endif; ?>
                                     <?php if ($cancion->explicit) : ?>

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $counter = 1;
 
 ?>
-<div class="albumes-view">
+<div class="albumes-view" itemscope itemtype="https://schema.org/MusicAlbum">
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn main-yellow']) ?>
@@ -30,9 +30,9 @@ $counter = 1;
     </p>
 
     <div class="text-center">
-        <?= Html::img($model->url_portada, ['width' => '300px']) ?>
-        <h2 class="mt-3"><?= Html::encode($model->titulo) ?></h2>
-        <h6><?= Yii::$app->formatter->asDuration($duration) ?></h6>
+        <?= Html::img($model->url_portada, ['width' => '300px', 'itemprop' => 'image']) ?>
+        <h2 class="mt-3" itemprop="name"><?= Html::encode($model->titulo) ?></h2>
+        <h6><meta itemprop="timeRequired" content="<?= $duration ?>"><?= Yii::$app->formatter->asDuration($duration) ?></h6>
     </div>
 
     <?php if (count($canciones) > 0) : ?>
@@ -45,16 +45,16 @@ $counter = 1;
 
     <div class="row mt-3">
         <?php foreach ($canciones as $cancion) : ?>
-            <div class="col-12 playlist-cancion mb-4 fall-animation" id="song-<?= $cancion->id ?>">
+            <div class="col-12 playlist-cancion mb-4 fall-animation" id="song-<?= $cancion->id ?>" itemprop="track" itemscope itemtype="https://schema.org/MusicRecording">
                 <h6 class="d-inline-block"><?= $counter++; ?></h6>
-                <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px']) ?>
+                <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px', 'itemprop' => 'image']) ?>
                 <div class="text-truncate">
-                    <h5 class="d-inline-block ml-3"><?= Html::encode($cancion->titulo) ?></h5>
+                    <h5 class="d-inline-block ml-3" itemprop="name"><?= Html::encode($cancion->titulo) ?></h5>
                 </div>
                 <?php if ($cancion->explicit) : ?>
                     <span class="ml-3 badge explicit-badge">EXPLICIT</span>
                 <?php endif; ?>
-                <span class="ml-3 float-right"><?= (new DateInterval($cancion->duracion))->format('%i:%S') ?></span>
+                <span class="ml-3 float-right"> <meta itemprop="duration" content="<?= $cancion->duracion ?>"><?= (new DateInterval($cancion->duracion))->format('%i:%S') ?></span>
             </div>
         <?php endforeach ?>
     </div>

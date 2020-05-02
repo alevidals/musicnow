@@ -822,11 +822,11 @@ $(window).on('scroll', function () {
                                 offset = offset + 10;
                                 data.canciones.forEach(element => {
                                     $('.canciones-container').append(`
-                                        <div class="card mb-3">
+                                        <div class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
                                             <div class="card-header">
-                                                <a href="index.php?r=usuarios%2Fperfil&id=${element.usuario_id}">
-                                                    <img class="user-search-img" width="40px" alt="logo" src="${element.url_image}">
-                                                    <span class="ml-3">${element.login}</span>
+                                                <a href="index.php?r=usuarios%2Fperfil&id=${element.usuario_id}" itemprop="byArtist" itemscope itemtype="https://schema.org/Person">
+                                                    <img class="user-search-img" width="40px" alt="logo" src="${element.url_image}" itemprop="image">
+                                                    <span class="ml-3" itemprop="name">${element.login}</span>
                                                 </a>
                                             </div>
                                             <div class="card-body py-0">
@@ -834,7 +834,7 @@ $(window).on('scroll', function () {
                                                     <div class="col">
                                                         <div class="song-container mt-3">
                                                             <div class="box-3">
-                                                                <img class="img-fluid" alt="portada" src="${element.url_portada}">
+                                                                <img class="img-fluid" alt="portada" src="${element.url_portada}" itemprop="image">
                                                                 <div class="share-buttons">
                                                                     <button id="play-${element.id}" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                                                     <button id="outerlike-${element.id}" class="action-btn outline-transparent bubbly-button like-btn"><i class="${data.likes.includes(element.id) ? 'fas' : 'far'} fa-heart red-hearth"></i></button>
@@ -846,11 +846,11 @@ $(window).on('scroll', function () {
                                                             </div>
                                                         </div>
                                                         <div class="w-100 my-3 text-truncate">
-                                                            <h4 class="my-2">${element.titulo}</h4>
+                                                            <h4 class="my-2" itemprop="name">${element.titulo}</h4>
                                                             ${(element.album_id !== null) ?
                                                                 `<div class="my-2">
                                                                     <div class="w-100"></div>
-                                                                    <span>${element.album_titulo}</span>
+                                                                    <span itemprop="inAlbum">${element.album_titulo}</span>
                                                                 </div>` : ''
                                                             }
                                                             ${(element.explicit) ?
