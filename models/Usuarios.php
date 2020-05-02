@@ -194,7 +194,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 $this->auth_key = $security->generateRandomString();
                 $this->confirm_token = $security->generateRandomString(255);
                 $this->password = $security->generatePasswordHash($this->password);
-                $this->url_image = Yii::$app->params['defaultImgProfile'];
+                $this->url_image = '@web/img/user-profile.png';
                 $this->image_name = 'perfil.png';
             }
         } else {
