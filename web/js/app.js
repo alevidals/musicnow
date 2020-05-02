@@ -73,8 +73,10 @@ $('.file-input-banner').on('change', function ev(e) {
 });
 
 $('body').on('show.bs.modal', '.modal', function (e) {
+    let id = $(this).attr('id').split('-')[1];
+    updateChatHistory(id);
     interval = setInterval(function(){
-        updateChatHistory();
+        updateChatHistory(id);
     }, 5000);
 });
 
@@ -1003,11 +1005,8 @@ function getMessagesFromChat(receptor_id, refresh) {
     });
 }
 
-function updateChatHistory() {
-    $('.chat-history').each(function() {
-        let receptor_id = $(this).data('receptorid');
-        getMessagesFromChat(receptor_id, false);
-    });
+function updateChatHistory(id) {
+    getMessagesFromChat(id, false);
 }
 
 $('body').on('click', '.send-chat', function ev(e) {

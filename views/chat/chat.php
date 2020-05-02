@@ -42,8 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div id="user-chat-<?= $seguido->id ?>" class="user-chat">
-                                    <div class="chat-history custom-overflow pr-2 pt-2" data-receptorid="<?= $seguido->id ?>" id="chat-history-<?= $seguido->id ?>">
+                                <div id="user-chat-<?= $seguido->id ?>" class="user-chat" data-chatreceptorid="<?= $seguido->id ?>">
+                                    <div class="chat-history custom-overflow pr-2 pt-2" id="chat-history-<?= $seguido->id ?>">
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="chat-message<?= $seguido->id ?>" id="chat-message-<?= $seguido->id ?>" class="form-control chat-input">
