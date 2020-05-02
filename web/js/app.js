@@ -1,11 +1,12 @@
-var mensajes = 0;
-var solicitudes = 0;
-var seguidores;
-var songs = [];
-var actualSong = 0;
-var playlist = [];
-var offset = 10;
-var interval;
+let mensajes = 0;
+let solicitudes = 0;
+let seguidores;
+let songs = [];
+let actualSong = 0;
+let playlist = [];
+let offset = 10;
+let interval;
+let firstTime = true;
 
 const PERFIL = 'perfil';
 const BANNER = 'banner';
@@ -24,9 +25,30 @@ $('.opacity-animation').animate({
     opacity: 1
 }, 1000);
 
+$(window).on('pjax:start', function (){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    setTimeout(function () {
+        getFollowersData()
+        checkTheme();
+        if (solicitudes > 0) {
+            $('.notifications-number').html(solicitudes);
+        }
+        if ($('#chat-page').length) {
+            getStatusFromUsers();
+        }
+        $(".owl-carousel-index").owlCarousel({
+            loop: true,
+            autoplay:true,
+            autoplayTimeout:4000,
+            items : 1
+        });
+    }, 500);
+});
+
 function readURL(input, target) {
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
 
         reader.onload = function(e) {
             if (target == PERFIL) {
@@ -88,9 +110,9 @@ function resetTheme() {
 
 
 function getCookie(name) {
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
+    let dc = document.cookie;
+    let prefix = name + "=";
+    let begin = dc.indexOf("; " + prefix);
     if (begin == -1) {
         begin = dc.indexOf(prefix);
         if (begin != 0) return null;
@@ -106,10 +128,9 @@ function getCookie(name) {
     return decodeURI(dc.substring(begin + prefix.length, end));
 }
 
-var firstTime = true;
 $('body').on('click', '.play-btn', function ev(e) {
     songs = [];
-    var cancion_id = $(this).attr('id').split('-')[1];
+    let cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=canciones%2Fget-song-data',
@@ -131,10 +152,10 @@ $('body').on('click', '.play-btn', function ev(e) {
                 firstTime = false;
             }
             $('.player').css('display', 'flex');
-            var audio = $('#audio')[0];
+            let audio = $('#audio')[0];
             audio.addEventListener('ended', () =>  {
                 if (songs.length > 0) {
-                    var cancion = songs.shift();
+                    let cancion = songs.shift();
                     $('.info-song img').attr('src', cancion.url_portada);
                     $('.player audio source').attr('src', cancion.url_cancion);
                     $('.artist-info p').html(cancion.titulo);
@@ -148,7 +169,7 @@ $('body').on('click', '.play-btn', function ev(e) {
 });
 
 $('body').on('click', '.like-btn', function ev(e) {
-    var cancion_id = $(this).attr('id').split('-')[1];
+    let cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         'method': 'POST',
         url: '/index.php?r=likes%2Flike&cancion_id=' + cancion_id,
@@ -170,7 +191,7 @@ $('body').on('click', '.like-btn', function ev(e) {
 });
 
 $('body').on('click', '.cancion', function ev(e) {
-    var cancion_id = $(this).data('target').split('-')[1];
+    let cancion_id = $(this).data('target').split('-')[1];
     $('#like-' + cancion_id + ' i').removeClass('fas far');
     $.ajax({
         'method': 'POST',
@@ -214,8 +235,8 @@ $('body').on('click', '.cancion', function ev(e) {
 });
 
 $('body').on('click', '.playlist-btn', function ev(e) {
-    var usuario_id = $(this).data('user');
-    var cancion_id = $(this).data('song');
+    let usuario_id = $(this).data('user');
+    let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
         url: '/index.php?r=usuarios%2Fget-playlists&usuario_id=' + usuario_id,
@@ -230,8 +251,8 @@ $('body').on('click', '.playlist-btn', function ev(e) {
                 `);
             });
             $('.add-playlist-btn').on('click', function ev(e) {
-                var cancion_id = $(this).data('song');
-                var playlist_id = $(this).data('playlist');
+                let cancion_id = $(this).data('song');
+                let playlist_id = $(this).data('playlist');
                 $.ajax({
                     method: 'POST',
                     url: '/index.php?r=canciones-playlist%2Fagregar',
@@ -262,8 +283,8 @@ $('body').on('click', '.playlist-btn', function ev(e) {
 });
 
 $('body').on('click', '.comment-btn', function ev(e) {
-    var cancion_id = $(this).attr('id').split('-')[1];
-    var comentario = $('#text-area-comment-' + cancion_id).val();
+    let cancion_id = $(this).attr('id').split('-')[1];
+    let comentario = $('#text-area-comment-' + cancion_id).val();
     if (comentario.length > 255 || comentario.length == 0) {
         $('.invalid-feedback').show();
     } else {
@@ -299,7 +320,7 @@ $('body').on('click', '.comment-btn', function ev(e) {
 });
 
 $('body').on('click', '.add-btn', function ev() {
-    var cancion_id = $(this).data('song');
+    let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
         url: '/index.php?r=canciones%2Fget-song-data&cancion_id=' + cancion_id,
@@ -324,7 +345,7 @@ $('body').on('click', '.add-btn', function ev() {
                 titulo: data.titulo,
                 album: data.album,
             });
-            var audio = $('#audio')[0];
+            let audio = $('#audio')[0];
             if (audio.paused) {
                 removeActualData();
                 initAudioPlayer();
@@ -338,7 +359,7 @@ $('body').on('click', '.add-btn', function ev() {
 $('body').on('click', '.play-playlist-btn', function ev(e) {
     playlist = [];
     actualSong = 0;
-    var playlist_id = $(this).attr('id');
+    let playlist_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
         url: '/index.php?r=playlists%2Fget-songs&playlist_id=' + playlist_id,
@@ -362,7 +383,7 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
 $('body').on('click', '.play-album-btn', function ev(e) {
     playlist = [];
     actualSong = 0;
-    var album_id = $(this).attr('id');
+    let album_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
         url: '/index.php?r=albumes%2Fget-songs&album_id=' + album_id,
@@ -385,7 +406,7 @@ $('body').on('click', '.play-album-btn', function ev(e) {
 
 $('body').on('click', '.add-videoclip-btn', function ev(e) {
     e.preventDefault();
-    var link = $('#add-videoclip-form #link').val();
+    let link = $('#add-videoclip-form #link').val();
     if (link == '') {
         $('.invalid-videoclip').show();
     } else if (!/.*www.youtube.com\/watch\?v=.{11}\b/.test(link)) {
@@ -452,14 +473,14 @@ function initAudioPlayer() {
 }
 
 function addInfoSongQueue() {
-    var cancion = songs.shift();
+    let cancion = songs.shift();
     addNewData(cancion);
     $('.audio-player').css('display', 'flex');
     $('.player').css('display', 'flex');
-    var audio = $('#audio')[0];
+    let audio = $('#audio')[0];
     audio.addEventListener('ended', () =>  {
         if (songs.length > 0) {
-            var cancion = songs.shift();
+            let cancion = songs.shift();
             addNewData(cancion);
             audio.load();
             $('.play-pause-btn').trigger('click');
@@ -468,15 +489,15 @@ function addInfoSongQueue() {
 }
 
 function refreshSongPlaylist() {
-    var cancion = playlist[actualSong];
+    let cancion = playlist[actualSong];
     addNewData(cancion);
     $('.audio-player').css('display', 'flex');
     $('.player').css('display', 'flex');
-    var audio = $('#audio')[0];
+    let audio = $('#audio')[0];
     audio.addEventListener('ended', () =>  {
         if (actualSong < playlist.length - 1) {
             actualSong++;
-            var cancion = playlist[actualSong];
+            let cancion = playlist[actualSong];
             addNewData(cancion);
             audio.load();
             $('.play-pause-btn').trigger('click');
@@ -496,13 +517,13 @@ $('body').on('click', '.backward-btn', function ev(e) {
         actualSong--;
         removeActualData();
         initAudioPlayer();
-        var cancion = playlist[actualSong];
+        let cancion = playlist[actualSong];
         addNewData(cancion);
         $('.play-pause-btn').trigger('click');
         audio.addEventListener('ended', () =>  {
             if (actualSong < playlist.length - 1) {
                 actualSong++;
-                var cancion = playlist[actualSong];
+                let cancion = playlist[actualSong];
                 addNewData(cancion);
                 audio.load();
                 $('.play-pause-btn').trigger('click');
@@ -516,20 +537,20 @@ $('body').on('click', '.forward-btn', function ev(e) {
         actualSong++;
         removeActualData();
         initAudioPlayer();
-        var cancion = playlist[actualSong];
+        let cancion = playlist[actualSong];
         addNewData(cancion);
         $('.play-pause-btn').trigger('click');
     } else if (songs.length > 0) {
         removeActualData();
         initAudioPlayer();
-        var cancion = songs.shift();
-        var audio = $('#audio')[0];
+        let cancion = songs.shift();
+        let audio = $('#audio')[0];
         addNewData(cancion);
         audio.load();
         $('.play-pause-btn').trigger('click');
         audio.addEventListener('ended', () =>  {
             if (songs.length > 0) {
-                var cancion = songs.shift();
+                let cancion = songs.shift();
                 addNewData(cancion);
                 audio.load();
                 $('.play-pause-btn').trigger('click');
@@ -550,7 +571,7 @@ function removeActualData() {
 
 if (getCookie('cookie-accept') == null) {
     $( document ).ready(function() {
-        var strings = ['CookieMessage'];
+        let strings = ['CookieMessage'];
         $.ajax({
             method: 'GET',
             url: '/index.php?r=site%2Fget-translate',
@@ -582,7 +603,7 @@ function getFollowersNumber() {
 
 function getNewNotifications() {
     // NUEVOS SEGUIDORES
-    var strings = ['followMessage'];
+    let strings = ['followMessage'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -630,12 +651,12 @@ function getNewNotifications() {
                 $('.messages-number').html('');
             }
             if (data.count > mensajes) {
-                var notification = $('.chat-notification')[0];
+                let notification = $('.chat-notification')[0];
                 if (notification.paused) {
                     notification.play();
                 }
                 data.mensajes.forEach(element => {
-                    var time = element.created_at.split(' ')[1];
+                    let time = element.created_at.split(' ')[1];
                     $('.alert-box').prepend(`
                         <div class="toast mb-2" data-delay="5000">
                             <div class="toast-header">
@@ -694,25 +715,6 @@ function getNewRequests() {
     });
 }
 
-$(window).on('pjax:start', function (){
-    setTimeout(function () {
-        getFollowersData()
-        checkTheme();
-        if (solicitudes > 0) {
-            $('.notifications-number').html(solicitudes);
-        }
-        if ($('#chat-page').length) {
-            getStatusFromUsers();
-        }
-        $(".owl-carousel-index").owlCarousel({
-            loop: true,
-            autoplay:true,
-            autoplayTimeout:4000,
-            items : 1
-        });
-    }, 500);
-});
-
 $('body').on('click', '.follow', function ev(e) {
     $.ajax({
         'method': 'POST',
@@ -739,7 +741,7 @@ function getFollowersData() {
 }
 
 $('body').on('click', '.like-list', function ev(e) {
-    var cancion_id = $(this).data('song');
+    let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
         url: '/index.php?r=canciones/get-likes&cancion_id=' + cancion_id,
@@ -758,8 +760,8 @@ $('body').on('click', '.like-list', function ev(e) {
 });
 
 $('body').on('click', '.remove-videoclip-btn', function ev(e) {
-    var id = $(this).data('id');
-    var strings = ['Are you sure you want to delete this item?'];
+    let id = $(this).data('id');
+    let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -799,10 +801,10 @@ $('body').on('click', '.filter-btn', function ev(e) {
 
 $(window).on('scroll', function () {
     if ($('.owl-carousel-index').length) {
-        var scrollHeight = $(document).height();
-        var scrollPosition = $(window).height() + $(window).scrollTop();
+        let scrollHeight = $(document).height();
+        let scrollPosition = $(window).height() + $(window).scrollTop();
         if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-            var strings = ['Comment', 'MaxChar'];
+            let strings = ['Comment', 'MaxChar'];
             $.ajax({
                     method: 'GET',
                     url: '/index.php?r=site%2Fget-translate',
@@ -900,15 +902,15 @@ $('body').on('submit', '.create-form', function ev(e) {
 });
 
 $('body').on('keyup', '.usuarios-update input', function ev(e) {
-    var target = $(this).data('target');
+    let target = $(this).data('target');
     if (target !== undefined && $('.update-' + target).length) {
         $('.update-' + target).text($(this).val());
     }
 });
 
 $('body').on('click', '.delete-comment-btn', function ev(e) {
-    var comentario_id = $(this).data('comentario');
-    var strings = ['Are you sure you want to delete this item?'];
+    let comentario_id = $(this).data('comentario');
+    let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -937,7 +939,7 @@ function getStatusFromUsers() {
         url: '/index.php?r=usuarios%2Festados',
         success: function (data) {
             data.forEach(element => {
-                var id = element.id;
+                let id = element.id;
                 if (element.estado_id == 'online') {
                     $('#' + id + ' .status').removeClass('badge-danger');
                     $('#' + id + ' .status').addClass('badge-success');
@@ -992,14 +994,14 @@ function getMessagesFromChat(receptor_id, refresh) {
 
 function updateChatHistory() {
     $('.chat-history').each(function() {
-        var receptor_id = $(this).data('receptorid');
+        let receptor_id = $(this).data('receptorid');
         getMessagesFromChat(receptor_id, false);
     });
 }
 
 $('body').on('click', '.send-chat', function ev(e) {
-    var receptor_id = $(this).attr('id');
-    var mensaje = $('#chat-message-' + receptor_id).val().trim();
+    let receptor_id = $(this).attr('id');
+    let mensaje = $('#chat-message-' + receptor_id).val().trim();
     $.ajax({
         method: 'POST',
         url: '/index.php?r=chat%2Fsend-chat',
@@ -1030,10 +1032,10 @@ $('body').on('click', '.send-chat', function ev(e) {
 });
 
 $('body').on('keydown', '.chat-input', function ev(e) {
-    var key = (event.keyCode ? event.keyCode : event.which);
+    let key = (event.keyCode ? event.keyCode : event.which);
     if (key == 13) {
-        var receptor_id = $(this).attr('id').split('-')[2];
-        var mensaje = $('#chat-message-' + receptor_id).val().trim();
+        let receptor_id = $(this).attr('id').split('-')[2];
+        let mensaje = $('#chat-message-' + receptor_id).val().trim();
         $.ajax({
             method: 'POST',
             url: '/index.php?r=chat%2Fsend-chat',
@@ -1065,13 +1067,13 @@ $('body').on('keydown', '.chat-input', function ev(e) {
 });
 
 $('body').on('click', '.start-chat', function ev(e) {
-    var receptor_id = $(this).data('receptorid');
+    let receptor_id = $(this).data('receptorid');
     getMessagesFromChat(receptor_id, true);
     $('.send-chat').trigger('click');
 });
 
 $('body').on('keyup', '#search-users', function ev(e) {
-    var text = $(this).val();
+    let text = $(this).val();
     if (text != '') {
         $('.chat-list').hide();
         $.ajax({
@@ -1128,8 +1130,8 @@ $('body').on('keyup', '#search-users', function ev(e) {
 });
 
 $('body').on('click', '.delete-follow-btn', function ev(e) {
-    var seguidor_id = $(this).data('follower_id');
-    var strings = ['Are you sure you want to delete this item?'];
+    let seguidor_id = $(this).data('follower_id');
+    let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -1157,9 +1159,9 @@ $('body').on('click', '.delete-follow-btn', function ev(e) {
 });
 
 $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
-    var cancion_id = $(this).data('song-id');
-    var playlist_id = $('.playlist-id').text();
-    var strings = ['DeleteSongName'];
+    let cancion_id = $(this).data('song-id');
+    let playlist_id = $('.playlist-id').text();
+    let strings = ['DeleteSongName'];
     $.ajax({
         method: 'GET',
         url: '/index.php?r=site%2Fget-translate',
@@ -1167,7 +1169,7 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
             strings: strings
         },
         success: function (data) {
-            var message = data[0] + ' ' + $('#song-' + cancion_id + ' h5').text() + '?';
+            let message = data[0] + ' ' + $('#song-' + cancion_id + ' h5').text() + '?';
             krajeeDialogCust2.confirm(message, function (result) {
                 if (result) {
                     $.ajax({
@@ -1205,7 +1207,7 @@ $('body').on('change', '.is-album-check', function ev(e) {
 });
 
 $('body').on('click', '.copy-playlist-btn', function ev(e) {
-    var id = $(this).attr('id');
+    let id = $(this).attr('id');
     $.ajax({
         method: 'POST',
         url: '/index.php?r=playlists%2Fcopiar',
@@ -1232,19 +1234,19 @@ $('body').on('click', '.copy-playlist-btn', function ev(e) {
 });
 
 $('body').on('change', '.song-file-input', function ev(e) {
-    var target = e.currentTarget;
-    var file = target.files[0];
-    var reader = new FileReader();
+    let target = e.currentTarget;
+    let file = target.files[0];
+    let reader = new FileReader();
     if (target.files && file) {
-        var reader = new FileReader();
+        let reader = new FileReader();
 
         reader.onload = function (e) {
             audio.src = e.target.result;
             audio.addEventListener('loadedmetadata', function(){
-                var duration = audio.duration;
+                let duration = audio.duration;
                 $('#canciones-duracion').val(parseInt(duration));
-                var minutes =  Math.floor(duration / 60);
-                var seconds = Math.trunc(duration % 60);
+                let minutes =  Math.floor(duration / 60);
+                let seconds = Math.trunc(duration % 60);
                 $('#duration-hidden').val(`PT${minutes}M${seconds}S`);
                 $('#canciones-duracion').val(`${minutes} m ${seconds} s`);
             },false);
@@ -1255,8 +1257,8 @@ $('body').on('change', '.song-file-input', function ev(e) {
 });
 
 $('body').on('click', '.request-btn', function ev(e) {
-    var seguidor_id = $(this).data('id');
-    var type = '';
+    let seguidor_id = $(this).data('id');
+    let type = '';
     if ($(this).hasClass('accept')) {
         type = 'accept';
     } else if ($(this).hasClass('delete')) {

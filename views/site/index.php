@@ -98,7 +98,7 @@ $this->registerJS($js);
                         <?= Html::a(
                             Html::img($cancion->getUsuario()->one()->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo']) .
                             '<span class="ml-3">' . $cancion->getUsuario()->one()->login . '</span>',
-                            ['usuarios/perfil', 'id' => $cancion->id]
+                            ['usuarios/perfil', 'id' => $cancion->usuario_id]
                         ) ?>
                     </div>
                     <div class="card-body py-0">
