@@ -7,6 +7,7 @@ use app\models\CancionesPlaylist;
 use Yii;
 use app\models\Playlists;
 use app\models\PlaylistsSearch;
+use app\models\Usuarios;
 use yii\bootstrap4\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -39,13 +40,25 @@ class PlaylistsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PlaylistsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $res = [];
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if (Yii::$app->user->identity->rol_id == 1) {
+            $searchModel = new PlaylistsSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $res = [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ];
+        } else {
+            $usuario = Usuarios::findOne(Yii::$app->user->id);
+            $playlists = $usuario->getPlaylists()->all();
+            $likedSongs = $usuario->getCancionesFavoritas()->all();
+            $res = [
+                'playlists' => $playlists,
+            ];
+        }
+
+        return $this->render('index', $res);
     }
 
     /**

@@ -59,18 +59,17 @@ if (Yii::$app->user->identity->rol_id == 1) {
         <?= Html::a(Yii::t('app', 'Create Playlists'), ['create'], ['class' => 'btn main-yellow', 'data-pjax' => 0]) ?>
     </p>
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <div class="mt-3"></div>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
-        'columns' => $columns,
-        'tableOptions' => [
-            'class' => 'table admin-table ',
-        ],
-    ]); ?>
+    <?php if (Yii::$app->user->identity->rol_id == 1) : ?>
+        <?= $this->render('_admins-playlist-view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'columns' => $columns,
+        ]) ?>
+    <?php else : ?>
+        <?= $this->render('_users-playlist-view', [
+            'playlists' => $playlists,
+        ]) ?>
+    <?php endif;?>
 
 
 </div>
