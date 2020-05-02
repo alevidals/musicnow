@@ -8,10 +8,10 @@ use yii\bootstrap4\Html;
     <div class="row">
         <?php if (count($canciones) > 0) : ?>
             <?php foreach ($canciones as $cancion) : ?>
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicRecording">
                     <div class="song-container">
                         <div class="box-3">
-                            <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
+                            <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada', 'itemprop'=> 'image'])?>
                             <div class="share-buttons">
                                 <button id="play-<?= $cancion->id ?>" class="action-btn play-btn outline-transparent"><i class="fas fa-play"></i></button>
                                 <button id="outerlike-<?= $cancion->id ?>" class="action-btn outline-transparent like-btn"><i class="<?= in_array($cancion->id, $likes) ? 'fas' : 'far' ?> fa-heart red-hearth"></i></button>
@@ -22,7 +22,7 @@ use yii\bootstrap4\Html;
                             <div class="layer"></div>
                         </div>
                     </div>
-                    <h5 class="text-center my-3 text-truncate"><?= Html::encode($cancion->titulo) ?></h5>
+                    <h5 class="text-center my-3 text-truncate" itemprop="name"><?= Html::encode($cancion->titulo) ?></h5>
                     <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content">

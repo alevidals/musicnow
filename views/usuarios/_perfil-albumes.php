@@ -7,10 +7,10 @@ use yii\bootstrap4\Html;
     <div class="row">
         <?php if (count($albumes) > 0) : ?>
             <?php foreach ($albumes as $album) : ?>
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicAlbum">
                     <div class="song-container">
                         <div class="box-3">
-                            <?= Html::img($album->url_portada, ['class' => 'img-fluid', 'alt' => 'portada'])?>
+                            <?= Html::img($album->url_portada, ['class' => 'img-fluid', 'alt' => 'portada', 'itemprop' => 'image'])?>
                             <div class="share-buttons">
                                 <button id="<?= $album->id ?>" class="action-btn play-album-btn outline-transparent"><i class="fas fa-play"></i></button>
                                 <?= Html::a(
@@ -22,7 +22,7 @@ use yii\bootstrap4\Html;
                             <div class="layer"></div>
                         </div>
                     </div>
-                    <h5 class="text-center my-3"><?= Html::encode($album->titulo) ?></h5>
+                    <h5 class="text-center my-3" itemprop="name"><?= Html::encode($album->titulo) ?></h5>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
