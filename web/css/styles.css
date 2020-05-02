@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap');
 
+:root {
+    /* GENERAL */
+    --primary: #ffba00;
+
+    /* DARK THEME */
+    --bar-dark: #202020;
+    --bar-bg-dark: #181818;
+    --bar-bg-dark-separator: #4A4A4A;
+    --bar-bg-dark-highlighted: #383838;
+
+    /* LIGHT THEME */
+    --bar-light: #ccc;
+}
+
 * {
     font-family: 'Raleway', sans-serif;
     color: #000 !important;
@@ -35,7 +49,7 @@
 
 .card .card-header {
     border: none;
-    background-color: #ccc;
+    background-color: var(--bar-light);
 }
 
 .height-60 {
@@ -44,6 +58,10 @@
 
 table i:hover, .delete-song-playlist-btn:hover {
     opacity: .5;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
 
@@ -54,6 +72,18 @@ table i:hover, .delete-song-playlist-btn:hover {
 
 .btn.btn-secondary {
     color: #fff !important;
+}
+
+.btn {
+    transition: all .3s ease;
+}
+
+.btn:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .wrap {
@@ -92,7 +122,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 }
 
 .navbar {
-    background-color: #ccc !important;
+    background-color: var(--bar-light) !important;
     color: red;
 }
 
@@ -122,7 +152,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #181818;
+    background: var(--bar-bg-dark);
 }
 
 /* Handle */
@@ -140,26 +170,34 @@ table i:hover, .delete-song-playlist-btn:hover {
 
 @keyframes full-rotate {
     from {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -o-transform: rotate(0);
+        -ms-transform: rotate(0);
         transform: rotate(0);
     }
 
     to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
 
 .main-yellow {
-    background-color: #ffba00
+    background-color: var(--primary);
 }
 
 .admin-table thead {
-    background-color: #ccc;
+    background-color: var(--bar-light);
 }
 
 .admin-table a,
 .action-column,
 .breadcrumb a {
-    color: #ffbb00;
+    color: var(--primary);
 }
 
 .admin-table tbody {
@@ -167,32 +205,32 @@ table i:hover, .delete-song-playlist-btn:hover {
 }
 
 .admin-table th {
-    color: #ffba00;
+    color: var(--primary);
 }
 
 
 .nav-pills .nav-item .active {
-    border: 1px solid #ffba00;
-    background-color: #ffba00;
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
     color: #000 !important;
 }
 
 .nav-pills .nav-link.active {
-    background-color: #ffba00;
+    background-color: var(--primary);
 }
 
 .nav-pills .nav-item:hover {
-    background-color: #ffbb0091;
+    background-color: var(--primary)91;
     border-radius: 0.25rem;
 }
 
 .custom-control-input:checked~.custom-control-label::before {
-    background-color: #ffbb00;
+    background-color: var(--primary);
     border: none;
 }
 
 .custom-control-input.is-valid:checked~.custom-control-label::before {
-    background-color: #ffbb00 !important;
+    background-color: var(--primary) !important;
     color: red !important;
 }
 
@@ -205,6 +243,9 @@ table i:hover, .delete-song-playlist-btn:hover {
         margin: 0;
         position: absolute;
         top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
     }
@@ -255,7 +296,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 .fs-title {
     font-size: 18px;
     text-transform: uppercase;
-    color: #ffba00 !important;
+    color: var(--primary) !important;
     margin-bottom: 10px;
     letter-spacing: 2px;
     font-weight: bold;
@@ -263,7 +304,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 
 .custom-file-label::after {
     color: black;
-    background-color: #ffba00;
+    background-color: var(--primary);
 }
 
 
@@ -277,6 +318,10 @@ table i:hover, .delete-song-playlist-btn:hover {
     position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
 }
@@ -297,7 +342,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 }
 
 .modal-header {
-    background-color: #ccc;
+    background-color: var(--bar-light);
 }
 
 .user-search-img {
@@ -371,6 +416,10 @@ table i:hover, .delete-song-playlist-btn:hover {
     opacity: 1;
 }
 
+.box-3:hover img {
+    filter: grayscale();
+}
+
 .box-3 .share-buttons {
     display: flex;
     position: absolute;
@@ -406,7 +455,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 
 .edit-image-icon-image {
     border-radius: 100%;
-    background-color: #ffba00;
+    background-color: var(--primary);
     padding: 5px;
     color: #000;
     position: absolute;
@@ -420,7 +469,7 @@ table i:hover, .delete-song-playlist-btn:hover {
 
 .edit-image-icon-banner {
     border-radius: 100%;
-    background-color: #ffba00;
+    background-color: var(--primary);
     padding: 5px;
     color: #000;
     position: absolute;
@@ -438,11 +487,19 @@ table i:hover, .delete-song-playlist-btn:hover {
 }
 
 .action-btn:hover {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
     transform: scale(1.2)
 }
 
 .action-btn:active {
-    transform: scale(0.98);
+    -webkit-transform: scale(.98);
+    -moz-transform: scale(.98);
+    -o-transform: scale(.98);
+    -ms-transform: scale(.98);
+    transform: scale(.98);
 }
 
 input,
@@ -459,7 +516,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-    border-bottom: 2px solid #ffba00 !important;
+    border-bottom: 2px solid var(--primary) !important;
 }
 
 .fixed-player {
@@ -494,6 +551,10 @@ textarea:focus {
 }
 
 .fall {
+    -webkit-transform: translateX(10rem);
+    -moz-transform: translateX(10rem);
+    -o-transform: translateX(10rem);
+    -ms-transform: translateX(10rem);
     transform: translateX(10rem);
     opacity: 0;
 }
@@ -529,11 +590,11 @@ textarea:focus {
 }
 
 .my-message {
-    background-color: #ffba00;
+    background-color: var(--primary);
 }
 
 .toast-header {
-    background-color: #ffba00;
+    background-color: var(--primary);
     border-bottom: none;
 }
 
@@ -561,7 +622,7 @@ textarea:focus {
 }
 
 [data-theme="dark"] {
-    background-color: #181818 !important;
+    background-color: var(--bar-bg-dark) !important;
 }
 
 [data-theme="dark"] .navbar-dark .navbar-toggler-icon:hover {
@@ -571,7 +632,7 @@ textarea:focus {
 
 [data-theme="dark"] .navbar,
 [data-theme="dark"] .footer {
-    background-color: #202020 !important;
+    background-color: var(--bar-dark) !important;
 }
 
 [data-theme="dark"] .nav-link {
@@ -580,7 +641,7 @@ textarea:focus {
 
 [data-theme="dark"] th,
 [data-theme="dark"] th a {
-    color: #ffba00 !important;
+    color: var(--primary) !important;
 }
 
 [data-theme="dark"] .btn {
@@ -588,7 +649,7 @@ textarea:focus {
 }
 
 [data-theme="dark"] .breadcrumb {
-    background-color: #383838;
+    background-color: var(--bar-bg-dark-highlighted);
 }
 
 
@@ -597,21 +658,21 @@ textarea:focus {
 }
 
 [data-theme="dark"] .admin-table thead {
-    background-color: #181818;
+    background-color: var(--bar-bg-dark);
 }
 
 [data-theme="dark"] .admin-table a,
 [data-theme="dark"] .action-column,
 [data-theme="dark"] .breadcrumb a {
-    color: #ffbb00;
+    color: var(--primary);
 }
 
 [data-theme="dark"] .admin-table tbody {
-    background-color: #383838;
+    background-color: var(--bar-bg-dark-highlighted);
 }
 
 [data-theme="dark"] .admin-table th {
-    color: #ffba00;
+    color: var(--primary);
 }
 
 [data-theme="dark"] #register-form fieldset,
@@ -621,11 +682,11 @@ textarea:focus {
 
 [data-theme="dark"] .dropdown-menu,
 [data-theme="dark"] .dropdown-item.active {
-    background-color: #4A4A4A;
+    background-color: var(--bar-bg-dark-separator);
 }
 
 [data-theme="dark"] .dropdown-item:hover {
-    background-color: #181818;
+    background-color: var(--bar-bg-dark);
 }
 
 [data-theme="dark"] .bootstrap-dialog-title {
@@ -633,11 +694,11 @@ textarea:focus {
 }
 
 [data-theme="dark"] .modal-header {
-    background-color: #202020;
+    background-color: var(--bar-dark);
 }
 
 [data-theme="dark"] .modal-body {
-    background-color: #181818;
+    background-color: var(--bar-bg-dark);
 }
 
 [data-theme="dark"] .full-player {
@@ -650,7 +711,7 @@ textarea:focus {
 }
 
 [data-theme="dark"] .toast-body {
-    background-color: #202020;
+    background-color: var(--bar-dark);
 }
 
 [data-theme="dark"] .message {
@@ -695,18 +756,18 @@ textarea:focus {
 }
 
 [data-theme="dark"] .page-link {
-    border-color: #181818 !important;
-    background-color: #383838 !important;
+    border-color: var(--bar-bg-dark) !important;
+    background-color: var(--bar-bg-dark-highlighted) !important;
 }
 
 [data-theme="dark"] .page-item.active .page-link {
     z-index: 3;
-    color: #383838 !important;
-    border-color: #181818;
-    background-color: #ffba00 !important;
+    color: var(--bar-bg-dark-highlighted) !important;
+    border-color: var(--bar-bg-dark);
+    background-color: var(--primary) !important;
 }
 [data-theme="dark"] .pagination li a:focus {
-    color: #ffba00 !important;
+    color: var(--primary) !important;
 }
 
 .red-hearth {
@@ -718,11 +779,11 @@ textarea:focus {
 }
 
 [data-theme="dark"] option {
-    background-color: #383838 !important;
+    background-color: var(--bar-bg-dark-highlighted) !important;
 }
 
 [data-theme="dark"] table i {
-    color: #ffba00 !important;
+    color: var(--primary) !important;
 }
 
 [data-theme="dark"] .explicit-badge {
@@ -731,15 +792,15 @@ textarea:focus {
 }
 
 [data-theme="dark"] .modal-header {
-    background-color: #202020;
+    background-color: var(--bar-dark);
 }
 
 [data-theme="dark"] .card {
     border: none;
-    background-color: #4A4A4A;
+    background-color: var(--bar-bg-dark-separator);
 }
 
 [data-theme="dark"] .card .card-header {
     border: none;
-    background-color: #202020;
+    background-color: var(--bar-dark);
 }
