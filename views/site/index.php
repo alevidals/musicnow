@@ -90,10 +90,10 @@ $this->registerJS($js);
         </div>
     <?php endif ?>
 
-    <div class="row">
+    <section class="row">
         <div class="col-12 col-lg-6 mt-5 order-1 order-lg-0 canciones-container">
             <?php foreach ($canciones as $cancion) : ?>
-                <div class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
+                <article class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
                     <div class="card-header">
                         <?= Html::a(
                             Html::img($cancion->getUsuario()->one()->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo', 'itemprop' => 'image']) .
@@ -175,7 +175,7 @@ $this->registerJS($js);
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             <?php endforeach; ?>
             <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -202,5 +202,5 @@ $this->registerJS($js);
                 </div>
             </div>
         </a>
-    </div>
+    </section>
 </div>

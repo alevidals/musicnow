@@ -5,10 +5,10 @@ use yii\bootstrap4\Html;
 ?>
 
 <div class="tab-pane fade" id="playlists" role="tabpanel" aria-labelledby="playlists-tab">
-    <div class="row">
+    <section class="row">
         <?php if (count($playlists) > 0) : ?>
             <?php foreach ($playlists as $playlist) : ?>
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicPlaylist">
+                <article class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicPlaylist">
                     <div class="song-container">
                         <div class="box-3">
                             <?= Html::img($playlist->getCanciones()->one()->url_portada, ['class' => 'img-fluid', 'alt' => 'portada', 'itemprop' => 'image'])?>
@@ -27,7 +27,7 @@ use yii\bootstrap4\Html;
                         </div>
                     </div>
                     <h5 class="text-center my-3" itemprop="name"><?= Html::encode($playlist->titulo) ?></h5>
-                </div>
+                </article>
             <?php endforeach; ?>
         <?php else : ?>
             <div class="row mt-5 justify-content-center text-center mx-0">
@@ -39,5 +39,5 @@ use yii\bootstrap4\Html;
                 </div>
             </div>
         <?php endif; ?>
-    </div>
+    </section>
 </div>

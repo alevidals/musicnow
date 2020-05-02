@@ -5,10 +5,10 @@ use yii\bootstrap4\Html;
 ?>
 
 <div class="tab-pane fade show active" id="canciones" role="tabpanel" aria-labelledby="canciones-tab">
-    <div class="row">
+    <section class="row">
         <?php if (count($canciones) > 0) : ?>
             <?php foreach ($canciones as $cancion) : ?>
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicRecording">
+                <article class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicRecording">
                     <div class="song-container">
                         <div class="box-3">
                             <?= Html::img($cancion->url_portada, ['class' => 'img-fluid', 'alt' => 'portada', 'itemprop'=> 'image'])?>
@@ -78,7 +78,7 @@ use yii\bootstrap4\Html;
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             <?php endforeach; ?>
         <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -101,5 +101,5 @@ use yii\bootstrap4\Html;
                 </div>
             </div>
         <?php endif; ?>
-    </div>
+    </section>
 </div>

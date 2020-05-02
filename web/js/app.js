@@ -822,7 +822,7 @@ $(window).on('scroll', function () {
                                 offset = offset + 10;
                                 data.canciones.forEach(element => {
                                     $('.canciones-container').append(`
-                                        <div class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
+                                        <article class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
                                             <div class="card-header">
                                                 <a href="index.php?r=usuarios%2Fperfil&id=${element.usuario_id}" itemprop="byArtist" itemscope itemtype="https://schema.org/Person">
                                                     <img class="user-search-img" width="40px" alt="logo" src="${element.url_image}" itemprop="image">

@@ -3,9 +3,9 @@
 use yii\bootstrap4\Html;
 
 ?>
-<div class="row">
+<article class="row">
     <?php foreach ($playlists as $playlist) : ?>
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicPlaylist">
+        <section class="col-12 col-md-6 col-lg-4 col-xl-3" itemscope itemtype="https://schema.org/MusicPlaylist">
             <div class="song-container">
                 <div class="box-3">
                     <?php if ($playlist->getCanciones()->count() > 0) : ?>
@@ -35,6 +35,6 @@ use yii\bootstrap4\Html;
                 </div>
             </div>
             <h5 class="text-center my-3" itemprop="name"><?= Html::encode($playlist->titulo) ?></h5>
-        </div>
+        </section>
     <?php endforeach; ?>
-</div>
+</article>
