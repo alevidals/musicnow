@@ -45,7 +45,9 @@ $counter = 1;
             <div class="col-12 playlist-cancion mb-4 fall-animation" id="song-<?= $cancion->id ?>">
                 <h6 class="d-inline-block"><?= $counter++; ?></h6>
                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px']) ?>
-                <h5 class="d-inline-block ml-3"><?= Html::encode($cancion->titulo) ?></h5>
+                <div class="text-truncate">
+                    <h5 class="d-inline-block ml-3"><?= Html::encode($cancion->titulo) ?></h5>
+                </div>
                 <?php if ($cancion->explicit) : ?>
                     <span class="ml-3 badge explicit-badge">EXPLICIT</span>
                 <?php endif; ?>

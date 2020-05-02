@@ -845,9 +845,20 @@ $(window).on('scroll', function () {
                                                                 <div class="layer"></div>
                                                             </div>
                                                         </div>
-                                                        <div class="w-100 my-3">
-                                                            <h4 class="d-inline-block">${element.titulo}</h4>
-                                                            ${(element.explicit) ? '<span class="ml-3 badge explicit-badge">EXPLICIT</span>' : ''}
+                                                        <div class="w-100 my-3 text-truncate">
+                                                            <h4 class="my-2">${element.titulo}</h4>
+                                                            ${(element.album_id !== null) ?
+                                                                `<div class="my-2">
+                                                                    <div class="w-100"></div>
+                                                                    <span>${element.album_titulo}</span>
+                                                                </div>` : ''
+                                                            }
+                                                            ${(element.explicit) ?
+                                                                `<div class="my-2">
+                                                                    <div class="w-100"></div>
+                                                                    <span class="badge explicit-badge">EXPLICIT</span>
+                                                                </div>` : ''
+                                                            }
                                                         </div>
                                                         <div class="modal fade" id="song-${element.id}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">

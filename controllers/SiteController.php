@@ -254,11 +254,12 @@ class SiteController extends Controller
 
 
         $canciones = (new \yii\db\Query())
-            ->select(['c.*', 'u.login', 'u.url_image'])
+            ->select(['c.*', 'u.login', 'u.url_image', 'a.titulo as album_titulo'])
             ->from('canciones c')
             ->leftJoin('usuarios u', 'u.id = c.usuario_id')
-            ->where(['IN', 'usuario_id', $ids])
-            ->orWhere(['usuario_id' => Yii::$app->user->id])
+            ->leftJoin('albumes a', 'c.album_id = a.id')
+            ->where(['IN', 'c.usuario_id', $ids])
+            ->orWhere(['c.usuario_id' => Yii::$app->user->id])
             ->offset($offset)
             ->limit(10)
             ->orderBy(['c.created_at' => SORT_DESC])

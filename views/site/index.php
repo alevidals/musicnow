@@ -117,10 +117,19 @@ $this->registerJS($js);
                                         <div class="layer"></div>
                                     </div>
                                 </div>
-                                <div class="w-100 my-3">
-                                    <h4 class="d-inline-block"><?= Html::encode($cancion->titulo) ?></h4>
+                                <div class="w-100 my-3 text-truncate">
+                                    <h4 class="my-2"><?= Html::encode($cancion->titulo) ?></h4>
+                                    <?php if ($cancion->album_id !== null) : ?>
+                                        <div class="my-2">
+                                            <div class="w-100"></div>
+                                            <span><?= Html::encode($cancion->getAlbum()->one()->titulo) ?></span>
+                                        </div>
+                                    <?php endif; ?>
                                     <?php if ($cancion->explicit) : ?>
-                                        <span class="ml-3 badge explicit-badge">EXPLICIT</span>
+                                        <div class="my-2">
+                                            <div class="w-100"></div>
+                                            <span class="badge explicit-badge">EXPLICIT</span>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="modal fade" id="song-<?= $cancion->id ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

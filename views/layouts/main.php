@@ -150,11 +150,12 @@ $this->registerJS($js);
                         ],
                     ],
                     [
-                        'label' => '<i class="fas fa-sun"></i>' .
+                        'label' => '<i class="fas fa-sun mr-2"></i>' .
                                     '<div class="custom-control custom-switch d-inline-block">' .
                                         '<input type="checkbox" class="custom-control-input " id="darkSwitch">' .
                                         '<label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>' .
-                                    '</div>'
+                                    '</div>',
+                        'options' => ['class' => 'my-auto'],
                     ],
                     Yii::$app->user->isGuest ? (
                         [
@@ -245,7 +246,7 @@ $this->registerJS($js);
         <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
             <img class="height-60" src=":" alt="song-cover col-2">
                 <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
-                <div class="artist-info my-auto col text-center">
+                <div class="artist-info my-auto col text-center text-truncate">
                     <p class="m-0"></p>
                     <small></small>
                 </div>
