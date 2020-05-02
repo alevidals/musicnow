@@ -146,7 +146,15 @@ $this->registerJS($js);
                             ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
                             ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
                             ['label' => Yii::t('app', 'Comments'), 'url' => ['/comentarios/index']],
+
                         ],
+                    ],
+                    [
+                        'label' => '<i class="fas fa-sun"></i>' .
+                                    '<div class="custom-control custom-switch d-inline-block">' .
+                                        '<input type="checkbox" class="custom-control-input " id="darkSwitch">' .
+                                        '<label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>' .
+                                    '</div>'
                     ],
                     Yii::$app->user->isGuest ? (
                         [
@@ -255,11 +263,6 @@ $this->registerJS($js);
 <footer class="footer">
     <div class="container">
         <p class="float-left">&copy; My Company <?= date('Y') ?></p>
-        <i class="fas fa-sun"></i>
-        <div class="custom-control custom-switch d-inline-block">
-            <input type="checkbox" class="custom-control-input " id="darkSwitch">
-            <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
-        </div>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
