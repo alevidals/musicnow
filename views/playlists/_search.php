@@ -19,10 +19,12 @@ use yii\bootstrap4\Html;
 
     <div class="filters mt-4">
         <div class="row">
-            <div class="col-6">
-                <?= $form->field($model, 'usuario.login') ?>
-            </div>
-            <div class="col-6">
+            <?php if (Yii::$app->user->identity->rol_id == 1) : ?>
+                <div class="col-6">
+                    <?= $form->field($model, 'usuario.login') ?>
+                </div>
+            <?php endif; ?>
+            <div class="col">
                 <?= $form->field($model, 'titulo') ?>
             </div>
         </div>

@@ -37,7 +37,7 @@ $this->registerJS($js);
 
     <?= Html::beginForm(['site/index'], 'get', ['data-pjax' => 'true']) ?>
         <div class="form-group">
-            <?= Html::textInput('cadena', $cadena, ['class' => 'form-control', 'placeholder' => Yii::t('app', 'Search') . '...']) ?>
+            <?= Html::textInput('cadena', $cadena, ['class' => 'form-control', 'placeholder' => Yii::t('app', 'Search') . '...', 'autocomplete' => 'off']) ?>
         </div>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn main-yellow']) ?>

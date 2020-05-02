@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row justify-content-center mt-3">
         <div class="form-group mb-5 col-12 col-md-4">
-            <input class="form-control" type="text" name="searchUsers" id="search-users" placeholder="<?= Yii::t('app', 'UserSearch') ?>">
+            <input class="form-control" type="text" name="searchUsers" id="search-users" placeholder="<?= Yii::t('app', 'UserSearch') ?>" autocomplete="off">
         </div>
     </div>
 
