@@ -804,3 +804,7 @@ textarea:focus {
     border: none;
     background-color: var(--bar-dark);
 }
+
+[data-theme="dark"] .fs-title {
+    color: var(--primary);
+}
