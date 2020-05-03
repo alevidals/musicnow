@@ -108,36 +108,39 @@ kartik\icons\FontAwesomeAsset::register($this);
                                 'fieldConfig' => [
                                     'horizontalCssClasses' => ['wrapper' => 'col-lg-12 mx-auto'],
                                 ],
+                                'options' => ['itemscope' => '', 'itemtype' => 'https://schema.org/RegisterAction']
                             ]); ?>
-                                <fieldset>
-                                    <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
-                                    <?= $form->field($userModel, 'nombre')->textInput()->label(Yii::t('app', 'Nombre') . '*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($userModel, 'apellidos')->textInput()->label(Yii::t('app', 'Apellidos') . '*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($userModel, 'login')->textInput()->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12']) ?>
-                                    <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
-                                </fieldset>
-                                <fieldset>
-                                    <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <?= $form->field($userModel, 'password')->passwordInput()->label(Yii::t('app', 'Password') . '*', ['class' => 'col-12']) ?>
+                                <div itemprop="agent" itemscope itemtype="https://schema.org/Person">
+                                    <fieldset>
+                                        <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
+                                        <?= $form->field($userModel, 'nombre')->textInput()->label(Yii::t('app', 'Nombre') . '*', ['class' => 'col-12', 'itemprop' => 'name']) ?>
+                                        <?= $form->field($userModel, 'apellidos')->textInput()->label(Yii::t('app', 'Apellidos') . '*', ['class' => 'col-12', 'itemprop' => 'familyName']) ?>
+                                        <?= $form->field($userModel, 'login')->textInput()->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12', 'itemprop' => 'additionalName']) ?>
+                                        <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
+                                    </fieldset>
+                                    <fieldset>
+                                        <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <?= $form->field($userModel, 'password')->passwordInput()->label(Yii::t('app', 'Password') . '*', ['class' => 'col-12']) ?>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <?= $form->field($userModel, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password Repeat') . '*', ['class' => 'col-12']) ?>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
-                                            <?= $form->field($userModel, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password Repeat') . '*', ['class' => 'col-12']) ?>
-                                        </div>
-                                    </div>
-                                    <?= $form->field($userModel, 'email')->textInput()->label('Email*', ['class' => 'col-12']) ?>
-                                    <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12'])
-                                            ->widget(
-                                                DateControl::classname(),
-                                                [
-                                                'type' => DateControl::FORMAT_DATE,
-                                                'displayFormat' => 'php:d-m-Y',
-                                                ]
-                                            ); ?>
-                                    <?= Html::button(Yii::t('app', 'Anterior'), ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
-                                    <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
-                                </fieldset>
+                                        <?= $form->field($userModel, 'email')->textInput()->label('Email*', ['class' => 'col-12', 'itemprop' => 'email']) ?>
+                                        <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12', 'itemprop' => 'birthDate'])
+                                                ->widget(
+                                                    DateControl::classname(),
+                                                    [
+                                                    'type' => DateControl::FORMAT_DATE,
+                                                    'displayFormat' => 'php:d-m-Y',
+                                                    ]
+                                                ); ?>
+                                        <?= Html::button(Yii::t('app', 'Anterior'), ['type' => 'button', 'name' => 'previous', 'class' => 'previous action-button-previous btn main-yellow']) ?>
+                                        <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => ' btn main-yellow rounded', 'name' => 'register-button']) ?>
+                                    </fieldset>
+                                </div>
                             <?php ActiveForm::end(); ?>
                         </div>
                     </div>
