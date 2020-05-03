@@ -68,7 +68,7 @@ class UsuariosController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['send-reset-pass'],
-                        'roles' => ['@'],
+                        'roles' => ['?'],
                     ],
                 ],
             ],
