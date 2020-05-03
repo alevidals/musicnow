@@ -8,7 +8,7 @@ $lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'es-ES';
 
 $config = [
     'id' => 'basic',
-    'defaultRoute' => '/usuarios/login',
+    // 'defaultRoute' => '/usuarios/login',
     'name' => 'Mus!c now',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
