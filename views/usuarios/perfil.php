@@ -148,7 +148,7 @@ $this->registerJS($js);
                         <i class="fas fa-ellipsis-h"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <?= Html::a(Yii::t('app', 'ConfigureProfile'), ['usuarios/configurar', 'id' => $model->id], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
+                        <?= Html::a(Yii::t('app', 'ConfigureProfile'), ['usuarios/configurar'], ['class' => 'dropdown-item', 'data-pjax' => 0]) ?>
                     </div>
                 <?php endif; ?>
             </div>
