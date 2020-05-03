@@ -69,7 +69,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                 'id' => 'login-form',
                                 'layout' => 'horizontal',
                                 'fieldConfig' => [
-                                    'horizontalCssClasses' => ['wrapper' => 'col-lg-12 mx-auto'],
+                                    'horizontalCssClasses' => ['wrapper' => 'col-sm-12 mx-auto'],
                                 ],
                             ]); ?>
                                 <h2 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h2>

@@ -46,7 +46,7 @@ class UsuariosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'update', 'create', 'delete', 'eliminar-cuenta'],
+                'only' => ['index', 'update', 'create', 'delete', 'eliminar-cuenta', 'send-reset-pass'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -64,6 +64,11 @@ class UsuariosController extends Controller
                             $id = Yii::$app->request->get('id');
                             return $id == Yii::$app->user->id;
                         },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['send-reset-pass'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
