@@ -675,7 +675,10 @@ class UsuariosController extends Controller
 
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return $playlists;
+        return [
+            'imgLink' => Yii::getAlias('@web/img/playlists.png'),
+            'playlists' => $playlists
+        ];
     }
 
     /**

@@ -62,4 +62,16 @@ $counter = 1;
             </div>
         <?php endforeach ?>
     </div>
+
+    <div class="modal fade" id="playlist" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2 class="text-center">Playlists</h2>
+                    <div class="row row-playlists">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

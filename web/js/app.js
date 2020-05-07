@@ -244,10 +244,11 @@ $('body').on('click', '.playlist-btn', function ev(e) {
         url: '/index.php?r=usuarios%2Fget-playlists&usuario_id=' + usuario_id,
         success: function (data) {
             $('.row-playlists').html('');
-            data.forEach(element => {
+            data.playlists.forEach(element => {
                 $('.row-playlists').append(`
-                    <div class="col-12">
-                        <h3 class="d-inline-block">${element.titulo}</h3>
+                    <div class="col-4">
+                        <img src="${data.imgLink}" class="img-fluid">
+                        <h5 class="d-inline-block">${element.titulo}</h5>
                         <button data-song="${cancion_id}" data-playlist="${element.id}" class="ml-auto action-btn outline-transparent add-playlist-btn"><i class="far fa-plus-square"></i></button>
                     </div>
                 `);

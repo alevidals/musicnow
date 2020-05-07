@@ -52,7 +52,7 @@ class PlaylistsController extends Controller
         } else {
             $usuario = Usuarios::findOne(Yii::$app->user->id);
             $playlists = $usuario->getPlaylists()->all();
-            $likedSongs = $usuario->getCancionesFavoritas()->all();
+            // $likedSongs = $usuario->getCancionesFavoritas()->all();
             $res = [
                 'playlists' => $playlists,
             ];
