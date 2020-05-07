@@ -136,6 +136,7 @@ $this->registerJS($js);
         } else {
             $items = [
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Tendencias'), 'url' => ['/site/tendencias'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Notificaciones<span class="badge badge-warning ml-1 notifications-number">', 'url' => ['/usuarios/notificaciones'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'options' => ['class' => 'my-auto']],

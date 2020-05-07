@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span class="status badge d-inline-block"><?= $seguido->getEstado()->one()->estado ?></span>
                 <span class="badge badge-warning" id="messages-number-<?= $seguido->id ?>"></span>
                 <button class="btn main-yellow btn-sm start-chat" data-receptorid="<?= $seguido->id ?>" data-toggle="modal" data-target="#chat-<?= $seguido->id ?>">Chat</button>
-                <div class="modal fade" id="chat-<?= $seguido->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade chat" id="chat-<?= $seguido->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

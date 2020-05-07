@@ -4,7 +4,7 @@
 
 use yii\bootstrap4\Html;
 
-$this->title = 'My Yii Application';
+$this->title = 'Mus!c Now';
 
 $sort = Yii::$app->request->get('sort');
 

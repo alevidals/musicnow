@@ -177,4 +177,9 @@ return [
     'UserInfo' => 'Información personal',
     'ImageBanner' => 'Banner e imágen de perfil',
     'Manage' => 'Administrar',
+    'MostListened' => 'Canciones más escuchadas',
+    'MostLikes' => 'Canciones con más likes',
+    'Popular' => 'Lo más popular',
+    'Tendencias' => '',
+    'TrendsOf' => 'Tendencias de',
 ];

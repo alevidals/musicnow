@@ -22,6 +22,7 @@ use yii\web\UploadedFile;
  * @property bool $explicit
  * @property int $usuario_id
  * @property string $created_at
+ * @property int $reproducciones
  *
  * @property AlbumesCanciones[] $albumesCanciones
  * @property Albumes $album
@@ -54,8 +55,9 @@ class Canciones extends \yii\db\ActiveRecord
     {
         return [
             [['titulo', 'genero_id', 'url_cancion', 'song_name', 'url_portada', 'image_name', 'anyo', 'duracion', 'explicit', 'usuario_id'], 'required'],
-            [['album_id', 'genero_id', 'usuario_id'], 'default', 'value' => null],
-            [['album_id', 'genero_id', 'usuario_id'], 'integer'],
+            [['album_id', 'genero_id', 'usuario_id', 'reproducciones'], 'default', 'value' => null],
+            [['reproducciones'], 'default', 'value' => 0],
+            [['album_id', 'genero_id', 'usuario_id', 'reproducciones'], 'integer'],
             [['anyo'], 'number'],
             [['duracion'], 'string'],
             [['created_at'], 'safe'],
@@ -90,6 +92,7 @@ class Canciones extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'portada' => Yii::t('app', 'Cover'),
             'cancion' => Yii::t('app', 'Song'),
+            'reproducciones' => Yii::t('app', 'Reproducciones'),
         ];
     }
 

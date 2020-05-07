@@ -181,15 +181,18 @@ $this->registerJS($js);
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" id="playlists-tab" data-toggle="tab" href="#playlists" role="tab" aria-controls="playlists1" aria-selected="false">Playlists</a>
                 </li>
-                <li class="nav-item mr-auto">
+                <li class="nav-item">
                     <a class="nav-link text-uppercase" id="videoclips-tab" data-toggle="tab" href="#videoclips" role="tab" aria-controls="videoclips" aria-selected="false">Videoclips</a>
+                </li>
+                <li class="nav-item mr-auto">
+                    <a class="nav-link text-uppercase" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="videoclips" aria-selected="false"><?= Yii::t('app', 'Popular') ?></a>
                 </li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
 
                 <?= $this->render('_perfil-canciones', [
-                    'canciones' => $canciones,
+                    'canciones' => $canciones->all(),
                     'likes' => $likes,
                 ]) ?>
 
@@ -205,6 +208,11 @@ $this->registerJS($js);
                 <?= $this->render('_perfil-videoclips', [
                     'videoclips' => $videoclips,
                     'model' => $model,
+                ]) ?>
+
+                <?= $this->render('_perfil-popular', [
+                    'canciones' => $canciones,
+                    'likes' => $likes,
                 ]) ?>
 
             </div>

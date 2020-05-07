@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'image_name',
             'anyo',
             'duracion',
-            'usuario_id',
+            'usuario.login',
             'created_at:datetime',
         ],
         'options' => [

@@ -362,7 +362,7 @@ class UsuariosController extends Controller
         $videoclips = $model->getVideoclips()->all();
 
         $canciones_id = $model->getCanciones()->select('id')->column();
-        $canciones = $model->getCanciones()->all();
+        $canciones = $model->getCanciones();
         $cancionesIds = $model->getCanciones()
             ->distinct()
             ->select('album_id')

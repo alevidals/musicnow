@@ -195,6 +195,7 @@ class CancionesController extends Controller
 
         $model = $this->findModel($cancion_id);
         $res = [
+            'id' => $model->id,
             'url_cancion' => $model->url_cancion,
             'url_portada' => $model->url_portada,
             'titulo' => Html::encode($model->titulo),
@@ -253,5 +254,13 @@ class CancionesController extends Controller
         Yii::debug($canciones);
 
         return $canciones;
+    }
+
+    public function actionAddVisualization()
+    {
+        $cancion_id = Yii::$app->request->post('cancion_id');
+        $cancion = $this->findModel($cancion_id);
+        $cancion->reproducciones = ++$cancion->reproducciones;
+        $cancion->save();
     }
 }

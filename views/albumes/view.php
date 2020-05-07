@@ -48,8 +48,8 @@ $counter = 1;
             <div class="col-12 playlist-cancion mb-4 fall-animation" id="song-<?= $cancion->id ?>" itemprop="track" itemscope itemtype="https://schema.org/MusicRecording">
                 <h6 class="d-inline-block"><?= $counter++; ?></h6>
                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px', 'itemprop' => 'image']) ?>
-                <div class="text-truncate">
-                    <h5 class="d-inline-block ml-3" itemprop="name"><?= Html::encode($cancion->titulo) ?></h5>
+                <div class="text-truncate d-inline-block">
+                    <h5 class="ml-3 my-auto" itemprop="name"><?= Html::encode($cancion->titulo) ?></h5>
                 </div>
                 <?php if ($cancion->explicit) : ?>
                     <span class="ml-3 badge explicit-badge">EXPLICIT</span>

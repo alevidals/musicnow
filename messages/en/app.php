@@ -177,4 +177,9 @@ return [
     'UserInfo' => 'Personal information',
     'ImageBanner' => 'Banner and profile image',
     'Manage' => '',
+    'MostListened' => 'Most listened songs',
+    'MostLikes' => 'Songs with more likes',
+    'Popular' => 'The most popular',
+    'Tendencias' => 'Trends',
+    'TrendsOf' => 'Trends of',
 ];

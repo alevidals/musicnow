@@ -289,4 +289,26 @@ class SiteController extends Controller
             'likes' => $likes,
         ];
     }
+
+    public function actionTendencias()
+    {
+        $cancionesMasEscuchadas = Canciones::find()
+            ->where('EXTRACT(MONTH FROM created_at) = EXTRACT(MONTH FROM current_date)')
+            ->andWhere('EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM current_date)')
+            ->limit(10)->orderBy(['reproducciones' => SORT_DESC])
+            ->all();
+
+        $cancionesConMasLikes = Canciones::find()
+            ->joinWith('likes l')
+            ->groupBy('canciones.id')
+            ->where('EXTRACT(MONTH FROM created_at) = EXTRACT(MONTH FROM current_date)')
+            ->andWhere('EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM current_date)')
+            ->orderBy(['COUNT(l.usuario_id)' => SORT_DESC])
+            ->all();
+
+        return $this->render('tendencias', [
+            'cancionesMasEscuchadas' => $cancionesMasEscuchadas,
+            'cancionesConMasLikes' => $cancionesConMasLikes,
+        ]);
+    }
 }

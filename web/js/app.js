@@ -72,7 +72,7 @@ $('.file-input-banner').on('change', function ev(e) {
     readURL(this, BANNER);
 });
 
-$('body').on('show.bs.modal', '.modal', function (e) {
+$('body').on('show.bs.modal', '.modal.chat', function (e) {
     let id = $(this).attr('id').split('-')[1];
     updateChatHistory(id);
     interval = setInterval(function(){
@@ -368,6 +368,7 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
         success: function(data) {
             data.forEach(element => {
                 playlist.push({
+                    id: element.id,
                     url_cancion: element.url_cancion,
                     url_portada: element.url_portada,
                     titulo: element.titulo,
@@ -392,6 +393,7 @@ $('body').on('click', '.play-album-btn', function ev(e) {
         success: function(data) {
             data.forEach(element => {
                 playlist.push({
+                    id: element.id,
                     url_cancion: element.url_cancion,
                     url_portada: element.url_portada,
                     titulo: element.titulo,
@@ -512,6 +514,13 @@ function addNewData(cancion) {
     $('.player audio source').attr('src', cancion.url_cancion);
     $('.artist-info p').html(cancion.titulo);
     $('.artist-info small').html(cancion.album);
+    $.ajax({
+        method: 'POST',
+        url: '/index.php?r=canciones%2Fadd-visualization',
+        data: {
+            cancion_id: cancion.id
+        }
+    });
 }
 
 $('body').on('click', '.backward-btn', function ev(e) {
@@ -1102,7 +1111,7 @@ $('body').on('keyup', '#search-users', function ev(e) {
                         <span class="status badge badge-success d-inline-block">${element.estado_id}</span>
                         <span class="badge badge-warning" id="messages-number-${element.id}"></span>
                         <button class="btn main-yellow start-chat" data-receptorid="${element.id}" data-toggle="modal" data-target="#chat-${element.id}">Chat</button>
-                        <div class="modal fade" id="chat-${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade chat" id="chat-${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
