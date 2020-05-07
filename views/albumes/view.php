@@ -48,6 +48,8 @@ $counter = 1;
             <div class="col-12 playlist-cancion mb-4 fall-animation" id="song-<?= $cancion->id ?>" itemprop="track" itemscope itemtype="https://schema.org/MusicRecording">
                 <h6 class="d-inline-block"><?= $counter++; ?></h6>
                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid ml-3', 'alt' => 'portada', 'width' => '50px', 'itemprop' => 'image']) ?>
+                <button data-song="<?= $cancion->id ?>" class="action-btn outline-transparent add-btn"><i class="fas fa-music"></i></button>
+                <button data-song="<?= $cancion->id ?>" data-user="<?= Yii::$app->user->id ?>" class="action-btn outline-transparent playlist-btn" data-toggle="modal" data-target="#playlist"><i class="fas fa-plus"></i></button>
                 <div class="text-truncate d-inline-block">
                     <h5 class="ml-3 my-auto" itemprop="name"><?= Html::encode($cancion->titulo) ?></h5>
                 </div>
