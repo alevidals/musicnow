@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Albumes;
 use app\models\Canciones;
 use app\models\ContactForm;
 use app\models\Usuarios;
@@ -90,12 +91,21 @@ class SiteController extends Controller
             'query' => Canciones::find()->where('1=0'),
         ]);
 
+        $albumesSerch = new ActiveDataProvider([
+            'query' => Albumes::find()->where('1=0'),
+        ]);
+
         if (($cadena = Yii::$app->request->get('cadena', ''))) {
             $usuariosSearch = new ActiveDataProvider([
                 'query' => Usuarios::find()
                     ->where(['ilike', 'login', $cadena])
                     ->orWhere(['ilike', 'email', $cadena])
                     ->andWhere(['!=', 'rol_id', 1]),
+            ]);
+
+            $albumesSerch = new ActiveDataProvider([
+                'query' => Albumes::find()
+                    ->where(['ilike', 'titulo', $cadena])
             ]);
 
             $userIds = Usuarios::find()
@@ -140,6 +150,7 @@ class SiteController extends Controller
             'cadena' => $cadena,
             'usuariosSearch' => $usuariosSearch,
             'cancionesSearch' => $cancionesSearch,
+            'albumesSearch' => $albumesSerch,
         ]);
     }
 

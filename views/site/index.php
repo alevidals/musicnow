@@ -62,7 +62,7 @@ $this->registerJS($js);
     <?php endif ?>
 
     <?php if ($cancionesSearch->totalCount > 0) : ?>
-        <h3 class="my-3"><?= Yii::t('app', 'Songs') ?></h3>
+        <h3 class="my-3"><?= Yii::t('app', 'Canciones') ?></h3>
         <div class="dropdown">
             <button class="btn main-yellow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?= Yii::t('app', 'Order') ?>
@@ -83,6 +83,31 @@ $this->registerJS($js);
                     <div class="col my-auto">
                         <p class="m-0 font-weight-bold"><?= $cancion->titulo ?></p>
                         <p class="m-0"><?= $cancion->getUsuario()->one()->login ?></p>
+                    </div>
+                    <div class="float-right">
+                        <button id="play-<?= $cancion->id ?>" class=" play-btn outline-transparent"><i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif ?>
+
+    <?php if ($albumesSearch->totalCount > 0) : ?>
+        <h3 class="my-3"><?= Yii::t('app', 'Albumes') ?></h3>
+        <div class="row">
+            <?php foreach ($albumesSearch->getModels() as $album) : ?>
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <div class="col-3 col-md-2 col-lg-1">
+                        <?= Html::img($album->url_portada, ['class' => 'img-fluid', 'alt' => 'portada']) ?>
+                    </div>
+                    <div class="col my-auto">
+                        <p class="m-0 font-weight-bold"><?= $album->titulo ?></p>
+                        <p class="m-0"><?= $album->getUsuario()->one()->login ?></p>
+                    </div>
+                    <div class="float-right">
+                        <?= Html::a('<i class="fas fa-eye"></i>', ['albumes/view', 'id' => $album->id]) ?>
                     </div>
                 </div>
             </div>
