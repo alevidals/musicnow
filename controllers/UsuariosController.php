@@ -668,16 +668,23 @@ class UsuariosController extends Controller
         $usuario = Usuarios::findOne($usuario_id);
 
         $playlists = $usuario->getPlaylists()->all();
+        $playlistsPortadas = [];
 
         foreach ($playlists as $playlist) {
             $playlist['titulo'] = Html::encode($playlist['titulo']);
+            if ($playlist->getCanciones()->count() > 0) {
+                $randomNumber = rand(0, $playlist->getCanciones()->count() - 1);
+                $playlistsPortadas[$playlist->id] = $playlist->getCanciones()->all()[$randomNumber]->url_portada;
+            } else {
+                $playlistsPortadas[$playlist->id] = Yii::getAlias('@web/img/playlists.png');
+            }
         }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         return [
-            'imgLink' => Yii::getAlias('@web/img/playlists.png'),
-            'playlists' => $playlists
+            'playlists' => $playlists,
+            'playlistsPortadas' => $playlistsPortadas,
         ];
     }
 
