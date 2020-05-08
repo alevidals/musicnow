@@ -1113,7 +1113,7 @@ $('body').on('keyup', '#search-users', function ev(e) {
                     <div id="${element.id}" class="col-12 mb-5">
                         <img src="${element.url_image}" class="user-search-img" width="40px" alt="logo"?>
                         <h4 class="d-inline-block">${element.login}</h4>
-                        <span class="status badge badge-success d-inline-block">${element.estado_id}</span>
+                        <span class="status badge ${(element.estado_id == 'offline') ? 'badge-danger' : 'badge-success'} d-inline-block">${element.estado_id}</span>
                         <span class="badge badge-warning" id="messages-number-${element.id}"></span>
                         <button class="btn main-yellow start-chat" data-receptorid="${element.id}" data-toggle="modal" data-target="#chat-${element.id}">Chat</button>
                         <div class="modal fade chat" id="chat-${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1122,7 +1122,7 @@ $('body').on('keyup', '#search-users', function ev(e) {
                                     <div class="modal-header">
                                         <img src="${element.url_image}" class="user-search-img" width="40px" alt="logo"?>
                                         <h5 class="modal-title my-auto ml-3">${element.login}</h5>
-                                        <span class="status badge badge-success my-auto ml-3">${element.estado_id}</span>
+                                        <span class="status badge ${(element.estado_id == 'offline') ? 'badge-danger' : 'badge-success'} my-auto ml-3">${element.estado_id}</span>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true" class="text-white"><i class="fas fa-times"></i></span>
                                         </button>
