@@ -845,3 +845,7 @@ textarea:focus {
 [data-theme="dark"] .fs-title {
     color: var(--primary);
 }
+
+[data-theme] input:disabled {
+    background-color: transparent !important;
+}
