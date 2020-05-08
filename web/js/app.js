@@ -241,7 +241,11 @@ $('body').on('click', '.playlist-btn', function ev(e) {
     let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Fget-playlists&usuario_id=' + usuario_id,
+        url: '/index.php?r=usuarios%2Fget-playlists',
+        data: {
+            usuario_id: usuario_id,
+            cancion_id: cancion_id
+        },
         success: function (data) {
             $('.row-playlists').html('');
             data.playlists.forEach(element => {

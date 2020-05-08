@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Bloqueados;
 use app\models\CancionesPlaylist;
+use app\models\CancionesPlaylistSearch;
 use app\models\Chat;
 use app\models\Estados;
 use app\models\LoginForm;
@@ -663,11 +664,19 @@ class UsuariosController extends Controller
      * conocer las playlists
      * @return array
      */
-    public function actionGetPlaylists($usuario_id)
+    public function actionGetPlaylists($usuario_id, $cancion_id)
     {
         $usuario = Usuarios::findOne($usuario_id);
 
-        $playlists = $usuario->getPlaylists()->all();
+        $playlistsIds = CancionesPlaylistSearch::find()
+            ->select('playlist_id')
+            ->where(['=', 'cancion_id', $cancion_id])
+            ->column();
+
+        $playlists = $usuario
+            ->getPlaylists()
+            ->where(['NOT IN', 'id', $playlistsIds])
+            ->all();
         $playlistsPortadas = [];
 
         foreach ($playlists as $playlist) {
