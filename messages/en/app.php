@@ -182,4 +182,5 @@ return [
     'Popular' => 'The most popular',
     'Tendencias' => 'Trends',
     'TrendsOf' => 'Trends of',
+    'Policy' => 'Privacy Policy',
 ];
