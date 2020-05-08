@@ -370,6 +370,11 @@ table i:hover, .delete-song-playlist-btn:hover {
     max-height: 600px;
     height: 600px;
     overflow-y: auto;
+    word-break: break-all;
+}
+
+.no-break-word {
+    word-break: normal;
 }
 
 .like-btn {

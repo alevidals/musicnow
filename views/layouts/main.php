@@ -296,7 +296,7 @@ $this->registerJS($js);
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body custom-overflow text-justify">
+        <div class="modal-body custom-overflow text-justify no-break-word">
             <p>El presente Política de Privacidad establece los términos en que Mus!c Now usa y protege la información que es
                 proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la
                 seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual

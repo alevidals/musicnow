@@ -38,7 +38,8 @@ use yii\bootstrap4\Html;
                                             <div class="row">
                                                 <?= Html::img($cancion->url_portada, ['class' => 'img-fluid col-12', 'alt' => 'profile-image']) ?>
                                                 <div class="col-12 mt-4">
-                                                    <textarea id="text-area-comment-<?= $cancion->id ?>" class="form-control text-area-comment" cols="30" rows="3" placeholder="<?= Yii::t('app', 'Comment') . '...' ?>"></textarea>
+                                                    <input id="text-area-comment-<?= $cancion->id ?>" class="form-control text-area-comment" cols="30" rows="3" placeholder="<?= Yii::t('app', 'Comment') . '...' ?>"></input>
+                                                    <p><small><span class="character-count">0</span>/255</small></p>
                                                     <div class="invalid-feedback"><?= Yii::t('app', 'MaxChar') ?></div>
                                                     <div class="mt-3">
                                                         <button class="btn btn-sm main-yellow comment-btn" id="comment-<?= $cancion->id ?>" type="button"><?= Yii::t('app', 'CommentAction') ?></button>

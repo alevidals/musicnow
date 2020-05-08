@@ -194,6 +194,8 @@ $('body').on('click', '.like-btn', function ev(e) {
 
 $('body').on('click', '.cancion', function ev(e) {
     let cancion_id = $(this).data('target').split('-')[1];
+    $('.character-count').html('0');
+    $('.text-area-comment').val('');
     $('#like-' + cancion_id + ' i').removeClass('fas far');
     $.ajax({
         'method': 'POST',
@@ -323,6 +325,56 @@ $('body').on('click', '.comment-btn', function ev(e) {
                 $('.text-area-comment').val('');
             }
         });
+    }
+});
+
+$('body').on('keydown', '.text-area-comment', function ev(e) {
+    let key = (event.keyCode ? event.keyCode : event.which);
+    if (key == 13) {
+        let cancion_id = $('.comment-btn').attr('id').split('-')[1];
+        let comentario = $('#text-area-comment-' + cancion_id).val();
+        if (comentario.length > 255 || comentario.length == 0) {
+            $('.text-area-comment').html('');
+            $('.invalid-feedback').show();
+        } else {
+            $('.invalid-feedback').hide();
+            $.ajax({
+                'method': 'POST',
+                url: '/index.php?r=comentarios%2Fcomentar&cancion_id=' + cancion_id,
+                data: {
+                    comentario: comentario,
+                },
+                success: function (data) {
+                    $('.row-comments').prepend(`
+                        <div class="col-12 mt-3" id="comentario-${data.comentario_id}">
+                            <div class="row">
+                                <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">
+                                    <img class="user-search-img" src="${data.url_image}" alt="perfil" width="50px" height="50px">
+                                </a>
+                                <div class="col">
+                                    <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">${data.login}</a>
+                                    <small class="ml-1 comment-time">${data.created_at}</small>
+                                    <p>
+                                        ${data.comentario}
+                                        <button class="btn d-inline outline-transparent delete-comment-btn" data-comentario="${data.comentario_id}"><i class="fas fa-trash text-danger"></i></button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                    $('.text-area-comment').val('');
+                }
+            });
+        }
+    }
+});
+
+$('body').on('keyup', '.text-area-comment', function ev(e) {
+    let longitud = $('.text-area-comment').val().length;
+    if (longitud >= 0 && longitud <= 255) {
+        $('.character-count').html(longitud);
+    } else {
+        $('.character-count').effect('bounce');
     }
 });
 
@@ -885,7 +937,7 @@ $(window).on('scroll', function () {
                                                                                 <div class="row">
                                                                                     <img class="img-fluid col-12" alt="profile-image" src="${element.url_portada}">
                                                                                     <div class="col-12 mt-4">
-                                                                                        <textarea id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="${strings[0]}"></textarea>
+                                                                                        <input id="text-area-comment-${element.id}" class="form-control text-area-comment" cols="30" rows="3" placeholder="${strings[0]}"></input>
                                                                                         <div class="invalid-feedback">${strings[1]}</div>
                                                                                         <div class="mt-3">
                                                                                             <button class="btn btn-sm main-yellow comment-btn" id="comment-${element.id}" type="button">${strings[0]}</button>
