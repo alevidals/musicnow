@@ -35,6 +35,19 @@ $(".previous").click(function(){
         previous_fs.fadeIn();
     });
 });
+
+$('body').on('click', '.hide-show', function e(ev) {
+    if ($(this).hasClass('fa-eye-slash')) {
+        $(this).removeClass('fa-eye-slash');
+        $(this).addClass('fa-eye');
+        $('.pass-input').prev().attr('type', 'text');
+    } else {
+        $(this).addClass('fa-eye-slash');
+        $(this).removeClass('fa-eye');
+        $('.pass-input').prev().attr('type', 'password');
+    }
+});
+
 EOT;
 
 $this->registerJS($js);
@@ -74,7 +87,14 @@ kartik\icons\FontAwesomeAsset::register($this);
                             ]); ?>
                                 <h2 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h2>
                                 <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
-                                <?= $form->field($loginFormModel, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
+                                <?= $form->field($loginFormModel, 'password', [
+                                    'inputTemplate' => '<div class="input-group mb-3">
+                                                            {input}
+                                                            <div class="input-group-append pass-input">
+                                                                    <i class="fas fa-eye-slash hide-show"></i>
+                                                            </div>
+                                                        </div>'
+                                    ])->passwordInput()->label(Yii::t('app', 'Password')) ?>
                                 <?= $form->field($loginFormModel, 'rememberMe')->checkbox()->label(Yii::t('app', 'Remember me')) ?>
                                 <div class="form-group">
                                     <?= Html::a(Yii::t('app', 'reset-password'), ['usuarios/send-reset-pass'], ['class' => 'normal-link']) ?>
@@ -122,10 +142,24 @@ kartik\icons\FontAwesomeAsset::register($this);
                                         <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
                                         <div class="row">
                                             <div class="col-md-6 col-12">
-                                                <?= $form->field($userModel, 'password')->passwordInput()->label(Yii::t('app', 'Password') . '*', ['class' => 'col-12']) ?>
+                                                <?= $form->field($userModel, 'password', [
+                                                    'inputTemplate' => '<div class="input-group mb-3">
+                                                                            {input}
+                                                                            <div class="input-group-append pass-input">
+                                                                                    <i class="fas fa-eye-slash hide-show"></i>
+                                                                            </div>
+                                                                        </div>'
+                                                    ])->passwordInput()->label(Yii::t('app', 'Password') . '*', ['class' => 'col-12']) ?>
                                             </div>
                                             <div class="col-md-6 col-12">
-                                                <?= $form->field($userModel, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password Repeat') . '*', ['class' => 'col-12']) ?>
+                                                <?= $form->field($userModel, 'password_repeat', [
+                                                    'inputTemplate' => '<div class="input-group mb-3">
+                                                                            {input}
+                                                                            <div class="input-group-append pass-input">
+                                                                                    <i class="fas fa-eye-slash hide-show"></i>
+                                                                            </div>
+                                                                        </div>'
+                                                    ])->passwordInput()->label(Yii::t('app', 'Password Repeat') . '*', ['class' => 'col-12']) ?>
                                             </div>
                                         </div>
                                         <?= $form->field($userModel, 'email')->textInput()->label('Email*', ['class' => 'col-12', 'itemprop' => 'email']) ?>
