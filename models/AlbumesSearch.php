@@ -80,11 +80,11 @@ class AlbumesSearch extends Albumes
         $query->andFilterWhere([
             'id' => $this->id,
             'anyo' => $this->anyo,
-            'created_at' => $this->created_at,
             'usuario_id' => $this->usuario_id,
         ]);
 
         $query->andFilterWhere(['ilike', 'titulo', $this->titulo]);
+        $query->andFilterWhere(['ilike', '(albumes.created_at::TEXT)', $this->created_at]);
 
         $query->andFilterWhere([
             'ilike', 'u.login', $this->getAttribute('usuario.login')

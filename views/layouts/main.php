@@ -69,7 +69,7 @@ $this->registerJS($js);
     <?php $this->head() ?>
 </head>
 <body>
-<?php Pjax::begin(); ?>
+<?php (Yii::$app->user->identity->rol_id != 1) ? Pjax::begin() : ''?>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -143,10 +143,10 @@ $this->registerJS($js);
                         'label' => Yii::t('app', 'Manage'),
                         'options' => ['class' => 'my-auto'],
                         'items' => [
-                            ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
-                            ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
-                            ['label' => Yii::t('app', 'Comments'), 'url' => ['/comentarios/index']],
-                            ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index']],
+                            ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'linkOptions' => ['data-pjax' => 0]],
+                            ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'linkOptions' => ['data-pjax' => 0]],
+                            ['label' => Yii::t('app', 'Comments'), 'url' => ['/comentarios/index'], 'linkOptions' => ['data-pjax' => 0]],
+                            ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'linkOptions' => ['data-pjax' => 0]],
 
                         ],
                     ],
@@ -225,7 +225,7 @@ $this->registerJS($js);
     </div>
 </div>
 
-<?php Pjax::end(); ?>
+<?php (Yii::$app->user->identity->rol_id != 1) ? Pjax::end() : ''; ?>
 
 <audio class="chat-notification">
     <source src="/sounds/notification.mp3">
