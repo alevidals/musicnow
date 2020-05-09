@@ -381,6 +381,10 @@ table i:hover, .delete-song-playlist-btn:hover {
     font-size: 23px;
 }
 
+.datepicker {
+    z-index: 5000 !important;
+}
+
 
 /* HOVER ANIMATION */
 

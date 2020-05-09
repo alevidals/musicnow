@@ -69,7 +69,7 @@ $this->registerJS($js);
     <?php $this->head() ?>
 </head>
 <body>
-<?php (Yii::$app->user->identity->rol_id != 1) ? Pjax::begin() : ''?>
+<?php (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol_id != 1) ? Pjax::begin() : ''?>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -225,7 +225,7 @@ $this->registerJS($js);
     </div>
 </div>
 
-<?php (Yii::$app->user->identity->rol_id != 1) ? Pjax::end() : ''; ?>
+<?php (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol_id != 1) ? Pjax::end() : ''; ?>
 
 <audio class="chat-notification">
     <source src="/sounds/notification.mp3">
