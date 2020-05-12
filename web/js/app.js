@@ -135,7 +135,7 @@ $('body').on('click', '.play-btn', function ev(e) {
     let cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=canciones%2Fget-song-data',
+        url: '/canciones%2Fget-song-data',
         data: {
             cancion_id: cancion_id
         },
@@ -174,7 +174,7 @@ $('body').on('click', '.like-btn', function ev(e) {
     let cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         'method': 'POST',
-        url: '/index.php?r=likes%2Flike&cancion_id=' + cancion_id,
+        url: '/likes%2Flike?cancion_id=' + cancion_id,
         success: function (data) {
             if (data.class == 'far') {
                 $('#outerlike-' + cancion_id + ' i').removeClass('fas');
@@ -199,7 +199,7 @@ $('body').on('click', '.cancion', function ev(e) {
     $('#like-' + cancion_id + ' i').removeClass('fas far');
     $.ajax({
         'method': 'POST',
-        url: '/index.php?r=likes%2Fget-data&cancion_id=' + cancion_id,
+        url: '/likes%2Fget-data?cancion_id=' + cancion_id,
         success: function (data) {
             $('#like-' + cancion_id + ' i').addClass(data.class);
             $('.like-btn ~ p span').html(data.likes);
@@ -208,7 +208,7 @@ $('body').on('click', '.cancion', function ev(e) {
 
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=canciones%2Fcomentarios',
+        url: '/canciones%2Fcomentarios',
         data: {
             cancion_id: cancion_id
         },
@@ -243,7 +243,7 @@ $('body').on('click', '.playlist-btn', function ev(e) {
     let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Fget-playlists',
+        url: '/usuarios%2Fget-playlists',
         data: {
             usuario_id: usuario_id,
             cancion_id: cancion_id
@@ -264,7 +264,7 @@ $('body').on('click', '.playlist-btn', function ev(e) {
                 let playlist_id = $(this).data('playlist');
                 $.ajax({
                     method: 'POST',
-                    url: '/index.php?r=canciones-playlist%2Fagregar',
+                    url: '/canciones-playlist%2Fagregar',
                     data: {
                         cancion_id: cancion_id,
                         playlist_id: playlist_id,
@@ -300,7 +300,7 @@ $('body').on('click', '.comment-btn', function ev(e) {
         $('.invalid-feedback').hide();
         $.ajax({
             'method': 'POST',
-            url: '/index.php?r=comentarios%2Fcomentar&cancion_id=' + cancion_id,
+            url: '/comentarios%2Fcomentar?cancion_id=' + cancion_id,
             data: {
                 comentario: comentario,
             },
@@ -331,8 +331,10 @@ $('body').on('click', '.comment-btn', function ev(e) {
 $('body').on('keydown', '.text-area-comment', function ev(e) {
     let key = (event.keyCode ? event.keyCode : event.which);
     if (key == 13) {
-        let cancion_id = $('.comment-btn').attr('id').split('-')[1];
+        let cancion_id = $(this).attr('id').split('-')[3];
+        console.log(cancion_id);
         let comentario = $('#text-area-comment-' + cancion_id).val();
+        console.log(comentario);
         if (comentario.length > 255 || comentario.length == 0) {
             $('.text-area-comment').html('');
             $('.invalid-feedback').show();
@@ -340,7 +342,7 @@ $('body').on('keydown', '.text-area-comment', function ev(e) {
             $('.invalid-feedback').hide();
             $.ajax({
                 'method': 'POST',
-                url: '/index.php?r=comentarios%2Fcomentar&cancion_id=' + cancion_id,
+                url: '/comentarios%2Fcomentar?cancion_id=' + cancion_id,
                 data: {
                     comentario: comentario,
                 },
@@ -370,7 +372,7 @@ $('body').on('keydown', '.text-area-comment', function ev(e) {
 });
 
 $('body').on('keyup', '.text-area-comment', function ev(e) {
-    let longitud = $('.text-area-comment').val().length;
+    let longitud = $(this).val().length;
     if (longitud >= 0 && longitud <= 255) {
         $('.character-count').html(longitud);
     } else {
@@ -382,7 +384,7 @@ $('body').on('click', '.add-btn', function ev() {
     let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=canciones%2Fget-song-data&cancion_id=' + cancion_id,
+        url: '/canciones%2Fget-song-data?cancion_id=' + cancion_id,
         success: function (data) {
             $('.alert-box').prepend(`
                 <div class="toast mb-2" data-delay="5000">
@@ -399,6 +401,7 @@ $('body').on('click', '.add-btn', function ev() {
             `);
             $('.toast').not('.hide').toast('show');
             songs.push({
+                id: data.id,
                 url_cancion: data.url_cancion,
                 url_portada: data.url_portada,
                 titulo: data.titulo,
@@ -421,7 +424,7 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
     let playlist_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=playlists%2Fget-songs&playlist_id=' + playlist_id,
+        url: '/playlists%2Fget-songs?playlist_id=' + playlist_id,
         success: function(data) {
             data.forEach(element => {
                 playlist.push({
@@ -446,7 +449,7 @@ $('body').on('click', '.play-album-btn', function ev(e) {
     let album_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=albumes%2Fget-songs&album_id=' + album_id,
+        url: '/albumes%2Fget-songs?album_id=' + album_id,
         success: function(data) {
             data.forEach(element => {
                 playlist.push({
@@ -475,7 +478,7 @@ $('body').on('click', '.add-videoclip-btn', function ev(e) {
     } else {
         $.ajax({
             method: 'POST',
-            url: '/index.php?r=videoclips%2Fagregar',
+            url: '/videoclips%2Fagregar',
             data: {
                 link: link
             },
@@ -573,7 +576,7 @@ function addNewData(cancion) {
     $('.artist-info small').html(cancion.album);
     $.ajax({
         method: 'POST',
-        url: '/index.php?r=canciones%2Fadd-visualization',
+        url: '/canciones%2Fadd-visualization',
         data: {
             cancion_id: cancion.id
         }
@@ -642,7 +645,7 @@ if (getCookie('cookie-accept') == null) {
         let strings = ['CookieMessage'];
         $.ajax({
             method: 'GET',
-            url: '/index.php?r=site%2Fget-translate',
+            url: '/site%2Fget-translate',
             data: {
                 strings: strings
             },
@@ -662,7 +665,7 @@ if (getCookie('cookie-accept') == null) {
 function getFollowersNumber() {
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Fget-followers-data',
+        url: '/usuarios%2Fget-followers-data',
         success: function (data) {
             seguidores = data;
         }
@@ -674,14 +677,14 @@ function getNewNotifications() {
     let strings = ['followMessage'];
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=site%2Fget-translate',
+        url: '/site%2Fget-translate',
         data: {
             strings: strings
         },
         success: function (message) {
             $.ajax({
                 method: 'GET',
-                url: '/index.php?r=usuarios%2Fget-new-followers&total=' + seguidores,
+                url: '/usuarios%2Fget-new-followers?total=' + seguidores,
                 success: function (data) {
                     if (data.count > seguidores) {
                         data.seguidores.forEach(element => {
@@ -711,7 +714,7 @@ function getNewNotifications() {
     // NUEVOS MENSAJES
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Fget-no-read-messages&total=' + mensajes,
+        url: '/usuarios%2Fget-no-read-messages?total=' + mensajes,
         success: function (data) {
             if (data.count > 0) {
                 $('.messages-number').html(data.count);
@@ -754,7 +757,7 @@ function getNewNotifications() {
 function getNewRequests() {
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=solicitudes-seguimiento%2Fget-total-solicitudes',
+        url: '/solicitudes-seguimiento%2Fget-total-solicitudes',
         success: function (data) {
             if (data.total != 0) {
                 $('.notifications-number').html(data.total);
@@ -812,7 +815,7 @@ $('body').on('click', '.like-list', function ev(e) {
     let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=canciones/get-likes&cancion_id=' + cancion_id,
+        url: '/canciones/get-likes?cancion_id=' + cancion_id,
         success: function (data) {
             $('.like-row').html('');
             data.forEach(element => {
@@ -832,7 +835,7 @@ $('body').on('click', '.remove-videoclip-btn', function ev(e) {
     let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=site%2Fget-translate',
+        url: '/site%2Fget-translate',
         data: {
             strings: strings
         },
@@ -841,7 +844,7 @@ $('body').on('click', '.remove-videoclip-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/index.php?r=videoclips%2Feliminar',
+                        url: '/videoclips%2Feliminar',
                         data: {
                             id: id
                         },
@@ -875,14 +878,14 @@ $(window).on('scroll', function () {
             let strings = ['Comment', 'MaxChar'];
             $.ajax({
                     method: 'GET',
-                    url: '/index.php?r=site%2Fget-translate',
+                    url: '/site%2Fget-translate',
                     data: {
                         strings: strings
                     },
                     success: function (strings) {
                         $.ajax({
                             method: 'GET',
-                            url: '/index.php?r=site%2Fget-more-posts',
+                            url: '/site%2Fget-more-posts',
                             data: {
                                 offset: offset
                             },
@@ -992,7 +995,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
     let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=site%2Fget-translate',
+        url: '/site%2Fget-translate',
         data: {
             strings: strings,
         },
@@ -1001,7 +1004,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/index.php?r=comentarios%2Fdelete&id=' + comentario_id,
+                        url: '/comentarios%2Fdelete?id=' + comentario_id,
                         success: function (data) {
                             $('.row-comments #comentario-' + comentario_id).remove();
                         }
@@ -1015,7 +1018,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
 function getStatusFromUsers() {
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Festados',
+        url: '/usuarios%2Festados',
         success: function (data) {
             data.forEach(element => {
                 let id = element.id;
@@ -1036,7 +1039,7 @@ function getStatusFromUsers() {
 function getNoReadMessages(receptor_id) {
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=usuarios%2Fget-no-read-messages&receptor_id=' + receptor_id,
+        url: '/usuarios%2Fget-no-read-messages?receptor_id=' + receptor_id,
         success: function (data) {
             if (data != 0) {
                 $('#messages-number-' + receptor_id).html(data);
@@ -1050,7 +1053,7 @@ function getNoReadMessages(receptor_id) {
 function getMessagesFromChat(receptor_id, refresh) {
     $.ajax({
         method: 'POST',
-        url: '/index.php?r=chat%2Fget-chat&receptor_id=' + receptor_id + '&refresh=' + refresh,
+        url: '/chat%2Fget-chat?receptor_id=' + receptor_id + '&refresh=' + refresh,
         success: function (data) {
             $('#chat-history-' + receptor_id).html('');
             data.historial.forEach(element => {
@@ -1080,7 +1083,7 @@ $('body').on('click', '.send-chat', function ev(e) {
     let mensaje = $('#chat-message-' + receptor_id).val().trim();
     $.ajax({
         method: 'POST',
-        url: '/index.php?r=chat%2Fsend-chat',
+        url: '/chat%2Fsend-chat',
         data: {
             receptor_id: receptor_id,
             mensaje: mensaje
@@ -1114,7 +1117,7 @@ $('body').on('keydown', '.chat-input', function ev(e) {
         let mensaje = $('#chat-message-' + receptor_id).val().trim();
         $.ajax({
             method: 'POST',
-            url: '/index.php?r=chat%2Fsend-chat',
+            url: '/chat%2Fsend-chat',
             data: {
                 receptor_id: receptor_id,
                 mensaje: mensaje
@@ -1154,7 +1157,7 @@ $('body').on('keyup', '#search-users', function ev(e) {
         $('.chat-list').hide();
         $.ajax({
             method: 'GET',
-            url: '/index.php?r=chat%2Fget-users',
+            url: '/chat%2Fget-users',
             data: {
                 text: text
             },
@@ -1210,7 +1213,7 @@ $('body').on('click', '.delete-follow-btn', function ev(e) {
     let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=site%2Fget-translate',
+        url: '/site%2Fget-translate',
         data: {
             strings: strings
         },
@@ -1219,7 +1222,7 @@ $('body').on('click', '.delete-follow-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/index.php?r=seguidores%2Fdelete-follower&seguidor_id=' + seguidor_id,
+                        url: '/seguidores%2Fdelete-follower?seguidor_id=' + seguidor_id,
                         success: function (data) {
                             $('#follower-' + seguidor_id).addClass('fall');
                             $('#follower-' + seguidor_id).on('transitionend', function ev(e){
@@ -1240,7 +1243,7 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
     let strings = ['DeleteSongName'];
     $.ajax({
         method: 'GET',
-        url: '/index.php?r=site%2Fget-translate',
+        url: '/site%2Fget-translate',
         data: {
             strings: strings
         },
@@ -1250,7 +1253,7 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/index.php?r=canciones-playlist%2Fdelete&cancion_id=' + cancion_id + '&playlist_id=' + playlist_id,
+                        url: '/canciones-playlist%2Fdelete?cancion_id=' + cancion_id + '?playlist_id=' + playlist_id,
                         success: function (data) {
                             $('#song-' + cancion_id).addClass('fall');
                             $('#song-' + cancion_id).on('transitionend', function ev(e){
@@ -1286,7 +1289,7 @@ $('body').on('click', '.copy-playlist-btn', function ev(e) {
     let id = $(this).attr('id');
     $.ajax({
         method: 'POST',
-        url: '/index.php?r=playlists%2Fcopiar',
+        url: '/playlists%2Fcopiar',
         data: {
             id: id
         },
@@ -1342,7 +1345,7 @@ $('body').on('click', '.request-btn', function ev(e) {
     }
     $.ajax({
         method: 'POST',
-        url: '/index.php?r=seguidores%2Fsolicitud',
+        url: '/seguidores%2Fsolicitud',
         data: {
             seguidor_id: seguidor_id,
             type: type,

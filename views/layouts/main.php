@@ -245,7 +245,7 @@ $this->registerJS($js);
     </div>
     <div class="full-player w-100 row ml-0">
         <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
-            <img class="height-60" src=":" alt="song-cover col-2">
+            <img class="height-60" src="//:0" alt="song-cover col-2">
                 <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
                 <div class="artist-info my-auto col text-center text-truncate">
                     <p class="m-0"></p>
@@ -255,7 +255,7 @@ $this->registerJS($js);
         </div>
         <div class="player col-12 col-lg-8 col-xl-9">
             <audio id="audio">
-                <source src=":">
+                <source src="//:0">
             </audio>
         </div>
     </div>
