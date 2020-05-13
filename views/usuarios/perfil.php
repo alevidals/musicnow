@@ -141,7 +141,7 @@ $this->registerJS($js);
     <?php if (Yii::$app->user->id == $model->id || !$model->privated_account || in_array(Yii::$app->user->id, $model->getSeguidores()->select('id')->column())) : ?>
 
         <div class="mt-3 d-flex">
-            <h1 class="d-inline-block"><?= Html::encode($model->login) ?></h1>
+            <h1 class="d-inline-block"><?= Html::encode($model->login) ?> <?= $model->esPremium() ? '<i class="fas fa-crown"></i>' : '' ?></h1>
             <div class="dropdown d-inline-block ml-auto my-auto">
                 <?php if ($model->id == Yii::$app->user->id) : ?>
                     <button class="dots-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

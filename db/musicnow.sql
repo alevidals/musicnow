@@ -180,9 +180,33 @@ CREATE TABLE solicitudes_seguimiento
   , PRIMARY KEY (seguidor_id, seguido_id)
 );
 
+DROP TABLE IF EXISTS provincias;
+
+CREATE TABLE provincias
+(
+    id           BIGSERIAL PRIMARY KEY
+  , denominacion VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS pagos;
+
+CREATE TABLE pagos
+(
+    id           BIGSERIAL    PRIMARY KEY
+  , payment      VARCHAR(50)
+  , cart         VARCHAR(50)
+  , nombre       VARCHAR(255) NOT NULL
+  , apellidos    VARCHAR(255) NOT NULL
+  , provincia_id BIGINT       NOT NULL REFERENCES provincias (id)
+  , direccion    VARCHAR(255) NOT NULL
+  , usuario_id   BIGINT       NOT NULL REFERENCES usuarios (id)
+  , created_at   TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO roles (rol)
 VALUES ('admin')
-     , ('usuario');
+     , ('usuario')
+     , ('premium');
 
 INSERT INTO estados (estado)
 VALUES ('offline')
@@ -190,10 +214,65 @@ VALUES ('offline')
      , ('no-read')
      , ('read');
 
-INSERT INTO generos(denominacion)
+INSERT INTO generos (denominacion)
 VALUES ('Pop'),
        ('Rap'),
        ('Flamenco');
+
+INSERT INTO provincias (denominacion)
+VALUES  ('Álava')
+      , ('Albacete')
+      , ('Alacant')
+      , ('Almería')
+      , ('Ávila')
+      , ('Badajoz')
+      , ('Illes Balears')
+      , ('Barcelona')
+      , ('Burgos')
+      , ('Cáceres')
+      , ('Cádiz')
+      , ('Castellón')
+      , ('Ciudad Real')
+      , ('Córdoba')
+      , ('A Coruña')
+      , ('Cuenca')
+      , ('Girona')
+      , ('Granada')
+      , ('Guadalajara')
+      , ('Gipuzkoa')
+      , ('Huelva')
+      , ('Huesca')
+      , ('Jaén')
+      , ('León')
+      , ('Lleida')
+      , ('La Rioja')
+      , ('Lugo')
+      , ('Madrid')
+      , ('Málaga')
+      , ('Murcia')
+      , ('Nafarroa')
+      , ('Ourense')
+      , ('Asturias')
+      , ('Palencia')
+      , ('Las Palmas')
+      , ('Pontevedra')
+      , ('Salamanca')
+      , ('Sta. Cruz de Tenerife')
+      , ('Cantabria')
+      , ('Segovia')
+      , ('Sevilla')
+      , ('Soria')
+      , ('Tarragona')
+      , ('Teruel')
+      , ('Toledo')
+      , ('Valéncia')
+      , ('Valladolid')
+      , ('Bizkaia')
+      , ('Zamora')
+      , ('Zaragoza')
+      , ('Ceuta')
+      , ('Melilla');
+
 
 INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol_id)
 VALUES ('admin', 'admin', 'admin', 'admin@admin.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),

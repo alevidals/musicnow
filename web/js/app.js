@@ -7,11 +7,13 @@ let playlist = [];
 let offset = 10;
 let interval;
 let firstTime = true;
+let premium = false;
 
 const PERFIL = 'perfil';
 const BANNER = 'banner';
 
 checkTheme();
+getPremium();
 
 setInterval(() => {
     $('.alert-box .hide').remove();
@@ -45,6 +47,17 @@ $(window).on('pjax:start', function (){
         });
     }, 500);
 });
+
+function getPremium() {
+    $.ajax({
+        method: 'GET',
+        url: '/usuarios%2Fes-premium',
+        success: function (data) {
+            premium = data;
+        }
+    })
+}
+
 
 function readURL(input, target) {
     if (input.files && input.files[0]) {
@@ -141,11 +154,7 @@ $('body').on('click', '.play-btn', function ev(e) {
         },
         success: function (data) {
             removeActualData();
-            GreenAudioPlayer.init({
-                selector: '.player',
-                stopOthersOnPlay: true,
-                showDownloadButton: true,
-            });
+            initAudioPlayer();
             addNewData(data);
             $('.play-pause-btn').trigger('click');
             $('.audio-player').css('display', 'flex');
@@ -537,7 +546,7 @@ function initAudioPlayer() {
     GreenAudioPlayer.init({
         selector: '.player',
         stopOthersOnPlay: true,
-        showDownloadButton: true,
+        showDownloadButton: premium,
     });
 }
 
@@ -902,7 +911,7 @@ $(window).on('scroll', function () {
                                             <div class="card-header">
                                                 <a href="index.php?r=usuarios%2Fperfil&id=${element.usuario_id}" itemprop="byArtist" itemscope itemtype="https://schema.org/Person">
                                                     <img class="user-search-img" width="40px" alt="logo" src="${element.url_image}" itemprop="image">
-                                                    <span class="ml-3" itemprop="name">${element.login}</span>
+                                                    <span class="ml-3" itemprop="name">${element.login + ((element.rol_id == 3) ? '<i class="ml-1 fas fa-crown"></i>' : '')}</span>
                                                 </a>
                                             </div>
                                             <div class="card-body py-0">

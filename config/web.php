@@ -24,6 +24,10 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'K3x9rSpl6vpK-13zJnVJ-BvP51hq3ryC',
         ],
+        'PayPalRestApi'=> [
+            'class'=>'bitcko\paypalrestapi\PayPalRestApi',
+            'redirectUrl'=>'/pagos/make-payment', // Redirect Url after payment
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

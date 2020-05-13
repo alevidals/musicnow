@@ -307,6 +307,9 @@ table i:hover, .delete-song-playlist-btn:hover {
     background-color: var(--primary);
 }
 
+.premium-list {
+    list-style: none;
+}
 
 
 .h1-error {
