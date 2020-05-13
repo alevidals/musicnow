@@ -141,8 +141,9 @@ class AlbumesController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->delete();
-        $model->deletePortada();
+        if ($model->delete()) {
+            $model->deletePortada();
+        }
 
         return $this->redirect(['index']);
     }

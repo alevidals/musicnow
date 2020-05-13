@@ -376,4 +376,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return static::find()
             ->where(['IN', 'id', $seguidoresIds]);
     }
+
+    public function deleteImage()
+    {
+        Utility::deleteFileFirebase('images/perfil/' . $this->id . '/' . $this->banner_name);
+    }
 }

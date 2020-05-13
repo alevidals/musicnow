@@ -403,6 +403,7 @@ class UsuariosController extends Controller
     public function actionEliminarImagen($id)
     {
         $model = $this->findModel($id);
+        $model->deleteImage();
         $model->url_image = Yii::getAlias('@web/img/user-profile.png');
         if ($model->save()) {
             return $this->redirect(['usuarios/configurar']);
@@ -419,6 +420,7 @@ class UsuariosController extends Controller
     public function actionEliminarBanner($id)
     {
         $model = $this->findModel($id);
+        $model->deleteImage();
         $model->url_banner = null;
         $model->banner_name = null;
         if ($model->save()) {
