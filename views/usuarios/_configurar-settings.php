@@ -49,6 +49,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ) ?>
         </div>
         <div class="col-12 mb-3">
+                <p class="d-md-inline-block my-0"><?= Yii::t('app', 'Become') . ' premium'?></p>
+                <?= Html::a(
+                    'Premium',
+                    ['/site/premium'],
+                    [
+                        'role' => 'button',
+                        'class' => 'btn btn-sm main-yellow float-md-right'
+                    ]
+                ) ?>
+        </div>
+        <div class="col-12 mb-3">
             <p class="d-md-inline-block my-0"><?= Yii::t('app', 'Language') ?></p>
             <div class="dropdown float-md-right">
                 <button class="btn btn-sm main-yellow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

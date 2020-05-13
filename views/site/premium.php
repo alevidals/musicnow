@@ -20,7 +20,7 @@ use yii\bootstrap4\Html;
             <?= Html::img('@web/img/undraw_subscriptions_1xdv.png', ['class' => 'img-fluid']) ?>
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center mt-5">
         <?= Html::a(Yii::t('app', 'Become') . ' <span class="font-weight-bolder">PREMIUM</span>', ['pagos/create'], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
     </div>
 
