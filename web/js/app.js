@@ -218,11 +218,11 @@ $('body').on('click', '.cancion', function ev(e) {
                 $('.row-comments').append(`
                     <div class="col-12 mt-3" id="comentario-${element.comentario_id}">
                         <div class="row">
-                            <a href="/index.php?r=usuarios%2Fperfil&id=${element.id}">
+                            <a class="close-dialog" href="/usuarios/perfil/${element.id}">
                                 <img class="user-search-img" src="${element.url_image}" alt="perfil" width="50px" height="50px">
                             </a>
                             <div class="col">
-                                <a href="/index.php?r=usuarios%2Fperfil&id=${element.id}">${element.login}</a>
+                                <a class="close-dialog" href="/usuarios/perfil/${element.id}">${element.login}</a>
                                 <small class="ml-1 comment-time">${element.created_at}</small>
                                 <p class="m-0">
                                     ${element.comentario}
@@ -235,7 +235,10 @@ $('body').on('click', '.cancion', function ev(e) {
             });
         }
     });
+});
 
+$('body').on('click', '.close-dialog', function ev(e) {
+    $('.modal-backdrop').remove();
 });
 
 $('body').on('click', '.playlist-btn', function ev(e) {
@@ -323,6 +326,7 @@ $('body').on('click', '.comment-btn', function ev(e) {
                     </div>
                 `);
                 $('.text-area-comment').val('');
+                $('.character-count').html('0');
             }
         });
     }
@@ -365,6 +369,7 @@ $('body').on('keydown', '.text-area-comment', function ev(e) {
                         </div>
                     `);
                     $('.text-area-comment').val('');
+                    $('.character-count').html('0');
                 }
             });
         }
@@ -652,7 +657,7 @@ if (getCookie('cookie-accept') == null) {
             success: function (data) {
                 krajeeDialogCust2.confirm(data[0], function (result) {
                     if (result) {
-                        window.location="/index.php?r=site%2Fcookie";
+                        window.location="/site%2Fcookie";
                     } else {
                         window.location="http://google.es";
                     }
@@ -789,7 +794,7 @@ function getNewRequests() {
 $('body').on('click', '.follow', function ev(e) {
     $.ajax({
         'method': 'POST',
-        'url': '/index.php?r=seguidores%2Ffollow&seguido_id=' + $('.user-id').text(),
+        'url': '/seguidores%2Ffollow?seguido_id=' + $('.user-id').text(),
         success: function (data) {
             $('.follow').html(data.textButton);
             $('#seguidores').html(data.seguidores);
@@ -801,7 +806,7 @@ function getFollowersData() {
     if ($('.user-id').length) {
         $.ajax({
             'method': 'GET',
-            'url': '/index.php?r=seguidores%2Fget-data&seguido_id=' + $('.user-id').text(),
+            'url': '/seguidores%2Fget-data?seguido_id=' + $('.user-id').text(),
             success: function (data) {
                 $('.follow').html(data.textButton);
                 $('#seguidores').html(data.seguidores);

@@ -215,7 +215,7 @@ $this->registerJS($js);
                 </div>
             </div>
         </div>
-        <a class="perfil-link" href="/index.php?r=usuarios%2Fperfil&id=<?= Yii::$app->user->id ?>">
+        <a class="perfil-link" href="/usuarios/perfil/<?= Yii::$app->user->id ?>">
             <div class="d-none d-md-block col-lg-6 mt-5 order-0 order-lg-1">
                 <div class="row ml-lg-5 user-info">
                     <div class="col-md-2 col-lg-3 p-0">

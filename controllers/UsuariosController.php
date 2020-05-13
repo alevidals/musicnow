@@ -403,7 +403,7 @@ class UsuariosController extends Controller
     public function actionEliminarImagen($id)
     {
         $model = $this->findModel($id);
-        $model->url_image = '@web/img/user-profile.png';
+        $model->url_image = Yii::getAlias('@web/img/user-profile.png');
         if ($model->save()) {
             return $this->redirect(['usuarios/configurar']);
         }

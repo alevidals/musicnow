@@ -52,11 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <p class="d-md-inline-block my-0"><?= Yii::t('app', 'Language') ?></p>
             <div class="dropdown float-md-right">
                 <button class="btn btn-sm main-yellow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?= $_COOKIE['lang'] ?>
+                    <?= isset($_COOKIE['lang']) ? $_COOKIE['lang'] : '' ?>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/index.php?r=site%2Fidioma&amp;lang=es-ES">Español</a>
-                    <a class="dropdown-item" href="/index.php?r=site%2Fidioma&amp;lang=en">English</a>
+                    <a class="dropdown-item" href="/site%2Fidioma?lang=es-ES">Español</a>
+                    <a class="dropdown-item" href="/site%2Fidioma?lang=en">English</a>
                 </div>
             </div>
         </div>
