@@ -50,7 +50,14 @@ class AccountController extends Controller
             $deleted_at = (new DateTime($usuario->deleted_at))->add(new DateInterval('P30D'))->format('Y-m-d H:i:s');
             $hoy = (new DateTime())->format('Y-m-d H:i:s');
             if ($deleted_at < $hoy) {
-                $usuario->delete();
+                if ($usuario->delete()) {
+                    if ($usuario->image_name != null) {
+                        $usuario->deleteImage();
+                    }
+                    if ($usuario->banner_name != null) {
+                        $usuario->deleteBanner();
+                    }
+                }
             }
         }
 
