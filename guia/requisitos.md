@@ -919,6 +919,24 @@
 | **Entrega**     | v3             |
 | **Incidencia**  | [141](https://github.com/alevidals/musicnow/issues/141) |
 
+| **R103**     | **Cuenta premium.**         |
+| --------------: | :------------------- |
+| **Descripción** | Cuenta premium que tendrá ventajas sobre las cuentas normales y a la que habrá que pagar para acceder a ella.             |
+| **Prioridad**   | Opcional           |
+| **Tipo**        | Funcional                |
+| **Complejidad** | Media         |
+| **Entrega**     | v3             |
+| **Incidencia**  | [144](https://github.com/alevidals/musicnow/issues/144) |
+
+| **R104**     | **Pago por Paypal.**         |
+| --------------: | :------------------- |
+| **Descripción** | Pago por Paypal para acceder a la cuenta premium.             |
+| **Prioridad**   | Opcional           |
+| **Tipo**        | Funcional                |
+| **Complejidad** | Media         |
+| **Entrega**     | v3             |
+| **Incidencia**  | [145](https://github.com/alevidals/musicnow/issues/145) |
+
 
 ## Cuadro resumen
 
@@ -1026,3 +1044,5 @@
 | (**R100**) Agregar el link de un videoclip a la canción. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [100](https://github.com/alevidals/musicnow/issues/100) |
 | (**R101**) Escuchar la canción  través de la página. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [134](https://github.com/alevidals/musicnow/issues/134) |
 | (**R102**) Cuenta privada. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [141](https://github.com/alevidals/musicnow/issues/141) |
+| (**R103**) Cuenta premium. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [144](https://github.com/alevidals/musicnow/issues/144) |
+| (**R104**) Pago por Paypal. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [145](https://github.com/alevidals/musicnow/issues/145) |
