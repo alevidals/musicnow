@@ -32,6 +32,7 @@ use yii\web\UploadedFile;
  * @property Albumes[] $albumes
  * @property Usuarios[] $bloqueados
  * @property Canciones[] $canciones
+ * @property Pagos[] $pagos
  * @property Playlists[] $playlists
  * @property Comentarios[] $comentarios
  * @property Usuarios[] $seguidores
@@ -365,6 +366,17 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(SolicitudesSeguimiento::className(), ['seguido_id' => 'id']);
     }
 
+    /**
+    * Gets query for [[Pagos]].
+    *
+    * @return \yii\db\ActiveQuery
+    */
+    public function getPagos()
+    {
+        return $this->hasMany(Pagos::className(), ['usuario_id' => 'id']);
+    }
+
+
     public static function findMutualFollow()
     {
         $seguidoresIds = Seguidores::find()
@@ -381,4 +393,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         Utility::deleteFileFirebase('images/perfil/' . $this->id . '/' . $this->banner_name);
     }
+
+    public function esPremium()
+    {
+        return $this->rol_id == 3;
+    }
+
 }

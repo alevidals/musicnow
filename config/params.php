@@ -9,6 +9,8 @@ return [
     'smtpUsername' => 'musicnowproyect@gmail.com',
     'defaultImgProfile' => 'https://firebasestorage.googleapis.com/v0/b/song-test-103af.appspot.com/o/images%2Fall%2Fblank-profile.png?alt=media',
     'defaultImgProfile' => getenv('url_prefix') . 'images%2Fall%2Fblank-profile.png' . getenv('url_suffix'),
+    'payPalClientId'=> getenv('payPalClientId'),
+    'payPalClientSecret' => getenv('payPalClientSecret'),
     'bsVersion' => '4.x',
     'dateControlDisplay' => [
         Module::FORMAT_DATE => 'php:d-m-Y',

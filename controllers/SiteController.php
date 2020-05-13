@@ -265,7 +265,7 @@ class SiteController extends Controller
 
 
         $canciones = (new \yii\db\Query())
-            ->select(['c.*', 'u.login', 'u.url_image', 'a.titulo as album_titulo'])
+            ->select(['c.*', 'u.login', 'u.url_image', 'a.titulo as album_titulo', 'u.rol_id'])
             ->from('canciones c')
             ->leftJoin('usuarios u', 'u.id = c.usuario_id')
             ->leftJoin('albumes a', 'c.album_id = a.id')
@@ -310,5 +310,10 @@ class SiteController extends Controller
             'cancionesMasEscuchadas' => $cancionesMasEscuchadas,
             'cancionesConMasLikes' => $cancionesConMasLikes,
         ]);
+    }
+
+    public function actionPremium()
+    {
+        return $this->render('premium');
     }
 }

@@ -122,7 +122,7 @@ $this->registerJS($js);
                     <div class="card-header">
                         <?= Html::a(
                             Html::img($cancion->getUsuario()->one()->url_image, ['class' => 'user-search-img', 'width' => '40px', 'alt' => 'logo', 'itemprop' => 'image']) .
-                            '<span class="ml-3" itemprop="name">' . $cancion->getUsuario()->one()->login . '</span>',
+                            '<span class="ml-3" itemprop="name">' . $cancion->getUsuario()->one()->login . (($cancion->getUsuario()->one()->esPremium()) ? '<i class="ml-1 fas fa-crown"></i>' : '') . '</span>',
                             ['usuarios/perfil', 'id' => $cancion->usuario_id],
                             ['itemprop' => 'byArtist', 'itemscope' => '', 'itemtype' => 'https://schema.org/Person']
                         ) ?>
@@ -222,7 +222,7 @@ $this->registerJS($js);
                         <?= Html::img($usuario->url_image, ['class' => 'img-fluid user-search-img', 'alt' => 'user-image']) ?>
                     </div>
                     <div class="col-md-10 col-lg-9 my-auto">
-                        <p><?= Html::encode(Yii::$app->user->identity->login) ?></p>
+                        <p><?= Html::encode(Yii::$app->user->identity->login) ?> <?= Yii::$app->user->identity->esPremium() ? '<i class="fas fa-crown"></i>' : '' ?></p>
                         <p><?= Html::encode(Yii::$app->user->identity->nombre) . ' ' . Html::encode(Yii::$app->user->identity->apellidos) ?></p>
                     </div>
                 </div>

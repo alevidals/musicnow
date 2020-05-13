@@ -745,4 +745,13 @@ class UsuariosController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionEsPremium()
+    {
+        $model = Usuarios::findOne(Yii::$app->user->id);
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return ($model->rol_id == 3) ? true : false;
+    }
 }
