@@ -159,8 +159,17 @@ class UsuariosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
+        if ($model->delete()) {
+            if ($model->image_name != null) {
+                $model->deleteImage();
+            }
+
+            if ($model->banner_name != null) {
+                $model->deleteBanner();
+            }
+        }
         return $this->redirect(['index']);
     }
 
@@ -403,8 +412,11 @@ class UsuariosController extends Controller
     public function actionEliminarImagen($id)
     {
         $model = $this->findModel($id);
-        $model->deleteImage();
+        if ($model->image_name != null) {
+            $model->deleteImage();
+        }
         $model->url_image = Yii::getAlias('@web/img/user-profile.png');
+        $model->image_name = null;
         if ($model->save()) {
             return $this->redirect(['usuarios/configurar']);
         }
@@ -420,7 +432,7 @@ class UsuariosController extends Controller
     public function actionEliminarBanner($id)
     {
         $model = $this->findModel($id);
-        $model->deleteImage();
+        $model->deleteBanner();
         $model->url_banner = null;
         $model->banner_name = null;
         if ($model->save()) {

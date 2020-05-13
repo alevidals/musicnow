@@ -391,6 +391,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function deleteImage()
     {
+        Utility::deleteFileFirebase('images/perfil/' . $this->id . '/' . $this->image_name);
+    }
+
+    public function deleteBanner()
+    {
         Utility::deleteFileFirebase('images/perfil/' . $this->id . '/' . $this->banner_name);
     }
 
