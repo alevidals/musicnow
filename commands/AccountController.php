@@ -8,6 +8,7 @@
 namespace app\commands;
 
 use app\models\Usuarios;
+use app\services\Utility;
 use DateInterval;
 use DateTime;
 use yii\console\Controller;
@@ -50,12 +51,41 @@ class AccountController extends Controller
             $deleted_at = (new DateTime($usuario->deleted_at))->add(new DateInterval('P30D'))->format('Y-m-d H:i:s');
             $hoy = (new DateTime())->format('Y-m-d H:i:s');
             if ($deleted_at < $hoy) {
+                $datosCanciones = $usuario->getCanciones()->all();
+                $datosAlbumes = $usuario->getAlbumes()->all();
+                $canciones = [];
+                $portadas = [];
+                $albumes = [];
+
+                foreach ($datosCanciones as $cancion) {
+                    $canciones[] = $cancion->song_name;
+                    if ($cancion->album_id == null) {
+                        $portadas[] = $cancion->image_name;
+                    }
+                }
+
+                foreach ($datosAlbumes as $album) {
+                    $albumes[] = $album->image_name;
+                }
+
                 if ($usuario->delete()) {
                     if ($usuario->image_name != null) {
                         $usuario->deleteImage();
                     }
                     if ($usuario->banner_name != null) {
                         $usuario->deleteBanner();
+                    }
+
+                    foreach ($canciones as $data) {
+                        Utility::deleteFileFirebase('canciones/' . $usuario->id . '/' . $data);
+                    }
+
+                    foreach ($portadas as $data) {
+                        Utility::deleteFileFirebase('images/portada/' . $usuario->id . '/' . $data);
+                    }
+
+                    foreach ($albumes as $data) {
+                        Utility::deleteFileFirebase('images/portada/' . $usuario->id . '/' . $data);
                     }
                 }
             }

@@ -160,6 +160,22 @@ class UsuariosController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
+        $datosCanciones = $model->getCanciones()->all();
+        $datosAlbumes = $model->getAlbumes()->all();
+        $canciones = [];
+        $portadas = [];
+        $albumes = [];
+
+        foreach ($datosCanciones as $cancion) {
+            $canciones[] = $cancion->song_name;
+            if ($cancion->album_id == null) {
+                $portadas[] = $cancion->image_name;
+            }
+        }
+
+        foreach ($datosAlbumes as $album) {
+            $albumes[] = $album->image_name;
+        }
 
         if ($model->delete()) {
             if ($model->image_name != null) {
@@ -169,6 +185,19 @@ class UsuariosController extends Controller
             if ($model->banner_name != null) {
                 $model->deleteBanner();
             }
+
+            foreach ($canciones as $data) {
+                Utility::deleteFileFirebase('canciones/' . $id . '/' . $data);
+            }
+
+            foreach ($portadas as $data) {
+                Utility::deleteFileFirebase('images/portada/' . $id . '/' . $data);
+            }
+
+            foreach ($albumes as $data) {
+                Utility::deleteFileFirebase('images/portada/' . $id . '/' . $data);
+            }
+
         }
         return $this->redirect(['index']);
     }
