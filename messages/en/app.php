@@ -188,4 +188,5 @@ return [
     'Pay' => '',
     'Direccion' => 'Address',
     'PremiumName' => 'Premium name',
+    'BetterPosition' => 'Better position in the searchs',
 ];

@@ -14,6 +14,7 @@ use yii\bootstrap4\Html;
             <ul class="ml-5 mt-3 premium-list">
                 <li><i class="fas fa-check mt-3 mr-2 text-success"></i><?= Yii::t('app', 'DownloadSongs') ?></li>
                 <li><i class="fas fa-check mt-3 mr-2 text-success"></i><?= Yii::t('app', 'PremiumName') ?></li>
+                <li><i class="fas fa-check mt-3 mr-2 text-success"></i><?= Yii::t('app', 'BetterPosition') ?></li>
             </ul>
         </div>
         <div class="col-12 col-lg-6 col-md-7 offset-md-2 offset-lg-0">

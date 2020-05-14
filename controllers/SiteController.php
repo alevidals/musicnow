@@ -100,7 +100,8 @@ class SiteController extends Controller
                 'query' => Usuarios::find()
                     ->where(['ilike', 'login', $cadena])
                     ->orWhere(['ilike', 'email', $cadena])
-                    ->andWhere(['!=', 'rol_id', 1]),
+                    ->andWhere(['!=', 'rol_id', 1])
+                    ->orderBy(['rol_id' => SORT_DESC])
             ]);
 
             $albumesSerch = new ActiveDataProvider([
@@ -127,7 +128,8 @@ class SiteController extends Controller
                     ->where(['ilike', 'titulo', $cadena])
                     ->orWhere(['IN', 'canciones.usuario_id', $userIds])
                     ->andWhere(['NOT IN', 'canciones.usuario_id', $adminIds])
-                    ->addGroupBy(['g.denominacion', 'u.login']),
+                    ->addGroupBy(['g.denominacion', 'u.login', 'u.rol_id'])
+                    ->orderBy(['u.rol_id' => SORT_DESC]),
                 'sort' => [
                     'attributes' => [
                         'u.login',
