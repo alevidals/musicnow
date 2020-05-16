@@ -189,4 +189,5 @@ return [
     'Direccion' => 'Direccion',
     'PremiumName' => 'Nombre premium',
     'BetterPosition' => 'Mejor posición en las búsquedas',
+    'YouArePremium' => 'Ya eres',
 ];

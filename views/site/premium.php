@@ -22,7 +22,11 @@ use yii\bootstrap4\Html;
         </div>
     </div>
     <div class="text-center mt-5">
-        <?= Html::a(Yii::t('app', 'Become') . ' <span class="font-weight-bolder">PREMIUM</span>', ['pagos/create'], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
+        <?php if (Yii::$app->user->identity->rol_id != 3 and Yii::$app->user->identity->rol_id != 1) : ?>
+            <?= Html::a(Yii::t('app', 'Become') . ' <span class="font-weight-bolder">PREMIUM</span>', ['pagos/create'], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
+        <?php else : ?>
+            <?= Html::a(Yii::t('app', 'YouArePremium') . ' <span class="font-weight-bolder">PREMIUM</span>', null, ['role' => 'button', 'class' => 'btn main-yellow', 'disabled' => 'true']) ?>
+        <?php endif; ?>
     </div>
 
 </div>
