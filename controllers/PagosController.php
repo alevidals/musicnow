@@ -171,7 +171,6 @@ class PagosController extends Controller
 
         Yii::$app->PayPalRestApi->processPayment($params);
         $data = Yii::$app->response->data;
-        var_dump($data);
 
         if ($data !== null && (Yii::$app->request->get('success') == true)) {
             $usuario = Usuarios::findOne(Yii::$app->user->id);
