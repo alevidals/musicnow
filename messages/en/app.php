@@ -190,4 +190,7 @@ return [
     'PremiumName' => 'Premium name',
     'BetterPosition' => 'Better position in the searchs',
     'YouArePremium' => 'You are',
+    'Quantity' => '',
+    'Price' => '',
+    'Concept' => '',
 ];

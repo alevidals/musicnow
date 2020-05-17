@@ -6,6 +6,7 @@ use app\models\Albumes;
 use app\models\Canciones;
 use app\models\ContactForm;
 use app\models\Usuarios;
+use kartik\mpdf\Pdf;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
