@@ -238,7 +238,7 @@ class SiteController extends Controller
     public function actionCookie()
     {
         setcookie('cookie-accept', 'true', time() + 3600 * 24 * 30);
-        $this->goBack();
+        $this->redirect(['usuarios/login']);
     }
 
     public function actionIdioma($lang)

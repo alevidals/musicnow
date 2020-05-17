@@ -20,6 +20,7 @@ $isLogued = !Yii::$app->user->isGuest;
 
 $js = <<<EOT
     if ('$isLogued') {
+        getPremium();
         getFollowersNumber();
         getNewNotifications();
         setInterval(function () {

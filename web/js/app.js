@@ -13,7 +13,6 @@ const PERFIL = 'perfil';
 const BANNER = 'banner';
 
 checkTheme();
-getPremium();
 
 setInterval(() => {
     $('.alert-box .hide').remove();
