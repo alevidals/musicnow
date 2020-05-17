@@ -666,7 +666,7 @@ if (getCookie('cookie-accept') == null) {
             success: function (data) {
                 krajeeDialogCust2.confirm(data[0], function (result) {
                     if (result) {
-                        window.location="/site/cookie";
+                        window.location="/site%2Fcookie";
                     } else {
                         window.location="http://google.es";
                     }
