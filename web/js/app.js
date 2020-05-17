@@ -1,6 +1,6 @@
 let mensajes = 0;
 let solicitudes = 0;
-let seguidores;
+let seguidores = 0;
 let songs = [];
 let actualSong = 0;
 let playlist = [];
