@@ -186,6 +186,27 @@ class PagosController extends Controller
             $pago->delete();
         }
 
-        return $this->redirect(['site/index']);
+        return $this->redirect(['pagos/payed']);
+    }
+
+    public function actionPayed()
+    {
+        return $this->render('payed');
+    }
+
+    public function actionGetInvoice()
+    {
+        $pago = Pagos::find()
+            ->where(['usuario_id' => Yii::$app->user->id])
+            ->orderBy(['id' => SORT_DESC])
+            ->limit(1)
+            ->one();
+
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $this->renderPartial('_invoice', [
+            'pago' => $pago,
+        ]);
+        return $pdf->render();
+
     }
 }

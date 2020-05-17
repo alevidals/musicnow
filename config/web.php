@@ -1,5 +1,7 @@
 <?php
 
+use kartik\mpdf\Pdf;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $log = require __DIR__ . '/log.php';
@@ -27,6 +29,21 @@ $config = [
         'PayPalRestApi'=> [
             'class'=>'bitcko\paypalrestapi\PayPalRestApi',
             'redirectUrl'=>'/pagos/make-payment', // Redirect Url after payment
+        ],
+        'pdf' => [
+            'class' => Pdf::classname(),
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+            'mode' => Pdf::MODE_UTF8,
+            'options' => ['title' => 'Krajee Report Title'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['MUS!C NOW'],
+                'SetFooter' => ['{PAGENO}'],
+            ],
+            // refer settings section for all configuration options
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

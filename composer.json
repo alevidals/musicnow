@@ -33,7 +33,8 @@
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
         "kartik-v/yii2-icons": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "bitcko/yii2-bitcko-paypal-api": "dev-master"
+        "bitcko/yii2-bitcko-paypal-api": "dev-master",
+        "kartik-v/yii2-mpdf": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
