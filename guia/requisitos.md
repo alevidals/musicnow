@@ -937,6 +937,15 @@
 | **Entrega**     | v3             |
 | **Incidencia**  | [145](https://github.com/alevidals/musicnow/issues/145) |
 
+| **R105**     | **Obtener factura.**         |
+| --------------: | :------------------- |
+| **Descripción** | Obtener factura de los pagos que realices.             |
+| **Prioridad**   | Opcional           |
+| **Tipo**        | Funcional                |
+| **Complejidad** | Media         |
+| **Entrega**     | v3             |
+| **Incidencia**  | [147](https://github.com/alevidals/musicnow/issues/147) |
+
 
 ## Cuadro resumen
 
@@ -1046,3 +1055,4 @@
 | (**R102**) Cuenta privada. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [141](https://github.com/alevidals/musicnow/issues/141) |
 | (**R103**) Cuenta premium. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [144](https://github.com/alevidals/musicnow/issues/144) |
 | (**R104**) Pago por Paypal. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [145](https://github.com/alevidals/musicnow/issues/145) |
+| (**R105**) Obtener factura. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [147](https://github.com/alevidals/musicnow/issues/147) |
