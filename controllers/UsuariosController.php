@@ -562,8 +562,10 @@ class UsuariosController extends Controller
     {
         $model = new Usuarios();
 
-        if (Yii::$app->request->post('Usuarios')['email']) {
-            $email = Yii::$app->request->post('Usuarios')['email'];
+        $post = Yii::$app->request->post('Usuarios');
+
+        if ($post !== null && $post['email']) {
+            $email = $post['email'];
             $model = Usuarios::findOne(['email' => $email]);
             if ($model) {
                 $url = Url::to([
