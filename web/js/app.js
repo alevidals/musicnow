@@ -51,7 +51,7 @@ $(window).on('pjax:start', function (){
 function getPremium() {
     $.ajax({
         method: 'GET',
-        url: '/usuarios%2Fes-premium',
+        url: '/usuarios/es-premium',
         success: function (data) {
             premium = data;
         }
@@ -148,7 +148,7 @@ $('body').on('click', '.play-btn', function ev(e) {
     let cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         method: 'GET',
-        url: '/canciones%2Fget-song-data',
+        url: '/canciones/get-song-data',
         data: {
             cancion_id: cancion_id
         },
@@ -183,7 +183,7 @@ $('body').on('click', '.like-btn', function ev(e) {
     let cancion_id = $(this).attr('id').split('-')[1];
     $.ajax({
         'method': 'POST',
-        url: '/likes%2Flike?cancion_id=' + cancion_id,
+        url: '/likes/like?cancion_id=' + cancion_id,
         success: function (data) {
             if (data.class == 'far') {
                 $('#outerlike-' + cancion_id + ' i').removeClass('fas');
@@ -208,7 +208,7 @@ $('body').on('click', '.cancion', function ev(e) {
     $('#like-' + cancion_id + ' i').removeClass('fas far');
     $.ajax({
         'method': 'POST',
-        url: '/likes%2Fget-data?cancion_id=' + cancion_id,
+        url: '/likes/get-data?cancion_id=' + cancion_id,
         success: function (data) {
             $('#like-' + cancion_id + ' i').addClass(data.class);
             $('.like-btn ~ p span').html(data.likes);
@@ -217,7 +217,7 @@ $('body').on('click', '.cancion', function ev(e) {
 
     $.ajax({
         method: 'GET',
-        url: '/canciones%2Fcomentarios',
+        url: '/canciones/comentarios',
         data: {
             cancion_id: cancion_id
         },
@@ -255,7 +255,7 @@ $('body').on('click', '.playlist-btn', function ev(e) {
     let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        url: '/usuarios%2Fget-playlists',
+        url: '/usuarios/get-playlists',
         data: {
             usuario_id: usuario_id,
             cancion_id: cancion_id
@@ -276,7 +276,7 @@ $('body').on('click', '.playlist-btn', function ev(e) {
                 let playlist_id = $(this).data('playlist');
                 $.ajax({
                     method: 'POST',
-                    url: '/canciones-playlist%2Fagregar',
+                    url: '/canciones-playlist/agregar',
                     data: {
                         cancion_id: cancion_id,
                         playlist_id: playlist_id,
@@ -312,7 +312,7 @@ $('body').on('click', '.comment-btn', function ev(e) {
         $('.invalid-feedback').hide();
         $.ajax({
             'method': 'POST',
-            url: '/comentarios%2Fcomentar?cancion_id=' + cancion_id,
+            url: '/comentarios/comentar?cancion_id=' + cancion_id,
             data: {
                 comentario: comentario,
             },
@@ -320,11 +320,11 @@ $('body').on('click', '.comment-btn', function ev(e) {
                 $('.row-comments').prepend(`
                     <div class="col-12 mt-3" id="comentario-${data.comentario_id}">
                         <div class="row">
-                            <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">
+                            <a href="/index.php?r=usuarios/perfil&id=${data.usuario_id}">
                                 <img class="user-search-img" src="${data.url_image}" alt="perfil" width="50px" height="50px">
                             </a>
                             <div class="col">
-                                <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">${data.login}</a>
+                                <a href="/index.php?r=usuarios/perfil&id=${data.usuario_id}">${data.login}</a>
                                 <small class="ml-1 comment-time">${data.created_at}</small>
                                 <p>
                                     ${data.comentario}
@@ -355,7 +355,7 @@ $('body').on('keydown', '.text-area-comment', function ev(e) {
             $('.invalid-feedback').hide();
             $.ajax({
                 'method': 'POST',
-                url: '/comentarios%2Fcomentar?cancion_id=' + cancion_id,
+                url: '/comentarios/comentar?cancion_id=' + cancion_id,
                 data: {
                     comentario: comentario,
                 },
@@ -363,11 +363,11 @@ $('body').on('keydown', '.text-area-comment', function ev(e) {
                     $('.row-comments').prepend(`
                         <div class="col-12 mt-3" id="comentario-${data.comentario_id}">
                             <div class="row">
-                                <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">
+                                <a href="/index.php?r=usuarios/perfil&id=${data.usuario_id}">
                                     <img class="user-search-img" src="${data.url_image}" alt="perfil" width="50px" height="50px">
                                 </a>
                                 <div class="col">
-                                    <a href="/index.php?r=usuarios%2Fperfil&id=${data.usuario_id}">${data.login}</a>
+                                    <a href="/index.php?r=usuarios/perfil&id=${data.usuario_id}">${data.login}</a>
                                     <small class="ml-1 comment-time">${data.created_at}</small>
                                     <p>
                                         ${data.comentario}
@@ -398,7 +398,7 @@ $('body').on('click', '.add-btn', function ev() {
     let cancion_id = $(this).data('song');
     $.ajax({
         method: 'GET',
-        url: '/canciones%2Fget-song-data?cancion_id=' + cancion_id,
+        url: '/canciones/get-song-data?cancion_id=' + cancion_id,
         success: function (data) {
             $('.alert-box').prepend(`
                 <div class="toast mb-2" data-delay="5000">
@@ -438,7 +438,7 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
     let playlist_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
-        url: '/playlists%2Fget-songs?playlist_id=' + playlist_id,
+        url: '/playlists/get-songs?playlist_id=' + playlist_id,
         success: function(data) {
             data.forEach(element => {
                 playlist.push({
@@ -463,7 +463,7 @@ $('body').on('click', '.play-album-btn', function ev(e) {
     let album_id = $(this).attr('id');
     $.ajax({
         method: 'GET',
-        url: '/albumes%2Fget-songs?album_id=' + album_id,
+        url: '/albumes/get-songs?album_id=' + album_id,
         success: function(data) {
             data.forEach(element => {
                 playlist.push({
@@ -492,7 +492,7 @@ $('body').on('click', '.add-videoclip-btn', function ev(e) {
     } else {
         $.ajax({
             method: 'POST',
-            url: '/videoclips%2Fagregar',
+            url: '/videoclips/agregar',
             data: {
                 link: link
             },
@@ -590,7 +590,7 @@ function addNewData(cancion) {
     $('.artist-info small').html(cancion.album);
     $.ajax({
         method: 'POST',
-        url: '/canciones%2Fadd-visualization',
+        url: '/canciones/add-visualization',
         data: {
             cancion_id: cancion.id
         }
@@ -659,14 +659,14 @@ if (getCookie('cookie-accept') == null) {
         let strings = ['CookieMessage'];
         $.ajax({
             method: 'GET',
-            url: '/site%2Fget-translate',
+            url: '/site/get-translate',
             data: {
                 strings: strings
             },
             success: function (data) {
                 krajeeDialogCust2.confirm(data[0], function (result) {
                     if (result) {
-                        window.location="/site%2Fcookie";
+                        window.location="/site/cookie";
                     } else {
                         window.location="http://google.es";
                     }
@@ -679,7 +679,7 @@ if (getCookie('cookie-accept') == null) {
 function getFollowersNumber() {
     $.ajax({
         method: 'GET',
-        url: '/usuarios%2Fget-followers-data',
+        url: '/usuarios/get-followers-data',
         success: function (data) {
             seguidores = data;
         }
@@ -691,14 +691,14 @@ function getNewNotifications() {
     let strings = ['followMessage'];
     $.ajax({
         method: 'GET',
-        url: '/site%2Fget-translate',
+        url: '/site/get-translate',
         data: {
             strings: strings
         },
         success: function (message) {
             $.ajax({
                 method: 'GET',
-                url: '/usuarios%2Fget-new-followers?total=' + seguidores,
+                url: '/usuarios/get-new-followers?total=' + seguidores,
                 success: function (data) {
                     if (data.count > seguidores) {
                         data.seguidores.forEach(element => {
@@ -728,7 +728,7 @@ function getNewNotifications() {
     // NUEVOS MENSAJES
     $.ajax({
         method: 'GET',
-        url: '/usuarios%2Fget-no-read-messages?total=' + mensajes,
+        url: '/usuarios/get-no-read-messages?total=' + mensajes,
         success: function (data) {
             if (data.count > 0) {
                 $('.messages-number').html(data.count);
@@ -771,7 +771,7 @@ function getNewNotifications() {
 function getNewRequests() {
     $.ajax({
         method: 'GET',
-        url: '/solicitudes-seguimiento%2Fget-total-solicitudes',
+        url: '/solicitudes-seguimiento/get-total-solicitudes',
         success: function (data) {
             if (data.total != 0) {
                 $('.notifications-number').html(data.total);
@@ -803,7 +803,7 @@ function getNewRequests() {
 $('body').on('click', '.follow', function ev(e) {
     $.ajax({
         'method': 'POST',
-        'url': '/seguidores%2Ffollow?seguido_id=' + $('.user-id').text(),
+        'url': '/seguidores/follow?seguido_id=' + $('.user-id').text(),
         success: function (data) {
             $('.follow').html(data.textButton);
             $('#seguidores').html(data.seguidores);
@@ -815,7 +815,7 @@ function getFollowersData() {
     if ($('.user-id').length) {
         $.ajax({
             'method': 'GET',
-            'url': '/seguidores%2Fget-data?seguido_id=' + $('.user-id').text(),
+            'url': '/seguidores/get-data?seguido_id=' + $('.user-id').text(),
             success: function (data) {
                 $('.follow').html(data.textButton);
                 $('#seguidores').html(data.seguidores);
@@ -849,7 +849,7 @@ $('body').on('click', '.remove-videoclip-btn', function ev(e) {
     let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
-        url: '/site%2Fget-translate',
+        url: '/site/get-translate',
         data: {
             strings: strings
         },
@@ -858,7 +858,7 @@ $('body').on('click', '.remove-videoclip-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/videoclips%2Feliminar',
+                        url: '/videoclips/eliminar',
                         data: {
                             id: id
                         },
@@ -892,14 +892,14 @@ $(window).on('scroll', function () {
             let strings = ['Comment', 'MaxChar'];
             $.ajax({
                     method: 'GET',
-                    url: '/site%2Fget-translate',
+                    url: '/site/get-translate',
                     data: {
                         strings: strings
                     },
                     success: function (strings) {
                         $.ajax({
                             method: 'GET',
-                            url: '/site%2Fget-more-posts',
+                            url: '/site/get-more-posts',
                             data: {
                                 offset: offset
                             },
@@ -909,7 +909,7 @@ $(window).on('scroll', function () {
                                     $('.canciones-container').append(`
                                         <article class="card mb-3" itemscope itemtype="https://schema.org/MusicRecording">
                                             <div class="card-header">
-                                                <a href="index.php?r=usuarios%2Fperfil&id=${element.usuario_id}" itemprop="byArtist" itemscope itemtype="https://schema.org/Person">
+                                                <a href="index.php?r=usuarios/perfil&id=${element.usuario_id}" itemprop="byArtist" itemscope itemtype="https://schema.org/Person">
                                                     <img class="user-search-img" width="40px" alt="logo" src="${element.url_image}" itemprop="image">
                                                     <span class="ml-3" itemprop="name">${element.login + ((element.rol_id == 3) ? '<i class="ml-1 fas fa-crown"></i>' : '')}</span>
                                                 </a>
@@ -1009,7 +1009,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
     let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
-        url: '/site%2Fget-translate',
+        url: '/site/get-translate',
         data: {
             strings: strings,
         },
@@ -1018,7 +1018,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/comentarios%2Fdelete?id=' + comentario_id,
+                        url: '/comentarios/delete?id=' + comentario_id,
                         success: function (data) {
                             $('.row-comments #comentario-' + comentario_id).remove();
                         }
@@ -1032,7 +1032,7 @@ $('body').on('click', '.delete-comment-btn', function ev(e) {
 function getStatusFromUsers() {
     $.ajax({
         method: 'GET',
-        url: '/usuarios%2Festados',
+        url: '/usuarios/estados',
         success: function (data) {
             data.forEach(element => {
                 let id = element.id;
@@ -1053,7 +1053,7 @@ function getStatusFromUsers() {
 function getNoReadMessages(receptor_id) {
     $.ajax({
         method: 'GET',
-        url: '/usuarios%2Fget-no-read-messages?receptor_id=' + receptor_id,
+        url: '/usuarios/get-no-read-messages?receptor_id=' + receptor_id,
         success: function (data) {
             if (data != 0) {
                 $('#messages-number-' + receptor_id).html(data);
@@ -1067,7 +1067,7 @@ function getNoReadMessages(receptor_id) {
 function getMessagesFromChat(receptor_id, refresh) {
     $.ajax({
         method: 'POST',
-        url: '/chat%2Fget-chat?receptor_id=' + receptor_id + '&refresh=' + refresh,
+        url: '/chat/get-chat?receptor_id=' + receptor_id + '&refresh=' + refresh,
         success: function (data) {
             $('#chat-history-' + receptor_id).html('');
             data.historial.forEach(element => {
@@ -1097,7 +1097,7 @@ $('body').on('click', '.send-chat', function ev(e) {
     let mensaje = $('#chat-message-' + receptor_id).val().trim();
     $.ajax({
         method: 'POST',
-        url: '/chat%2Fsend-chat',
+        url: '/chat/send-chat',
         data: {
             receptor_id: receptor_id,
             mensaje: mensaje
@@ -1131,7 +1131,7 @@ $('body').on('keydown', '.chat-input', function ev(e) {
         let mensaje = $('#chat-message-' + receptor_id).val().trim();
         $.ajax({
             method: 'POST',
-            url: '/chat%2Fsend-chat',
+            url: '/chat/send-chat',
             data: {
                 receptor_id: receptor_id,
                 mensaje: mensaje
@@ -1171,7 +1171,7 @@ $('body').on('keyup', '#search-users', function ev(e) {
         $('.chat-list').hide();
         $.ajax({
             method: 'GET',
-            url: '/chat%2Fget-users',
+            url: '/chat/get-users',
             data: {
                 text: text
             },
@@ -1227,7 +1227,7 @@ $('body').on('click', '.delete-follow-btn', function ev(e) {
     let strings = ['Are you sure you want to delete this item?'];
     $.ajax({
         method: 'GET',
-        url: '/site%2Fget-translate',
+        url: '/site/get-translate',
         data: {
             strings: strings
         },
@@ -1236,7 +1236,7 @@ $('body').on('click', '.delete-follow-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/seguidores%2Fdelete-follower?seguidor_id=' + seguidor_id,
+                        url: '/seguidores/delete-follower?seguidor_id=' + seguidor_id,
                         success: function (data) {
                             $('#follower-' + seguidor_id).addClass('fall');
                             $('#follower-' + seguidor_id).on('transitionend', function ev(e){
@@ -1257,7 +1257,7 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
     let strings = ['DeleteSongName'];
     $.ajax({
         method: 'GET',
-        url: '/site%2Fget-translate',
+        url: '/site/get-translate',
         data: {
             strings: strings
         },
@@ -1267,7 +1267,7 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
                 if (result) {
                     $.ajax({
                         method: 'POST',
-                        url: '/canciones-playlist%2Fdelete?cancion_id=' + cancion_id + '?playlist_id=' + playlist_id,
+                        url: '/canciones-playlist/delete?cancion_id=' + cancion_id + '?playlist_id=' + playlist_id,
                         success: function (data) {
                             $('#song-' + cancion_id).addClass('fall');
                             $('#song-' + cancion_id).on('transitionend', function ev(e){
@@ -1303,7 +1303,7 @@ $('body').on('click', '.copy-playlist-btn', function ev(e) {
     let id = $(this).attr('id');
     $.ajax({
         method: 'POST',
-        url: '/playlists%2Fcopiar',
+        url: '/playlists/copiar',
         data: {
             id: id
         },
@@ -1359,7 +1359,7 @@ $('body').on('click', '.request-btn', function ev(e) {
     }
     $.ajax({
         method: 'POST',
-        url: '/seguidores%2Fsolicitud',
+        url: '/seguidores/solicitud',
         data: {
             seguidor_id: seguidor_id,
             type: type,
