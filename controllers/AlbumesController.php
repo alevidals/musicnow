@@ -164,6 +164,12 @@ class AlbumesController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Devuelve las canciones del álbum en formato JSON
+     *
+     * @param int $album_id el id del álbum del que obtener las canciones
+     * @return array las canciones del álbum
+     */
     public function actionGetSongs($album_id)
     {
         $album = new Albumes(['id' => $album_id]);

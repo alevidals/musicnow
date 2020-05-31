@@ -146,6 +146,11 @@ class CancionesPlaylistController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de agregar una canción a una playlist
+     *
+     * @return void
+     */
     public function actionAgregar()
     {
         $cancion_id = Yii::$app->request->post('cancion_id');

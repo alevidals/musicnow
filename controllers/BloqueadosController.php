@@ -144,6 +144,12 @@ class BloqueadosController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de bloquear al usuario especificado
+     *
+     * @param int $bloqueado_id el id del usuario a bloquear
+     * @return Response
+     */
     public function actionBloquear($bloqueado_id)
     {
         $user_id = Yii::$app->user->id;

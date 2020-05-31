@@ -13,6 +13,12 @@ class Utility
     const BANNER = 'img_banner';
     const PORTADA = 'img_portada';
 
+    /**
+     * Instancia y devuelve el objeto con el que se pueden realizar
+     * operaciones sobre el servidor de almacenamiento Firebase
+     *
+     * @return object
+     */
     protected static function getFactory()
     {
         $config = '
@@ -36,6 +42,16 @@ class Utility
         ->withDatabaseUri(getenv('databaseUri'));
     }
 
+    /**
+     * Sube la imagen al servidor de almacenamiento Firebase, sube
+     * una imagen de perfil, una imagen de portada o un banner
+     * dependiendo del tipo especificado.
+     *
+     * @param string $img la imagen a subir
+     * @param int $userId el id del usuario que está subiendo la imagen
+     * @param string $type el tipo de imagen a subir
+     * @return void
+     */
     public static function uploadImageFirebase($img, $userId, $type)
     {
         $filename = str_replace(' ', '', $img->basename) . (new DateTime())->format('Y-m-d_H:i:s') . '.' . $img->extension;
@@ -84,6 +100,15 @@ class Utility
         return $res;
     }
 
+    /**
+     * Sube la canciones especificada al servidor de almacenamiento
+     * Firebase dentro del directorio reservado a cada usuario
+     *
+     * @param string $file nombre de la canción a subir
+     * @param int $userId id del usuario que sube el archivo
+     * @return array devuelve un array con el nombre de la canción
+     * y con la url de la canción
+     */
     public static function uploadFileFirebase($file, $userId)
     {
         $filename = str_replace(' ', '', $file->basename) . (new DateTime())->format('Y-m-d_H:i:s') . '.' . $file->extension;
@@ -103,6 +128,13 @@ class Utility
         ];
     }
 
+    /**
+     * Eliminar el fichero especificado del servidor de almacenamiento
+     * Firebase
+     *
+     * @param string $name el nombre del fichero a borrar
+     * @return void
+     */
     public static function deleteFileFirebase($name)
     {
         $factory = self::getFactory();

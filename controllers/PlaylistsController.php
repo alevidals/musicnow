@@ -4,14 +4,14 @@ namespace app\controllers;
 
 use app\models\Albumes;
 use app\models\CancionesPlaylist;
-use Yii;
 use app\models\Playlists;
 use app\models\PlaylistsSearch;
 use app\models\Usuarios;
+use Yii;
 use yii\bootstrap4\Html;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**
@@ -63,7 +63,7 @@ class PlaylistsController extends Controller
 
     /**
      * Displays a single Playlists model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -101,7 +101,7 @@ class PlaylistsController extends Controller
     /**
      * Updates an existing Playlists model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -121,7 +121,7 @@ class PlaylistsController extends Controller
     /**
      * Deletes an existing Playlists model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -135,7 +135,7 @@ class PlaylistsController extends Controller
     /**
      * Finds the Playlists model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Playlists the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -148,6 +148,13 @@ class PlaylistsController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que devuelve las canciones de la playlist especificada
+     *
+     * @param int $playlist_id el id de la playlist de la que se desea
+     * obtener las canciones
+     * @return ActiveQuery
+     */
     public function actionGetSongs($playlist_id)
     {
         $playlist = new Playlists(['id' => $playlist_id]);
@@ -162,6 +169,11 @@ class PlaylistsController extends Controller
         return $canciones;
     }
 
+    /**
+     * Acción que se encarga de copiar la playlist de un usuario
+     *
+     * @return string mensaje de éxito
+     */
     public function actionCopiar()
     {
         $id = Yii::$app->request->post('id');
@@ -184,7 +196,5 @@ class PlaylistsController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return Yii::t('app', 'CopiedPlaylist');
         }
-
-
     }
 }

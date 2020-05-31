@@ -59,7 +59,7 @@ class Generos extends \yii\db\ActiveRecord
     }
 
     /**
-     * Devuelve la denominación de todos los géneros indexados por el id.
+     * Devuelve la denominación de todos los géneros indexados por el id
      *
      * @return array
      */

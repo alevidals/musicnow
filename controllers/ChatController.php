@@ -143,16 +143,26 @@ class ChatController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Devuelve el resultado de una ActiveQuery en la que se comprueba
+     * que usuarios se siguen mutuamente
+     *
+     * @return ActiveQuery
+     */
     public function actionChat()
     {
-        $seguidos = Usuarios::findMutualFollow()
-            ->all();
+        $seguidos = Usuarios::findMutualFollow()->all();
 
         return $this->render('chat', [
             'seguidos' => $seguidos
         ]);
     }
 
+    /**
+     * Guarda en la base de datos el mensaje enviado por el usuario
+     *
+     * @return array el chat actualizado con el nuevo mensaje enviado
+     */
     public function actionSendChat()
     {
         $post = Yii::$app->request->post();
@@ -172,6 +182,15 @@ class ChatController extends Controller
         return $historial;
     }
 
+    /**
+     * Devuelve el chat entre el usuario autenticado y el especificado
+     * por parámetros
+     *
+     * @param int $receptor_id usuario del que queremos obtener el chat
+     * @param bool $refresh si se refresca el estado del mensaje o no
+     * @return array el historial de mensajes, el nombre del emisor y el
+     * nombre del receptor
+     */
     public function actionGetChat($receptor_id, $refresh)
     {
         $usuario = Usuarios::findOne(Yii::$app->user->id);
@@ -207,6 +226,13 @@ class ChatController extends Controller
         ];
     }
 
+    /**
+     * Devuelve un array con los usuarios que se siguen mutuamente
+     *
+     * @param string $text el nombre del login por el que vamos a filtrar
+     * al buscar los usuarios
+     * @return ActiveQuery
+     */
     public function actionGetUsers($text)
     {
         $usuarios = Usuarios::findMutualFollow()

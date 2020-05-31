@@ -130,6 +130,12 @@ class SolicitudesSeguimientoController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que devuelve el total de solicitudes de seguimiento del
+     * usuario autenticado
+     *
+     * @return array
+     */
     public function actionGetTotalSolicitudes()
     {
         $total = SolicitudesSeguimiento::find()

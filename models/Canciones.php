@@ -4,7 +4,6 @@ namespace app\models;
 
 use app\services\Utility;
 use Yii;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "canciones".
@@ -36,7 +35,6 @@ use yii\web\UploadedFile;
  */
 class Canciones extends \yii\db\ActiveRecord
 {
-
     public $portada;
     public $cancion;
 
@@ -96,6 +94,11 @@ class Canciones extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Sube la portada de la canción al servidor de almacenamiento
+     * Firebase y además establece la url y el nombre de la imagen en
+     * el modelo.
+     */
     public function uploadPortada()
     {
         if ($this->portada !== null) {
@@ -105,6 +108,10 @@ class Canciones extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Sube de la canción al servidor de almacenamiento Firebase y
+     * además establece la url y el nombre de la canción en el modelo.
+     */
     public function uploadCancion()
     {
         if ($this->cancion !== null) {
@@ -114,11 +121,17 @@ class Canciones extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Elimina la portada de Firebase.
+     */
     public function deletePortada()
     {
         Utility::deleteFileFirebase('images/portada/' . Yii::$app->user->id . '/' . $this->image_name);
     }
 
+    /**
+     * Elimina la portada de Firebase.
+     */
     public function deleteCancion()
     {
         Utility::deleteFileFirebase('canciones/' . Yii::$app->user->id . '/' . $this->song_name);
@@ -194,6 +207,12 @@ class Canciones extends \yii\db\ActiveRecord
         return $this->hasMany(Comentarios::className(), ['cancion_id' => 'id']);
     }
 
+    /**
+     * Devuelve el resultado de una consulta de canciones combinada con
+     * likes para así también obtener el total de likes.
+     *
+     * @return ActiveQuery
+     */
     public static function findWithTotalLikes()
     {
         return static::find()
@@ -203,20 +222,20 @@ class Canciones extends \yii\db\ActiveRecord
     }
 
     /**
-    * Gets query for [[CancionesPlaylists]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[CancionesPlaylists]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getCancionesPlaylists()
     {
         return $this->hasMany(CancionesPlaylist::className(), ['cancion_id' => 'id']);
     }
 
     /**
-    * Gets query for [[Playlists]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[Playlists]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getPlaylists()
     {
         return $this->hasMany(Playlists::className(), ['id' => 'playlist_id'])->viaTable('canciones_playlist', ['cancion_id' => 'id']);

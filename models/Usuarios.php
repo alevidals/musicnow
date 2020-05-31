@@ -5,7 +5,6 @@ namespace app\models;
 use app\services\Utility;
 use Yii;
 use yii\web\IdentityInterface;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "usuarios".
@@ -45,7 +44,6 @@ use yii\web\UploadedFile;
  * @property Chat[] $sendchats
  * @property Chat[] $receivedchats
  * @property Videoclips[] $videoclips
-
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -120,6 +118,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * Sube la imagen o el banner de perfil, del usuario al servidor de
+     * almacenamiento Firebase.
+     *
+     * @param string $type el tipo de fichero a subir, o imagen o banner
+     */
     public function uploadImg($type)
     {
         switch ($type) {
@@ -149,40 +153,68 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(Albumes::className(), ['usuario_id' => 'id']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function findIdentity($id)
     {
         return static::findOne($id);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
+        return static::findOne(['auth_key' => $token]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validateAuthKey($authKey)
     {
         return $this->auth_key === $authKey;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function findByUsername($nombre)
     {
         return static::findOne(['nombre' => $nombre]);
     }
 
+    /**
+     * Comprueba si la contraseña es correcta.
+     *
+     * @param string $password la contraseña a comprobar
+     * @return bool true si coindice y en caso contrario false
+     */
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function beforeSave($insert)
     {
         if (!parent::beforeSave($insert)) {
@@ -208,7 +240,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                     foreach ($solicitudesPendientes as $solicitud) {
                         (new Seguidores([
                             'seguidor_id' => $solicitud->seguidor_id,
-                            'seguido_id' => Yii::$app->user->id
+                            'seguido_id' => Yii::$app->user->id,
                         ]))->save();
                         SolicitudesSeguimiento::findOne([
                             'seguidor_id' => $solicitud->seguidor_id,
@@ -298,85 +330,89 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
-    * Gets query for [[Estado]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[Estado]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getEstado()
     {
         return $this->hasOne(Estados::className(), ['id' => 'estado_id']);
     }
 
     /** Gets query for [[SendChats]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getSendChats()
     {
         return $this->hasMany(Chat::className(), ['emisor_id' => 'id']);
     }
 
     /**
-    * Gets query for [[ReceivedChats]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[ReceivedChats]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getReceivedChats()
     {
         return $this->hasMany(Chat::className(), ['receptor_id' => 'id']);
     }
 
     /**
-    * Gets query for [[Bloqueados]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[Bloqueados]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getBloqueados()
     {
-        return $this->hasMany(Usuarios::className(), ['id' => 'bloqueador_id'])->viaTable('bloqueados', ['bloqueado_id' => 'id']);
+        return $this->hasMany(self::className(), ['id' => 'bloqueador_id'])->viaTable('bloqueados', ['bloqueado_id' => 'id']);
     }
 
     /**
-    * Gets query for [[Playlists]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[Playlists]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getPlaylists()
     {
         return $this->hasMany(Playlists::className(), ['usuario_id' => 'id']);
     }
 
     /**
-    * Gets query for [[Videoclips]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[Videoclips]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getVideoclips()
     {
         return $this->hasMany(Videoclips::className(), ['usuario_id' => 'id']);
     }
 
     /**
-    * Gets query for [[SolicitudesSeguimientos]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[SolicitudesSeguimientos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getSolicitudesSeguimientos()
     {
         return $this->hasMany(SolicitudesSeguimiento::className(), ['seguido_id' => 'id']);
     }
 
     /**
-    * Gets query for [[Pagos]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[Pagos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getPagos()
     {
         return $this->hasMany(Pagos::className(), ['usuario_id' => 'id']);
     }
 
-
+    /**
+     * Devuelve una consulta donde se comprueba si ambos usuarios se siguen.
+     *
+     * @return ActiveQuery
+     */
     public static function findMutualFollow()
     {
         $seguidoresIds = Seguidores::find()
@@ -389,19 +425,32 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             ->where(['IN', 'id', $seguidoresIds]);
     }
 
+    /**
+     * Eliminar la imagen del perfil del servidor de almacenamiento
+     * Firebase.
+     */
     public function deleteImage()
     {
         Utility::deleteFileFirebase('images/perfil/' . $this->id . '/' . $this->image_name);
     }
 
+    /**
+     * Eliminar el banner del perfil del servidor de almacenamiento
+     * Firebase.
+     */
     public function deleteBanner()
     {
         Utility::deleteFileFirebase('images/perfil/' . $this->id . '/' . $this->banner_name);
     }
 
+    /**
+     * Comprueba si un usuario es premium o no.
+     *
+     * @return bool true si el usuario es premium y false en caso
+     * contrario
+     */
     public function esPremium()
     {
         return $this->rol_id == 3;
     }
-
 }

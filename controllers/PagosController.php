@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Pagos;
 use app\models\PagosSearch;
 use app\models\Provincias;
 use app\models\Usuarios;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PagosController implements the CRUD actions for Pagos model.
@@ -48,7 +48,7 @@ class PagosController extends Controller
 
     /**
      * Displays a single Pagos model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -74,14 +74,14 @@ class PagosController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'provincias' => ['' => ''] + Provincias::lista()
+            'provincias' => ['' => ''] + Provincias::lista(),
         ]);
     }
 
     /**
      * Updates an existing Pagos model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -101,7 +101,7 @@ class PagosController extends Controller
     /**
      * Deletes an existing Pagos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -115,7 +115,7 @@ class PagosController extends Controller
     /**
      * Finds the Pagos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Pagos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -128,45 +128,52 @@ class PagosController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de realizar el checkout del pago
+     *
+     * @return void
+     */
     public function actionCheckout()
     {
-        // Setup order information array with all items
         $params = [
-            'method'=>'paypal',
-            'intent'=>'sale',
-            'order'=>[
-                'description'=>'Premium Account',
-                'subtotal'=>10,
-                'shippingCost'=>0,
-                'total'=>10,
-                'currency'=>'EUR',
-                'items'=>[
+            'method' => 'paypal',
+            'intent' => 'sale',
+            'order' => [
+                'description' => 'Premium Account',
+                'subtotal' => 10,
+                'shippingCost' => 0,
+                'total' => 10,
+                'currency' => 'EUR',
+                'items' => [
                     [
-                        'name'=>'Premium Account',
-                        'price'=>10,
-                        'quantity'=>1,
-                        'currency'=>'EUR'
+                        'name' => 'Premium Account',
+                        'price' => 10,
+                        'quantity' => 1,
+                        'currency' => 'EUR',
                     ],
-                ]
-
-            ]
+                ],
+            ],
         ];
 
-        // In this action you will redirect to the PayPpal website to login with you buyer account and complete the payment
         Yii::$app->PayPalRestApi->checkOut($params);
     }
 
+    /**
+     * Acción que se encarga de realizar el pago
+     *
+     * @return Response
+     */
     public function actionMakePayment()
     {
         // Setup order information array
         $params = [
-            'order'=>[
-                'description'=>'Premium Account',
-                'subtotal'=>10,
-                'shippingCost'=>0,
-                'total'=>10,
-                'currency'=>'EUR',
-            ]
+            'order' => [
+                'description' => 'Premium Account',
+                'subtotal' => 10,
+                'shippingCost' => 0,
+                'total' => 10,
+                'currency' => 'EUR',
+            ],
         ];
 
         Yii::$app->PayPalRestApi->processPayment($params);
@@ -188,11 +195,21 @@ class PagosController extends Controller
         return $this->redirect(['pagos/payed']);
     }
 
+    /**
+     * Acción que se encarga de renderizar la vista de pago
+     *
+     * @return string
+     */
     public function actionPayed()
     {
         return $this->render('payed');
     }
 
+    /**
+     * Acción que se encarga de generar la factura del pago realizado
+     *
+     * @return mixed
+     */
     public function actionGetInvoice()
     {
         $pago = Pagos::find()
@@ -206,6 +223,5 @@ class PagosController extends Controller
             'pago' => $pago,
         ]);
         return $pdf->render();
-
     }
 }

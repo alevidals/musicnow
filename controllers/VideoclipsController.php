@@ -140,6 +140,12 @@ class VideoclipsController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de añadir un videoclip a la lista del
+     * usuario autenticado
+     *
+     * @return array
+     */
     public function actionAgregar()
     {
         $link = Yii::$app->request->post('link');
@@ -159,6 +165,12 @@ class VideoclipsController extends Controller
         }
     }
 
+    /**
+     * Acción que se encarga de eliminar un videoclip de la lista de
+     * videoclips del usuario
+     *
+     * @return int
+     */
     public function actionEliminar()
     {
         $id = Yii::$app->request->post('id');

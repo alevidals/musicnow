@@ -146,6 +146,14 @@ class LikesController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de añadir un like a la canción especificada
+     * por parámetros
+     *
+     * @param int $cancion_id el id de la canción a la que se le añadirá
+     * un like
+     * @return array
+     */
     public function actionLike($cancion_id)
     {
         $res = [];
@@ -177,6 +185,13 @@ class LikesController extends Controller
         return $res;
     }
 
+    /**
+     * Devuelve los datos de los likes de la canción especificada
+     *
+     * @param int $cancion_id la canción de la que se desea obtener
+     * los datos
+     * @return array
+     */
     public function actionGetData($cancion_id)
     {
         $res = [];

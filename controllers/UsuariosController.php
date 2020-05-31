@@ -9,7 +9,6 @@ use app\models\Chat;
 use app\models\Estados;
 use app\models\LoginForm;
 use app\models\Seguidores;
-use app\models\SolicitudesSeguimiento;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use app\services\Utility;
@@ -29,7 +28,6 @@ use yii\web\UploadedFile;
  */
 class UsuariosController extends Controller
 {
-
     const YOU_BLOCK = 1;
     const OTHER_BLOCK = 2;
 
@@ -126,7 +124,6 @@ class UsuariosController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         $model->scenario = Usuarios::SCENARIO_UPDATE;
@@ -197,7 +194,6 @@ class UsuariosController extends Controller
             foreach ($albumes as $data) {
                 Utility::deleteFileFirebase('images/portada/' . $id . '/' . $data);
             }
-
         }
         return $this->redirect(['index']);
     }
@@ -224,6 +220,8 @@ class UsuariosController extends Controller
      *
      * @param string $email dirección a la que queremos mandar el correo
      * @param string $body cuerpo que se enviará al correo
+     * @param mixed $url
+     * @param mixed $layout
      * @return bool  true si se envía o false si hay error
      */
     public function actionMail($email, $url, $layout)
@@ -255,7 +253,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Reenvia el mensaje de confirmación al correo de la cuenta
+     * Reenvia el mensaje de confirmación al correo de la cuenta.
      *
      * @param string $email email de la cuenta del usuario
      * @param int $id id del usuario
@@ -320,9 +318,8 @@ class UsuariosController extends Controller
                             $user->save();
                             if ($user->rol_id == 1) {
                                 return $this->redirect(['site/admin-index']);
-                            } else {
-                                return $this->redirect(['site/index']);
                             }
+                            return $this->redirect(['site/index']);
                         }
                     }
                 }
@@ -374,7 +371,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Renderiza el perfil del usuario indicado
+     * Renderiza el perfil del usuario indicado.
      *
      * @param int $id el id del usuario a mostrar
      */
@@ -432,7 +429,7 @@ class UsuariosController extends Controller
 
     /**
      * Elimina la imagen de perfil del usuario y pasa a usar
-     * la imagen por defecto
+     * la imagen por defecto.
      *
      * @param int $id el id del usuario al que se le eliminará
      * la imagen de perfil
@@ -452,7 +449,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Elimina el banner de perfil del usuario
+     * Elimina el banner de perfil del usuario.
      *
      * @param int $id el id del usuario al que se le eliminará
      * el banner
@@ -473,7 +470,7 @@ class UsuariosController extends Controller
      * Deshabilita la cuenta 30 días, si en 30 días no la recupera
      * la cuenta se eliminará
      *
-     * @param [type] $id
+     * @param int $id
      * @return mixed
      */
     public function actionEliminarCuenta($id)
@@ -484,9 +481,8 @@ class UsuariosController extends Controller
             $model->deleted_at = (new Datetime())->format('Y-m-d H:i:s');
             if ($model->save()) {
                 return $this->redirect(['usuarios/logout']);
-            } else {
-                Yii::$app->session->setFlash('error', Yii::t('app', 'InternalError'));
             }
+            Yii::$app->session->setFlash('error', Yii::t('app', 'InternalError'));
         } else {
             return $this->redirect(['site/index']);
         }
@@ -494,7 +490,7 @@ class UsuariosController extends Controller
 
     /**
      * Devuelve los estados de los usuarios a los que el usuario
-     * sigue
+     * sigue.
      *
      * @return array
      */
@@ -513,7 +509,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Devuelve los mensajes no leídos del usuario conectado
+     * Devuelve los mensajes no leídos del usuario conectado.
      *
      * @param int $receptor_id el id del receptor de los mensajes
      * @param bool $total total de mensajes para así limitar la consulta
@@ -554,7 +550,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Método que envía un correo para poder restablecer la contraseña
+     * Método que envía un correo para poder restablecer la contraseña.
      *
      * @return mixed
      */
@@ -582,12 +578,12 @@ class UsuariosController extends Controller
         }
 
         return $this->render('reset-pass-email', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
     /**
-     * Restablece la contraseña del usuario indicado
+     * Restablece la contraseña del usuario indicado.
      *
      * @param int $id el id del usuario al que se le va a restablecer
      * la cuenta
@@ -606,12 +602,12 @@ class UsuariosController extends Controller
         }
 
         return $this->render('reset-pass-form', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
     /**
-     * Devuelve el número de nuevos seguidores
+     * Devuelve el número de nuevos seguidores.
      *
      * @param int $total el total de seguidores antes de hacer la
      * consulta para así limitarla
@@ -633,7 +629,7 @@ class UsuariosController extends Controller
             ->all();
 
         foreach ($seguidoresEncoded as &$seguidor) {
-            $seguidor['login'] =  Html::encode($seguidor['login']);
+            $seguidor['login'] = Html::encode($seguidor['login']);
         }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -645,7 +641,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Devuelve el número de seguidores del usuario autenticado
+     * Devuelve el número de seguidores del usuario autenticado.
      *
      * @return int
      */
@@ -657,7 +653,7 @@ class UsuariosController extends Controller
 
     /**
      * Método que envía un email para recuperar la cuenta si
-     * anteriormente la ha eliminado y sigue deshabilitada
+     * anteriormente la ha eliminado y sigue deshabilitada.
      *
      * @param int $id el id del usuario al que se le enviará el email
      * @return mixed
@@ -671,7 +667,7 @@ class UsuariosController extends Controller
         $url = Url::to([
             'usuarios/recuperar',
             'id' => $model->id,
-            'confirm_token' => $model->confirm_token
+            'confirm_token' => $model->confirm_token,
         ], true);
 
         $this->actionMail($model->email, $url, 'confirm-restore-account');
@@ -682,7 +678,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Recupera la cuenta del usuario volviéndola a activar
+     * Recupera la cuenta del usuario volviéndola a activar.
      *
      * @param int $id el id del usuario al que se le activará la cuenta
      * @param string $confirm_token token de confirmación
@@ -703,10 +699,11 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Devuelve las playlists del usuario indicado
+     * Devuelve las playlists del usuario indicado.
      *
      * @param int $usuario_id el id del usuario del que se desea
      * conocer las playlists
+     * @param mixed $cancion_id
      * @return array
      */
     public function actionGetPlaylists($usuario_id, $cancion_id)
@@ -743,7 +740,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Renderiza la vista de las notificaciones del usuario conectado
+     * Renderiza la vista de las notificaciones del usuario conectado.
      *
      * @return mixed
      */
@@ -765,12 +762,12 @@ class UsuariosController extends Controller
 
         return $this->render('notificaciones', [
             'model' => $model,
-            'notificaciones' => $notificaciones
+            'notificaciones' => $notificaciones,
         ]);
     }
 
     /**
-     * Renderiza la vista de la configuración del perfil
+     * Renderiza la vista de la configuración del perfil.
      *
      * @return mixed
      */
@@ -785,10 +782,16 @@ class UsuariosController extends Controller
 
 
         return $this->render('configurar', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
+    /**
+     * Acción que se encarga de comprobar si el usuario autenticado es
+     * premium
+     *
+     * @return bool true si es premium y en caso contrario false
+     */
     public function actionEsPremium()
     {
         $model = Usuarios::findOne(Yii::$app->user->id);

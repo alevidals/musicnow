@@ -33,25 +33,6 @@ class ComentariosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            // 'access' => [
-            //     'class' => AccessControl::className(),
-            //     'only' => ['index', 'update', 'create', 'delete'],
-            //     'rules' => [
-            //         [
-            //             'allow' => true,
-            //             'roles' => ['@'],
-            //             'matchCallback' => function ($rules, $action) {
-            //                 $user_id = Yii::$app->request->get('user_id');
-            //                 $id = Yii::$app->request->get('id');
-            //                 $comentarios = Usuarios::findOne(Yii::$app->user->id)->getComentarios()->select('id')->column();
-            //                 return (Yii::$app->user->identity->login === 'admin'
-            //                     && Yii::$app->user->identity->rol === 1)
-            //                     || ($user_id == Yii::$app->user->id)
-            //                     || (in_array($id, $comentarios));
-            //             },
-            //         ],
-            //     ],
-            // ],
         ];
     }
 
@@ -151,6 +132,12 @@ class ComentariosController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de añadir un comentario a una canción
+     *
+     * @param int $cancion_id el id de la canción en la que se desea comentar
+     * @return array
+     */
     public function actionComentar($cancion_id)
     {
         $usuario = Usuarios::findOne(['id' =>Yii::$app->user->id ]);

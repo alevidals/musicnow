@@ -54,6 +54,11 @@ class Provincias extends \yii\db\ActiveRecord
         return $this->hasMany(Pagos::className(), ['provincia_id' => 'id']);
     }
 
+    /**
+     * Devuelve la denominación de todas las provincias indexadas por el id
+     *
+     * @return void
+     */
     public static function lista()
     {
         return static::find()

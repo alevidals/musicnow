@@ -110,11 +110,23 @@ class Albumes extends \yii\db\ActiveRecord
             ->column();
     }
 
+    /**
+     * Establece el total de canciones para un álbum
+     *
+     * @param int $total el total de canciones del álbum
+     * @return void
+     */
     public function setTotal($total)
     {
         $this->_total = $total;
     }
 
+    /**
+     * Devuelve el total de canciones de un álbum si ya está
+     * establecido y si no lo establece
+     *
+     * @return int
+     */
     public function getTotal()
     {
         if ($this->_total === null && !$this->isNewRecord) {
@@ -123,6 +135,13 @@ class Albumes extends \yii\db\ActiveRecord
         return $this->_total;
     }
 
+    /**
+     * Devuelve el resultado de una consulta de albumes combinada con
+     * canciones para así también obtener el total de canciones de ese
+     * álbum
+     *
+     * @return ActiveQuery
+     */
     public static function findWithTotal()
     {
         return static::find()
@@ -131,6 +150,12 @@ class Albumes extends \yii\db\ActiveRecord
             ->groupBy('albumes.id');
     }
 
+    /**
+     * Sube la portada del álbum al servidor de almacenamiento Firebase
+     * y además establece la url y el nombre de la imagen en el modelo
+     *
+     * @return void
+     */
     public function uploadPortada()
     {
         if ($this->portada !== null) {
@@ -140,6 +165,11 @@ class Albumes extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Elimina la portada del álbum en Firebase
+     *
+     * @return void
+     */
     public function deletePortada()
     {
         Utility::deleteFileFirebase('images/portada/' . Yii::$app->user->id . '/' . $this->image_name);

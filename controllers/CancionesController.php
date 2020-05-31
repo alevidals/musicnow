@@ -189,6 +189,13 @@ class CancionesController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Devuelve la información de la canción especificada
+     *
+     * @param int $cancion_id el id de la canción de la que se desea
+     * obtener la información
+     * @return array el array con los datos de la canción
+     */
     public function actionGetSongData($cancion_id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -210,6 +217,14 @@ class CancionesController extends Controller
         return $res;
     }
 
+    /**
+     * Devuelve los comentarios de la canción especificada
+     *
+     * @param int $cancion_id la canción de la que se desea obtener los
+     * comentarios
+     * @return array un array con los comentarios de la canción, el
+     * autor de la canción y el id del usuario autenticado
+     */
     public function actionComentarios($cancion_id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -240,6 +255,13 @@ class CancionesController extends Controller
         ];
     }
 
+    /**
+     * Devuelve los likes de la canción especificada
+     *
+     * @param int $cancion_id la canción de la que se desea obtener los
+     * likes
+     * @return array el array con los likes
+     */
     public function actionGetLikes($cancion_id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -256,6 +278,12 @@ class CancionesController extends Controller
         return $canciones;
     }
 
+    /**
+     * Acción que se encarga de incrementar la visualización de una
+     * canción cuando es escuchada
+     *
+     * @return void
+     */
     public function actionAddVisualization()
     {
         $cancion_id = Yii::$app->request->post('cancion_id');

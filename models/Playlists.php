@@ -60,6 +60,11 @@ class Playlists extends \yii\db\ActiveRecord
         return $this->hasMany(CancionesPlaylist::className(), ['playlist_id' => 'id']);
     }
 
+    /**
+     * Devuelve un array con las canciones que pertenecen a dicha playlist
+     *
+     * @return void
+     */
     public function getCanciones()
     {
         return $this->hasMany(Canciones::className(), ['id' => 'cancion_id'])->via('cancionesPlaylists');

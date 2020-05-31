@@ -235,12 +235,24 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    /**
+     * Acción que se encarga de cambiar el idioma de la página
+     *
+     * @param string $lang el idioma al que se desea cambiar
+     * @return Response
+     */
     public function actionIdioma($lang)
     {
         setcookie('lang', $lang, time() + 3600 * 24 * 30);
         return $this->redirect(['site/index']);
     }
 
+    /**
+     * Acción que se encarga de devolver la traducción del mensaje
+     * especificado
+     *
+     * @return array
+     */
     public function actionGetTranslate()
     {
         $strings = Yii::$app->request->get('strings');
@@ -254,6 +266,13 @@ class SiteController extends Controller
         return $strings;
     }
 
+    /**
+     * Acción que se encarga de obtener más post
+     *
+     * @param int $offset el número de la fila de la que queremos partir
+     * al buscar los post
+     * @return array
+     */
     public function actionGetMorePosts($offset)
     {
         $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
@@ -287,6 +306,11 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * Acción que se encarga de renderizar la vista de tendencias
+     *
+     * @return string
+     */
     public function actionTendencias()
     {
         $cancionesMasEscuchadas = Canciones::find()
@@ -309,6 +333,11 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * Acción que se encarga de renderizar la vista premium
+     *
+     * @return void
+     */
     public function actionPremium()
     {
         return $this->render('premium');

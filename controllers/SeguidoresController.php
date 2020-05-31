@@ -157,6 +157,13 @@ class SeguidoresController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Acción que se encarga de hacer que un usuario siga al usuario
+     * especificado en los parámetros
+     *
+     * @param int $seguido_id el usuario al que se desea seguir
+     * @return array
+     */
     public function actionFollow($seguido_id)
     {
         $res = [];
@@ -206,6 +213,13 @@ class SeguidoresController extends Controller
         return $res;
     }
 
+    /**
+     * Devuelve la información del seguimiento de un usuario
+     *
+     * @param int $seguido_id el id del usuario del que queremos comprobar
+     * la información
+     * @return array
+     */
     public function actionGetData($seguido_id)
     {
 
@@ -242,6 +256,13 @@ class SeguidoresController extends Controller
         return $res;
     }
 
+    /**
+     * Acción que se encarga de hacer que un usuario nos deje de seguir
+     *
+     * @param int $seguidor_id el id del usuario que queremos hacer que
+     * nos deje de seguir
+     * @return void
+     */
     public function actionDeleteFollower($seguidor_id)
     {
         $userId = Yii::$app->user->id;
@@ -252,6 +273,12 @@ class SeguidoresController extends Controller
         }
     }
 
+    /**
+     * Acción que se encarga de crear una solicitud de seguimiento si el
+     * usuario al que vamos a seguir tiene la cuenta privada
+     *
+     * @return void
+     */
     public function actionSolicitud()
     {
         $seguidor_id = Yii::$app->request->post('seguidor_id');
