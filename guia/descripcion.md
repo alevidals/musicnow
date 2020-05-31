@@ -19,10 +19,10 @@ Mus!c Now tendrá un panel de administrador al cual solo los administradores pod
 
 ## URL del repositorio
 
-[https://github.com/ricpelo/proyecto](https://github.com/alevidals/musicnow)
+[https://github.com/alevidals/musicnow](https://github.com/alevidals/musicnow)
 
 ## URL de la documentación
 
-[https://ricpelo.github.io/proyecto](https://alevidals.github.io/musicnow/)
+[https://ricpelo.github.io/musicnow](https://alevidals.github.io/musicnow/)
 
 [1]: https://www.spotify.com/
