@@ -88,10 +88,10 @@ $this->registerJS($js);
         if (Yii::$app->user->identity->rol_id == 1) {
             $items = [
                 [
-                    'label' => '<i class="fas fa-sun"></i>
+                    'label' => '<em class="fas fa-sun"></em>
                                 <div class="custom-control custom-switch d-inline-block">
                                     <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                                    <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+                                    <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em></label>
                                 </div>',
                 ],
                 ['label' => Yii::t('app', 'Home'), 'url' => ['/site/admin-index']],
@@ -149,10 +149,10 @@ $this->registerJS($js);
                         ],
                     ],
                     [
-                        'label' => '<i class="fas fa-sun mr-2"></i>' .
+                        'label' => '<em class="fas fa-sun mr-2"></em>' .
                                     '<div class="custom-control custom-switch d-inline-block">' .
                                         '<input type="checkbox" class="custom-control-input " id="darkSwitch">' .
-                                        '<label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>' .
+                                        '<label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em></label>' .
                                     '</div>',
                         'options' => ['class' => 'my-auto'],
                     ],
@@ -231,18 +231,18 @@ $this->registerJS($js);
 <div class="audio-player fixed-player">
     <div>
         <button class="outline-transparent hide-player">
-            <i class="fas fa-chevron-left"></i>
+            <em class="fas fa-chevron-left"></em>
         </button>
     </div>
     <div class="full-player w-100 row ml-0">
         <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
             <img class="height-60" src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/user-profile.png?alt=media&token=6b233a2d-1bf7-41bf-9475-e43838896fa0" alt="song-cover col-2">
-                <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
+                <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><em class="fas fa-backward"></em></button>
                 <div class="artist-info my-auto col text-center text-truncate">
                     <p class="m-0"></p>
                     <small></small>
                 </div>
-                <button class="my-auto mr-2 action-btn forward-btn outline-transparent"><i class="fas fa-forward"></i></button>
+                <button class="my-auto mr-2 action-btn forward-btn outline-transparent"><em class="fas fa-forward"></em></button>
         </div>
         <div class="player col-12 col-lg-8 col-xl-9">
             <audio id="audio">
@@ -258,23 +258,23 @@ $this->registerJS($js);
         <p class="">&copy; Mus!c Now <?= date('Y') ?></p>
         <div class="social-media">
             <a class="action-btn mx-2" href="https://www.instagram.com/musicnow">
-                <i class="fab fa-instagram"></i>
+                <em class="fab fa-instagram"></em>
             </a>
             <a class="action-btn mx-2" href="https://www.twitter.com/musicnow">
-                <i class="fab fa-twitter"></i>
+                <em class="fab fa-twitter"></em>
             </a>
             <a class="action-btn mx-2" href="https://www.youtube.com/musicnow">
-                <i class="fab fa-youtube"></i>
+                <em class="fab fa-youtube"></em>
             </a>
             <a class="action-btn mx-2" href="https://www.facebook.com/musicnow">
-                <i class="fab fa-facebook"></i>
+                <em class="fab fa-facebook"></em>
             </a>
         </div>
         <div>
-            <i class="fas fa-sun"></i>
+            <em class="fas fa-sun"></em>
             <div class="custom-control custom-switch d-inline-block">
                 <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+                <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em></label>
             </div>
         </div>
         <div>
