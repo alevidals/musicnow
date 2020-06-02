@@ -274,7 +274,7 @@ $this->registerJS($js);
             <em class="fas fa-sun"></em>
             <div class="custom-control custom-switch d-inline-block">
                 <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em></label>
+                <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em><span class="d-none">moon</span></label>
             </div>
         </div>
         <div>
