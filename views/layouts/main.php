@@ -4,14 +4,12 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
-use app\models\Usuarios;
 use app\widgets\Alert;
 use kartik\dialog\Dialog;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 AppAsset::register($this);
@@ -196,13 +194,6 @@ $this->registerJS($js);
                     ['label' => 'English', 'url' => ['/site/idioma', 'lang' => 'en']],
                 ],
             ],
-            [
-                'label' => '<i class="fas fa-sun"></i>
-                            <div class="custom-control custom-switch d-inline-block">
-                                <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                                <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
-                            </div>',
-            ],
         ];
     }
     echo Nav::widget([
@@ -245,7 +236,7 @@ $this->registerJS($js);
     </div>
     <div class="full-player w-100 row ml-0">
         <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
-            <img class="height-60" src="//:0" alt="song-cover col-2">
+            <img class="height-60" src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/user-profile.png?alt=media&token=6b233a2d-1bf7-41bf-9475-e43838896fa0" alt="song-cover col-2">
                 <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><i class="fas fa-backward"></i></button>
                 <div class="artist-info my-auto col text-center text-truncate">
                     <p class="m-0"></p>
@@ -255,7 +246,7 @@ $this->registerJS($js);
         </div>
         <div class="player col-12 col-lg-8 col-xl-9">
             <audio id="audio">
-                <source src="//:0">
+                <source src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/notificacion.mp3?alt=media&token=fe228a37-f5fe-402b-9bcb-7ab747d24b34">
             </audio>
         </div>
     </div>
@@ -280,6 +271,13 @@ $this->registerJS($js);
             </a>
         </div>
         <div>
+            <i class="fas fa-sun"></i>
+            <div class="custom-control custom-switch d-inline-block">
+                <input type="checkbox" class="custom-control-input " id="darkSwitch">
+                <label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>
+            </div>
+        </div>
+        <div>
             <button type="button" class="policy-btn outline-transparent" data-toggle="modal" data-target="#policyModal">
                     <?= Yii::t('app', 'Policy') ?>
             </button>
@@ -287,7 +285,7 @@ $this->registerJS($js);
     </div>
 </footer>
 
-<div class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="policyModalLabel" aria-hidden="true">
+<div class="modal fade" id="policyModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -329,7 +327,7 @@ $this->registerJS($js);
                 permanente. Usted puede eliminar las cookies en cualquier momento desde su ordenador. Sin embargo las cookies
                 ayudan a proporcionar un mejor servicio de los sitios web, estás no dan acceso a información de su ordenador ni
                 de usted, a menos de que usted así lo quiera y la proporcione directamente, <a
-                    href="https:embedinstagramfeed.com" target="_blank">visitas a una web </a>. Usted puede aceptar o negar el
+                    href="https://embedinstagramfeed.com" target="_blank">visitas a una web </a>. Usted puede aceptar o negar el
                 uso de cookies, sin embargo la mayoría de navegadores aceptan cookies automáticamente pues sirve para tener un
                 mejor servicio web. También usted puede cambiar la configuración de su ordenador para declinar las cookies. Si
                 se declinan es posible que no pueda utilizar algunos de nuestros servicios.</p>
