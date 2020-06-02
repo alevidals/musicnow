@@ -134,14 +134,15 @@ kartik\icons\FontAwesomeAsset::register($this);
                                         <h3 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h3>
                                         <?= $form->field($userModel, 'nombre')->textInput()->label(Yii::t('app', 'Nombre') . '*', ['class' => 'col-12', 'itemprop' => 'name']) ?>
                                         <?= $form->field($userModel, 'apellidos')->textInput()->label(Yii::t('app', 'Apellidos') . '*', ['class' => 'col-12', 'itemprop' => 'familyName']) ?>
-                                        <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12', 'itemprop' => 'birthDate'])
+                                        <?= $form->field($userModel, 'fnac')->textInput()
                                                 ->widget(
                                                     DateControl::classname(),
                                                     [
                                                     'type' => DateControl::FORMAT_DATE,
                                                     'displayFormat' => 'php:d-m-Y',
                                                     ]
-                                                ); ?>
+                                                )
+                                                ->label(Yii::t('app', 'Fnac'), ['class' => 'col-12', 'itemprop' => 'birthDate']); ?>
                                         <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
                                     </fieldset>
                                     <fieldset>
