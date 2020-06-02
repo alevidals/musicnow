@@ -84,13 +84,13 @@ kartik\icons\FontAwesomeAsset::register($this);
                                     'horizontalCssClasses' => ['wrapper' => 'col-sm-12 mx-auto'],
                                 ],
                             ]); ?>
-                                <h2 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h2>
+                                <h3 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h3>
                                 <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
                                 <?= $form->field($loginFormModel, 'password', [
                                     'inputTemplate' => '<div class="input-group mb-3">
                                                             {input}
                                                             <div class="input-group-append pass-input">
-                                                                    <i class="fas fa-eye-slash hide-show"></i>
+                                                                    <em class="fas fa-eye-slash hide-show"></em>
                                                             </div>
                                                         </div>',
                                     ])->passwordInput()->label(Yii::t('app', 'Password')) ?>
@@ -131,7 +131,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                             ]); ?>
                                 <div itemprop="agent" itemscope itemtype="https://schema.org/Person">
                                     <fieldset>
-                                        <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
+                                        <h3 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h3>
                                         <?= $form->field($userModel, 'nombre')->textInput()->label(Yii::t('app', 'Nombre') . '*', ['class' => 'col-12', 'itemprop' => 'name']) ?>
                                         <?= $form->field($userModel, 'apellidos')->textInput()->label(Yii::t('app', 'Apellidos') . '*', ['class' => 'col-12', 'itemprop' => 'familyName']) ?>
                                         <?= $form->field($userModel, 'fnac')->textInput()->label(Yii::t('app', 'Fnac'), ['class' => 'col-12', 'itemprop' => 'birthDate'])
@@ -145,7 +145,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                         <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
                                     </fieldset>
                                     <fieldset>
-                                        <h2 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h2>
+                                        <h3 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h3>
                                         <?= $form->field($userModel, 'login')->textInput()->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12', 'itemprop' => 'additionalName']) ?>
                                         <div class="row">
                                             <div class="col-md-6 col-12">
@@ -153,7 +153,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                                     'inputTemplate' => '<div class="input-group mb-3">
                                                                             {input}
                                                                             <div class="input-group-append pass-input">
-                                                                                    <i class="fas fa-eye-slash hide-show"></i>
+                                                                                    <em class="fas fa-eye-slash hide-show"></em>
                                                                             </div>
                                                                         </div>',
                                                     ])->passwordInput()->label(Yii::t('app', 'Password') . '*', ['class' => 'col-12']) ?>
@@ -163,7 +163,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                                     'inputTemplate' => '<div class="input-group mb-3">
                                                                             {input}
                                                                             <div class="input-group-append pass-input">
-                                                                                    <i class="fas fa-eye-slash hide-show"></i>
+                                                                                    <em class="fas fa-eye-slash hide-show"></em>
                                                                             </div>
                                                                         </div>',
                                                     ])->passwordInput()->label(Yii::t('app', 'Password Repeat') . '*', ['class' => 'col-12']) ?>
