@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Ejemplo de prueba funcional combinada con fixtures
+ * Ejemplo de prueba funcional combinada con fixtures.
  */
-use tests\unit\fixtures\UsuariosFixture;
 use app\models\Usuarios;
+use tests\unit\fixtures\UsuariosFixture;
 
 class UsuariosCest
 {
@@ -22,4 +22,3 @@ class UsuariosCest
         $I->assertNotEquals(0, Usuarios::find()->count());
     }
 }
-

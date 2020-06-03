@@ -68,5 +68,4 @@ class CancionesPlaylist extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Playlists::className(), ['id' => 'playlist_id']);
     }
-
 }

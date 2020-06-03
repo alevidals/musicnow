@@ -4,37 +4,35 @@ class LoginFormCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute('site/login');
+        $I->amOnRoute('usuarios/login');
     }
 
     public function openLoginPage(\FunctionalTester $I)
     {
-        $I->see('Login', 'h1');
-
+        $I->see('INICIA SESIÓN CON TU NOMBRE DE USUARIO', 'h3');
     }
 
     // demonstrates `amLoggedInAs` method
     public function internalLoginById(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(100);
+        $I->amLoggedInAs('1');
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->see('Logout');
     }
 
     // demonstrates `amLoggedInAs` method
     public function internalLoginByInstance(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(\app\models\User::findByUsername('admin'));
+        $I->amLoggedInAs(\app\models\Usuarios::findByUsername('admin'));
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->see('Logout');
     }
 
     public function loginWithEmptyCredentials(\FunctionalTester $I)
     {
         $I->submitForm('#login-form', []);
         $I->expectTo('see validations errors');
-        $I->see('Username no puede estar vacío.');
-        $I->see('Password no puede estar vacío.');
+        $I->expect(Yii::$app->user->isGuest);
     }
 
     public function loginWithWrongCredentials(\FunctionalTester $I)
@@ -51,9 +49,19 @@ class LoginFormCest
     {
         $I->submitForm('#login-form', [
             'LoginForm[username]' => 'admin',
-            'LoginForm[password]' => 'admin',
+            'LoginForm[password]' => 'pepe',
         ]);
-        $I->see('Logout (admin)');
-        $I->dontSeeElement('form#login-form');              
+        $I->see('Logout');
+        $I->dontSeeElement('form#login-form');
+    }
+
+    public function adminLogin(\FunctionalTester $I)
+    {
+        $I->submitForm('#login-form', [
+            'LoginForm[username]' => 'admin',
+            'LoginForm[password]' => 'pepe',
+        ]);
+        $I->see('Panel de administración', 'h1');
+        $I->dontSeeElement('form#login-form');
     }
 }
