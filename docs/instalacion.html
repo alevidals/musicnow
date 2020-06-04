@@ -59,7 +59,7 @@
 <li>Instalar Heroku CLI</li>
 </ul>
 <h2>Despliegue <span id="despliegue"></span><a href="#despliegue" class="hashlink">&para;</a></h2><ol>
-<li><p>Ejecutamos el siguiente comando para clonar el repositorio: <code>`</code> $ git clone <a href="https://github.com/alevidals/musicnow.git```">https://github.com/alevidals/musicnow.git```</a></p>
+<li><p>Ejecutamos el siguiente comando para clonar el repositorio: <code> $ git clone https://github.com/alevidals/musicnow.git</code></p>
 </li>
 <li><p>Creamos una aplicación en Heroku (anteriormente debemos registrarnos).</p>
 </li>
@@ -67,76 +67,32 @@
 </li>
 <li><p>En el mismo directorio que hemos clonado, debemos de ejecutar los siguiente comandos:</p>
 <ol>
-<li><pre><code class="language- para iniciar sesión con Heroku.">
-</code></pre>
-</li>
-<li><pre><code class="language- para añadir el remoto.">
-</code></pre>
-</li>
-<li><pre><code class="language- para tener en Heroku nuestra base de datos.">
-</code></pre>
-</li>
+<li><code>$ heroku login</code> para iniciar sesión con Heroku.</li>
+<li><code>$ heroku git:remote -a nombre_app_heroku</code> para añadir el remoto.</li>
+<li><code>$heroku psql &lt; db/musicnow.sql -a nombre_aplicacion</code> para tener en Heroku nuestra base de datos.</li>
 </ol>
 </li>
 <li><p>Configuramos las variables de entorno:</p>
 <ul>
-<li><pre><code class="language- en esta variable indicamos prod">
-</code></pre>
-</li>
-<li><pre><code class="language- en esta variable añadiremos el sufijo de los archivos de Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- en esta variable añadiremos el prefijo de los archivos de Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- el tipo de cuenta de Google.">
-</code></pre>
-</li>
-<li><pre><code class="language- el token de acceso a Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- contraseña de la cuenta de correo.">
-</code></pre>
-</li>
-<li><pre><code class="language- el id del proyecto de Google.">
-</code></pre>
-</li>
-<li><pre><code class="language- el id de la clave privada.">
-</code></pre>
-</li>
-<li><pre><code class="language- la clave privada.">
-</code></pre>
-</li>
-<li><pre><code class="language- la clave secreta de PayPal.">
-</code></pre>
-</li>
-<li><pre><code class="language- el id de cliente de PayPal.">
-</code></pre>
-</li>
-<li><pre><code class="language- la url de la base de datos.">
-</code></pre>
-</li>
-<li><pre><code class="language- el uri de la base de datos de Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- la url de cliente de la api.">
-</code></pre>
-</li>
-<li><pre><code class="language- el id de cliente de Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- el email de cliente de Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- el bucket Firebase.">
-</code></pre>
-</li>
-<li><pre><code class="language- la uri de autenticación.">
-</code></pre>
-</li>
-<li><pre><code class="language- la url de autenticación.">
-</code></pre>
-</li>
+<li><code>YII_ENV</code> en esta variable indicamos prod</li>
+<li><code>url_suffix</code> en esta variable añadiremos el sufijo de los archivos de Firebase.</li>
+<li><code>url_prefix</code> en esta variable añadiremos el prefijo de los archivos de Firebase.</li>
+<li><code>type</code> el tipo de cuenta de Google.</li>
+<li><code>token_uri</code> el token de acceso a Firebase.</li>
+<li><code>SMTP_PASS</code> contraseña de la cuenta de correo.</li>
+<li><code>project_id</code> el id del proyecto de Google.</li>
+<li><code>private_key_id</code> el id de la clave privada.</li>
+<li><code>private_key</code> la clave privada.</li>
+<li><code>payPalClientSecret</code> la clave secreta de PayPal.</li>
+<li><code>payPalClientId</code> el id de cliente de PayPal.</li>
+<li><code>DATABASE_URL</code> la url de la base de datos.</li>
+<li><code>databaseUri</code> el uri de la base de datos de Firebase.</li>
+<li><code>client_x509_cert_url</code> la url de cliente de la api.</li>
+<li><code>client_id</code> el id de cliente de Firebase.</li>
+<li><code>client_email</code> el email de cliente de Firebase.</li>
+<li><code>bucket</code> el bucket Firebase.</li>
+<li><code>auth_uri</code> la uri de autenticación.</li>
+<li><code>auth_provider_x509_cert_url</code> la url de autenticación.</li>
 </ul>
 </li>
 <li><p>Ya estaría todo funcionando!!</p>
@@ -150,7 +106,7 @@
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Thu, 04 Jun 2020 19:09:21 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Thu, 04 Jun 2020 19:15:06 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {
