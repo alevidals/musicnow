@@ -3,17 +3,15 @@
 namespace app\controllers;
 
 use app\models\Canciones;
-use Yii;
 use app\models\Comentarios;
 use app\models\ComentariosSearch;
 use app\models\Usuarios;
-use DateTime;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -31,6 +29,19 @@ class ComentariosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            return Yii::$app->user->identity->rol_id === 1;
+                        },
+                    ],
                 ],
             ],
         ];
@@ -53,7 +64,7 @@ class ComentariosController extends Controller
 
     /**
      * Displays a single Comentarios model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -85,7 +96,7 @@ class ComentariosController extends Controller
     /**
      * Updates an existing Comentarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -105,7 +116,7 @@ class ComentariosController extends Controller
     /**
      * Deletes an existing Comentarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -119,7 +130,7 @@ class ComentariosController extends Controller
     /**
      * Finds the Comentarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Comentarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -133,14 +144,14 @@ class ComentariosController extends Controller
     }
 
     /**
-     * Acción que se encarga de añadir un comentario a una canción
+     * Acción que se encarga de añadir un comentario a una canción.
      *
      * @param int $cancion_id el id de la canción en la que se desea comentar
      * @return array
      */
     public function actionComentar($cancion_id)
     {
-        $usuario = Usuarios::findOne(['id' =>Yii::$app->user->id ]);
+        $usuario = Usuarios::findOne(['id' => Yii::$app->user->id]);
         $model = new Comentarios();
         $comentario = Yii::$app->request->post('comentario');
 

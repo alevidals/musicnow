@@ -13,10 +13,7 @@
 
 ### Validación accesibilidad AA
 
-![Accesibilidad con Krajee](images/validacion_accesibilidad_con_krajee.png)
-![Accesibilidad sin Krajee](images/validacion_accesibilidad_sin_krajee.png)
-
-En este apartado he incluido dos imágenes una con errores y otra sin errores para demostrar que los únicos errores de accesibilidad son generados por el plugin para fechas Krajee.
+![Validación accesibilidad](images/validacion_accesibilidad.png)
 
 ---
 

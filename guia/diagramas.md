@@ -6,4 +6,4 @@
 
 ## Diagramas de estructura lógica de datos
 
-Incluir.
+![Diagrama de clases Mus!c Now](images/diagrama_de_clases.png)

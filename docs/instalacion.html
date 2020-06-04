@@ -51,9 +51,97 @@
     <div class="col-md-9 guide-content" role="main">
         <h1>Instrucciones de instalación y despliegue <span id="instrucciones-de-instalacion-y-despliegue"></span><a href="#instrucciones-de-instalacion-y-despliegue" class="hashlink">&para;</a></h1>
 <div class="toc"><ol><li><a href="#en-local">En local</a></li>
-<li><a href="#en-la-nube">En la nube</a></li></ol></div>
+<li><a href="#en-la-nube">En la nube</a></li>
+<li><a href="#requisitos">Requisitos</a></li>
+<li><a href="#despliegue">Despliegue</a></li></ol></div>
 <h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><p>Explicar.</p>
-<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><p>Explicar.</p>
+<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><h2>Requisitos <span id="requisitos"></span><a href="#requisitos" class="hashlink">&para;</a></h2><ul>
+<li>Instalar Heroku CLI</li>
+</ul>
+<h2>Despliegue <span id="despliegue"></span><a href="#despliegue" class="hashlink">&para;</a></h2><ol>
+<li><p>Ejecutamos el siguiente comando para clonar el repositorio: <code>`</code> $ git clone <a href="https://github.com/alevidals/musicnow.git```">https://github.com/alevidals/musicnow.git```</a></p>
+</li>
+<li><p>Creamos una aplicación en Heroku (anteriormente debemos registrarnos).</p>
+</li>
+<li><p>Añadimos el add-on <strong>Heroku Postgres</strong> para poder conectar nuestra base de datos de PostgreSQL.</p>
+</li>
+<li><p>En el mismo directorio que hemos clonado, debemos de ejecutar los siguiente comandos:</p>
+<ol>
+<li><pre><code class="language- para iniciar sesión con Heroku.">
+</code></pre>
+</li>
+<li><pre><code class="language- para añadir el remoto.">
+</code></pre>
+</li>
+<li><pre><code class="language- para tener en Heroku nuestra base de datos.">
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p>Configuramos las variables de entorno:</p>
+<ul>
+<li><pre><code class="language- en esta variable indicamos prod">
+</code></pre>
+</li>
+<li><pre><code class="language- en esta variable añadiremos el sufijo de los archivos de Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- en esta variable añadiremos el prefijo de los archivos de Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- el tipo de cuenta de Google.">
+</code></pre>
+</li>
+<li><pre><code class="language- el token de acceso a Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- contraseña de la cuenta de correo.">
+</code></pre>
+</li>
+<li><pre><code class="language- el id del proyecto de Google.">
+</code></pre>
+</li>
+<li><pre><code class="language- el id de la clave privada.">
+</code></pre>
+</li>
+<li><pre><code class="language- la clave privada.">
+</code></pre>
+</li>
+<li><pre><code class="language- la clave secreta de PayPal.">
+</code></pre>
+</li>
+<li><pre><code class="language- el id de cliente de PayPal.">
+</code></pre>
+</li>
+<li><pre><code class="language- la url de la base de datos.">
+</code></pre>
+</li>
+<li><pre><code class="language- el uri de la base de datos de Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- la url de cliente de la api.">
+</code></pre>
+</li>
+<li><pre><code class="language- el id de cliente de Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- el email de cliente de Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- el bucket Firebase.">
+</code></pre>
+</li>
+<li><pre><code class="language- la uri de autenticación.">
+</code></pre>
+</li>
+<li><pre><code class="language- la url de autenticación.">
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Ya estaría todo funcionando!!</p>
+</li>
+</ol>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>
@@ -62,7 +150,7 @@
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Thu, 04 Jun 2020 16:43:02 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Thu, 04 Jun 2020 19:09:21 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {

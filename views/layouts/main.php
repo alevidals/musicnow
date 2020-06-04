@@ -144,7 +144,6 @@ $this->registerJS($js);
                         'items' => [
                             ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index'], 'linkOptions' => ['data-pjax' => 0]],
                             ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'linkOptions' => ['data-pjax' => 0]],
-                            ['label' => Yii::t('app', 'Comments'), 'url' => ['/comentarios/index'], 'linkOptions' => ['data-pjax' => 0]],
                             ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'linkOptions' => ['data-pjax' => 0]],
                         ],
                     ],
