@@ -87,13 +87,6 @@ $this->registerJS($js);
     if (!Yii::$app->user->isGuest) {
         if (Yii::$app->user->identity->rol_id == 1) {
             $items = [
-                [
-                    'label' => '<em class="fas fa-sun"></em>
-                                <div class="custom-control custom-switch d-inline-block">
-                                    <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                                    <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em></label>
-                                </div>',
-                ],
                 ['label' => Yii::t('app', 'Home'), 'url' => ['/site/admin-index']],
                 ['label' => Yii::t('app', 'Generos'), 'url' => ['/generos/index']],
                 ['label' => Yii::t('app', 'Albumes'), 'url' => ['/albumes/index']],
@@ -146,14 +139,6 @@ $this->registerJS($js);
                             ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index'], 'linkOptions' => ['data-pjax' => 0]],
                             ['label' => Yii::t('app', 'Playlists'), 'url' => ['/playlists/index'], 'linkOptions' => ['data-pjax' => 0]],
                         ],
-                    ],
-                    [
-                        'label' => '<em class="fas fa-sun mr-2"></em>' .
-                                    '<div class="custom-control custom-switch d-inline-block">' .
-                                        '<input type="checkbox" class="custom-control-input " id="darkSwitch">' .
-                                        '<label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em></label>' .
-                                    '</div>',
-                        'options' => ['class' => 'my-auto'],
                     ],
                     Yii::$app->user->isGuest ? (
                         [
@@ -252,10 +237,10 @@ $this->registerJS($js);
 </div>
 
 
-<footer class="footer">
-    <div class="container d-flex justify-content-between">
-        <p class="">&copy; Mus!c Now <?= date('Y') ?></p>
-        <div class="social-media">
+<footer class="footer" style="height: fit-content;">
+    <div class="container mx-auto row text-center">
+        <p class="col-12 p-0 m-0 col-lg">&copy; Mus!c Now <?= date('Y') ?></p>
+        <div class="col social-media">
             <a class="action-btn mx-2" href="https://www.instagram.com/musicnow">
                 <em class="fab fa-instagram"></em>
             </a>
@@ -269,14 +254,14 @@ $this->registerJS($js);
                 <em class="fab fa-facebook"></em>
             </a>
         </div>
-        <div>
+        <div class="col-12 col-lg">
             <em class="fas fa-sun"></em>
             <div class="custom-control custom-switch d-inline-block">
                 <input type="checkbox" class="custom-control-input " id="darkSwitch">
                 <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em><span class="d-none">moon</span></label>
             </div>
         </div>
-        <div>
+        <div class="col-12 col-lg">
             <button type="button" class="policy-btn outline-transparent" data-toggle="modal" data-target="#policyModal">
                     <?= Yii::t('app', 'Policy') ?>
             </button>
