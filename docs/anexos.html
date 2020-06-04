@@ -49,11 +49,63 @@
 <a class="list-group-item" href="#navigation-104" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-104" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
 <a class="list-group-item active" href="#navigation-105" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-105" class="submenu panel-collapse collapse in"><a class="list-group-item active" href="./anexos.html">Anexos</a></div></div>    </div>
     <div class="col-md-9 guide-content" role="main">
-        <h1>Anexos <span id="anexos"></span><a href="#anexos" class="hashlink">&para;</a></h1><p>Documentos específicos vinculados a determinados requisitos funcionales o
-técnicos ("prueba del seis" y similares).</p>
-<p>Poner cada uno en un apartado separado, indicando en el título de cada apartado
-el código y la descripción corta del requisito asociado (por ejemplo,
-<strong>(RF24) Prueba del seis</strong>).</p>
+        <h1>Anexos <span id="anexos"></span><a href="#anexos" class="hashlink">&para;</a></h1>
+<div class="toc"><ol><li><a href="#r34-validacion-html5-css3-y-accesibilidad">(R34) Validación HTML5, CSS3 y accesibilidad</a></li>
+<li><a href="#r36-varios-navegadores">(R36) Varios navegadores</a></li>
+<li><a href="#r25-codeception">(R25) Codeception</a></li></ol></div>
+<hr />
+<h2><strong>(<a href="https://github.com/alevidals/musicnow/issues/34">R34</a>) Validación HTML5, CSS3 y accesibilidad</strong> <span id="r34-validacion-html5-css3-y-accesibilidad"></span><a href="#r34-validacion-html5-css3-y-accesibilidad" class="hashlink">&para;</a></h2><h3>Validación HTML5 <span id="validacion-html5"></span><a href="#validacion-html5" class="hashlink">&para;</a></h3><p><img src="images/validacion_html.png" alt="Validación HTML" /></p>
+<h3>Validación CSS <span id="validacion-css"></span><a href="#validacion-css" class="hashlink">&para;</a></h3><p><img src="images/validacion_css.png" alt="Accesibilidad CSS" /></p>
+<h3>Validación accesibilidad AA <span id="validacion-accesibilidad-aa"></span><a href="#validacion-accesibilidad-aa" class="hashlink">&para;</a></h3><p><img src="images/validacion_accesibilidad_con_krajee.png" alt="Accesibilidad con Krajee" />
+<img src="images/validacion_accesibilidad_sin_krajee.png" alt="Accesibilidad sin Krajee" /></p>
+<p>En este apartado he incluido dos imágenes una con errores y otra sin errores para demostrar que los únicos errores de accesibilidad son generados por el plugin para fechas Krajee.</p>
+<hr />
+<h2><strong>(<a href="https://github.com/alevidals/musicnow/issues/36">R36</a>) Varios navegadores</strong> <span id="r36-varios-navegadores"></span><a href="#r36-varios-navegadores" class="hashlink">&para;</a></h2><h3>Microsoft Edge <span id="microsoft-edge"></span><a href="#microsoft-edge" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_edge.png" alt="Microsoft Edge" /></p>
+<h3>Google Chrome <span id="google-chrome"></span><a href="#google-chrome" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_chrome.png" alt="Google Chrome" /></p>
+<h3>Mozilla Firefox <span id="mozilla-firefox"></span><a href="#mozilla-firefox" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_firefox.png" alt="Mozilla Firefox" /></p>
+<h3>Opera <span id="opera"></span><a href="#opera" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_opera.png" alt="Opera" /></p>
+<h3>Brave <span id="brave"></span><a href="#brave" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_brave.png" alt="Brave" /></p>
+<hr />
+<h2><strong>(<a href="https://github.com/alevidals/musicnow/issues/25">R25</a>) Codeception</strong> <span id="r25-codeception"></span><a href="#r25-codeception" class="hashlink">&para;</a></h2><h3>TODO <span id="todo"></span><a href="#todo" class="hashlink">&para;</a></h3><hr />
+<h3>Prueba del seis <span id="prueba-del-seis"></span><a href="#prueba-del-seis" class="hashlink">&para;</a></h3><ol>
+<li><p>¿Qué sitio es éste?</p>
+<ul>
+<li>En todo momento podemos saber que sitio es debido a que en la barra superior existe un logo que indica que estamos en esta página y en la barra inferior (footer) está indicado el nombre de la página por lo que siempre vamos a tener presentes que estamos dentro de Mus!c Now.</li>
+</ul>
+</li>
+<li><p>¿En qué página estoy?</p>
+<ul>
+<li>Siempre vamos a saber en qué página estoy debido a que Mus!c Now incorpora en casi todas las página migas de pan (breadcrumbs) para saber donde estamos. Además con ayuda de las pretty urls con solo echar un vistazo también vamos a saber dónde estamos.</li>
+</ul>
+</li>
+<li><p>¿Cuales son las principales secciones del sitio?</p>
+<ul>
+<li>Las principales secciones del sitio son:<ul>
+<li>Inicio: la página principal.</li>
+<li>Tendencias: página donde vamos a poder ver que canciones son tendencia el mes actual.</li>
+<li>Chat: página dónde vamos a poder chatear con los amigos (personas que se siguen mutuamente).</li>
+<li>Administrar: es menú desplegable de administración con las siguiente opciones: Álbumes, Canciones, Comentarios y Playlists.</li>
+<li>En forma de imagen un menú desplegable con enlace a la cuenta de perfil, a configurar el perfil y a cerrar sesión.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>¿Qué opciones tengo en este nivel?</p>
+<ul>
+<li>En este nivel además de tener posibilidad de navegar haciendo clic en las secciones anteriormente comentadas, tenemos una barra de búsqueda para buscar canciones, álbumes y usuarios. Debajo de esta barra, tendremos en forma de lista vertical las canciones que vayan subiendo las personas que seguimos y podremos escucharlas, darles likes, agregarlas a cola o a playlists.</li>
+</ul>
+</li>
+<li><p>¿Dónde estoy en el esquema de las cosas?</p>
+<ul>
+<li>Al existir migas de pan (breadcrumbs) y al hacer uso de las pretty urls en todo momento vamos saber dónde estoy en el esquema de las cosas.</li>
+</ul>
+</li>
+<li><p>¿Cómo busco algo?</p>
+<ul>
+<li>En la página principal tenemos un búscador que filtra por canciones, álbumes y  usuarios.</li>
+</ul>
+</li>
+</ol>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>
@@ -62,7 +114,7 @@ el código y la descripción corta del requisito asociado (por ejemplo,
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Sun, 31 May 2020 16:46:51 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Thu, 04 Jun 2020 16:43:02 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {
