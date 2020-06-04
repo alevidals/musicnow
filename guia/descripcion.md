@@ -13,9 +13,9 @@ Mus!c Now tendrá un panel de administrador al cual solo los administradores pod
 
 - Objetivo: "gestionar las canciones de cada usuario, así como la descarga de las mismas".
 - Casos de uso:
-    - Invitado: "registrarse", "buscar canciones".
-    - Usuario: "iniciar sesión", "cerrar sesión", "añadir una canción", "modificar una canción", "eliminar una canción", "modificar el perfil de usuario", "seguir a un usuario", "ser seguido por otro usuario", "ver el perfil de otro usuario", "dar like a una canción", "quitar like a una canción", "añadir un comentario en una canción", "quitar un comentario de una canción", "eliminar la cuenta", "reproducir una canción".
-    - Administrador: "iniciar sesión", "cerrar sesión", "añadir un género", "modificar un género", "eliminar un género", "añadir a un usuario", "modificar a un usuario", "eliminar a un usuario", "añadir una canción", "modificar una canción", "eliminar una canción", "borrar comentarios".
+  - Invitado: "registrarse", "buscar canciones".
+  - Usuario: "iniciar sesión", "cerrar sesión", "añadir una canción", "modificar una canción", "eliminar una canción", "modificar el perfil de usuario", "seguir a un usuario", "ser seguido por otro usuario", "ver el perfil de otro usuario", "dar like a una canción", "quitar like a una canción", "añadir un comentario en una canción", "quitar un comentario de una canción", "eliminar la cuenta", "reproducir una canción".
+  - Administrador: "iniciar sesión", "cerrar sesión", "añadir un género", "modificar un género", "eliminar un género", "añadir a un usuario", "modificar a un usuario", "eliminar a un usuario", "añadir una canción", "modificar una canción", "eliminar una canción", "borrar comentarios".
 
 ## URL del repositorio
 
@@ -23,6 +23,6 @@ Mus!c Now tendrá un panel de administrador al cual solo los administradores pod
 
 ## URL de la documentación
 
-[https://ricpelo.github.io/musicnow](https://alevidals.github.io/musicnow/)
+[https://alevidals.github.io/musicnow/](https://alevidals.github.io/musicnow/)
 
 [1]: https://www.spotify.com/

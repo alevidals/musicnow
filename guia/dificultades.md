@@ -19,3 +19,4 @@
 - [Firebase](https://firebase.google.com/) para el almacenamiento de las canciones junto a sus portadas, así también la imágenes de perfil del usuario y los banner del perfil.
 - Multilenguaje (Español e Inglés).
 - Uso del módulo de chat en Yii2.
+- Paypal, no estaba integrado desde el primer momento, pero decidí agregar esta innovación.

@@ -85,7 +85,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                     'horizontalCssClasses' => ['wrapper' => 'col-sm-12 mx-auto'],
                                 ],
                             ]); ?>
-                                <h3 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h3>
+                                <h2 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h2>
                                 <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
                                 <?= $form->field($loginFormModel, 'password', [
                                     'inputTemplate' => '<div class="input-group mb-3">
@@ -139,12 +139,13 @@ kartik\icons\FontAwesomeAsset::register($this);
                                         ->widget(
                                             DatePicker::classname(),
                                             [
-                                                'readonly' => true,
+                                                'removeButton' => false,
+                                                'pickerIcon' => '<em class="fas fa-calendar-alt"></em>',
                                                 'pluginOptions' => [
                                                     'todayHighlight' => true,
                                                     'todayBtn' => true,
                                                     'autoclose' => true,
-                                                    'format' => 'dd/mm/yyyy'
+                                                    'format' => 'yyyy-mm-dd',
                                                 ]
 
                                             ]
@@ -152,7 +153,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                         <?= Html::button(Yii::t('app', 'Siguiente'), ['type' => 'button', 'name' => 'next', 'class' => 'next action-button btn main-yellow']) ?>
                                     </fieldset>
                                     <fieldset>
-                                        <h3 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h3>
+                                        <h4 class="fs-title"><?= Yii::t('app', 'Regístrate con tu dirección de correo electrónico') ?></h4>
                                         <?= $form->field($userModel, 'login')->textInput()->label(Yii::t('app', 'Nombre de usuario') . '*', ['class' => 'col-12', 'itemprop' => 'additionalName']) ?>
                                         <div class="row">
                                             <div class="col-md-6 col-12">

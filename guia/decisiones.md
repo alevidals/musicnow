@@ -4,6 +4,10 @@
 
 - Decidí que la página fuera completamente cargada por Ajax para así poder estar reproduciendo una canción a la vez que navegas. Esto está aplicado a toda la página excepto en las vistas donde existen formularios de creación o de actualización.
 
+### Integración de pago de cuenta premium
+
+- Decidí integrar que los usuarios pudieran hacer un pago para hacer que su cuenta fuera premium y tener varias ventajas respecto a los usuarios normales.
+
 #### Uso de widgets
 
 - [Yii2 mpdf](https://demos.krajee.com/mpdf) usé este plugin para la generación de pdfs.

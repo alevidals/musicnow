@@ -7,8 +7,6 @@
 
 ![Validación HTML](images/validacion_html.png)
 
-El error que muestra se debe a que use el componente [tabs](https://getbootstrap.com/docs/4.5/components/navs/#tabs) de Boostrap y la pestaña que no se encuentra en este momento esta oculta (display: none) por lo que dice que el valor for del attribute label no puede ser el ID de algo oculto.
-
 ### Validación CSS
 
 ![Accesibilidad CSS](images/validacion_css.png)

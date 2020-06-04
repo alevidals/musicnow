@@ -780,8 +780,11 @@ textarea:focus {
     color: #000 !important;
 }
 
-[data-theme="dark"] .kv-dp-icon {
-    color: #000 !important;
+[data-theme="dark"] .kv-date-picker,
+[data-theme="dark"] .kv-date-remove {
+    border: none !important;
+    z-index: 1000;
+    background-color: var(--bar-dark);
 }
 
 [data-theme="dark"] .alert {
