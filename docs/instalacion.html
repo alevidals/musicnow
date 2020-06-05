@@ -51,14 +51,43 @@
     <div class="col-md-9 guide-content" role="main">
         <h1>Instrucciones de instalación y despliegue <span id="instrucciones-de-instalacion-y-despliegue"></span><a href="#instrucciones-de-instalacion-y-despliegue" class="hashlink">&para;</a></h1>
 <div class="toc"><ol><li><a href="#en-local">En local</a></li>
-<li><a href="#en-la-nube">En la nube</a></li>
-<li><a href="#requisitos">Requisitos</a></li>
-<li><a href="#despliegue">Despliegue</a></li></ol></div>
-<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><p>Explicar.</p>
-<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><h2>Requisitos <span id="requisitos"></span><a href="#requisitos" class="hashlink">&para;</a></h2><ul>
+<li><a href="#en-la-nube">En la nube</a></li></ol></div>
+<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><h3>Requisitos <span id="requisitos"></span><a href="#requisitos" class="hashlink">&para;</a></h3><ul>
+<li><em>PHP 7.3.0</em></li>
+<li><em>PostgreSQL 12.0 o superior</em></li>
+<li><em>Composer</em></li>
+<li><em>Cuenta de Firebase</em></li>
+<li><em>Cuenta de gmail</em></li>
+<li><em>Cuenta de desarrollador de PayPal</em></li>
+</ul>
+<h3>Instalación <span id="instalacion"></span><a href="#instalacion" class="hashlink">&para;</a></h3><ol>
+<li><p>Ejecutamos los siguientes comandos
+ <code>`</code>sh
+ $ git clone <a href="https://github.com/alevidals/musicnow.git">https://github.com/alevidals/musicnow.git</a>
+ $ cd musicnow
+ $ componser install
+ <code>`</code></p>
+</li>
+<li><p>Rellenamos las variables de entorno, para ello cogemos el fichero <code>.env.dist</code> y lo guardamos como <code>.env</code>. Una vez lo hayais guardado rellenar las variables.</p>
+</li>
+<li><p>Creamos la base de datos y le cargamos los datos, para ello:
+ <code>`</code>sh
+ $ db/create.sh
+ $ db/load.sh
+ <code>`</code></p>
+</li>
+<li><p>Para iniciar la aplicación ejecutamos el comando:
+ <code>`</code>sh
+ $ make serve
+ <code>`</code></p>
+</li>
+<li><p>Ya estaría todo funcionando!! Para acceder a la aplicación introducimos en el navegador <code>localhost:8080</code>.</p>
+</li>
+</ol>
+<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><h3>Requisitos <span id="requisitos"></span><a href="#requisitos" class="hashlink">&para;</a></h3><ul>
 <li>Instalar Heroku CLI</li>
 </ul>
-<h2>Despliegue <span id="despliegue"></span><a href="#despliegue" class="hashlink">&para;</a></h2><ol>
+<h3>Despliegue <span id="despliegue"></span><a href="#despliegue" class="hashlink">&para;</a></h3><ol>
 <li><p>Ejecutamos el siguiente comando para clonar el repositorio: <code> $ git clone https://github.com/alevidals/musicnow.git</code></p>
 </li>
 <li><p>Creamos una aplicación en Heroku (anteriormente debemos registrarnos).</p>
@@ -106,7 +135,7 @@
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Thu, 04 Jun 2020 19:15:06 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Fri, 05 Jun 2020 17:28:33 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {
