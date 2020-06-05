@@ -2,15 +2,46 @@
 
 ## En local
 
-Explicar.
+### Requisitos
+
+- *PHP 7.3.0*
+- *PostgreSQL 12.0 o superior*
+- *Composer*
+- *Cuenta de Firebase*
+- *Cuenta de gmail*
+- *Cuenta de desarrollador de PayPal*
+
+### Instalación
+
+1. Ejecutamos los siguientes comandos
+    ```sh
+    $ git clone https://github.com/alevidals/musicnow.git
+    $ cd musicnow
+    $ componser install
+    ```
+
+2. Rellenamos las variables de entorno, para ello cogemos el fichero `.env.dist` y lo guardamos como `.env`. Una vez lo hayais guardado rellenar las variables.
+
+3. Creamos la base de datos y le cargamos los datos, para ello:
+    ```sh
+    $ db/create.sh
+    $ db/load.sh
+    ```
+
+4. Para iniciar la aplicación ejecutamos el comando:
+    ```sh
+    $ make serve
+    ```
+
+5. Ya estaría todo funcionando!! Para acceder a la aplicación introducimos en el navegador `localhost:8080`.
 
 ## En la nube
 
-## Requisitos
+### Requisitos
 
 - Instalar Heroku CLI
 
-## Despliegue
+### Despliegue
 
 1. Ejecutamos el siguiente comando para clonar el repositorio: ` $ git clone https://github.com/alevidals/musicnow.git`
 
