@@ -9,7 +9,7 @@ class LoginFormCest
 
     public function openLoginPage(\FunctionalTester $I)
     {
-        $I->see('INICIA SESIÓN CON TU NOMBRE DE USUARIO', 'h3');
+        $I->see('INICIA SESIÓN CON TU NOMBRE DE USUARIO');
     }
 
     // demonstrates `amLoggedInAs` method

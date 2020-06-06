@@ -64,7 +64,8 @@
 <h3>Opera <span id="opera"></span><a href="#opera" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_opera.png" alt="Opera" /></p>
 <h3>Brave <span id="brave"></span><a href="#brave" class="hashlink">&para;</a></h3><p><img src="images/prueba_navegador_brave.png" alt="Brave" /></p>
 <hr />
-<h2><strong>(<a href="https://github.com/alevidals/musicnow/issues/25">R25</a>) Codeception</strong> <span id="r25-codeception"></span><a href="#r25-codeception" class="hashlink">&para;</a></h2><h3>TODO <span id="todo"></span><a href="#todo" class="hashlink">&para;</a></h3><hr />
+<h2><strong>(<a href="https://github.com/alevidals/musicnow/issues/25">R25</a>) Codeception</strong> <span id="r25-codeception"></span><a href="#r25-codeception" class="hashlink">&para;</a></h2><p><img src="images/tests-funcionales.png" alt="Pruebas" /></p>
+<hr />
 <h3>Prueba del seis <span id="prueba-del-seis"></span><a href="#prueba-del-seis" class="hashlink">&para;</a></h3><ol>
 <li><p>¿Qué sitio es éste?</p>
 <ul>
@@ -104,6 +105,64 @@
 </ul>
 </li>
 </ol>
+<h3>Despliegue en servidor local <span id="despliegue-en-servidor-local"></span><a href="#despliegue-en-servidor-local" class="hashlink">&para;</a></h3><p>En primer lugar configure un adaptador de red interna en ambas máquinas virtuales y les di la siguiente configuración de red:</p>
+<ul>
+<li>Servidor</li>
+</ul>
+<p><img src="images/despliegue_local/netplan-servidor.png" alt="Netplan servidor" /></p>
+<ul>
+<li>Cliente</li>
+</ul>
+<p><img src="images/despliegue_local/netplan-cliente.png" alt="Netplan cliente" /></p>
+<p>Ahora configuramos el DNS en el servidor.</p>
+<ol>
+<li>Archivos creados</li>
+<li>Configuración de named.conf.local</li>
+<li>Configuración de db.musicnow.com (directa)</li>
+<li>Configuración de db.0.168.192 (inversa)</li>
+</ol>
+<p><img src="images/despliegue_local/server-conf.png" alt="DNS conf" /></p>
+<p>Hacemos ping entre ambas máquinas y vemos que se ven la una a la otra.</p>
+<p><img src="images/despliegue_local/ping.png" alt="Ping" /></p>
+<p>Configuración de apache en el servidor, donde ajuste la directiva <strong>DocumentRoot</strong> al directorio y añadí la redirección con la directiva <strong>Redirect</strong>.</p>
+<p><img src="images/despliegue_local/apache-conf.png" alt="Apache" /></p>
+<p>Para configurar el SSL:</p>
+<ul>
+<li><p>Habilité el modulo de ssl y el sitio ssl</p>
+<p> <code>`</code>sh
+ $ sudo a2enmod ssl
+ $ sudo a2ensite default-ssl
+ <code>`</code></p>
+</li>
+<li><p>Creé las llaves y los certificados</p>
+<p> <code>`</code>sh
+ $ sudo openssl genrsa -des3 -out server.key 2048
+ $ sudo openssl req -new -key server.key -out server.csr
+ $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+ $ sudo cp server.crt /etc/ssl/certs/
+ $ sudo cp server.key /etc/ssl/private/
+ <code>`</code></p>
+</li>
+<li><p>Vamos al archivo default-ssl.conf que se encuentra en el directorio <code>/etc/apache/sites-enabled</code> y añadimos estas líneas (las dos últimas existen, solo modificarlas)</p>
+<p> <code>`</code>sh
+ SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+ SSLCertificateFile /etc/ssl/certs/server.crt
+ SSLCertificateKeyFile /etc/ssl/private/server.key
+ <code>`</code></p>
+</li>
+<li><p>Por último reiniciamos Apache y ya estaría todo listo:</p>
+<p> <code>`</code>sh
+ $ sudo service apache2 restart
+ <code>`</code></p>
+</li>
+<li><p>Comprobamos que nos redirige correctamente a https:</p>
+</li>
+</ul>
+<p><img src="images/despliegue_local/ssl.gif" alt="ssl" /></p>
+<ul>
+<li>Comprobamos la redirección</li>
+</ul>
+<p><img src="images/despliegue_local/redireccion.gif" alt="Redirect" /></p>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>
@@ -112,7 +171,7 @@
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Fri, 05 Jun 2020 17:28:33 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Sat, 06 Jun 2020 18:22:44 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {
