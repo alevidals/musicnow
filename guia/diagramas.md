@@ -2,8 +2,9 @@
 
 ## Diagramas de clases
 
-![Diagrama ER Mus!c Now](images/diagrama_er_music_now.png)
+![Diagrama de clases Mus!c Now](images/diagrama_de_clases.png)
 
 ## Diagramas de estructura lógica de datos
 
-![Diagrama de clases Mus!c Now](images/diagrama_de_clases.png)
+
+![Diagrama ER Mus!c Now](images/diagrama_er_music_now.png)
