@@ -946,6 +946,15 @@
 | **Entrega**     | v3             |
 | **Incidencia**  | [147](https://github.com/alevidals/musicnow/issues/147) |
 
+| **R106**     | **Regalar premium.**         |
+| --------------: | :------------------- |
+| **Descripción** | Se podrá regalar premium a un amigo.             |
+| **Prioridad**   | Opcional           |
+| **Tipo**        | Funcional                |
+| **Complejidad** | Media         |
+| **Entrega**     | v3             |
+| **Incidencia**  | [149](https://github.com/alevidals/musicnow/issues/149) |
+
 
 ## Cuadro resumen
 
@@ -1056,3 +1065,4 @@
 | (**R103**) Cuenta premium. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [144](https://github.com/alevidals/musicnow/issues/144) |
 | (**R104**) Pago por Paypal. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [145](https://github.com/alevidals/musicnow/issues/145) |
 | (**R105**) Obtener factura. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [147](https://github.com/alevidals/musicnow/issues/147) |
+| (**R106**) Regalar premium. | Opcional | Funcional | Media | v3 | | **Incidencia**  | [149](https://github.com/alevidals/musicnow/issues/149) |
