@@ -8,11 +8,15 @@ use yii\bootstrap4\Html;
 ?>
 <div class="pagos-payed">
 
-    <h1>Enhorabuena (TRADUCIR)</h1>
+    <h1 class="mt-5"><?= Yii::t('app', 'Congratulations') ?></h1>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ipsum illum placeat temporibus velit magni illo itaque, eveniet nemo hic exercitationem qui, repellat, in eius! Veniam impedit itaque quis sequi!</p>
+    <p><?= Yii::t('app', 'CongratulationsMessage') ?></p>
 
-    <?= Html::a('Download invoice (TRADUCIR)', ['pagos/get-invoice'], ['role' => 'button', 'class' => 'btn main-yellow', 'data-pjax' => 0]) ?>
+    <?= Html::a(Yii::t('app', 'DownloadInvoice'), ['pagos/get-invoice'], ['role' => 'button', 'class' => 'btn main-yellow', 'data-pjax' => 0]) ?>
+
+    <div class="row mt-5">
+        <?= Html::img('@web/img/undraw_super_thank_you_obwk.png', ['class' => 'img-fluid col-12 col-md-6 mx-auto']) ?>
+    </div>
 
 
 </div>

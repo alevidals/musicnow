@@ -426,6 +426,23 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Devuelve la lista de amigos indexadas por id
+     *
+     * @return ActiveQuery
+     */
+    public static function lista()
+    {
+        return Seguidores::find()
+            ->select('u.login')
+            ->innerJoin('seguidores s2', 'seguidores.seguidor_id = s2.seguido_id AND seguidores.seguido_id = s2.seguidor_id')
+            ->leftJoin('usuarios u', 'u.id = seguidores.seguido_id')
+            ->where(['seguidores.seguidor_id' => Yii::$app->user->id])
+            ->andWhere(['!=', 'u.rol_id', 3])
+            ->indexBy('u.id')
+            ->column();
+    }
+
+    /**
      * Eliminar la imagen del perfil del servidor de almacenamiento
      * Firebase.
      */

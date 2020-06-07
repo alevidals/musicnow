@@ -15,9 +15,11 @@ use Yii;
  * @property int $provincia_id
  * @property string $direccion
  * @property int $usuario_id
+ * @property int|null $receptor_id
  * @property string $created_at
  *
  * @property Provincias $provincia
+ * @property Usuarios $receptor
  * @property Usuarios $usuario
  */
 class Pagos extends \yii\db\ActiveRecord
@@ -37,8 +39,8 @@ class Pagos extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'apellidos', 'provincia_id', 'direccion', 'usuario_id'], 'required'],
-            [['provincia_id', 'usuario_id'], 'default', 'value' => null],
-            [['provincia_id', 'usuario_id'], 'integer'],
+            [['provincia_id', 'usuario_id', 'receptor_id'], 'default', 'value' => null],
+            [['provincia_id', 'usuario_id', 'receptor_id'], 'integer'],
             [['created_at'], 'safe'],
             [['payment', 'cart'], 'string', 'max' => 50],
             [['nombre', 'apellidos', 'direccion'], 'string', 'max' => 255],
@@ -62,6 +64,7 @@ class Pagos extends \yii\db\ActiveRecord
             'direccion' => Yii::t('app', 'Direccion'),
             'usuario_id' => Yii::t('app', 'Usuario ID'),
             'created_at' => Yii::t('app', 'Created At'),
+            'receptor_id' => Yii::t('app', 'Receptor ID'),
         ];
     }
 
@@ -83,5 +86,15 @@ class Pagos extends \yii\db\ActiveRecord
     public function getUsuario()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id']);
+    }
+
+    /**
+     * Gets query for [[Receptor]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReceptor()
+    {
+        return $this->hasOne(Usuarios::className(), ['id' => 'receptor_id']);
     }
 }

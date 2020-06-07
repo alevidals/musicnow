@@ -193,4 +193,13 @@ return [
     'Quantity'=> 'Cantidad',
     'Price' => 'Precio',
     'Concept' => 'Concepto',
+    'Give' => 'Regala',
+    'ForYou' => 'Para ti',
+    'ForAFriend' => 'Para un amigo/a',
+    'GiveFriendMessage' => 'Regala premium a un amigo/a y dejale disfrutar de las ventajas',
+    'EnjoyYourself' => 'Conviértete en premium ahora mismo y empieza a disfrutar de las ventajas',
+    'Friend' => 'Amigo',
+    'Congratulations' => 'Enhorabuena',
+    'DownloadInvoice' => 'Descargar factura',
+    'CongratulationsMessage' => 'A partir de ahora podrás empezar a disfrutar de las ventajas de ser un usuario premium',
 ];

@@ -69,7 +69,7 @@ class PagosController extends Controller
         $model = new Pagos(['usuario_id' => Yii::$app->user->id]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->redirect('checkout');
+            $this->redirect(['pagos/checkout', 'id' => $model->receptor_id]);
         }
 
         return $this->render('create', [
@@ -133,7 +133,7 @@ class PagosController extends Controller
      *
      * @return void
      */
-    public function actionCheckout()
+    public function actionCheckout($id = null)
     {
         $params = [
             'method' => 'paypal',
@@ -154,6 +154,10 @@ class PagosController extends Controller
                 ],
             ],
         ];
+
+        if ($id !== null) {
+            $_SESSION['receptor_id'] = $id;
+        }
 
         Yii::$app->PayPalRestApi->checkOut($params);
     }
@@ -181,13 +185,22 @@ class PagosController extends Controller
 
         if ($data !== null && (Yii::$app->request->get('success') == true)) {
             $usuario = Usuarios::findOne(Yii::$app->user->id);
-            $usuario->rol_id = 3;
-            $usuario->save();
             $pago = $usuario->getPagos()->orderBy(['id' => SORT_DESC])->limit(1)->one();
+            if ($pago->receptor_id === null) {
+                $usuario->rol_id = 3;
+                $usuario->save();
+            } else {
+                $receptor_id = $_SESSION['receptor_id'];
+                unset($_SESSION['receptor_id']);
+                $receptor = Usuarios::findOne($receptor_id);
+                $receptor->rol_id = 3;
+                $receptor->save();
+            }
             $pago->payment = $data->id;
             $pago->cart = $data->cart;
             $pago->save();
         } else {
+            $usuario = Usuarios::findOne(Yii::$app->user->id);
             $pago = $usuario->getPagos()->orderBy(['id' => SORT_DESC])->limit(1)->one();
             $pago->delete();
         }
