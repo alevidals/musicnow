@@ -144,6 +144,7 @@ class AlbumesController extends Controller
         $canciones = $model->getCanciones()->all();
 
         foreach ($canciones as $cancion) {
+            $cancion->deleteCancion();
             $cancion->delete();
         }
 
