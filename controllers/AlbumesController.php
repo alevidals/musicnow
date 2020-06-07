@@ -141,6 +141,12 @@ class AlbumesController extends Controller
     {
         $model = $this->findModel($id);
 
+        $canciones = $model->getCanciones()->all();
+
+        foreach ($canciones as $cancion) {
+            $cancion->delete();
+        }
+
         if ($model->delete()) {
             $model->deletePortada();
         }
