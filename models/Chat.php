@@ -13,6 +13,7 @@ use Yii;
  * @property string $mensaje
  * @property int $estado_id
  * @property string $created_at
+ * @property bool|null $notified
  *
  * @property Estados $estado
  * @property Usuarios $emisor
@@ -38,6 +39,7 @@ class Chat extends \yii\db\ActiveRecord
             [['emisor_id', 'receptor_id', 'estado_id'], 'default', 'value' => null],
             [['emisor_id', 'receptor_id', 'estado_id'], 'integer'],
             [['mensaje'], 'string'],
+            [['notified'], 'boolean'],
             [['created_at'], 'safe'],
             [['estado_id'], 'default', 'value' => 3],
             [['estado_id'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::className(), 'targetAttribute' => ['estado_id' => 'id']],
@@ -57,6 +59,7 @@ class Chat extends \yii\db\ActiveRecord
             'receptor_id' => Yii::t('app', 'Receptor ID'),
             'mensaje' => Yii::t('app', 'Mensaje'),
             'estado_id' => Yii::t('app', 'Estado ID'),
+            'notified' => Yii::t('app', 'Notified'),
             'created_at' => Yii::t('app', 'Created At'),
         ];
     }

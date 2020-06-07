@@ -132,6 +132,7 @@ CREATE TABLE chat
   , receptor_id   BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
   , mensaje       TEXT         NOT NULL
   , estado_id     BIGINT       NOT NULL REFERENCES estados  (id) DEFAULT 3
+  , notified      BOOLEAN      DEFAULT FALSE
   , created_at    TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

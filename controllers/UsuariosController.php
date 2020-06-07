@@ -529,10 +529,11 @@ class UsuariosController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
 
             $mensajes = (new \yii\db\Query())
-                ->select(['mensaje', 'c.created_at', 'url_image', 'login'])
+                ->select(['c.id', 'mensaje', 'c.created_at', 'url_image', 'login'])
                 ->from('chat c')
                 ->leftJoin('usuarios', 'usuarios.id = c.emisor_id')
                 ->where(['c.estado_id' => 3])
+                ->andWhere(['notified' => false])
                 ->andWhere(['receptor_id' => $usuario->id])
                 ->orderBy(['c.created_at' => SORT_DESC]);
 

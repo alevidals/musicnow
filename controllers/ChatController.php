@@ -2,16 +2,15 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Chat;
 use app\models\ChatSearch;
-use app\models\Seguidores;
 use app\models\Usuarios;
+use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -40,7 +39,7 @@ class ChatController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rules, $action) {
                             return Yii::$app->user->identity->rol_id === 1;
-                        }
+                        },
                     ],
                 ],
             ],
@@ -64,7 +63,7 @@ class ChatController extends Controller
 
     /**
      * Displays a single Chat model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -96,7 +95,7 @@ class ChatController extends Controller
     /**
      * Updates an existing Chat model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -116,7 +115,7 @@ class ChatController extends Controller
     /**
      * Deletes an existing Chat model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -130,7 +129,7 @@ class ChatController extends Controller
     /**
      * Finds the Chat model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Chat the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -145,7 +144,7 @@ class ChatController extends Controller
 
     /**
      * Devuelve el resultado de una ActiveQuery en la que se comprueba
-     * que usuarios se siguen mutuamente
+     * que usuarios se siguen mutuamente.
      *
      * @return ActiveQuery
      */
@@ -154,12 +153,12 @@ class ChatController extends Controller
         $seguidos = Usuarios::findMutualFollow()->all();
 
         return $this->render('chat', [
-            'seguidos' => $seguidos
+            'seguidos' => $seguidos,
         ]);
     }
 
     /**
-     * Guarda en la base de datos el mensaje enviado por el usuario
+     * Guarda en la base de datos el mensaje enviado por el usuario.
      *
      * @return array el chat actualizado con el nuevo mensaje enviado
      */
@@ -184,7 +183,7 @@ class ChatController extends Controller
 
     /**
      * Devuelve el chat entre el usuario autenticado y el especificado
-     * por parámetros
+     * por parámetros.
      *
      * @param int $receptor_id usuario del que queremos obtener el chat
      * @param bool $refresh si se refresca el estado del mensaje o no
@@ -227,7 +226,7 @@ class ChatController extends Controller
     }
 
     /**
-     * Devuelve un array con los usuarios que se siguen mutuamente
+     * Devuelve un array con los usuarios que se siguen mutuamente.
      *
      * @param string $text el nombre del login por el que vamos a filtrar
      * al buscar los usuarios
@@ -246,5 +245,13 @@ class ChatController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         return $usuarios;
+    }
+
+    public function actionViewMessage($id)
+    {
+        $mensaje = $this->findModel($id);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $mensaje->notified = true;
+        $mensaje->save();
     }
 }

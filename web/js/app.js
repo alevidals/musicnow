@@ -758,6 +758,10 @@ function getNewNotifications() {
                             </div>
                         </div>
                     `);
+                    $.ajax({
+                        method: 'POST',
+                        url: '/chat/view-message?id=' + element.id,
+                    });
                 });
                 $('.toast').not('.hide').toast('show');
             }
