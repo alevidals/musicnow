@@ -88,7 +88,7 @@ DROP TABLE IF EXISTS albumes_canciones CASCADE;
 
 CREATE TABLE albumes_canciones
 (
-  album_id     BIGINT    NOT NULL REFERENCES albumes (id)
+    album_id     BIGINT    NOT NULL REFERENCES albumes (id)
   , canciones_id BIGINT    NOT NULL REFERENCES canciones (id)
   , PRIMARY KEY (album_id, canciones_id)
 );
@@ -97,9 +97,9 @@ DROP TABLE IF EXISTS seguidores CASCADE;
 
 CREATE TABLE seguidores
 (
-     id          BIGSERIAL PRIMARY KEY
-  ,  seguidor_id BIGINT NOT NULL REFERENCES usuarios (id)
-  , seguido_id   BIGINT NOT NULL REFERENCES usuarios (id)
+    id          BIGSERIAL PRIMARY KEY
+  , seguidor_id BIGINT NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
+  , seguido_id   BIGINT NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
   , UNIQUE (seguidor_id, seguido_id)
 );
 
@@ -176,8 +176,8 @@ DROP TABLE IF EXISTS solicitudes_seguimiento;
 
 CREATE TABLE solicitudes_seguimiento
 (
-    seguidor_id BIGINT NOT NULL REFERENCES usuarios (id)
-  , seguido_id  BIGINT NOT NULL REFERENCES usuarios (id)
+    seguidor_id BIGINT NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
+  , seguido_id  BIGINT NOT NULL REFERENCES usuarios (id) ON DELETE CASCADE
   , PRIMARY KEY (seguidor_id, seguido_id)
 );
 
