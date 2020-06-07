@@ -202,4 +202,6 @@ return [
     'Congratulations' => '',
     'DownloadInvoice' => 'Download Invoice',
     'CongratulationsMessage' => 'From now on you can enjoy the benefits of become a premium user',
+    'SomebodyGive' => 'has given you the premium account',
+    'GivenPremium' => 'You have been given the premium account'
 ];

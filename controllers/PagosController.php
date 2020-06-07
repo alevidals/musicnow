@@ -129,9 +129,9 @@ class PagosController extends Controller
     }
 
     /**
-     * Acción que se encarga de realizar el checkout del pago
+     * Acción que se encarga de realizar el checkout del pago.
      *
-     * @return void
+     * @param null|mixed $id
      */
     public function actionCheckout($id = null)
     {
@@ -163,7 +163,7 @@ class PagosController extends Controller
     }
 
     /**
-     * Acción que se encarga de realizar el pago
+     * Acción que se encarga de realizar el pago.
      *
      * @return Response
      */
@@ -195,6 +195,12 @@ class PagosController extends Controller
                 $receptor = Usuarios::findOne($receptor_id);
                 $receptor->rol_id = 3;
                 $receptor->save();
+
+                Yii::$app->mailer->compose('layouts/premium')
+                    ->setFrom(Yii::$app->params['smtpUsername'])
+                    ->setTo($receptor->email)
+                    ->setSubject($usuario->login . ' ' . Yii::t('app', 'SomebodyGive'))
+                    ->send();
             }
             $pago->payment = $data->id;
             $pago->cart = $data->cart;
@@ -209,7 +215,7 @@ class PagosController extends Controller
     }
 
     /**
-     * Acción que se encarga de renderizar la vista de pago
+     * Acción que se encarga de renderizar la vista de pago.
      *
      * @return string
      */
@@ -219,7 +225,7 @@ class PagosController extends Controller
     }
 
     /**
-     * Acción que se encarga de generar la factura del pago realizado
+     * Acción que se encarga de generar la factura del pago realizado.
      *
      * @return mixed
      */
