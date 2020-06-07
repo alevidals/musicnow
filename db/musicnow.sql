@@ -274,7 +274,7 @@ VALUES  ('Álava')
       , ('Melilla');
 
 
-INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol_id)
-VALUES ('admin', 'admin', 'admin', 'admin@admin.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1),
-       ('usuario1', 'usuario1', 'usuario1', 'usuario1@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2),
-       ('usuario2', 'usuario2', 'usuario2', 'usuario2@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2);
+INSERT INTO usuarios (login, nombre, apellidos, email, password, fnac, rol_id, url_image)
+VALUES ('admin', 'admin', 'admin', 'admin@admin.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 1, '/img/user-profile.png'),
+       ('usuario1', 'usuario1', 'usuario1', 'usuario1@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2, '/img/user-profile.png'),
+       ('usuario2', 'usuario2', 'usuario2', 'usuario2@usuario.com', crypt('pepe', gen_salt('bf', 10)), '1999-12-01', 2, '/img/user-profile.png');
