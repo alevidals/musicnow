@@ -193,4 +193,13 @@ return [
     'Quantity' => '',
     'Price' => '',
     'Concept' => '',
+    'Give' => 'Give away',
+    'ForYou' => 'For you',
+    'ForAFriend' => 'For a friend',
+    'GiveFriendMessage' => 'Give away premium to a friend and let him/her enjoy the benefits',
+    'EnjoyYourself' => 'Become premium right now and start enjoying the benefits',
+    'Friend' => '',
+    'Congratulations' => '',
+    'DownloadInvoice' => 'Download Invoice',
+    'CongratulationsMessage' => 'From now on you can enjoy the benefits of become a premium user',
 ];

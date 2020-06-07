@@ -247,6 +247,12 @@ class ChatController extends Controller
         return $usuarios;
     }
 
+    /**
+     * Si el mensaje ha sido notificado cambia el notified a true
+     *
+     * @param int $id el id del mensaje a modificar
+     * @return void
+     */
     public function actionViewMessage($id)
     {
         $mensaje = $this->findModel($id);

@@ -200,6 +200,7 @@ CREATE TABLE pagos
   , apellidos    VARCHAR(255) NOT NULL
   , provincia_id BIGINT       NOT NULL REFERENCES provincias (id)
   , direccion    VARCHAR(255) NOT NULL
+  , receptor_id  BIGINT       REFERENCES usuarios (id)
   , usuario_id   BIGINT       NOT NULL REFERENCES usuarios (id) ON DELETE SET DEFAULT DEFAULT 1
   , created_at   TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

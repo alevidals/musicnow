@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Yii::t('app', 'FillThis')?></h3>
 
     <?= $this->render('_form', [
+        'regalo' => Yii::$app->request->get('regalo'),
         'model' => $model,
         'provincias' => $provincias,
     ]) ?>
