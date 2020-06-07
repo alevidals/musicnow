@@ -86,7 +86,7 @@ kartik\icons\FontAwesomeAsset::register($this);
                                 ],
                             ]); ?>
                                 <h2 class="fs-title"><?= Yii::t('app', 'Inicia sesión con tu nombre de usuario') ?></h2>
-                                <?= $form->field($loginFormModel, 'username')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
+                                <?= $form->field($loginFormModel, 'username')->textInput()->label(Yii::t('app', 'Nombre de usuario'), ['class' => 'col-12']) ?>
                                 <?= $form->field($loginFormModel, 'password', [
                                     'inputTemplate' => '<div class="input-group mb-3">
                                                             {input}
