@@ -893,733 +893,733 @@ Array
     [148] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Usuario in app\models\Pagos
+            [message] => broken link to \app\models\Receptor in app\models\Pagos
         )
 
     [149] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Provincia in app\models\Pagos
+            [message] => broken link to \app\models\Usuario in app\models\Pagos
         )
 
     [150] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Usuario in app\models\Pagos
+            [message] => broken link to \app\models\Provincia in app\models\Pagos
         )
 
     [151] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Validator in app\models\Pagos
+            [message] => broken link to \app\models\Receptor in app\models\Pagos
         )
 
     [152] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Pagos
+            [message] => broken link to \app\models\Usuario in app\models\Pagos
         )
 
     [153] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Pagos
+            [message] => broken link to \app\models\Validator in app\models\Pagos
         )
 
     [154] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Pagos
+            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Pagos
         )
 
     [155] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Pagos
+            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Pagos
         )
 
     [156] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Provincia in app\models\Pagos
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Pagos
         )
 
     [157] => Array
         (
             [file] => ./models/Pagos.php
-            [message] => broken link to \app\models\Usuario in app\models\Pagos
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Pagos
         )
 
     [158] => Array
+        (
+            [file] => ./models/Pagos.php
+            [message] => broken link to \app\models\Provincia in app\models\Pagos
+        )
+
+    [159] => Array
+        (
+            [file] => ./models/Pagos.php
+            [message] => broken link to \app\models\Receptor in app\models\Pagos
+        )
+
+    [160] => Array
+        (
+            [file] => ./models/Pagos.php
+            [message] => broken link to \app\models\Usuario in app\models\Pagos
+        )
+
+    [161] => Array
         (
             [file] => ./models/PagosSearch.php
             [message] => broken link to \app\models\Validator in app\models\PagosSearch
         )
 
-    [159] => Array
+    [162] => Array
         (
             [file] => ./models/PagosSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\PagosSearch
         )
 
-    [160] => Array
-        (
-            [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\CancionesPlaylists in app\models\Playlists
-        )
-
-    [161] => Array
-        (
-            [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Usuario in app\models\Playlists
-        )
-
-    [162] => Array
-        (
-            [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\CancionesPlaylists in app\models\Playlists
-        )
-
     [163] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Usuario in app\models\Playlists
+            [message] => broken link to \app\models\CancionesPlaylists in app\models\Playlists
         )
 
     [164] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\CancionesPlaylists in app\models\Playlists
+            [message] => broken link to \app\models\Usuario in app\models\Playlists
         )
 
     [165] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Usuario in app\models\Playlists
+            [message] => broken link to \app\models\CancionesPlaylists in app\models\Playlists
         )
 
     [166] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Validator in app\models\Playlists
+            [message] => broken link to \app\models\Usuario in app\models\Playlists
         )
 
     [167] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Playlists
+            [message] => broken link to \app\models\CancionesPlaylists in app\models\Playlists
         )
 
     [168] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Playlists
+            [message] => broken link to \app\models\Usuario in app\models\Playlists
         )
 
     [169] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Playlists
+            [message] => broken link to \app\models\Validator in app\models\Playlists
         )
 
     [170] => Array
         (
             [file] => ./models/Playlists.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Playlists
+            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Playlists
         )
 
     [171] => Array
+        (
+            [file] => ./models/Playlists.php
+            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Playlists
+        )
+
+    [172] => Array
+        (
+            [file] => ./models/Playlists.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Playlists
+        )
+
+    [173] => Array
+        (
+            [file] => ./models/Playlists.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Playlists
+        )
+
+    [174] => Array
         (
             [file] => ./models/PlaylistsSearch.php
             [message] => broken link to \app\models\Validator in app\models\PlaylistsSearch
         )
 
-    [172] => Array
+    [175] => Array
         (
             [file] => ./models/PlaylistsSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\PlaylistsSearch
         )
 
-    [173] => Array
+    [176] => Array
         (
             [file] => ./models/Provincias.php
             [message] => broken link to \app\models\Validator in app\models\Provincias
         )
 
-    [174] => Array
+    [177] => Array
         (
             [file] => ./models/Provincias.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\Provincias
         )
 
-    [175] => Array
+    [178] => Array
         (
             [file] => ./models/Provincias.php
             [message] => broken link to \app\models\Inflector::camel2id() in app\models\Provincias
         )
 
-    [176] => Array
+    [179] => Array
         (
             [file] => ./models/Provincias.php
             [message] => broken link to \app\models\Connection::tablePrefix in app\models\Provincias
         )
 
-    [177] => Array
+    [180] => Array
         (
             [file] => ./models/Provincias.php
             [message] => broken link to \app\models\Connection::tablePrefix in app\models\Provincias
         )
 
-    [178] => Array
+    [181] => Array
         (
             [file] => ./models/ProvinciasSearch.php
             [message] => broken link to \app\models\Validator in app\models\ProvinciasSearch
         )
 
-    [179] => Array
+    [182] => Array
         (
             [file] => ./models/ProvinciasSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\ProvinciasSearch
         )
 
-    [180] => Array
+    [183] => Array
         (
             [file] => ./models/Roles.php
             [message] => broken link to \app\models\Validator in app\models\Roles
         )
 
-    [181] => Array
+    [184] => Array
         (
             [file] => ./models/Roles.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\Roles
         )
 
-    [182] => Array
+    [185] => Array
         (
             [file] => ./models/Roles.php
             [message] => broken link to \app\models\Inflector::camel2id() in app\models\Roles
         )
 
-    [183] => Array
+    [186] => Array
         (
             [file] => ./models/Roles.php
             [message] => broken link to \app\models\Connection::tablePrefix in app\models\Roles
         )
 
-    [184] => Array
+    [187] => Array
         (
             [file] => ./models/Roles.php
             [message] => broken link to \app\models\Connection::tablePrefix in app\models\Roles
         )
 
-    [185] => Array
+    [188] => Array
         (
             [file] => ./models/RolesSearch.php
             [message] => broken link to \app\models\Validator in app\models\RolesSearch
         )
 
-    [186] => Array
+    [189] => Array
         (
             [file] => ./models/RolesSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\RolesSearch
         )
 
-    [187] => Array
-        (
-            [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Seguido in app\models\Seguidores
-        )
-
-    [188] => Array
-        (
-            [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Seguidor in app\models\Seguidores
-        )
-
-    [189] => Array
-        (
-            [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Seguido in app\models\Seguidores
-        )
-
     [190] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Seguidor in app\models\Seguidores
+            [message] => broken link to \app\models\Seguido in app\models\Seguidores
         )
 
     [191] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Validator in app\models\Seguidores
+            [message] => broken link to \app\models\Seguidor in app\models\Seguidores
         )
 
     [192] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Seguidores
+            [message] => broken link to \app\models\Seguido in app\models\Seguidores
         )
 
     [193] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Seguidores
+            [message] => broken link to \app\models\Seguidor in app\models\Seguidores
         )
 
     [194] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Seguidores
+            [message] => broken link to \app\models\Validator in app\models\Seguidores
         )
 
     [195] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Seguidores
+            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Seguidores
         )
 
     [196] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Seguido in app\models\Seguidores
+            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Seguidores
         )
 
     [197] => Array
         (
             [file] => ./models/Seguidores.php
-            [message] => broken link to \app\models\Seguidor in app\models\Seguidores
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Seguidores
         )
 
     [198] => Array
+        (
+            [file] => ./models/Seguidores.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Seguidores
+        )
+
+    [199] => Array
+        (
+            [file] => ./models/Seguidores.php
+            [message] => broken link to \app\models\Seguido in app\models\Seguidores
+        )
+
+    [200] => Array
+        (
+            [file] => ./models/Seguidores.php
+            [message] => broken link to \app\models\Seguidor in app\models\Seguidores
+        )
+
+    [201] => Array
         (
             [file] => ./models/SeguidoresSearch.php
             [message] => broken link to \app\models\Validator in app\models\SeguidoresSearch
         )
 
-    [199] => Array
+    [202] => Array
         (
             [file] => ./models/SeguidoresSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\SeguidoresSearch
         )
 
-    [200] => Array
-        (
-            [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Seguido in app\models\SolicitudesSeguimiento
-        )
-
-    [201] => Array
-        (
-            [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Seguidor in app\models\SolicitudesSeguimiento
-        )
-
-    [202] => Array
-        (
-            [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Seguido in app\models\SolicitudesSeguimiento
-        )
-
     [203] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Seguidor in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Seguido in app\models\SolicitudesSeguimiento
         )
 
     [204] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Seguido in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Seguidor in app\models\SolicitudesSeguimiento
         )
 
     [205] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Seguidor in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Seguido in app\models\SolicitudesSeguimiento
         )
 
     [206] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Validator in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Seguidor in app\models\SolicitudesSeguimiento
         )
 
     [207] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Validator::builtInValidators in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Seguido in app\models\SolicitudesSeguimiento
         )
 
     [208] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Inflector::camel2id() in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Seguidor in app\models\SolicitudesSeguimiento
         )
 
     [209] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Validator in app\models\SolicitudesSeguimiento
         )
 
     [210] => Array
         (
             [file] => ./models/SolicitudesSeguimiento.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\SolicitudesSeguimiento
+            [message] => broken link to \app\models\Validator::builtInValidators in app\models\SolicitudesSeguimiento
         )
 
     [211] => Array
+        (
+            [file] => ./models/SolicitudesSeguimiento.php
+            [message] => broken link to \app\models\Inflector::camel2id() in app\models\SolicitudesSeguimiento
+        )
+
+    [212] => Array
+        (
+            [file] => ./models/SolicitudesSeguimiento.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\SolicitudesSeguimiento
+        )
+
+    [213] => Array
+        (
+            [file] => ./models/SolicitudesSeguimiento.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\SolicitudesSeguimiento
+        )
+
+    [214] => Array
         (
             [file] => ./models/SolicitudesSeguimientoSearch.php
             [message] => broken link to \app\models\Validator in app\models\SolicitudesSeguimientoSearch
         )
 
-    [212] => Array
+    [215] => Array
         (
             [file] => ./models/SolicitudesSeguimientoSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\SolicitudesSeguimientoSearch
         )
 
-    [213] => Array
+    [216] => Array
         (
             [line] => 7
             [file] => ./models/User.php
             [message] => Property $id conflicts with a defined getter getId in app\models\User.
         )
 
-    [214] => Array
+    [217] => Array
         (
             [line] => 10
             [file] => ./models/User.php
             [message] => Property $authKey conflicts with a defined getter getAuthKey in app\models\User.
         )
 
-    [215] => Array
+    [218] => Array
         (
             [file] => ./models/User.php
             [message] => broken link to \User::enableAutoLogin in app\models\User
         )
 
-    [216] => Array
+    [219] => Array
         (
             [file] => ./models/User.php
             [message] => broken link to \User::enableAutoLogin in app\models\User
         )
 
-    [217] => Array
+    [220] => Array
         (
             [line] => 199
             [file] => ./models/Usuarios.php
             [message] => Method findByUsername has no parent to inherit from in app\models\Usuarios.
         )
 
-    [218] => Array
-        (
-            [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Estado in app\models\Usuarios
-        )
-
-    [219] => Array
-        (
-            [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\ReceivedChats in app\models\Usuarios
-        )
-
-    [220] => Array
-        (
-            [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Rol in app\models\Usuarios
-        )
-
     [221] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Seguidos in app\models\Usuarios
+            [message] => broken link to \app\models\Estado in app\models\Usuarios
         )
 
     [222] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\SendChats in app\models\Usuarios
+            [message] => broken link to \app\models\ReceivedChats in app\models\Usuarios
         )
 
     [223] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\SolicitudesSeguimientos in app\models\Usuarios
+            [message] => broken link to \app\models\Rol in app\models\Usuarios
         )
 
     [224] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to app\models\User::enableAutoLogin in app\models\Usuarios
+            [message] => broken link to \app\models\Seguidos in app\models\Usuarios
         )
 
     [225] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Estado in app\models\Usuarios
+            [message] => broken link to \app\models\SendChats in app\models\Usuarios
         )
 
     [226] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\ReceivedChats in app\models\Usuarios
+            [message] => broken link to \app\models\SolicitudesSeguimientos in app\models\Usuarios
         )
 
     [227] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Rol in app\models\Usuarios
+            [message] => broken link to app\models\User::enableAutoLogin in app\models\Usuarios
         )
 
     [228] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Seguidos in app\models\Usuarios
+            [message] => broken link to \app\models\Estado in app\models\Usuarios
         )
 
     [229] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\SendChats in app\models\Usuarios
+            [message] => broken link to \app\models\ReceivedChats in app\models\Usuarios
         )
 
     [230] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\SolicitudesSeguimientos in app\models\Usuarios
+            [message] => broken link to \app\models\Rol in app\models\Usuarios
         )
 
     [231] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Validator in app\models\Usuarios
+            [message] => broken link to \app\models\Seguidos in app\models\Usuarios
         )
 
     [232] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Usuarios
+            [message] => broken link to \app\models\SendChats in app\models\Usuarios
         )
 
     [233] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Usuarios
+            [message] => broken link to \app\models\SolicitudesSeguimientos in app\models\Usuarios
         )
 
     [234] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Usuarios
+            [message] => broken link to \app\models\Validator in app\models\Usuarios
         )
 
     [235] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Usuarios
+            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Usuarios
         )
 
     [236] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to app\models\User::enableAutoLogin in app\models\Usuarios
+            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Usuarios
         )
 
     [237] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Estado in app\models\Usuarios
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Usuarios
         )
 
     [238] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\ReceivedChats in app\models\Usuarios
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Usuarios
         )
 
     [239] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Rol in app\models\Usuarios
+            [message] => broken link to app\models\User::enableAutoLogin in app\models\Usuarios
         )
 
     [240] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\Seguidos in app\models\Usuarios
+            [message] => broken link to \app\models\Estado in app\models\Usuarios
         )
 
     [241] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\SendChats in app\models\Usuarios
+            [message] => broken link to \app\models\ReceivedChats in app\models\Usuarios
         )
 
     [242] => Array
         (
             [file] => ./models/Usuarios.php
-            [message] => broken link to \app\models\SolicitudesSeguimientos in app\models\Usuarios
+            [message] => broken link to \app\models\Rol in app\models\Usuarios
         )
 
     [243] => Array
+        (
+            [file] => ./models/Usuarios.php
+            [message] => broken link to \app\models\Seguidos in app\models\Usuarios
+        )
+
+    [244] => Array
+        (
+            [file] => ./models/Usuarios.php
+            [message] => broken link to \app\models\SendChats in app\models\Usuarios
+        )
+
+    [245] => Array
+        (
+            [file] => ./models/Usuarios.php
+            [message] => broken link to \app\models\SolicitudesSeguimientos in app\models\Usuarios
+        )
+
+    [246] => Array
         (
             [file] => ./models/UsuariosSearch.php
             [message] => broken link to \app\models\Validator in app\models\UsuariosSearch
         )
 
-    [244] => Array
+    [247] => Array
         (
             [file] => ./models/UsuariosSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\UsuariosSearch
         )
 
-    [245] => Array
-        (
-            [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Usuario in app\models\Videoclips
-        )
-
-    [246] => Array
-        (
-            [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Usuario in app\models\Videoclips
-        )
-
-    [247] => Array
-        (
-            [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Usuario in app\models\Videoclips
-        )
-
     [248] => Array
         (
             [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Validator in app\models\Videoclips
+            [message] => broken link to \app\models\Usuario in app\models\Videoclips
         )
 
     [249] => Array
         (
             [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Videoclips
+            [message] => broken link to \app\models\Usuario in app\models\Videoclips
         )
 
     [250] => Array
         (
             [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Videoclips
+            [message] => broken link to \app\models\Usuario in app\models\Videoclips
         )
 
     [251] => Array
         (
             [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Videoclips
+            [message] => broken link to \app\models\Validator in app\models\Videoclips
         )
 
     [252] => Array
         (
             [file] => ./models/Videoclips.php
-            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Videoclips
+            [message] => broken link to \app\models\Validator::builtInValidators in app\models\Videoclips
         )
 
     [253] => Array
+        (
+            [file] => ./models/Videoclips.php
+            [message] => broken link to \app\models\Inflector::camel2id() in app\models\Videoclips
+        )
+
+    [254] => Array
+        (
+            [file] => ./models/Videoclips.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Videoclips
+        )
+
+    [255] => Array
+        (
+            [file] => ./models/Videoclips.php
+            [message] => broken link to \app\models\Connection::tablePrefix in app\models\Videoclips
+        )
+
+    [256] => Array
         (
             [file] => ./models/VideoclipsSearch.php
             [message] => broken link to \app\models\Validator in app\models\VideoclipsSearch
         )
 
-    [254] => Array
+    [257] => Array
         (
             [file] => ./models/VideoclipsSearch.php
             [message] => broken link to \app\models\Validator::builtInValidators in app\models\VideoclipsSearch
         )
 
-    [255] => Array
+    [258] => Array
         (
             [line] => 50
             [file] => ./widgets/Alert.php
             [message] => Method run has no parent to inherit from in app\widgets\Alert.
         )
 
-    [256] => Array
+    [259] => Array
         (
             [file] => ./widgets/Alert.php
             [message] => broken link to \yii\bootstrap\Alert::closeButton in app\widgets\Alert
         )
 
-    [257] => Array
+    [260] => Array
         (
             [line] => 413
             [file] => vendor/yiisoft/yii2/base/View.php
             [message] => Method param $placeholder does not exist in parent method, @inheritdoc not possible in addDynamicPlaceholder in yii\base\View.
         )
 
-    [258] => Array
+    [261] => Array
         (
             [line] => 103
             [file] => vendor/yiisoft/yii2/base/View.php
             [message] => Property $dynamicPlaceholders conflicts with a defined getter getDynamicPlaceholders in yii\base\View.
         )
 
-    [259] => Array
+    [262] => Array
         (
             [file] => vendor/yiisoft/yii2/behaviors/OptimisticLockBehavior.php
             [message] => broken link to \yii\behaviors\StaleObjectException in yii\behaviors\OptimisticLockBehavior
         )
 
-    [260] => Array
+    [263] => Array
         (
             [file] => vendor/yiisoft/yii2/caching/Cache.php
             [message] => broken link to \yii\caching\yii\caching\Cache::get() in yii\caching\Cache
         )
 
-    [261] => Array
-        (
-            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
-        )
-
-    [262] => Array
-        (
-            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\keyPrefix in yii\caching\CacheInterface
-        )
-
-    [263] => Array
-        (
-            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\keyPrefix in yii\caching\CacheInterface
-        )
-
     [264] => Array
         (
             [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\defaultDuration in yii\caching\CacheInterface
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
         )
 
     [265] => Array
         (
             [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+            [message] => broken link to \yii\caching\keyPrefix in yii\caching\CacheInterface
         )
 
     [266] => Array
         (
             [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+            [message] => broken link to \yii\caching\keyPrefix in yii\caching\CacheInterface
         )
 
     [267] => Array
         (
             [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+            [message] => broken link to \yii\caching\defaultDuration in yii\caching\CacheInterface
         )
 
     [268] => Array
         (
             [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
-            [message] => broken link to \yii\caching\defaultDuration in yii\caching\CacheInterface
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
         )
 
     [269] => Array
@@ -1630,209 +1630,209 @@ Array
 
     [270] => Array
         (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [271] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\defaultDuration in yii\caching\CacheInterface
+        )
+
+    [272] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [273] => Array
+        (
             [file] => vendor/yiisoft/yii2/console/controllers/HelpController.php
             [message] => broken link to \yii\console\controllers\ExitCode::UNSPECIFIED_ERROR in yii\console\controllers\HelpController
         )
 
-    [271] => Array
+    [274] => Array
         (
             [file] => vendor/yiisoft/yii2/console/controllers/HelpController.php
             [message] => broken link to \yii\console\controllers\ExitCode::OK in yii\console\controllers\HelpController
         )
 
-    [272] => Array
+    [275] => Array
         (
             [file] => vendor/yiisoft/yii2/console/controllers/MigrateController.php
             [message] => broken link to \yii\console\controllers\ExitCode::UNSPECIFIED_ERROR in yii\console\controllers\MigrateController
         )
 
-    [273] => Array
+    [276] => Array
         (
             [file] => vendor/yiisoft/yii2/console/controllers/MigrateController.php
             [message] => broken link to \yii\console\controllers\ExitCode::OK in yii\console\controllers\MigrateController
         )
 
-    [274] => Array
+    [277] => Array
         (
             [file] => vendor/yiisoft/yii2/console/controllers/ServeController.php
             [message] => broken link to \yii\console\controllers\ExitCode::UNSPECIFIED_ERROR in yii\console\controllers\ServeController
         )
 
-    [275] => Array
+    [278] => Array
         (
             [file] => vendor/yiisoft/yii2/console/controllers/ServeController.php
             [message] => broken link to \yii\console\controllers\ExitCode::OK in yii\console\controllers\ServeController
         )
 
-    [276] => Array
+    [279] => Array
         (
             [line] => 70
             [file] => vendor/yiisoft/yii2/console/widgets/Table.php
             [message] => Property $headers conflicts with a defined setter setHeaders in yii\console\widgets\Table.
         )
 
-    [277] => Array
+    [280] => Array
         (
             [line] => 75
             [file] => vendor/yiisoft/yii2/console/widgets/Table.php
             [message] => Property $rows conflicts with a defined setter setRows in yii\console\widgets\Table.
         )
 
-    [278] => Array
+    [281] => Array
         (
             [line] => 80
             [file] => vendor/yiisoft/yii2/console/widgets/Table.php
             [message] => Property $chars conflicts with a defined setter setChars in yii\console\widgets\Table.
         )
 
-    [279] => Array
+    [282] => Array
         (
             [line] => 106
             [file] => vendor/yiisoft/yii2/console/widgets/Table.php
             [message] => Property $screenWidth conflicts with a defined setter setScreenWidth in yii\console\widgets\Table.
         )
 
-    [280] => Array
+    [283] => Array
         (
             [line] => 111
             [file] => vendor/yiisoft/yii2/console/widgets/Table.php
             [message] => Property $listPrefix conflicts with a defined setter setListPrefix in yii\console\widgets\Table.
         )
 
-    [281] => Array
+    [284] => Array
         (
             [line] => 357
             [file] => vendor/yiisoft/yii2/data/DataFilter.php
             [message] => Undefined parameter documented:  in detectSearchAttributeType().
         )
 
-    [282] => Array
-        (
-            [file] => vendor/yiisoft/yii2/data/DataFilter.php
-            [message] => broken link to \yii\data\model in yii\data\DataFilter
-        )
-
-    [283] => Array
-        (
-            [file] => vendor/yiisoft/yii2/data/DataFilter.php
-            [message] => broken link to \yii\data\model in yii\data\DataFilter
-        )
-
-    [284] => Array
-        (
-            [file] => vendor/yiisoft/yii2/data/DataFilter.php
-            [message] => broken link to \yii\data\model in yii\data\DataFilter
-        )
-
     [285] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\model in yii\data\DataFilter
+        )
+
+    [286] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\model in yii\data\DataFilter
+        )
+
+    [287] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\model in yii\data\DataFilter
+        )
+
+    [288] => Array
         (
             [file] => vendor/yiisoft/yii2/db/ArrayExpression.php
             [message] => broken link to \yii\db\dimensions in yii\db\ArrayExpression
         )
 
-    [286] => Array
+    [289] => Array
         (
             [file] => vendor/yiisoft/yii2/db/ArrayExpression.php
             [message] => broken link to \yii\db\type in yii\db\ArrayExpression
         )
 
-    [287] => Array
+    [290] => Array
         (
             [file] => vendor/yiisoft/yii2/db/ArrayExpression.php
             [message] => broken link to \yii\db\value in yii\db\ArrayExpression
         )
 
-    [288] => Array
+    [291] => Array
         (
             [file] => vendor/yiisoft/yii2/db/Command.php
             [message] => broken link to \yii\db\yii\db\PdoValue in yii\db\Command
         )
 
-    [289] => Array
+    [292] => Array
         (
             [file] => vendor/yiisoft/yii2/db/Command.php
             [message] => broken link to \yii\db\yii\db\Query in yii\db\Command
         )
 
-    [290] => Array
+    [293] => Array
         (
             [file] => vendor/yiisoft/yii2/db/Command.php
             [message] => broken link to \yii\db\yii\db\Query in yii\db\Command
         )
 
-    [291] => Array
+    [294] => Array
         (
             [file] => vendor/yiisoft/yii2/db/Command.php
             [message] => broken link to \PDOStatement::execute() in yii\db\Command
         )
 
-    [292] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/Connection.php
-            [message] => broken link to \version_compare() in yii\db\Connection
-        )
-
-    [293] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/Connection.php
-            [message] => broken link to \version_compare() in yii\db\Connection
-        )
-
-    [294] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/ExpressionBuilder.php
-            [message] => broken link to \yii\db\yii\db\Expression in yii\db\ExpressionBuilder
-        )
-
     [295] => Array
         (
-            [file] => vendor/yiisoft/yii2/db/ExpressionBuilder.php
-            [message] => broken link to \yii\db\yii\db\Expression in yii\db\ExpressionBuilder
+            [file] => vendor/yiisoft/yii2/db/Connection.php
+            [message] => broken link to \version_compare() in yii\db\Connection
         )
 
     [296] => Array
         (
+            [file] => vendor/yiisoft/yii2/db/Connection.php
+            [message] => broken link to \version_compare() in yii\db\Connection
+        )
+
+    [297] => Array
+        (
             [file] => vendor/yiisoft/yii2/db/ExpressionBuilder.php
             [message] => broken link to \yii\db\yii\db\Expression in yii\db\ExpressionBuilder
         )
 
-    [297] => Array
+    [298] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ExpressionBuilder.php
+            [message] => broken link to \yii\db\yii\db\Expression in yii\db\ExpressionBuilder
+        )
+
+    [299] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ExpressionBuilder.php
+            [message] => broken link to \yii\db\yii\db\Expression in yii\db\ExpressionBuilder
+        )
+
+    [300] => Array
         (
             [line] => 99
             [file] => vendor/yiisoft/yii2/db/Migration.php
             [message] => Method getDb has no parent to inherit from in yii\db\Migration.
         )
 
-    [298] => Array
+    [301] => Array
         (
             [line] => 105
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
             [message] => Property $expressionBuilders conflicts with a defined setter setExpressionBuilders in yii\db\QueryBuilder.
         )
 
-    [299] => Array
+    [302] => Array
         (
             [line] => 80
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
             [message] => Property $conditionClasses conflicts with a defined setter setConditionClasses in yii\db\QueryBuilder.
-        )
-
-    [300] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
-        )
-
-    [301] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\setConditonClasses() in yii\db\QueryBuilder
-        )
-
-    [302] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\setExpressionBuilder() in yii\db\QueryBuilder
         )
 
     [303] => Array
@@ -1844,37 +1844,37 @@ Array
     [304] => Array
         (
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
+            [message] => broken link to \yii\db\setConditonClasses() in yii\db\QueryBuilder
         )
 
     [305] => Array
         (
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
+            [message] => broken link to \yii\db\setExpressionBuilder() in yii\db\QueryBuilder
         )
 
     [306] => Array
         (
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
+            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
         )
 
     [307] => Array
         (
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
         )
 
     [308] => Array
         (
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
         )
 
     [309] => Array
         (
             [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
-            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
         )
 
     [310] => Array
@@ -1897,20 +1897,20 @@ Array
 
     [313] => Array
         (
-            [file] => vendor/yiisoft/yii2/db/Schema.php
-            [message] => broken link to \version_compare() in yii\db\Schema
+            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
+            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
         )
 
     [314] => Array
         (
-            [file] => vendor/yiisoft/yii2/db/Schema.php
-            [message] => broken link to \version_compare() in yii\db\Schema
+            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
+            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
         )
 
     [315] => Array
         (
-            [file] => vendor/yiisoft/yii2/db/Schema.php
-            [message] => broken link to \version_compare() in yii\db\Schema
+            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
+            [message] => broken link to \yii\db\yii\db\condition\ConditionInterface in yii\db\QueryBuilder
         )
 
     [316] => Array
@@ -1945,514 +1945,514 @@ Array
 
     [321] => Array
         (
+            [file] => vendor/yiisoft/yii2/db/Schema.php
+            [message] => broken link to \version_compare() in yii\db\Schema
+        )
+
+    [322] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Schema.php
+            [message] => broken link to \version_compare() in yii\db\Schema
+        )
+
+    [323] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Schema.php
+            [message] => broken link to \version_compare() in yii\db\Schema
+        )
+
+    [324] => Array
+        (
             [line] => 69
             [file] => vendor/yiisoft/yii2/db/conditions/BetweenColumnsCondition.php
             [message] => Undefined parameter documented:  in __construct().
         )
 
-    [322] => Array
+    [325] => Array
         (
             [line] => 47
             [file] => vendor/yiisoft/yii2/db/conditions/InCondition.php
             [message] => Undefined parameter documented:  in __construct().
         )
 
-    [323] => Array
+    [326] => Array
         (
             [line] => 47
             [file] => vendor/yiisoft/yii2/db/conditions/InCondition.php
             [message] => Undefined parameter documented:  in __construct().
         )
 
-    [324] => Array
+    [327] => Array
         (
             [line] => 48
             [file] => vendor/yiisoft/yii2/db/conditions/LikeCondition.php
             [message] => Undefined parameter documented:  in setEscapingReplacements().
         )
 
-    [325] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/conditions/NotCondition.php
-            [message] => broken link to \yii\db\conditions\condition in yii\db\conditions\NotCondition
-        )
-
-    [326] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/conditions/NotCondition.php
-            [message] => broken link to \yii\db\conditions\condition in yii\db\conditions\NotCondition
-        )
-
-    [327] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/conditions/NotCondition.php
-            [message] => broken link to \yii\db\conditions\condition in yii\db\conditions\NotCondition
-        )
-
     [328] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/conditions/NotCondition.php
+            [message] => broken link to \yii\db\conditions\condition in yii\db\conditions\NotCondition
+        )
+
+    [329] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/conditions/NotCondition.php
+            [message] => broken link to \yii\db\conditions\condition in yii\db\conditions\NotCondition
+        )
+
+    [330] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/conditions/NotCondition.php
+            [message] => broken link to \yii\db\conditions\condition in yii\db\conditions\NotCondition
+        )
+
+    [331] => Array
         (
             [file] => vendor/yiisoft/yii2/db/cubrid/QueryBuilder.php
             [message] => broken link to \yii\db\cubrid\Query in yii\db\cubrid\QueryBuilder
         )
 
-    [329] => Array
+    [332] => Array
         (
             [line] => 159
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\cubrid\Schema.
         )
 
-    [330] => Array
+    [333] => Array
         (
             [line] => 176
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\cubrid\Schema.
         )
 
-    [331] => Array
+    [334] => Array
         (
             [line] => 206
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => Method loadTableIndexes has no parent to inherit from in yii\db\cubrid\Schema.
         )
 
-    [332] => Array
+    [335] => Array
         (
             [line] => 214
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => Method loadTableUniques has no parent to inherit from in yii\db\cubrid\Schema.
         )
 
-    [333] => Array
+    [336] => Array
         (
             [line] => 223
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => Method loadTableChecks has no parent to inherit from in yii\db\cubrid\Schema.
         )
 
-    [334] => Array
+    [337] => Array
         (
             [line] => 232
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\cubrid\Schema.
         )
 
-    [335] => Array
+    [338] => Array
         (
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => broken link to \yii\db\cubrid\ColumnSchema in yii\db\cubrid\Schema
         )
 
-    [336] => Array
+    [339] => Array
         (
             [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
             [message] => broken link to \yii\db\cubrid\ColumnSchema in yii\db\cubrid\Schema
         )
 
-    [337] => Array
+    [340] => Array
         (
             [file] => vendor/yiisoft/yii2/db/cubrid/conditions/LikeConditionBuilder.php
             [message] => broken link to \yii\db\cubrid\conditions\buildLikeCondition() in yii\db\cubrid\conditions\LikeConditionBuilder
         )
 
-    [338] => Array
+    [341] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
             [message] => broken link to \yii\db\mssql\Query::orderBy in yii\db\mssql\QueryBuilder
         )
 
-    [339] => Array
+    [342] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
             [message] => broken link to \yii\db\mssql\Query::limit in yii\db\mssql\QueryBuilder
         )
 
-    [340] => Array
+    [343] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
             [message] => broken link to \yii\db\mssql\Query::offset in yii\db\mssql\QueryBuilder
         )
 
-    [341] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
-            [message] => broken link to \yii\db\mssql\yii\db\Query in yii\db\mssql\QueryBuilder
-        )
-
-    [342] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
-            [message] => broken link to \yii\db\mssql\yii\db\Query in yii\db\mssql\QueryBuilder
-        )
-
-    [343] => Array
-        (
-            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
-            [message] => broken link to \version_compare() in yii\db\mssql\QueryBuilder
-        )
-
     [344] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
-            [message] => broken link to \yii\db\mssql\Query::where() in yii\db\mssql\QueryBuilder
+            [message] => broken link to \yii\db\mssql\yii\db\Query in yii\db\mssql\QueryBuilder
         )
 
     [345] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
-            [message] => broken link to \yii\db\mssql\Query in yii\db\mssql\QueryBuilder
+            [message] => broken link to \yii\db\mssql\yii\db\Query in yii\db\mssql\QueryBuilder
         )
 
     [346] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \version_compare() in yii\db\mssql\QueryBuilder
+        )
+
+    [347] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\Query::where() in yii\db\mssql\QueryBuilder
+        )
+
+    [348] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\Query in yii\db\mssql\QueryBuilder
+        )
+
+    [349] => Array
         (
             [line] => 210
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [347] => Array
+    [350] => Array
         (
             [line] => 218
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [348] => Array
+    [351] => Array
         (
             [line] => 226
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method loadTableIndexes has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [349] => Array
+    [352] => Array
         (
             [line] => 265
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method loadTableUniques has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [350] => Array
+    [353] => Array
         (
             [line] => 273
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method loadTableChecks has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [351] => Array
+    [354] => Array
         (
             [line] => 281
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [352] => Array
+    [355] => Array
         (
             [line] => 585
             [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
             [message] => Method findViewNames has no parent to inherit from in yii\db\mssql\Schema.
         )
 
-    [353] => Array
+    [356] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mysql/ColumnSchema.php
             [message] => broken link to \yii\db\mysql\Expression in yii\db\mysql\ColumnSchema
         )
 
-    [354] => Array
+    [357] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mysql/ColumnSchema.php
             [message] => broken link to \yii\db\mysql\Expression in yii\db\mysql\ColumnSchema
         )
 
-    [355] => Array
+    [358] => Array
         (
             [file] => vendor/yiisoft/yii2/db/mysql/QueryBuilder.php
             [message] => broken link to \yii\db\mysql\yii\db\Query in yii\db\mysql\QueryBuilder
         )
 
-    [356] => Array
+    [359] => Array
         (
             [line] => 136
             [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
             [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\mysql\Schema.
         )
 
-    [357] => Array
+    [360] => Array
         (
             [line] => 144
             [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
             [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\mysql\Schema.
         )
 
-    [358] => Array
+    [361] => Array
         (
             [line] => 152
             [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
             [message] => Method loadTableIndexes has no parent to inherit from in yii\db\mysql\Schema.
         )
 
-    [359] => Array
+    [362] => Array
         (
             [line] => 188
             [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
             [message] => Method loadTableUniques has no parent to inherit from in yii\db\mysql\Schema.
         )
 
-    [360] => Array
+    [363] => Array
         (
             [line] => 197
             [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
             [message] => Method loadTableChecks has no parent to inherit from in yii\db\mysql\Schema.
         )
 
-    [361] => Array
+    [364] => Array
         (
             [line] => 206
             [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
             [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\mysql\Schema.
         )
 
-    [362] => Array
+    [365] => Array
         (
             [file] => vendor/yiisoft/yii2/db/oci/QueryBuilder.php
             [message] => broken link to \yii\db\oci\yii\db\Query in yii\db\oci\QueryBuilder
         )
 
-    [363] => Array
+    [366] => Array
         (
             [line] => 164
             [file] => vendor/yiisoft/yii2/db/oci/Schema.php
             [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\oci\Schema.
         )
 
-    [364] => Array
+    [367] => Array
         (
             [line] => 172
             [file] => vendor/yiisoft/yii2/db/oci/Schema.php
             [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\oci\Schema.
         )
 
-    [365] => Array
+    [368] => Array
         (
             [line] => 180
             [file] => vendor/yiisoft/yii2/db/oci/Schema.php
             [message] => Method loadTableIndexes has no parent to inherit from in yii\db\oci\Schema.
         )
 
-    [366] => Array
+    [369] => Array
         (
             [line] => 221
             [file] => vendor/yiisoft/yii2/db/oci/Schema.php
             [message] => Method loadTableUniques has no parent to inherit from in yii\db\oci\Schema.
         )
 
-    [367] => Array
+    [370] => Array
         (
             [line] => 229
             [file] => vendor/yiisoft/yii2/db/oci/Schema.php
             [message] => Method loadTableChecks has no parent to inherit from in yii\db\oci\Schema.
         )
 
-    [368] => Array
+    [371] => Array
         (
             [line] => 238
             [file] => vendor/yiisoft/yii2/db/oci/Schema.php
             [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\oci\Schema.
         )
 
-    [369] => Array
+    [372] => Array
         (
             [file] => vendor/yiisoft/yii2/db/oci/conditions/LikeConditionBuilder.php
             [message] => broken link to \yii\db\oci\conditions\buildLikeCondition() in yii\db\oci\conditions\LikeConditionBuilder
         )
 
-    [370] => Array
+    [373] => Array
         (
             [file] => vendor/yiisoft/yii2/db/pgsql/ArrayExpressionBuilder.php
             [message] => broken link to \yii\db\pgsql\type in yii\db\pgsql\ArrayExpressionBuilder
         )
 
-    [371] => Array
+    [374] => Array
         (
             [file] => vendor/yiisoft/yii2/db/pgsql/ColumnSchema.php
             [message] => broken link to \yii\db\pgsql\Expression in yii\db\pgsql\ColumnSchema
         )
 
-    [372] => Array
+    [375] => Array
         (
             [file] => vendor/yiisoft/yii2/db/pgsql/ColumnSchema.php
             [message] => broken link to \yii\db\pgsql\Expression in yii\db\pgsql\ColumnSchema
         )
 
-    [373] => Array
+    [376] => Array
         (
             [file] => vendor/yiisoft/yii2/db/pgsql/JsonExpressionBuilder.php
             [message] => broken link to \yii\db\pgsql\type in yii\db\pgsql\JsonExpressionBuilder
         )
 
-    [374] => Array
+    [377] => Array
         (
             [file] => vendor/yiisoft/yii2/db/pgsql/QueryBuilder.php
             [message] => broken link to \yii\db\pgsql\yii\db\Query in yii\db\pgsql\QueryBuilder
         )
 
-    [375] => Array
+    [378] => Array
         (
             [file] => vendor/yiisoft/yii2/db/pgsql/QueryBuilder.php
             [message] => broken link to \yii\db\pgsql\yii\db\Query in yii\db\pgsql\QueryBuilder
         )
 
-    [376] => Array
+    [379] => Array
         (
             [line] => 203
             [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
             [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\pgsql\Schema.
         )
 
-    [377] => Array
+    [380] => Array
         (
             [line] => 211
             [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
             [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\pgsql\Schema.
         )
 
-    [378] => Array
+    [381] => Array
         (
             [line] => 219
             [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
             [message] => Method loadTableIndexes has no parent to inherit from in yii\db\pgsql\Schema.
         )
 
-    [379] => Array
+    [382] => Array
         (
             [line] => 263
             [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
             [message] => Method loadTableUniques has no parent to inherit from in yii\db\pgsql\Schema.
         )
 
-    [380] => Array
+    [383] => Array
         (
             [line] => 271
             [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
             [message] => Method loadTableChecks has no parent to inherit from in yii\db\pgsql\Schema.
         )
 
-    [381] => Array
+    [384] => Array
         (
             [line] => 280
             [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
             [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\pgsql\Schema.
         )
 
-    [382] => Array
+    [385] => Array
         (
             [line] => 110
             [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
             [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\sqlite\Schema.
         )
 
-    [383] => Array
+    [386] => Array
         (
             [line] => 118
             [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
             [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\sqlite\Schema.
         )
 
-    [384] => Array
+    [387] => Array
         (
             [line] => 141
             [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
             [message] => Method loadTableIndexes has no parent to inherit from in yii\db\sqlite\Schema.
         )
 
-    [385] => Array
+    [388] => Array
         (
             [line] => 149
             [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
             [message] => Method loadTableUniques has no parent to inherit from in yii\db\sqlite\Schema.
         )
 
-    [386] => Array
+    [389] => Array
         (
             [line] => 157
             [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
             [message] => Method loadTableChecks has no parent to inherit from in yii\db\sqlite\Schema.
         )
 
-    [387] => Array
+    [390] => Array
         (
             [line] => 197
             [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
             [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\sqlite\Schema.
         )
 
-    [388] => Array
+    [391] => Array
         (
             [file] => vendor/yiisoft/yii2/di/Instance.php
             [message] => broken link to \yii\di\var_export() in yii\di\Instance
         )
 
-    [389] => Array
+    [392] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/di/NotInstantiableException.php
             [message] => Method __construct has no parent to inherit from in yii\di\NotInstantiableException.
         )
 
-    [390] => Array
+    [393] => Array
         (
             [line] => 308
             [file] => vendor/yiisoft/yii2/filters/PageCache.php
             [message] => Method getView has no parent to inherit from in yii\filters\PageCache.
         )
 
-    [391] => Array
+    [394] => Array
         (
             [line] => 122
             [file] => vendor/yiisoft/yii2/filters/PageCache.php
             [message] => Property $view conflicts with a defined getter getView in yii\filters\PageCache.
         )
 
-    [392] => Array
+    [395] => Array
         (
             [file] => vendor/yiisoft/yii2/helpers/BaseHtml.php
             [message] => broken link to \yii\helpers\mergeCssClasses() in yii\helpers\BaseHtml
         )
 
-    [393] => Array
+    [396] => Array
         (
             [file] => vendor/yiisoft/yii2/helpers/BaseStringHelper.php
             [message] => broken link to \yii\helpers\fnmatch() in yii\helpers\BaseStringHelper
         )
 
-    [394] => Array
+    [397] => Array
         (
             [file] => vendor/yiisoft/yii2/helpers/ReplaceArrayValue.php
             [message] => broken link to \yii\helpers\var_export() in yii\helpers\ReplaceArrayValue
         )
 
-    [395] => Array
+    [398] => Array
         (
             [file] => vendor/yiisoft/yii2/helpers/UnsetArrayValue.php
             [message] => broken link to \yii\helpers\var_export() in yii\helpers\UnsetArrayValue
-        )
-
-    [396] => Array
-        (
-            [file] => vendor/yiisoft/yii2/mutex/RetryAcquireTrait.php
-            [message] => broken link to \yii\mutex\acquire() in yii\mutex\RetryAcquireTrait
-        )
-
-    [397] => Array
-        (
-            [file] => vendor/yiisoft/yii2/mutex/RetryAcquireTrait.php
-            [message] => broken link to \yii\mutex\acquire() in yii\mutex\RetryAcquireTrait
-        )
-
-    [398] => Array
-        (
-            [file] => vendor/yiisoft/yii2/mutex/RetryAcquireTrait.php
-            [message] => broken link to \yii\mutex\acquire() in yii\mutex\RetryAcquireTrait
         )
 
     [399] => Array
@@ -2469,67 +2469,67 @@ Array
 
     [401] => Array
         (
+            [file] => vendor/yiisoft/yii2/mutex/RetryAcquireTrait.php
+            [message] => broken link to \yii\mutex\acquire() in yii\mutex\RetryAcquireTrait
+        )
+
+    [402] => Array
+        (
+            [file] => vendor/yiisoft/yii2/mutex/RetryAcquireTrait.php
+            [message] => broken link to \yii\mutex\acquire() in yii\mutex\RetryAcquireTrait
+        )
+
+    [403] => Array
+        (
+            [file] => vendor/yiisoft/yii2/mutex/RetryAcquireTrait.php
+            [message] => broken link to \yii\mutex\acquire() in yii\mutex\RetryAcquireTrait
+        )
+
+    [404] => Array
+        (
             [line] => 34
             [file] => vendor/yiisoft/yii2/rbac/BaseManager.php
             [message] => Property $defaultRoles conflicts with a defined setter setDefaultRoles in yii\rbac\BaseManager.
         )
 
-    [402] => Array
+    [405] => Array
         (
             [line] => 123
             [file] => vendor/yiisoft/yii2/rbac/DbManager.php
             [message] => Method checkAccess has no parent to inherit from in yii\rbac\DbManager.
         )
 
-    [403] => Array
+    [406] => Array
         (
             [line] => 98
             [file] => vendor/yiisoft/yii2/rbac/DbManager.php
             [message] => Property $rules conflicts with a defined getter getRules in yii\rbac\DbManager.
         )
 
-    [404] => Array
+    [407] => Array
         (
             [line] => 99
             [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
             [message] => Method checkAccess has no parent to inherit from in yii\rbac\PhpManager.
         )
 
-    [405] => Array
+    [408] => Array
         (
             [line] => 79
             [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
             [message] => Property $rules conflicts with a defined getter getRules in yii\rbac\PhpManager.
         )
 
-    [406] => Array
+    [409] => Array
         (
             [file] => vendor/yiisoft/yii2/rest/ActiveController.php
             [message] => broken link to \yii\rest\VerbFilter::actions in yii\rest\ActiveController
         )
 
-    [407] => Array
+    [410] => Array
         (
             [file] => vendor/yiisoft/yii2/rest/Controller.php
             [message] => broken link to \yii\rest\Behavior in yii\rest\Controller
-        )
-
-    [408] => Array
-        (
-            [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
-            [message] => broken link to \yii\test\getData() in yii\test\FileFixtureTrait
-        )
-
-    [409] => Array
-        (
-            [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
-            [message] => broken link to \yii\test\getData() in yii\test\FileFixtureTrait
-        )
-
-    [410] => Array
-        (
-            [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
-            [message] => broken link to \yii\test\getData() in yii\test\FileFixtureTrait
         )
 
     [411] => Array
@@ -2541,78 +2541,96 @@ Array
     [412] => Array
         (
             [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
-            [message] => broken link to \yii\test\data in yii\test\FileFixtureTrait
+            [message] => broken link to \yii\test\getData() in yii\test\FileFixtureTrait
         )
 
     [413] => Array
+        (
+            [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
+            [message] => broken link to \yii\test\getData() in yii\test\FileFixtureTrait
+        )
+
+    [414] => Array
+        (
+            [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
+            [message] => broken link to \yii\test\getData() in yii\test\FileFixtureTrait
+        )
+
+    [415] => Array
+        (
+            [file] => vendor/yiisoft/yii2/test/FileFixtureTrait.php
+            [message] => broken link to \yii\test\data in yii\test\FileFixtureTrait
+        )
+
+    [416] => Array
         (
             [line] => 364
             [file] => vendor/yiisoft/yii2/validators/FileValidator.php
             [message] => Method param $trim does not exist in parent method, @inheritdoc not possible in isEmpty in yii\validators\FileValidator.
         )
 
-    [414] => Array
+    [417] => Array
         (
             [file] => vendor/yiisoft/yii2/validators/Validator.php
             [message] => broken link to \yii\validators\yii\base\Model in yii\validators\Validator
         )
 
-    [415] => Array
-        (
-            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
-            [message] => broken link to \yii\web\yii\web\ErrorHandler in yii\web\ErrorAction
-        )
-
-    [416] => Array
-        (
-            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
-            [message] => broken link to \yii\web\yii\base\UserException in yii\web\ErrorAction
-        )
-
-    [417] => Array
-        (
-            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
-            [message] => broken link to \yii\web\yii\web\ErrorHandler in yii\web\ErrorAction
-        )
-
     [418] => Array
         (
             [file] => vendor/yiisoft/yii2/web/ErrorAction.php
-            [message] => broken link to \yii\web\yii\base\UserException in yii\web\ErrorAction
+            [message] => broken link to \yii\web\yii\web\ErrorHandler in yii\web\ErrorAction
         )
 
     [419] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\base\UserException in yii\web\ErrorAction
+        )
+
+    [420] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\web\ErrorHandler in yii\web\ErrorAction
+        )
+
+    [421] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\base\UserException in yii\web\ErrorAction
+        )
+
+    [422] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/web/HeadersAlreadySentException.php
             [message] => Method __construct has no parent to inherit from in yii\web\HeadersAlreadySentException.
         )
 
-    [420] => Array
+    [423] => Array
         (
             [file] => vendor/yiisoft/yii2/web/Request.php
             [message] => broken link to yii\validators\IpValidator::::setRanges() in yii\web\Request
         )
 
-    [421] => Array
+    [424] => Array
         (
             [file] => vendor/yiisoft/yii2/web/Request.php
             [message] => broken link to \yii\web\$getUserHost in yii\web\Request
         )
 
-    [422] => Array
+    [425] => Array
         (
             [file] => vendor/yiisoft/yii2/web/Request.php
             [message] => broken link to \yii\web\$ipHeader in yii\web\Request
         )
 
-    [423] => Array
+    [426] => Array
         (
             [file] => vendor/yiisoft/yii2/web/Request.php
             [message] => broken link to \yii\web\$trustedHeaders in yii\web\Request
         )
 
-    [424] => Array
+    [427] => Array
         (
             [file] => vendor/yiisoft/yii2/widgets/ActiveField.php
             [message] => broken link to \yii\widgets\Widget in yii\widgets\ActiveField

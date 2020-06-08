@@ -12,7 +12,7 @@
 
 - **Seguir / Follow**: Acción en la cual seguimos a un usuario.
 
-- **Dejar de seguir / Unfollow*: Acción en la cual dejamos de seguir a un usuario.
+- **Dejar de seguir / Unfollow**: Acción en la cual dejamos de seguir a un usuario.
 
 - **Banner**: Imagen que mostraremos en el perfil para darle algo más de diseño.
 

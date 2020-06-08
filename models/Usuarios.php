@@ -426,7 +426,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Devuelve la lista de amigos indexadas por id
+     * Devuelve la lista de amigos indexada por id
      *
      * @return ActiveQuery
      */
