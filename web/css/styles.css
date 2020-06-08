@@ -30,9 +30,12 @@ html {
 .scroll-top-btn {
     position: fixed;
     font-size: 30px;
-    color: var(--primary) !important;
     right: 50px;
     bottom: 50px;
+}
+
+.scroll-top-btn em {
+    color: var(--primary) !important;
 }
 
 .premium-card {

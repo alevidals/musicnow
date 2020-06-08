@@ -93,6 +93,14 @@ $this->registerJS($js);
                 ['label' => Yii::t('app', 'Canciones'), 'url' => ['/canciones/index']],
                 ['label' => Yii::t('app', 'Usuarios'), 'url' => ['/usuarios/index']],
                 [
+                    'label' => '<i class="fas fa-sun mr-2"></i>' .
+                                '<div class="custom-control custom-switch d-inline-block">' .
+                                    '<input type="checkbox" class="custom-control-input " id="darkSwitch">' .
+                                    '<label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>' .
+                                '</div>',
+                    'options' => ['class' => 'my-auto'],
+                ],
+                [
                     'label' => Yii::t('app', 'Language'),
                     'options' => ['class' => 'my-auto'],
                     'items' => [
@@ -131,6 +139,14 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Tendencias'), 'url' => ['/site/tendencias'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Notificaciones<span class="badge badge-warning ml-1 notifications-number">', 'url' => ['/usuarios/notificaciones'], 'options' => ['class' => 'my-auto']],
+                    [
+                        'label' => '<i class="fas fa-sun mr-2"></i>' .
+                                    '<div class="custom-control custom-switch d-inline-block">' .
+                                        '<input type="checkbox" class="custom-control-input " id="darkSwitch">' .
+                                        '<label class="custom-control-label" for="darkSwitch"><i class="fas fa-moon"></i></label>' .
+                                    '</div>',
+                        'options' => ['class' => 'my-auto'],
+                    ],
                     [
                         'label' => Yii::t('app', 'Manage'),
                         'options' => ['class' => 'my-auto'],
@@ -256,13 +272,15 @@ $this->registerJS($js);
                 <em class="fab fa-facebook"></em>
             </a>
         </div>
-        <div class="col-12 col-lg">
-            <em class="fas fa-sun"></em>
-            <div class="custom-control custom-switch d-inline-block">
-                <input type="checkbox" class="custom-control-input " id="darkSwitch">
-                <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em><span class="d-none">moon</span></label>
+        <?php if (Yii::$app->user->isGuest) : ?>
+            <div class="col-12 col-lg">
+                <em class="fas fa-sun"></em>
+                <div class="custom-control custom-switch d-inline-block">
+                    <input type="checkbox" class="custom-control-input " id="darkSwitch">
+                    <label class="custom-control-label" for="darkSwitch"><em class="fas fa-moon"></em><span class="d-none">moon</span></label>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
         <div class="col-12 col-lg">
             <button type="button" class="policy-btn outline-transparent" data-toggle="modal" data-target="#policyModal">
                     <?= Yii::t('app', 'Policy') ?>
