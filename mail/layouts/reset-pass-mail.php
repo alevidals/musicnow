@@ -12,7 +12,7 @@ use yii\bootstrap4\Html;
     <title>Document</title>
 </head>
 <body>
-    <img src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/music_now_naranja_largo.png?alt=media&token=d6d99f07-d179-4ee9-88a3-48b2e8bbe9fd" width="500px" alt="mail-image">
+    <img src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/default%2Fmusic_now_letras.png?alt=media&token=2df69831-c061-4903-9266-7464f8d7c140" width="500px" alt="mail-image">
     <h1><?= Yii::t('app', 'click-to-reset') ?></h1>
     <a href="<?= $content ?>" role="button" style="display: inline-block; font-weight: 400; color: #212529; text-align: center; vertical-align: middle; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-color: transparent; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; border-radius: 0.25rem; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; background-color: #ffba00; text-decoration: none;"><?= Yii::t('app', 'Verify') ?></a>
 </body>

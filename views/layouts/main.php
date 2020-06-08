@@ -236,7 +236,7 @@ $this->registerJS($js);
     </div>
     <div class="full-player w-100 row ml-0">
         <div class="info-song col-12 col-lg-4 col-xl-3 ml-0 row">
-            <img class="height-60" src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/user-profile.png?alt=media&token=6b233a2d-1bf7-41bf-9475-e43838896fa0" alt="song-cover col-2">
+            <img class="height-60" src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/default%2Fuser-profile.png?alt=media&token=f4d7b3ec-06ad-493b-84f6-acacb8a8f4db" alt="song-cover col-2">
                 <button class="my-auto ml-2 action-btn backward-btn outline-transparent"><em class="fas fa-backward"></em></button>
                 <div class="artist-info my-auto col text-center text-truncate">
                     <p class="m-0"></p>
@@ -246,7 +246,7 @@ $this->registerJS($js);
         </div>
         <div class="player col-12 col-lg-8 col-xl-9">
             <audio id="audio">
-                <source src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/notificacion.mp3?alt=media&token=fe228a37-f5fe-402b-9bcb-7ab747d24b34">
+                <source src="https://firebasestorage.googleapis.com/v0/b/jiejie-test.appspot.com/o/default%2Fnotification.mp3?alt=media&token=dea8e885-c148-41c4-9250-cbda7768b703">
             </audio>
         </div>
     </div>
