@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Likes */
 
-$this->title = $model->usuario_id;
+$this->title = $model->getUsuario()->one()->login;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Likes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'usuario_id',
-            'cancion_id',
+            'usuario.login',
+            'cancion.titulo',
         ],
         'options' => [
             'class' => 'table admin-table'

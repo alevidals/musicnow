@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Chat */
 
-$this->title = $model->id;
+$this->title = $model->getEmisor()->one()->login;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Chats'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,12 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'emisor_id',
-            'receptor_id',
+            'emisor.login',
+            'receptor.login',
             'mensaje:ntext',
-            'estado_id',
-            'created_at',
+            'estado.estado',
+            'created_at:datetime',
         ],
         'options' => [
             'class' => 'table admin-table'

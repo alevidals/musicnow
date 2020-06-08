@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Seguidores */
 
-$this->title = $model->seguidor_id;
+$this->title = $model->getSeguidor()->one()->login;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Seguidores'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'seguidor_id',
-            'seguido_id',
+            'seguidor.login',
+            'seguido.login',
         ],
         'options' => [
             'class' => 'table admin-table'

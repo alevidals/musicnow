@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Bloqueados */
 
-$this->title = $model->bloqueador_id;
+$this->title = $model->getBloqueador()->one()->login;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Bloqueados'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'bloqueador_id',
-            'bloqueado_id',
+            'bloqueador.login',
+            'bloqueado.login',
         ],
         'options' => [
             'class' => 'table admin-table'
