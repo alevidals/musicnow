@@ -57,6 +57,7 @@ class Canciones extends \yii\db\ActiveRecord
             [['reproducciones'], 'default', 'value' => 0],
             [['album_id', 'genero_id', 'usuario_id', 'reproducciones'], 'integer'],
             [['anyo'], 'number'],
+            [['anyo'], 'validateNumberLength'],
             [['duracion'], 'string'],
             [['created_at'], 'safe'],
             [['portada'], 'image', 'extensions' => ['png', 'jpg'], 'minWidth' => 500, 'maxWidth' => 1000, 'minHeight' => 500, 'maxHeight' => 1000],
@@ -67,6 +68,20 @@ class Canciones extends \yii\db\ActiveRecord
             [['genero_id'], 'exist', 'skipOnError' => true, 'targetClass' => Generos::className(), 'targetAttribute' => ['genero_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
+    }
+
+    /**
+     * Devuelve si el año de creación valida o no
+     *
+     * @param any $attribute
+     * @param array $params
+     * @return void
+     */
+    public function validateNumberLength($attribute, $params)
+    {
+        if (!preg_match('/^\d{4}$/', $this->anyo)) {
+            $this->addError($attribute, Yii::t('app', 'YearValidation'));
+        }
     }
 
     /**

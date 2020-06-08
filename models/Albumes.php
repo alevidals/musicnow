@@ -52,6 +52,12 @@ class Albumes extends \yii\db\ActiveRecord
         ];
     }
 
+        /**
+     * Devuelve si el año de creación valida o no.
+     *
+     * @param any $attribute
+     * @param array $params
+     */
     public function validateNumberLength($attribute, $params)
     {
         if (!preg_match('/^\d{4}$/', $this->anyo)) {
