@@ -66,8 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= isset($_COOKIE['lang']) ? $_COOKIE['lang'] : '' ?>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/site%2Fidioma?lang=es-ES">Español</a>
-                    <a class="dropdown-item" href="/site%2Fidioma?lang=en">English</a>
+                    <a class="dropdown-item" href="/site/idioma?lang=es-ES">Español</a>
+                    <a class="dropdown-item" href="/site/idioma?lang=en">English</a>
                 </div>
             </div>
         </div>

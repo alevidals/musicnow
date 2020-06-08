@@ -243,7 +243,7 @@ class SiteController extends Controller
      */
     public function actionIdioma($lang)
     {
-        setcookie('lang', $lang, time() + 3600 * 24 * 30);
+        setcookie('lang', $lang, time() + 3600 * 24 * 30, '/');
         return $this->redirect(['site/index']);
     }
 
