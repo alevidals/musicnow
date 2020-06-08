@@ -284,6 +284,9 @@ table i:hover, .delete-song-playlist-btn:hover {
         left: 0;
         z-index: 1030;
     }
+    .footer {
+        height: fit-content;
+    }
 }
 
 .px-15 {

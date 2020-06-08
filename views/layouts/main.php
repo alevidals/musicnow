@@ -239,7 +239,7 @@ $this->registerJS($js);
 <button class="scroll-top-btn outline-transparent"><em class="fas fa-arrow-circle-up"></em></button>
 
 
-<footer class="footer" style="height: fit-content;">
+<footer class="footer">
     <div class="container mx-auto row text-center">
         <p class="col-12 p-0 m-0 col-lg">&copy; Mus!c Now <?= date('Y') ?></p>
         <div class="col social-media">
