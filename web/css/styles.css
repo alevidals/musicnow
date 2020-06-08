@@ -29,6 +29,7 @@ html {
 
 .scroll-top-btn {
     position: fixed;
+    display: none;
     font-size: 30px;
     right: 50px;
     bottom: 50px;
