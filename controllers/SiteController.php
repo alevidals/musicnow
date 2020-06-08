@@ -244,7 +244,11 @@ class SiteController extends Controller
     public function actionIdioma($lang)
     {
         setcookie('lang', $lang, time() + 3600 * 24 * 30, '/');
-        return $this->redirect(['site/index']);
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/index']);
+        } else {
+            return $this->redirect(['usuarios/configurar']);
+        }
     }
 
     /**
