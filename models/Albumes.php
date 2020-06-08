@@ -41,6 +41,7 @@ class Albumes extends \yii\db\ActiveRecord
         return [
             [['titulo', 'anyo', 'image_name', 'url_portada', 'usuario_id'], 'required'],
             [['anyo'], 'number'],
+            [['anyo'], 'validateNumberLength'],
             [['created_at'], 'safe'],
             [['usuario_id'], 'default', 'value' => null],
             [['usuario_id'], 'integer'],
@@ -49,6 +50,13 @@ class Albumes extends \yii\db\ActiveRecord
             [['url_portada'], 'string', 'max' => 2048],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
+    }
+
+    public function validateNumberLength($attribute, $params)
+    {
+        if (!preg_match('/^\d{4}$/', $this->anyo)) {
+            $this->addError($attribute, Yii::t('app', 'YearValidation'));
+        }
     }
 
     /**

@@ -204,4 +204,5 @@ return [
     'CongratulationsMessage' => 'A partir de ahora podrás empezar a disfrutar de las ventajas de ser un usuario premium',
     'SomebodyGive' => 'te ha regalado la cuenta premium',
     'GivenPremium' => 'Te han regalado la cuenta premium',
+    'YearValidation' => 'El año debe tener como máximo 4 dígitos',
 ];
