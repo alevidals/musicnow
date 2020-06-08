@@ -23,6 +23,18 @@
     min-height: 100%;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+.scroll-top-btn {
+    position: fixed;
+    font-size: 30px;
+    color: var(--primary) !important;
+    right: 50px;
+    bottom: 50px;
+}
+
 .premium-card {
     height: 257px;
     width: 18rem;

@@ -891,10 +891,21 @@ $('body').on('click', '.filter-btn', function ev(e) {
     $('.filters').toggle('blind');
 });
 
+$('body').on('click', '.scroll-top-btn', function ev(e) {
+    window.scrollTo(0,0);
+});
+
+
 $(window).on('scroll', function () {
     if ($('.owl-carousel-index').length) {
         let scrollHeight = $(document).height();
-        let scrollPosition = $(window).height() + $(window).scrollTop();
+        let scrollTop = $(window).scrollTop();
+        let scrollPosition = $(window).height() + scrollTop;
+        if (scrollTop > 100) {
+            $('.scroll-top-btn').fadeIn();
+        } else if (scrollTop == 0) {
+            $('.scroll-top-btn').fadeOut();
+        }
         if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
             let strings = ['Comment', 'MaxChar'];
             $.ajax({

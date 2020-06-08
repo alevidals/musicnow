@@ -236,6 +236,8 @@ $this->registerJS($js);
     </div>
 </div>
 
+<button class="scroll-top-btn outline-transparent"><em class="fas fa-arrow-circle-up"></em></button>
+
 
 <footer class="footer" style="height: fit-content;">
     <div class="container mx-auto row text-center">
