@@ -205,4 +205,5 @@ return [
     'SomebodyGive' => 'te ha regalado la cuenta premium',
     'GivenPremium' => 'Te han regalado la cuenta premium',
     'YearValidation' => 'El año debe tener como máximo 4 dígitos',
+    'Create Roles' => 'Crear un rol',
 ];

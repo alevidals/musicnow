@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app', 'Actions'),
-                'template' => '{view} {update} {delete}',
+                'template' => '{view} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-eye"></i>', [
@@ -42,13 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'btn btn-sm p-0 pr-1 shadow-none',
                         ]);
                     },
-                    'update' => function ($url, $model, $key) {
-                        return Html::a('<i class="fas fa-pen"></i>', [
-                            'bloqueados/update', 'bloqueador_id' => $model->bloqueador_id, 'bloqueado_id' => $model->bloqueado_id,
-                        ], [
-                            'class' => 'btn btn-sm p-0 shadow-none',
-                        ]);
-                    },
+                    // 'update' => function ($url, $model, $key) {
+                    //     return Html::a('<i class="fas fa-pen"></i>', [
+                    //         'bloqueados/update', 'bloqueador_id' => $model->bloqueador_id, 'bloqueado_id' => $model->bloqueado_id,
+                    //     ], [
+                    //         'class' => 'btn btn-sm p-0 shadow-none',
+                    //     ]);
+                    // },
                     'delete' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-trash"></i>', [
                             'bloqueados/delete', 'bloqueador_id' => $model->bloqueador_id, 'bloqueado_id' => $model->bloqueado_id,

@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Seguidores'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="mt-3"></div>
@@ -37,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app', 'Actions'),
-                'template' => '{view} {update} {delete}',
+                'template' => '{view} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-eye"></i>', [
@@ -46,13 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'btn btn-sm p-0 pr-1 shadow-none',
                         ]);
                     },
-                    'update' => function ($url, $model, $key) {
-                        return Html::a('<i class="fas fa-pen"></i>', [
-                            'seguidores/update', 'seguidor_id' => $model->seguidor_id, 'seguido_id' => $model->seguido_id,
-                        ], [
-                            'class' => 'btn btn-sm p-0 shadow-none',
-                        ]);
-                    },
+                    // 'update' => function ($url, $model, $key) {
+                    //     return Html::a('<i class="fas fa-pen"></i>', [
+                    //         'seguidores/update', 'seguidor_id' => $model->seguidor_id, 'seguido_id' => $model->seguido_id,
+                    //     ], [
+                    //         'class' => 'btn btn-sm p-0 shadow-none',
+                    //     ]);
+                    // },
                     'delete' => function ($url, $model, $key) {
                         return Html::a('<i class="fas fa-trash"></i>', [
                             'seguidores/delete', 'id' => $model->id,

@@ -205,4 +205,5 @@ return [
     'SomebodyGive' => 'has given you the premium account',
     'GivenPremium' => 'You have been given the premium account',
     'YearValidation' => 'The year must have a maximum of 4 digits',
+    'Create Roles' => 'Create a role',
 ];
