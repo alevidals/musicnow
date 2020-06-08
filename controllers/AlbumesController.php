@@ -93,8 +93,12 @@ class AlbumesController extends Controller
             $model->uploadPortada();
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                $model->deletePortada();
+            }
         }
 
         return $this->render('create', [

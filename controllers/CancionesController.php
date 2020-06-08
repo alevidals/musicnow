@@ -2,13 +2,11 @@
 
 namespace app\controllers;
 
-use app\models\Albumes;
 use app\models\Canciones;
 use app\models\CancionesSearch;
 use app\models\Comentarios;
 use app\models\Generos;
 use app\models\Usuarios;
-use app\services\Utility;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -102,6 +100,10 @@ class CancionesController extends Controller
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
+            if ($model->album_id == null) {
+                $model->deletePortada();
+            }
+            $model->deleteCancion();
         }
 
         $usuario = Usuarios::findOne(Yii::$app->user->id);
@@ -164,11 +166,12 @@ class CancionesController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->delete();
-        if ($model->album_id == null) {
-            $model->deletePortada();
+        if ($model->delete()) {
+            if ($model->album_id == null) {
+                $model->deletePortada();
+            }
+            $model->deleteCancion();
         }
-        $model->deleteCancion();
 
         return $this->redirect(['index']);
     }
@@ -190,7 +193,7 @@ class CancionesController extends Controller
     }
 
     /**
-     * Devuelve la información de la canción especificada
+     * Devuelve la información de la canción especificada.
      *
      * @param int $cancion_id el id de la canción de la que se desea
      * obtener la información
@@ -207,7 +210,7 @@ class CancionesController extends Controller
             'url_portada' => $model->url_portada,
             'titulo' => Html::encode($model->titulo),
             'explicit' => ($model->explicit) ? true : false,
-            'message' => Yii::t('app', 'AddedToQueue')
+            'message' => Yii::t('app', 'AddedToQueue'),
         ];
 
         if ($model->album != null) {
@@ -218,7 +221,7 @@ class CancionesController extends Controller
     }
 
     /**
-     * Devuelve los comentarios de la canción especificada
+     * Devuelve los comentarios de la canción especificada.
      *
      * @param int $cancion_id la canción de la que se desea obtener los
      * comentarios
@@ -256,7 +259,7 @@ class CancionesController extends Controller
     }
 
     /**
-     * Devuelve los likes de la canción especificada
+     * Devuelve los likes de la canción especificada.
      *
      * @param int $cancion_id la canción de la que se desea obtener los
      * likes
@@ -280,9 +283,7 @@ class CancionesController extends Controller
 
     /**
      * Acción que se encarga de incrementar la visualización de una
-     * canción cuando es escuchada
-     *
-     * @return void
+     * canción cuando es escuchada.
      */
     public function actionAddVisualization()
     {
