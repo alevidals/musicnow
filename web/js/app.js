@@ -448,10 +448,12 @@ $('body').on('click', '.play-playlist-btn', function ev(e) {
                     album: element.album_id,
                 });
             });
-            removeActualData();
-            initAudioPlayer();
-            refreshSongPlaylist();
-            $('.play-pause-btn').trigger('click');
+            if (playlist.length) {
+                removeActualData();
+                initAudioPlayer();
+                refreshSongPlaylist();
+                $('.play-pause-btn').trigger('click');
+            }
         }
     })
 });
