@@ -1301,6 +1301,9 @@ $('body').on('click', '.delete-song-playlist-btn', function ev(e) {
 
 $('body').on('change', '.is-album-check', function ev(e) {
     if ($(this).prop('checked')) {
+        let date = new Date();
+        date.setMinutes(date.getMinutes() + 5);
+        document.cookie = `album=true; expires=${date.toUTCString()}; path=/`;
         $('.field-canciones-album_id').show();
         $('#canciones-album_id').attr('name', 'Canciones[album_id]');
         $('#canciones-album_id').prev().attr('name', 'Canciones[album_id]');
@@ -1308,6 +1311,7 @@ $('body').on('change', '.is-album-check', function ev(e) {
         $('#canciones-portada').prev().removeAttr('name');
         $('.field-canciones-portada').hide();
     } else {
+        document.cookie = "album=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         $('.field-canciones-album_id').hide();
         $('#canciones-album_id').removeAttr('name');
         $('#canciones-album_id').prev().removeAttr('name');

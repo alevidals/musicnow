@@ -636,9 +636,9 @@ textarea:focus {
     transition: all .3s ease;
 }
 
-.field-canciones-portada {
+/* .field-canciones-portada {
     display: none;
-}
+} */
 
 .navbar-logo {
     width: 40px;
