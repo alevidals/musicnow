@@ -215,4 +215,5 @@ return [
     'HelpYou' => 'How can we help you?',
     'AnyQuestions' => 'Do you have any question? Fill out the following forms and we will answer you as soon as possible',
     'Notifications' => '',
+    'Incorrect username or password.' => '',
 ];

@@ -215,4 +215,5 @@ return [
     'HelpYou' => '¿En qué podemos ayudarte?',
     'AnyQuestions' => '¿Tienes alguna pregunta? Rellena el siguiente formularios y le contestaremos con la mayor brevedad posible',
     'Notifications' => 'Notificaciones',
+    'Incorrect username or password.' => 'Nombre de usuario o contraseña incorrecta.',
 ];
