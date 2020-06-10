@@ -3,9 +3,9 @@
 use kartik\datecontrol\Module;
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'musicnowproyect@gmail.com',
     'senderEmail' => 'noreply@example.com',
-    'senderName' => 'Example.com mailer',
+    'senderName' => 'Mus!c Now',
     'smtpUsername' => 'musicnowproyect@gmail.com',
     'defaultImgProfile' => 'https://firebasestorage.googleapis.com/v0/b/song-test-103af.appspot.com/o/images%2Fall%2Fblank-profile.png?alt=media',
     'defaultImgProfile' => getenv('url_prefix') . 'images%2Fall%2Fblank-profile.png' . getenv('url_suffix'),

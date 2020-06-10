@@ -6,7 +6,6 @@ use app\models\Albumes;
 use app\models\Canciones;
 use app\models\ContactForm;
 use app\models\Usuarios;
-use kartik\mpdf\Pdf;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -102,12 +101,12 @@ class SiteController extends Controller
                     ->where(['ilike', 'login', $cadena])
                     ->orWhere(['ilike', 'email', $cadena])
                     ->andWhere(['!=', 'rol_id', 1])
-                    ->orderBy(['rol_id' => SORT_DESC])
+                    ->orderBy(['rol_id' => SORT_DESC]),
             ]);
 
             $albumesSerch = new ActiveDataProvider([
                 'query' => Albumes::find()
-                    ->where(['ilike', 'titulo', $cadena])
+                    ->where(['ilike', 'titulo', $cadena]),
             ]);
 
             $userIds = Usuarios::find()
@@ -236,7 +235,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Acción que se encarga de cambiar el idioma de la página
+     * Acción que se encarga de cambiar el idioma de la página.
      *
      * @param string $lang el idioma al que se desea cambiar
      * @return Response
@@ -246,14 +245,13 @@ class SiteController extends Controller
         setcookie('lang', $lang, time() + 3600 * 24 * 30, '/');
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/index']);
-        } else {
-            return $this->redirect(['usuarios/configurar']);
         }
+        return $this->redirect(['usuarios/configurar']);
     }
 
     /**
      * Acción que se encarga de devolver la traducción del mensaje
-     * especificado
+     * especificado.
      *
      * @return array
      */
@@ -271,7 +269,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Acción que se encarga de obtener más post
+     * Acción que se encarga de obtener más post.
      *
      * @param int $offset el número de la fila de la que queremos partir
      * al buscar los post
@@ -311,7 +309,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Acción que se encarga de renderizar la vista de tendencias
+     * Acción que se encarga de renderizar la vista de tendencias.
      *
      * @return string
      */
@@ -338,12 +336,21 @@ class SiteController extends Controller
     }
 
     /**
-     * Acción que se encarga de renderizar la vista premium
-     *
-     * @return void
+     * Acción que se encarga de renderizar la vista premium.
      */
     public function actionPremium()
     {
         return $this->render('premium');
+    }
+
+    public function actionContacto()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'thanksForContact'));
+        }
+        return $this->render('contacto', [
+            'model' => $model,
+        ]);
     }
 }

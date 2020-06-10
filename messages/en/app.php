@@ -206,4 +206,13 @@ return [
     'GivenPremium' => 'You have been given the premium account',
     'YearValidation' => 'The year must have a maximum of 4 digits',
     'Create Roles' => 'Create a role',
+    'Contact us' => '',
+    'thanksForContact' => 'Thanks for contact with Mus!c Now, we receive your request and we will answer you as soon as possible',
+    'Subject' => '',
+    'Body' => '',
+    'Verification Code' => '',
+    'Send' => '',
+    'HelpYou' => 'How can we help you?',
+    'AnyQuestions' => 'Do you have any question? Fill out the following forms and we will answer you as soon as possible',
+    'Notifications' => '',
 ];

@@ -138,7 +138,7 @@ $this->registerJS($js);
                     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'options' => ['class' => 'my-auto']],
                     ['label' => Yii::t('app', 'Tendencias'), 'url' => ['/site/tendencias'], 'options' => ['class' => 'my-auto']],
                     ['label' => 'Chat<span class="badge badge-warning ml-1 messages-number"></span>', 'url' => ['/chat/chat'], 'options' => ['class' => 'my-auto']],
-                    ['label' => 'Notificaciones<span class="badge badge-warning ml-1 notifications-number">', 'url' => ['/usuarios/notificaciones'], 'options' => ['class' => 'my-auto']],
+                    ['label' => Yii::t('app', 'Notifications') . '<span class="badge badge-warning ml-1 notifications-number">', 'url' => ['/usuarios/notificaciones'], 'options' => ['class' => 'my-auto']],
                     [
                         'label' => '<i class="fas fa-sun mr-2"></i>' .
                                     '<div class="custom-control custom-switch d-inline-block">' .
@@ -169,6 +169,7 @@ $this->registerJS($js);
                             'items' => [
                                 ['label' => Yii::t('app', 'My account'), 'url' => ['usuarios/perfil', 'id' => Yii::$app->user->id]],
                                 ['label' => Yii::t('app', 'ConfigureProfile'), 'url' => ['usuarios/configurar'], 'linkOptions' => ['data-pjax' => 0]],
+                                ['label' => Yii::t('app', 'Contact us'), 'url' => ['site/contacto'], 'linkOptions' => ['data-pjax' => 0]],
                                 [
                                     'label' => Yii::t('app', 'Logout'),
                                     'url' => [
@@ -186,6 +187,7 @@ $this->registerJS($js);
         }
     } else {
         $items = [
+            ['label' => Yii::t('app', 'Contact us'), 'url' => ['site/contacto'], 'linkOptions' => ['data-pjax' => 0]],
             [
                 'label' => Yii::t('app', 'Language'),
                 'options' => ['class' => 'my-auto'],

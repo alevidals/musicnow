@@ -206,4 +206,13 @@ return [
     'GivenPremium' => 'Te han regalado la cuenta premium',
     'YearValidation' => 'El año debe tener como máximo 4 dígitos',
     'Create Roles' => 'Crear un rol',
+    'Contact us' => 'Contáctenos',
+    'thanksForContact' => 'Gracias por contactar con Mus!c Now, hemos recibido su solicitud y le contestaremos con la mayor brevedad posible',
+    'Subject' => 'Asunto',
+    'Body' => 'Cuerpo',
+    'Verification Code' => 'Código de verificación',
+    'Send' => 'Enviar',
+    'HelpYou' => '¿En qué podemos ayudarte?',
+    'AnyQuestions' => '¿Tienes alguna pregunta? Rellena el siguiente formularios y le contestaremos con la mayor brevedad posible',
+    'Notifications' => 'Notificaciones',
 ];
