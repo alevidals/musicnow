@@ -34,7 +34,7 @@ use yii\bootstrap4\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Pay'), ['class' => 'btn btn-success mx-auto d-block my-5']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Pay'), ['class' => 'btn main-yellow mx-auto d-block my-5']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

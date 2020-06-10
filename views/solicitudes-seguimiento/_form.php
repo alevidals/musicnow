@@ -17,7 +17,7 @@ use yii\bootstrap4\ActiveForm;
     <?= $form->field($model, 'seguido_id')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn main-yellow']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

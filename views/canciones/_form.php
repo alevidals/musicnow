@@ -60,7 +60,7 @@ $this->registerJS($js);
     <?= Html::activeHiddenInput($model, 'duracion', ['id' => 'duration-hidden']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success send-btn']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn main-yellow send-btn']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
