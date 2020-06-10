@@ -53,4 +53,17 @@ class Roles extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Usuarios::className(), ['rol' => 'id']);
     }
+
+    /**
+     * Devuelve el nombre de todos los roles indexados por el id
+     *
+     * @return array
+     */
+    public static function lista()
+    {
+        return static::find()
+            ->select('rol')
+            ->indexBy('id')
+            ->column();
+    }
 }

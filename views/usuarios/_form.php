@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Roles;
 use kartik\datecontrol\DateControl;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
@@ -33,7 +34,7 @@ use yii\bootstrap4\ActiveForm;
             ]
         ); ?>
 
-    <?= $form->field($model, 'rol_id')->textInput() ?>
+    <?= $form->field($model, 'rol_id')->dropDownList(Roles::lista()) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn main-yellow']) ?>
