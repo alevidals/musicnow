@@ -9,6 +9,7 @@ use app\models\PlaylistsSearch;
 use app\models\Usuarios;
 use Yii;
 use yii\bootstrap4\Html;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -29,6 +30,26 @@ class PlaylistsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'create', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            $id = Yii::$app->request->get('id');
+                            return Yii::$app->user->identity->rol_id === 1 || in_array($id, Yii::$app->user->identity->getPlaylists()->select('id')->column());
+                        },
+                    ],
+                    [
+                        'actions' => ['index', 'create'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -149,7 +170,7 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * Acción que devuelve las canciones de la playlist especificada
+     * Acción que devuelve las canciones de la playlist especificada.
      *
      * @param int $playlist_id el id de la playlist de la que se desea
      * obtener las canciones
@@ -170,7 +191,7 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * Acción que se encarga de copiar la playlist de un usuario
+     * Acción que se encarga de copiar la playlist de un usuario.
      *
      * @return string mensaje de éxito
      */

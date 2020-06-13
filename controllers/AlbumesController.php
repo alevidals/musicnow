@@ -36,6 +36,16 @@ class AlbumesController extends Controller
                 'only' => ['index', 'update', 'create', 'delete'],
                 'rules' => [
                     [
+                        'actions' => ['update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rules, $action) {
+                            $id = Yii::$app->request->get('id');
+                            return Yii::$app->user->identity->rol_id === 1 || in_array($id, Yii::$app->user->identity->getAlbumes()->select('id')->column());
+                        },
+                    ],
+                    [
+                        'actions' => ['index', 'create'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
