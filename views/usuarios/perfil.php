@@ -47,8 +47,8 @@ $this->registerJS($js);
     <?php endif; ?>
 
 
-    <div class="d-flex mt-5">
-        <div>
+    <div class="mt-3 d-sm-flex">
+        <div class="text-center">
             <?= Html::img($model->url_image, ['width' => '90px', 'id' => 'image-perfil', 'class' => 'user-search-img mr-3', 'alt' => 'profile-image']) ?>
         </div>
         <div class="w-100">
@@ -171,8 +171,8 @@ $this->registerJS($js);
             <h3><?= Yii::t('app', 'YouBlock') ?></h3>
             <?= Html::a(Yii::t('app', 'Desbloquear'), ['bloqueados/bloquear', 'bloqueado_id' => $model->id], ['role' => 'button', 'class' => 'btn main-yellow']) ?>
         <?php else : ?>
-            <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
-                <li class="nav-item ml-auto">
+            <ul class="nav flex-column text-center flex-md-row d-flex justify-content-center nav-pills mb-3" id="myTab" role="tablist">
+                <li class="nav-item">
                     <a class="nav-link active text-uppercase" id="canciones-tab" data-toggle="tab" href="#canciones" role="tab" aria-controls="canciones" aria-selected="true"><?= Yii::t('app', 'Canciones') ?></a>
                 </li>
                 <li class="nav-item">
@@ -184,7 +184,7 @@ $this->registerJS($js);
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" id="videoclips-tab" data-toggle="tab" href="#videoclips" role="tab" aria-controls="videoclips" aria-selected="false">Videoclips</a>
                 </li>
-                <li class="nav-item mr-auto">
+                <li class="nav-item">
                     <a class="nav-link text-uppercase" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="videoclips" aria-selected="false"><?= Yii::t('app', 'Popular') ?></a>
                 </li>
             </ul>
