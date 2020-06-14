@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'password',
             'fnac:date',
-            'rol_id',
+            'rol.rol',
             'auth_key',
             'url_image:url',
             'image_name',
