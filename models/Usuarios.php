@@ -80,6 +80,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['login'], 'string', 'max' => 50],
             [['nombre', 'apellidos', 'email', 'password', 'auth_key', 'confirm_token', 'image_name', 'banner_name'], 'string', 'max' => 255],
             [['url_image', 'url_banner'], 'string', 'max' => 2048],
+            [['password'], 'string', 'min' => '8'],
             [['email'], 'unique'],
             [['email'], 'email'],
             [['login'], 'unique'],
