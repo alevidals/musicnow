@@ -154,7 +154,7 @@ CREATE TABLE playlists
   , titulo     VARCHAR(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS canciones_playlist;
+DROP TABLE IF EXISTS canciones_playlist CASCADE;
 
 CREATE TABLE canciones_playlist
 (
@@ -163,7 +163,7 @@ CREATE TABLE canciones_playlist
   , PRIMARY KEY (playlist_id, cancion_id)
 );
 
-DROP TABLE IF EXISTS videoclips;
+DROP TABLE IF EXISTS videoclips CASCADE;
 
 CREATE TABLE videoclips
 (
@@ -172,7 +172,7 @@ CREATE TABLE videoclips
   , link       VARCHAR(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS solicitudes_seguimiento;
+DROP TABLE IF EXISTS solicitudes_seguimiento CASCADE;
 
 CREATE TABLE solicitudes_seguimiento
 (
@@ -181,7 +181,7 @@ CREATE TABLE solicitudes_seguimiento
   , PRIMARY KEY (seguidor_id, seguido_id)
 );
 
-DROP TABLE IF EXISTS provincias;
+DROP TABLE IF EXISTS provincias CASCADE;
 
 CREATE TABLE provincias
 (
@@ -189,7 +189,7 @@ CREATE TABLE provincias
   , denominacion VARCHAR(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS pagos;
+DROP TABLE IF EXISTS pagos CASCADE;
 
 CREATE TABLE pagos
 (
