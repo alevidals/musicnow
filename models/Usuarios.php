@@ -225,7 +225,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         if ($insert) {
             if ($this->scenario === self::SCENARIO_CREAR) {
                 $this->auth_key = $security->generateRandomString();
-                $this->confirm_token = $security->generateRandomString(255);
+                if ($this->rol_id != 1) {
+                    $this->confirm_token = $security->generateRandomString(255);
+                }
                 $this->password = $security->generatePasswordHash($this->password);
                 $this->url_image = Yii::getAlias('@web/img/user-profile.png');
                 // $this->image_name = 'perfil.png';
@@ -426,7 +428,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Devuelve la lista de amigos indexada por id
+     * Devuelve la lista de amigos indexada por id.
      *
      * @return ActiveQuery
      */
