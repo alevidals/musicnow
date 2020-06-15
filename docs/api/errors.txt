@@ -1326,7 +1326,7 @@ Array
 
     [220] => Array
         (
-            [line] => 199
+            [line] => 200
             [file] => ./models/Usuarios.php
             [message] => Method findByUsername has no parent to inherit from in app\models\Usuarios.
         )
